@@ -9,7 +9,7 @@ function Profil() {
     return (
         <>
             <p>Profil Page</p>
-            {/* <Row>
+            <Row>
                 <Col sm={5}>
                     <Button>
                         <MdAddAPhoto />
@@ -23,7 +23,7 @@ function Profil() {
                         Calendar
                     </Button>
                 </Col>
-            </Row> */}
+            </Row>
         </>
     );
 }
