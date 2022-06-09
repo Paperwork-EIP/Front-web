@@ -2,10 +2,10 @@ version: '3'
 services:
   react-ui:
     build:
-      context: ./Paperwork-Front-Web
+      context: ./paperwork-front-web
     ports:
       - "3000:3000"
     container_name: react-ui
     volumes:
-       - ./Paperwork-Front-Web:/usr/src/app/Paperwork-Front-Web
-       - /usr/src/app/Paperwork-Front-Web/node_modules
+       - ./paperwork-front-web:/usr/src/app/paperwork-front-web
+       - /usr/src/app/paperwork-front-web/node_modules
