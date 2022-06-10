@@ -1,0 +1,27 @@
+/* .Profile-InputGroup {
+    background-color: red;
+} */
+
+.Profile-Input {
+    background-color: #E4E4E4;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    text-align: 10px;
+}
+
+.Profile-Input::placeholder {
+    padding-left: 10%;
+}
+
+.Profile-ShowPwdBtn {
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.Profile-Input-Icon {
+    color: #3C3C3C;
+}
