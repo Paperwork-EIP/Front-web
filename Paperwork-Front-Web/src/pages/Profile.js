@@ -3,10 +3,10 @@ import { MdAddAPhoto } from "react-icons/md";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FaCalendarAlt } from "react-icons/fa";
 
-function Profil() {
+function Profile() {
     return (
         <>
-            <p>Profil Page</p>
+            <p>Profile Page</p>
                 <MdAddAPhoto />
             <AiFillEyeInvisible />
             <AiFillEye />
@@ -16,4 +16,4 @@ function Profil() {
     );
 }
 
-export default Profil;
+export default Profile;
