@@ -1,8 +1,7 @@
 import React from 'react';
-import { Center, Grid, GridItem, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react';
+import { Center, Grid, GridItem, Input, InputGroup, InputRightElement, Button, Progress, Box } from '@chakra-ui/react';
 import { AiFillEye, AiFillEyeInvisible, AiOutlineCalendar } from "react-icons/ai";
 import "../styles/Profile.css"
-import { render } from '@testing-library/react';
 
 const ProfilePage = () => {
     const [showEyePwd, setShowEyePwd] = React.useState(false)
@@ -41,7 +40,14 @@ const ProfilePage = () => {
                 </Center>
                 </GridItem>
                 <GridItem rowSpan={1} colSpan={3} bg='green'>
-
+                <Box className='Profil-ProcessBox'>
+                Your current process
+                <Progress colorScheme='red' size='lg' value={20} className='Profil-ProcessBar'/>
+                <br/>
+                Your current process
+                <Progress colorScheme='red' size='lg' value={80} className='Profil-ProcessBar'/>
+                <br/>
+                </Box>
                 </GridItem>
             </Grid>
         </>
