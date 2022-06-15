@@ -22,6 +22,21 @@
     cursor: pointer;
 }
 
+.Profile-UploadImage {
+    height: 130px;
+    border-radius: 100px;
+    border: 5px solid white;
+}
+
+.Profile-CalendarButton {
+    height: 50px;
+    width: 400px;
+    background-color: white;
+    color: tomato;
+    border-color: tomato;
+    border-radius: 100px;
+}
+
 .Profile-Input-Icon {
     color: #3C3C3C;
 }
