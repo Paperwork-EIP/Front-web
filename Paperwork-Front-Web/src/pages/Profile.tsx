@@ -3,7 +3,7 @@ import { Center, Grid, GridItem, Input, InputGroup, InputRightElement, Button } 
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import "../styles/Profile.css"
 
-function Profile() {
+const ProfilePage = () => {
     const [showEyePwd, setShowEyePwd] = React.useState(false)
     const handleClickEyePwd = () => setShowEyePwd(!showEyePwd)
 
@@ -18,6 +18,8 @@ function Profile() {
                                 pr='4.5rem'
                                 type={showEyePwd ? 'text' : 'password'}
                                 placeholder='Enter password'
+                                _placeholder={{ color: 'black' }}
+                                bg='white'
                             />
                             <InputRightElement>
                                 <Button className='Profile-ShowPwdBtn' size='sm' onClick={handleClickEyePwd}>
@@ -40,4 +42,4 @@ function Profile() {
     );
 }
 
-export default Profile;
+export default ProfilePage;
