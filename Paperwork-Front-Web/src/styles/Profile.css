@@ -42,10 +42,11 @@
 }
 
 .Profil-ProcessBox {
-    border: 1px solid grey;
-    background-color: white;
+    border: 1px solid lightgray;
+    background-color: whitesmoke;
     width: 100%;
     color: black;
+    border-radius: 10px;
 }
 
 .Profil-ProcessBar {

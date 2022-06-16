@@ -88,15 +88,16 @@ const ProfilePage = () => {
                         </InputGroup>
                     </Center>
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3} bg='red'>
+                <GridItem rowSpan={1} colSpan={3}>
                 <Center>
                     <Button leftIcon={<AiOutlineCalendar />} className='Profile-CalendarButton'>
                     Calendar 
                     </Button>
                 </Center>
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3} bg='green'>
+                <GridItem rowSpan={1} colSpan={3}>
                 <Box className='Profil-ProcessBox'>
+                <br/>
                 Your current process
                 <Progress colorScheme='red' size='lg' value={20} className='Profil-ProcessBar'/>
                 <br/>
