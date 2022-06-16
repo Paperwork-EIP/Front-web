@@ -27,13 +27,13 @@ describe("when user clicked on submit button", () => {
 
 describe("when user clicked on create an account button", () => {
     it("should call login function", () => {
-        const login = jest.fn();
+        const createAccount = jest.fn();
         const { getByText } = render(<Login />);
         const createAccountButton = getByText("create an account");
 
         createAccountButton.click();
     
-        expect(login).toHaveBeenCalled();
+        expect(createAccount).toHaveBeenCalled();
     });
 });
 
@@ -41,6 +41,12 @@ test("Press submit button : should submit a request after clicking on submit but
     const mockData = {
         emailAdress: "test@test.com",
         password: "test"
+    };
+
+    const mockResponse = {
+        data: {
+            token: "test"
+        }
     };
 
     /* const request = await postRequest("/login", mockData); */
@@ -51,6 +57,9 @@ test("Press submit button : should submit a request after clicking on submit but
     user.click(screen.getByText("submit"));
 
     expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+    expect(postRequest).toHaveBeenCalledTimes(1);
+
+    /* expect(request).toEqual(mockResponse); */
 
     await screen.findByText(/login/i);
 
@@ -73,9 +82,15 @@ test("Press submit button : should not submit a request after clicking on submit
 
 test("Press submit button : should not submit a request after clicking on submit button without a valid email", async () => {
     const mockData = {
-        emailAdress: "",
+        emailAdress: "s",
         password: "test"
     };
+    
+    /* const mockResponse = {
+        data: {
+            token: "test"
+        }
+    }; */
 
     const errorMessageToFind = "Please enter a valid email address";
 
@@ -86,14 +101,22 @@ test("Press submit button : should not submit a request after clicking on submit
     user.type(screen.getByLabelText("password"), mockData.password);
     user.click(screen.getByText("submit"));
 
+    expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+    expect(postRequest).toHaveBeenCalledTimes(1);
     expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
 });
 
 test("Press submit button : should not submit a request after clicking on submit button without a valid password", async () => {
     const mockData = {
         emailAdress: "test@test.com",
-        password: ""
+        password: "s"
     };
+
+    /* const mockResponse = {
+        data: {
+            token: "test"
+        }
+    }; */
 
     const errorMessageToFind = "Invalid password";
 
@@ -105,6 +128,7 @@ test("Press submit button : should not submit a request after clicking on submit
     user.click(screen.getByText("submit"));
 
     expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+    expect(postRequest).toHaveBeenCalledTimes(1);
     expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
 });
 
