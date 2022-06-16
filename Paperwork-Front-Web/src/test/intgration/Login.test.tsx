@@ -1,163 +1,188 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import LoginPage from "../../pages/Login";
 import Login from "../../container/Login/Login";
 import { postRequest } from "../api/api";
 
+
+jest.mock("@chakra-ui/react", () => {
+    // --> Original module
+    const originalModule = jest.requireActual("@chakra-ui/react");
+
+    return {
+        __esModule: true,
+        ...originalModule,
+        useMediaQuery: jest.fn().mockImplementation(() => ({
+            isMobile: false,
+        })),
+    };
+});
+
 /////////////////////////// VALID TESTS ///////////////////////////
 
 describe("LoginPage", () => {
     it("renders without crashing", () => {
-        render(<LoginPage />);
+        render(
+            <BrowserRouter>
+                <LoginPage />
+            </BrowserRouter>
+        );
     });
 });
 
-describe("when user clicked on submit button", () => {
-    it("should call login function", () => {
-        const login = jest.fn();
-        const { getByText } = render(<Login />);
-        const loginButton = getByText("submit");
+describe("Starting integration test", () => {
+    test("Press submit button : should submit a request after clicking on submit button with email/password", async () => {
+        const mockData = {
+            emailAdress: "test@test.com",
+            password: "test"
+        };
 
-        loginButton.click();
-    
-        expect(login).toHaveBeenCalled();
+        const mockResponse = {
+            data: {
+                token: "test"
+            }
+        };
+
+        /* const request = await postRequest("/login", mockData); */
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
+
+        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
+        user.type(screen.getByPlaceholderText("password"), mockData.password);
+        user.click(screen.getByText("submit"));
+
+        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+        expect(postRequest).toHaveBeenCalledTimes(1);
+
+        /* expect(request).toEqual(mockResponse); */
+
+        await screen.findByText(/login/i);
+
+        expect(screen.getByText(mockData.emailAdress)).toBeInTheDocument();
+        expect(screen.getByText(mockData.password)).toBeInTheDocument();
     });
-});
 
-describe("when user clicked on create an account button", () => {
-    it("should call login function", () => {
-        const createAccount = jest.fn();
-        const { getByText } = render(<Login />);
-        const createAccountButton = getByText("create an account");
+    /////////////////////////// INVALID TESTS ///////////////////////////
 
-        createAccountButton.click();
-    
-        expect(createAccount).toHaveBeenCalled();
+    test("Press submit button : should not submit a request after clicking on submit button without email/password", async () => {
+        const errorMessageToFind = "Please enter a valid email address and password";
+
+        /* const request = await postRequest("/login", mockData); */
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
+
+        user.click(screen.getByText("submit"));
+
+        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
     });
-});
 
-test("Press submit button : should submit a request after clicking on submit button with email/password", async () => {
-    const mockData = {
-        emailAdress: "test@test.com",
-        password: "test"
-    };
+    test("Press submit button : should not submit a request after clicking on submit button without a valid email", async () => {
+        const mockData = {
+            emailAdress: "s",
+            password: "test"
+        };
 
-    const mockResponse = {
-        data: {
-            token: "test"
-        }
-    };
+        /* const mockResponse = {
+            data: {
+                token: "test"
+            }
+        }; */
 
-    /* const request = await postRequest("/login", mockData); */
-    render(<Login />);
+        const errorMessageToFind = "Please enter a valid email address";
 
-    user.type(screen.getByLabelText("email"), mockData.emailAdress);
-    user.type(screen.getByLabelText("password"), mockData.password);
-    user.click(screen.getByText("submit"));
+        /* const request = await postRequest("/login", mockData); */
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
 
-    expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-    expect(postRequest).toHaveBeenCalledTimes(1);
+        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
+        user.type(screen.getByPlaceholderText("password"), mockData.password);
+        user.click(screen.getByText("submit"));
 
-    /* expect(request).toEqual(mockResponse); */
+        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+        expect(postRequest).toHaveBeenCalledTimes(1);
+        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
+    });
 
-    await screen.findByText(/login/i);
+    test("Press submit button : should not submit a request after clicking on submit button without a valid password", async () => {
+        const mockData = {
+            emailAdress: "test@test.com",
+            password: "s"
+        };
 
-    expect(screen.getByText(mockData.emailAdress)).toBeInTheDocument();
-    expect(screen.getByText(mockData.password)).toBeInTheDocument();
-});
+        /* const mockResponse = {
+            data: {
+                token: "test"
+            }
+        }; */
 
-/////////////////////////// INVALID TESTS ///////////////////////////
+        const errorMessageToFind = "Invalid password";
 
-test("Press submit button : should not submit a request after clicking on submit button without email/password", async () => {
-    const errorMessageToFind = "Please enter a valid email address and password";
+        /* const request = await postRequest("/login", mockData); */
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
 
-    /* const request = await postRequest("/login", mockData); */
-    render(<Login />);
+        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
+        user.type(screen.getByPlaceholderText("password"), mockData.password);
+        user.click(screen.getByText("submit"));
 
-    user.click(screen.getByText("submit"));
+        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
+        expect(postRequest).toHaveBeenCalledTimes(1);
+        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
+    });
 
-    expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-});
+    test("Press create an account link : should be redirected in the create profile page", async () => {
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
 
-test("Press submit button : should not submit a request after clicking on submit button without a valid email", async () => {
-    const mockData = {
-        emailAdress: "s",
-        password: "test"
-    };
-    
-    /* const mockResponse = {
-        data: {
-            token: "test"
-        }
-    }; */
+        user.click(screen.getByText("Create an account"));
 
-    const errorMessageToFind = "Please enter a valid email address";
+        await screen.findByText("/register");
+    });
 
-    /* const request = await postRequest("/login", mockData); */
-    render(<Login />);
+    test("Press Google login auth : should be connected with a Google account", async () => {
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
 
-    user.type(screen.getByLabelText("email"), mockData.emailAdress);
-    user.type(screen.getByLabelText("password"), mockData.password);
-    user.click(screen.getByText("submit"));
+        user.click(screen.getByText("Google"));
 
-    expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-    expect(postRequest).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-});
+        // expect('login_function_Google').toHaveBeenCalled();
+        expect('/google').toBeCalled();
 
-test("Press submit button : should not submit a request after clicking on submit button without a valid password", async () => {
-    const mockData = {
-        emailAdress: "test@test.com",
-        password: "s"
-    };
+        await screen.findByText("/google");
+    });
 
-    /* const mockResponse = {
-        data: {
-            token: "test"
-        }
-    }; */
+    test("Press Facebook login auth : should be connected with a Facebook account", async () => {
+        render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
 
-    const errorMessageToFind = "Invalid password";
+        user.click(screen.getByText("Facebook"));
 
-    /* const request = await postRequest("/login", mockData); */
-    render(<Login />);
+        // expect('login_function_Facebook').toHaveBeenCalled();
+        expect('/facebook').toBeCalled();
 
-    user.type(screen.getByLabelText("email"), mockData.emailAdress);
-    user.type(screen.getByLabelText("password"), mockData.password);
-    user.click(screen.getByText("submit"));
-
-    expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-    expect(postRequest).toHaveBeenCalledTimes(1);
-    expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-});
-
-test("Press create an account link : should be redirected in the create profile page", async () => {
-    render(<Login />);
-
-    user.click(screen.getByText("Create an account"));
-
-    await screen.findByText("/register");
-});
-
-test("Press Google login auth : should be connected with a Google account", async () => {
-    render(<Login />);
-
-    user.click(screen.getByText("Google"));
-
-    // expect('login_function_Google').toHaveBeenCalled();
-    expect('/google').toBeCalled();
-
-    await screen.findByText("/google");
-});
-
-test("Press Facebook login auth : should be connected with a Facebook account", async () => {
-    render(<Login />);
-
-    user.click(screen.getByText("Facebook"));
-
-    // expect('login_function_Facebook').toHaveBeenCalled();
-    expect('/facebook').toBeCalled();
-
-    await screen.findByText("/facebook");
+        await screen.findByText("/facebook");
+    });
 });
