@@ -13,7 +13,7 @@ const ProcessBar = () => {
                 </Center>
                 <p className='Profile-ProcessText'>Your current process</p>
                 <Center>
-                    <p className='Profile-ProcessDiagText'>Vital Card</p>
+                    <p className='Profile-ProcessDiagText'>Another document</p>
                     <Progress colorScheme='red' size='lg' value={90} className='Profil-ProcessBar'/>
                 </Center>
             </Box>

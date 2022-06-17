@@ -8,14 +8,14 @@ import ProcessBar from '../container/Profile/ProcessBar';
 const ProfilePage = () => {
     return (
         <>
-            <Grid h='600px' templateRows='repeat(2, 1fr)' templateColumns='repeat(5, 1fr)' gap={4} >
-                <GridItem rowSpan={2} colSpan={2}>
+            <Grid h='600px' gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' >
+                <GridItem w='100%' rowSpan={2} colSpan={4}>
                     <AccountModifications />
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3}>
+                <GridItem w='100%' rowSpan={1} colSpan={8}>
                     <CalendarButton />
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3}>
+                <GridItem w='100%' rowSpan={1} colSpan={8}>
                     <ProcessBar />
                 </GridItem>
             </Grid>

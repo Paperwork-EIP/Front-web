@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Center, Input, InputGroup, InputRightElement, Button } from '@chakra-ui/react';
+import { Center, Input, InputGroup, InputRightElement, Button, Avatar } from '@chakra-ui/react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import "../../styles/Profile.css";
 
 const AccountModifications = () => {
     const [showEyePwd, setShowEyePwd] = React.useState(false)
@@ -12,11 +11,20 @@ const AccountModifications = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const [verifPassword, setVerifPassword] = useState("");
+    const [file, setFile] = useState("");
     
     return (
         <>
             <Center>
-                <img src='https://bit.ly/dan-abramov' alt='' className='Profile-UploadImage'></img>
+                <Input
+                type={'file'}
+                placeholder='Choose a file'
+                mb={4}
+                value={file}
+                onChange={({ target }) => setFile(target.value)}
+                hidden
+                />
+                <Avatar size='2xl' name='Christian Nwamba' src='https://bit.ly/dan-abramov' />{' '}
             </Center>
             <Center>
                 <InputGroup size='md' width={"auto"}>
@@ -28,51 +36,54 @@ const AccountModifications = () => {
                         value={username}
                         onChange={({ target }) => setUsername(target.value)} />
                     <InputRightElement>
-                        </InputRightElement>
-                    </InputGroup>
-                </Center><Center>
-                    <InputGroup size='md' width={"auto"}>
-                        <Input
-                            type={'email'}
-                            placeholder='Enter email'
-                            variant="filled"
-                            mb={4}
-                            value={emailAdress}
-                            onChange={({ target }) => setEmailAddress(target.value)} />
-                        <InputRightElement>
-                        </InputRightElement>
-                    </InputGroup>
-                </Center><Center>
-                    <InputGroup size='md' width={"auto"}>
-                        <Input
-                            type={showEyePwd ? 'text' : 'password'}
-                            placeholder='Enter password'
-                            variant="filled"
-                            mb={4}
-                            value={password}
-                            onChange={({ target }) => setPassword(target.value)} />
-                        <InputRightElement>
-                            <Button size='sm' onClick={handleClickEyePwd}>
-                                {showEyePwd ? <AiFillEye className='Profile-Input-Icon' size={20} /> : <AiFillEyeInvisible className='Profile-Input-Icon' size={20} />}
-                            </Button>
-                        </InputRightElement>
-                    </InputGroup>
-                </Center><Center>
-                    <InputGroup size='md' width={"auto"}>
-                        <Input
-                            type={showEyeVerifPwd ? 'text' : 'password'}
-                            placeholder='Verify password'
-                            variant="filled"
-                            mb={4}
-                            value={verifPassword}
-                            onChange={({ target }) => setVerifPassword(target.value)} />
-                        <InputRightElement>
-                            <Button size='sm' onClick={handleClickVerifEyePwd}>
-                                {showEyeVerifPwd ? <AiFillEye className='Profile-Input-Icon' size={20} /> : <AiFillEyeInvisible className='Profile-Input-Icon' size={20} />}
-                            </Button>
-                        </InputRightElement>
-                    </InputGroup>
-                </Center>
+                    </InputRightElement>
+                </InputGroup>
+            </Center>
+            <Center>
+                <InputGroup size='md' width={"auto"}>
+                    <Input
+                        type={'email'}
+                        placeholder='Enter email'
+                        variant="filled"
+                        mb={4}
+                        value={emailAdress}
+                        onChange={({ target }) => setEmailAddress(target.value)} />
+                    <InputRightElement>
+                    </InputRightElement>
+                </InputGroup>
+            </Center>
+            <Center>
+                <InputGroup size='md' width={"auto"}>
+                    <Input
+                        type={showEyePwd ? 'text' : 'password'}
+                        placeholder='Enter password'
+                        variant="filled"
+                        mb={4}
+                        value={password}
+                        onChange={({ target }) => setPassword(target.value)} />
+                    <InputRightElement>
+                        <Button size='sm' onClick={handleClickEyePwd}>
+                            {showEyePwd ? <AiFillEye className='Profile-Input-Icon' size={20} /> : <AiFillEyeInvisible className='Profile-Input-Icon' size={20} />}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+            </Center>
+            <Center>
+                <InputGroup size='md' width={"auto"}>
+                    <Input
+                        type={showEyeVerifPwd ? 'text' : 'password'}
+                        placeholder='Verify password'
+                        variant="filled"
+                        mb={4}
+                        value={verifPassword}
+                        onChange={({ target }) => setVerifPassword(target.value)} />
+                    <InputRightElement>
+                        <Button size='sm' onClick={handleClickVerifEyePwd}>
+                            {showEyeVerifPwd ? <AiFillEye className='Profile-Input-Icon' size={20} /> : <AiFillEyeInvisible className='Profile-Input-Icon' size={20} />}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+            </Center>
         </>
     );
 }
