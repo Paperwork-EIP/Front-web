@@ -29,6 +29,7 @@
 }
 
 .Profile-CalendarButton {
+    margin-top: 200px;
     height: 50px;
     width: 400px;
     background-color: white;
@@ -44,11 +45,27 @@
 .Profil-ProcessBox {
     border: 1px solid lightgray;
     background-color: whitesmoke;
-    width: 100%;
+    width: 40%;
     color: black;
     border-radius: 10px;
 }
 
 .Profil-ProcessBar {
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 10px;
+    width: 70%;
+    border: 1px solid lightgray;
+}
+
+.Profile-ProcessText {
+    margin-top: 5px;
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+.Profile-ProcessDiagText {
+    transform: rotate(60deg);
+    font-size: xx-small;
 }

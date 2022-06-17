@@ -1,4 +1,4 @@
-import { Progress, Box } from '@chakra-ui/react';
+import { Progress, Box, Center } from '@chakra-ui/react';
 import "../../styles/Profile.css";
 
 const ProcessBar = () => {
@@ -6,13 +6,16 @@ const ProcessBar = () => {
     return (
         <>
             <Box className='Profil-ProcessBox'>
-                <br/>
-                Your current process
-                <Progress colorScheme='red' size='lg' value={20} className='Profil-ProcessBar'/>
-                <br/>
-                Your current process
-                <Progress colorScheme='red' size='lg' value={80} className='Profil-ProcessBar'/>
-                <br/>
+                <p className='Profile-ProcessText'>Your current process</p>
+                <Center>
+                    <p className='Profile-ProcessDiagText'>Vital Card</p>
+                    <Progress colorScheme='red' size='lg' value={20} className='Profil-ProcessBar'/>
+                </Center>
+                <p className='Profile-ProcessText'>Your current process</p>
+                <Center>
+                    <p className='Profile-ProcessDiagText'>Vital Card</p>
+                    <Progress colorScheme='red' size='lg' value={90} className='Profil-ProcessBar'/>
+                </Center>
             </Box>
         </>
     );

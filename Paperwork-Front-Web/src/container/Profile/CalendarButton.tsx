@@ -5,11 +5,7 @@ import "../../styles/Profile.css";
 const CalendarButton = () => {
     
     return (
-        <>
-            <Center>
-                <Button leftIcon={<AiOutlineCalendar />} className='Profile-CalendarButton'>Calendar</Button>
-            </Center>
-        </>
+        <Button leftIcon={<AiOutlineCalendar/>} className='Profile-CalendarButton'>Calendar</Button>
     );
 }
 
