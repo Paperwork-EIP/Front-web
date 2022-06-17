@@ -1,11 +1,10 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import LoginPage from "../../pages/Login";
 import Login from "../../container/Login/Login";
-import { postRequest } from "../api/api";
-
+import { postRequest } from "../mocks/api/api";
 
 jest.mock("@chakra-ui/react", () => {
     // --> Original module
@@ -20,7 +19,13 @@ jest.mock("@chakra-ui/react", () => {
     };
 });
 
-/////////////////////////// VALID TESTS ///////////////////////////
+beforeEach(() => {
+    configure({
+        throwSuggestions: true,
+    })
+})
+
+/////////////////////////// VALID CASE TESTS ///////////////////////////
 
 describe("LoginPage", () => {
     it("renders without crashing", () => {
@@ -32,7 +37,30 @@ describe("LoginPage", () => {
     });
 });
 
-describe("Starting integration test", () => {
+describe("Units tests", () => {
+    it('should have an email input', () => {
+        const input = screen.getByRole('textbox', { name: /email/i, hidden: true });
+
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveClass('chakra-input');
+    });
+
+    it('should have a password input', () => {
+        const input = screen.getByRole('textbox', { name: /password/i, hidden: true });
+
+        expect(input).toBeInTheDocument();
+        expect(input).toHaveClass('chakra-input');
+    });
+
+    it('should have a submit button', () => {
+        const button = screen.getByRole('button', { name: /submit/i, hidden: true });
+
+        expect(button).toBeInTheDocument();
+        expect(button).toHaveClass('chakra-button');
+    });
+});
+
+describe("Integration tests", () => {
     test("Press submit button : should submit a request after clicking on submit button with email/password", async () => {
         const mockData = {
             emailAdress: "test@test.com",
@@ -41,23 +69,44 @@ describe("Starting integration test", () => {
 
         const mockResponse = {
             data: {
-                token: "test"
+                token: "test",
+                username: "test",
+                email: "test@gmail.com",
+                id: "test"
             }
         };
 
-        /* const request = await postRequest("/login", mockData); */
+        const mockFetch = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                json: () => Promise.resolve(mockResponse)
+            });
+        });
+
+        const mockPost = jest.fn().mockImplementation(() => {
+            return Promise.resolve({
+                json: () => Promise.resolve(mockData)
+            });
+        });
+
+        global.fetch = mockFetch;
+
         render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 
-        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
-        user.type(screen.getByPlaceholderText("password"), mockData.password);
+        /* const request = await postRequest("/login", mockData); */
+
+        const emailPlaceholder = screen.queryByPlaceholderText(/mama@gmail.com/i)!;
+        const passwordPlaceholder = screen.queryByPlaceholderText(/[************]/i)!;
+
+        user.type(emailPlaceholder, mockData.emailAdress);
+        user.type(passwordPlaceholder, mockData.password);
         user.click(screen.getByText("submit"));
 
-        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-        expect(postRequest).toHaveBeenCalledTimes(1);
+        expect(mockPost).toHaveBeenCalledWith("/login", mockData);
+        expect(mockPost).toHaveBeenCalledTimes(1);
 
         /* expect(request).toEqual(mockResponse); */
 
@@ -67,7 +116,7 @@ describe("Starting integration test", () => {
         expect(screen.getByText(mockData.password)).toBeInTheDocument();
     });
 
-    /////////////////////////// INVALID TESTS ///////////////////////////
+    /////////////////////////// INVALID CASE TESTS ///////////////////////////
 
     test("Press submit button : should not submit a request after clicking on submit button without email/password", async () => {
         const errorMessageToFind = "Please enter a valid email address and password";
