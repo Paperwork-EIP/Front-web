@@ -1,238 +1,170 @@
-import React from "react";
+import '@testing-library/jest-dom';
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
 
-import LoginPage from "../../../pages/Login";
 import Login from "../../../container/Login/Login";
-
-import { postRequest } from "../../mocks/api/api";
-
-jest.mock("@chakra-ui/react", () => {
-    const originalModule = jest.requireActual("@chakra-ui/react");
-
-    return {
-        __esModule: true,
-        ...originalModule,
-        useMediaQuery: jest.fn().mockImplementation(() => ({
-            isMobile: false,
-        })),
-    };
-});
+import mockFetch from '../../mocks/api/api';
 
 beforeEach(() => {
+    jest.spyOn(window, 'fetch').mockImplementation(mockFetch);
     configure({
         throwSuggestions: true,
     })
+    render(
+        <BrowserRouter>
+            <Login />
+        </BrowserRouter>
+    );
 })
+
+afterEach(() => {
+    jest.restoreAllMocks();
+});
 
 /////////////////////////// VALID CASE TESTS ///////////////////////////
 
-describe("LoginPage", () => {
-    it("renders without crashing", () => {
-        render(
-            <BrowserRouter>
-                <LoginPage />
-            </BrowserRouter>
-        );
+describe("Login page", () => {
+    test("should render the login form", () => { });
+});
+
+describe('Valid unit tests', () => {
+    test('should render the email input', () => {
+        const emailInput = screen.getByRole('textbox', { name: /email/i });
+
+        expect(emailInput).toBeVisible();
+        expect(emailInput).toBeInTheDocument();
+        expect(emailInput).toHaveClass('chakra-input');
+        expect(emailInput).toHaveAttribute('aria-label', 'email');
+        expect(emailInput).toHaveAttribute('type', 'email');
+        expect(emailInput).toHaveAttribute('placeholder');
+    });
+
+    test('should render the password input', async () => {
+        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+
+        expect(passwordInput).toBeVisible();
+        expect(passwordInput).toBeInTheDocument();
+        expect(passwordInput).toHaveClass('chakra-input');
+        expect(passwordInput).toHaveAttribute('aria-label');
+        expect(passwordInput).toHaveAttribute('type', 'password');
+        expect(passwordInput).toHaveAttribute('placeholder');
+    });
+
+    test('should render the submit button', async () => {
+        const submitButton = screen.getByRole('button', { name: /submit/i });
+
+        expect(submitButton).toBeVisible();
+        expect(submitButton).toBeInTheDocument();
+        expect(submitButton).toHaveClass('chakra-button');
+        expect(submitButton).toHaveTextContent('submit');
+    });
+
+    test('should render the create an account button', async () => {
+        const createAccountButton = screen.getByRole('button', { name: /create an account/i });
+
+        expect(createAccountButton).toBeVisible();
+        expect(createAccountButton).toBeInTheDocument();
+        expect(createAccountButton).toHaveClass('chakra-button');
+        expect(createAccountButton).toHaveTextContent('Create an account');
+    });
+
+    test('should render the facebook button', async () => {
+        const facebookButton = screen.getByRole('button', { name: /facebook/i });
+
+        expect(facebookButton).toBeVisible();
+        expect(facebookButton).toBeInTheDocument();
+        expect(facebookButton).toHaveClass('chakra-button');
+        expect(facebookButton).toHaveTextContent('Facebook');
+    });
+
+    test('should render the google button', async () => {
+        const googleButton = screen.getByRole('button', { name: /google/i });
+
+        expect(googleButton).toBeVisible();
+        expect(googleButton).toBeInTheDocument();
+        expect(googleButton).toHaveClass('chakra-button');
+        expect(googleButton).toHaveTextContent('Google');
     });
 });
 
-describe("Units tests", () => {
-    it('should have an email input', () => {
-        const input = screen.getByRole('textbox', { name: /email/i, exact: false });
+describe('Valid integration tests', () => {
+    test('should submit the form', async () => {
+        const emailInput = screen.getByRole('textbox', { name: /email/i });
+        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+        const submitButton = screen.getByRole('button', { name: /submit/i });
+        const mockUserData = {
+            email: 'test@test.com',
+            password: 'toto'
+        };
 
-        expect(input).toBeInTheDocument();
-        expect(input).toHaveClass('chakra-input');
-    });
+        await user.clear(emailInput);
+        await user.type(emailInput, mockUserData.email);
+        
+        await user.clear(passwordInput);
+        await user.type(passwordInput, mockUserData.password);
 
-    it('should have a password input', () => {
-        const input = screen.getByRole('textbox', { name: /password/i, exact: false });
+        expect(submitButton).toBeEnabled();
 
-        expect(input).toBeInTheDocument();
-        expect(input).toHaveClass('chakra-input');
-    });
+        await user.click(submitButton);
 
-    it('should have a submit button', () => {
-        const button = screen.getByRole('button', { name: /submit/i, exact: false });
-
-        expect(button).toBeInTheDocument();
-        expect(button).toHaveClass('chakra-button');
+        expect(emailInput).toHaveValue(mockUserData.email);
+        expect(passwordInput).toHaveValue(mockUserData.password);
+        expect(window.fetch).toHaveBeenCalledTimes(1);
+        expect(window.fetch).toHaveBeenCalledWith('/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(mockUserData)
+        });
     });
 });
 
-describe("Integration tests", () => {
-    test("Press submit button : should submit a request after clicking on submit button with email/password", async () => {
-        const mockData = {
-            emailAdress: "test@test.com",
-            password: "test"
+/////////////////////////// INVALID CASE TESTS ///////////////////////////
+
+describe('Invalid integration tests', () => {
+    test('Type in email field : should bu null', async () => {
+        const emailInput = screen.getByRole('textbox', { name: /email/i });
+        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+        const submitButton = screen.getByRole('button', { name: /submit/i });
+        const mockUserData = {
+            email: 'test@test.com',
+            password: 'toto'
         };
 
-        const mockResponse = {
-            data: {
-                token: "test",
-                username: "test",
-                email: "test@gmail.com",
-                id: "test"
-            }
+        await user.clear(emailInput);
+        
+        await user.clear(passwordInput);
+        await user.type(passwordInput, mockUserData.password);
+
+        expect(submitButton).toBeEnabled();
+
+        await user.click(submitButton);
+
+        expect(emailInput).not.toBeNull();
+        expect(window.fetch).not.toBeCalled();
+    });
+
+    test('Type in password field : should bu null', async () => {
+        const emailInput = screen.getByRole('textbox', { name: /email/i });
+        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+        const submitButton = screen.getByRole('button', { name: /submit/i });
+        const mockUserData = {
+            email: 'test@test.com',
+            password: 'toto'
         };
 
-        const mockFetch = jest.fn().mockImplementation(() => {
-            return Promise.resolve({
-                json: () => Promise.resolve(mockResponse)
-            });
-        });
+        await user.clear(emailInput);
+        await user.type(emailInput, mockUserData.email);
+        
+        await user.clear(passwordInput);
 
-        const mockPost = jest.fn().mockImplementation(() => {
-            return Promise.resolve({
-                json: () => Promise.resolve(mockData)
-            });
-        });
+        expect(submitButton).toBeEnabled();
 
-        global.fetch = mockFetch;
+        await user.click(submitButton);
 
-        render(
-            <BrowserRouter>
-                <LoginPage />
-            </BrowserRouter>
-        );
-
-        /* const request = await postRequest("/login", mockData); */
-
-        const emailPlaceholder = screen.queryByPlaceholderText(/mama@gmail.com/i)!;
-        const passwordPlaceholder = screen.queryByPlaceholderText(/[************]/i)!;
-
-        user.type(emailPlaceholder, mockData.emailAdress);
-        user.type(passwordPlaceholder, mockData.password);
-        user.click(screen.getByText("submit"));
-
-        expect(mockPost).toHaveBeenCalledWith("/login", mockData);
-        expect(mockPost).toHaveBeenCalledTimes(1);
-
-        /* expect(request).toEqual(mockResponse); */
-
-        await screen.findByText(/login/i);
-
-        expect(screen.getByText(mockData.emailAdress)).toBeInTheDocument();
-        expect(screen.getByText(mockData.password)).toBeInTheDocument();
-    });
-
-    /////////////////////////// INVALID CASE TESTS ///////////////////////////
-
-    test("Press submit button : should not submit a request after clicking on submit button without email/password", async () => {
-        const errorMessageToFind = "Please enter a valid email address and password";
-
-        /* const request = await postRequest("/login", mockData); */
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.click(screen.getByText("submit"));
-
-        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-    });
-
-    test("Press submit button : should not submit a request after clicking on submit button without a valid email", async () => {
-        const mockData = {
-            emailAdress: "s",
-            password: "test"
-        };
-
-        /* const mockResponse = {
-            data: {
-                token: "test"
-            }
-        }; */
-
-        const errorMessageToFind = "Please enter a valid email address";
-
-        /* const request = await postRequest("/login", mockData); */
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
-        user.type(screen.getByPlaceholderText("password"), mockData.password);
-        user.click(screen.getByText("submit"));
-
-        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-        expect(postRequest).toHaveBeenCalledTimes(1);
-        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-    });
-
-    test("Press submit button : should not submit a request after clicking on submit button without a valid password", async () => {
-        const mockData = {
-            emailAdress: "test@test.com",
-            password: "s"
-        };
-
-        /* const mockResponse = {
-            data: {
-                token: "test"
-            }
-        }; */
-
-        const errorMessageToFind = "Invalid password";
-
-        /* const request = await postRequest("/login", mockData); */
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.type(screen.getByPlaceholderText("email"), mockData.emailAdress);
-        user.type(screen.getByPlaceholderText("password"), mockData.password);
-        user.click(screen.getByText("submit"));
-
-        expect(postRequest).toHaveBeenCalledWith("/login", mockData);
-        expect(postRequest).toHaveBeenCalledTimes(1);
-        expect(screen.getByText(errorMessageToFind)).toBeInTheDocument();
-    });
-
-    test("Press create an account link : should be redirected in the create profile page", async () => {
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.click(screen.getByText("Create an account"));
-
-        await screen.findByText("/register");
-    });
-
-    test("Press Google login auth : should be connected with a Google account", async () => {
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.click(screen.getByText("Google"));
-
-        // expect('login_function_Google').toHaveBeenCalled();
-        expect('/google').toBeCalled();
-
-        await screen.findByText("/google");
-    });
-
-    test("Press Facebook login auth : should be connected with a Facebook account", async () => {
-        render(
-            <BrowserRouter>
-                <Login />
-            </BrowserRouter>
-        );
-
-        user.click(screen.getByText("Facebook"));
-
-        // expect('login_function_Facebook').toHaveBeenCalled();
-        expect('/facebook').toBeCalled();
-
-        await screen.findByText("/facebook");
+        expect(passwordInput).not.toBeNull();
+        expect(window.fetch).not.toBeCalled();
     });
 });

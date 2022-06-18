@@ -27,6 +27,7 @@ const Login = () => {
                 boxShadow={'xl'} p={12} rounded={6}>
                   <Heading mb={12}>Sign in to your account</Heading>
                   <Input
+                    aria-label="email"
                     placeholder="mama@gmail.com"
                     variant="filled"
                     mb={8}
@@ -35,6 +36,7 @@ const Login = () => {
                     onChange={({ target }) => setEmailAddress(target.value)}
                   />
                   <Input
+                    aria-label="password"
                     placeholder="************"
                     variant="filled"
                     mb={8}

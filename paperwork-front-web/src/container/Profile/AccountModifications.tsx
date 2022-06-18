@@ -21,6 +21,8 @@ const AccountModifications = () => {
             <Center>
                 <InputGroup size='md' width={"auto"}>
                     <Input
+                        id="username"
+                        aria-label="username"
                         type={'text'}
                         placeholder='Enter username'
                         variant="filled"
@@ -33,6 +35,8 @@ const AccountModifications = () => {
                 </Center><Center>
                     <InputGroup size='md' width={"auto"}>
                         <Input
+                            id="email"
+                            aria-label="email"
                             type={'email'}
                             placeholder='Enter email'
                             variant="filled"
@@ -45,6 +49,8 @@ const AccountModifications = () => {
                 </Center><Center>
                     <InputGroup size='md' width={"auto"}>
                         <Input
+                            id="password"
+                            aria-label="password"
                             type={showEyePwd ? 'text' : 'password'}
                             placeholder='Enter password'
                             variant="filled"
@@ -60,6 +66,8 @@ const AccountModifications = () => {
                 </Center><Center>
                     <InputGroup size='md' width={"auto"}>
                         <Input
+                            id="verifPassword"
+                            aria-label="verify_password"
                             type={showEyeVerifPwd ? 'text' : 'password'}
                             placeholder='Verify password'
                             variant="filled"
