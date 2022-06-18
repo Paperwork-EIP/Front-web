@@ -2,12 +2,13 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
-import LoginPage from "../../pages/Login";
-import Login from "../../container/Login/Login";
-import { postRequest } from "../mocks/api/api";
+
+import LoginPage from "../../../pages/Login";
+import Login from "../../../container/Login/Login";
+
+import { postRequest } from "../../mocks/api/api";
 
 jest.mock("@chakra-ui/react", () => {
-    // --> Original module
     const originalModule = jest.requireActual("@chakra-ui/react");
 
     return {
@@ -39,21 +40,21 @@ describe("LoginPage", () => {
 
 describe("Units tests", () => {
     it('should have an email input', () => {
-        const input = screen.getByRole('textbox', { name: /email/i, hidden: true });
+        const input = screen.getByRole('textbox', { name: /email/i, exact: false });
 
         expect(input).toBeInTheDocument();
         expect(input).toHaveClass('chakra-input');
     });
 
     it('should have a password input', () => {
-        const input = screen.getByRole('textbox', { name: /password/i, hidden: true });
+        const input = screen.getByRole('textbox', { name: /password/i, exact: false });
 
         expect(input).toBeInTheDocument();
         expect(input).toHaveClass('chakra-input');
     });
 
     it('should have a submit button', () => {
-        const button = screen.getByRole('button', { name: /submit/i, hidden: true });
+        const button = screen.getByRole('button', { name: /submit/i, exact: false });
 
         expect(button).toBeInTheDocument();
         expect(button).toHaveClass('chakra-button');

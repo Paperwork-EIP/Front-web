@@ -7,7 +7,7 @@ const CalendarButton = () => {
     return (
         <>
             <Center>
-                <Button leftIcon={<AiOutlineCalendar />} className='Profile-CalendarButton'>Calendar</Button>
+                <Button aria-label='calendar-button' leftIcon={<AiOutlineCalendar />} className='Profile-CalendarButton'>Calendar</Button>
             </Center>
         </>
     );
