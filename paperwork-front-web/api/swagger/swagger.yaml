@@ -1,0 +1,81 @@
+swagger: '2.0'
+info:
+  title: Paperwork - API Documentation
+  description: Paperwork API documentation for Epitech Project
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  contact: 
+    name: Paperwork Team
+    url: http://eip.epitech.eu/2024/prosshelper
+    email: prosshelper_2024@labeip.epitech.eu
+host: 'localhost:3000'
+basePath: /
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+tags:
+  - name: user
+    description: User management
+  - name: token
+    description: Token management
+
+paths:
+  /user/register:
+    post:
+      responses:
+        '200':
+          description: Register a new user
+      summary: Register a new user
+      tags:
+        - user
+  /user/login:
+    post:
+      responses:
+        '200':
+          description: Login a user
+      summary: Login a user
+      tags:
+        - user
+  /token/set:
+    post:
+      responses:
+        '200':
+          description: Set a token
+      summary: Set a token
+      tags:
+        - token
+  /token/get:
+    get:
+      responses:
+        '200':
+          description: Get a token
+      summary: Get a token
+      tags:
+        - token
+  /token/getAll:
+    get:
+      responses:
+        '200':
+          description: Get all tokens
+      summary: Get all tokens
+      tags:
+        - token
+  /token/delete/{service}:
+    delete:
+      responses:
+        '200':
+          description: Delete a token
+      parameters:
+        - name: service
+          in: path
+          description: Service name
+          required: true
+          type: string
+      summary: Delete a token
+      tags:
+        - token
