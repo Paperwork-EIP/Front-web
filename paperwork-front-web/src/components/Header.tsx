@@ -58,6 +58,7 @@ const Header = () => {
                   </Center>
                   <MenuDivider />
                   <MenuItem>Start a process</MenuItem>
+                  <MenuItem><Link to='/home'>Home</Link></MenuItem>
                   <MenuItem>Forum</MenuItem>
                   <MenuItem>Calendar</MenuItem>
                   <MenuItem>Find an association</MenuItem>
