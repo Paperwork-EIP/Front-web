@@ -11,6 +11,8 @@ export default async function mockFetch(url) {
             return Response.json(userData);
         case "/api/login":
             return Response.json(userData);
+        case "/api/register":
+            return Response.json(userData);
         case "/home":
             return Response.json({
                 status: 200,

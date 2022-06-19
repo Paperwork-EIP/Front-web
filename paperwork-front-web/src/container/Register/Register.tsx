@@ -15,7 +15,7 @@ import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     
@@ -25,7 +25,16 @@ const Login = () => {
               <Flex alignItems="center" bg={useColorModeValue('gray.50', 'gray.800')} justifyContent="center">
                 <Flex direction="column" bg={useColorModeValue('white', 'gray.700')}
                 boxShadow={'xl'} p={12} rounded={6}>
-                  <Heading mb={12}>Sign in to your account</Heading>
+                  <Heading mb={12}>Create your account</Heading>
+                  <Input
+                    aria-label="pseudo"
+                    placeholder="username"
+                    variant="filled"
+                    mb={8}
+                    type="text"
+                    value={emailAdress}
+                    onChange={({ target }) => setEmailAddress(target.value)}
+                  />
                   <Input
                     aria-label="email"
                     placeholder="mama@gmail.com"
@@ -37,13 +46,20 @@ const Login = () => {
                   />
                   <Input
                     aria-label="password"
-                    placeholder="************"
+                    placeholder="password"
                     variant="filled"
                     mb={8}
                     type="password"
                     value={password}
                     onChange={({ target }) => setPassword(target.value)}
-                  />                
+                  />
+                  <Input
+                    aria-label="confirm password"
+                    placeholder="confirm your password"
+                    variant="filled"
+                    mb={8}
+                    type="password"
+                  />         
                   <Button
                     colorScheme="purple"
                     mb={3}
@@ -52,9 +68,9 @@ const Login = () => {
                     submit
                   </Button>
                   <Center>
-                    <Link to="/register">
+                    <Link to="/">
                       <Button colorScheme="white" variant="link" mb={6}>
-                        Create an account
+                        Sign in
                       </Button>
                     </Link>
                   </Center>
@@ -68,7 +84,7 @@ const Login = () => {
               </Flex>
               <Flex flex={1}>
                 <Image
-                  alt={"Login Image"}
+                  alt={"Register Image"}
                   objectFit={"cover"}
                   src={
                     "https://smallbizclub.com/wp-content/uploads/2018/09/Types-of-Paperwork-Youll-Have-to-Create.jpg"
@@ -80,4 +96,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default Register;

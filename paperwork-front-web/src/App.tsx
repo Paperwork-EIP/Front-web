@@ -7,6 +7,7 @@ import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import ProfilePage from './pages/Profile';
+import RegisterPage from './pages/Register';
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
         <ColorModeScript initialColorMode="light"/>
           <Routes>
             <Route path="/" element={<LoginPage/>}/>
-            {/* <Route path="/signup" element={<SignUpPage/>}/> */}
+            <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage/>}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
             <Route
