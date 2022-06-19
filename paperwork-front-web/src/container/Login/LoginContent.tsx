@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Flex,
   FormControl,
@@ -14,10 +14,38 @@ import {
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
+import { signIn } from "../../api/Auth";
 
-const Login = () => {
+const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
+
+
+    const handleSubmit = async (event : any) => {
+      event.preventDefault();
+      let res = await signIn(emailAdress, password);
+      if (res) {
+        window.location.assign("/home");
+      } else {
+        console.log(res);
+      }
+
+      // axios
+      //   .post("/api/login", payload)
+      //   .then((res) => {
+      //     console.log(payload);
+      //     //axios.post('/welcome', payload).then(res => {
+      //     // printToast(res);
+      //     // console.log(document.cookies);
+      //     window.location.assign("/home");
+      //   })
+      //   .catch((err) => {
+      //     if (err.response.status == 401) {
+      //       window.location.assign("/signup")
+      //     }
+      //   });
+    };
+
     
     return (
         <FormControl as="fieldset">
@@ -46,6 +74,9 @@ const Login = () => {
                     colorScheme="purple"
                     mb={3}
                     type="submit"
+                    onClick={(e) => {
+                      handleSubmit(e)
+                    }}
                   >
                     submit
                   </Button>
@@ -78,4 +109,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default LoginContent;
