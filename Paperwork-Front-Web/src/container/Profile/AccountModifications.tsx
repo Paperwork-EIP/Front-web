@@ -25,7 +25,7 @@ const AccountModifications = () => {
                 onChange={({ target }) => setFile(target.value)}
                 hidden
                 />
-                <Avatar size='2xl' name='Christian Nwamba' mb={6} mt={8} src='https://bit.ly/dan-abramov' border={"5px solid white"} boxShadow={"0px 5px 5px lightgray"} />{' '}
+                <Avatar size='2xl' width={"30%"} height="30%" name='Christian Nwamba' mb={6} mt={8} src='https://bit.ly/dan-abramov' border={"5px solid white"} boxShadow={"0px 5px 5px lightgray"} />{' '}
             </Center>
             <p className="ProfilTextLabel">Username</p>
             <Center>
