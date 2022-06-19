@@ -27,7 +27,7 @@ const AccountModifications = () => {
                 <Avatar size='2xl' name='Christian Nwamba' src='https://bit.ly/dan-abramov' />{' '}
             </Center>
             <Center>
-                <InputGroup size='md' width={"auto"}>
+                <InputGroup size='lg' width={"auto"}>
                     <Input
                         type={'text'}
                         placeholder='Enter username'
@@ -40,7 +40,7 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='md' width={"auto"}>
+                <InputGroup size='lg' width={"auto"}>
                     <Input
                         type={'email'}
                         placeholder='Enter email'
@@ -53,7 +53,7 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='md' width={"auto"}>
+                <InputGroup size='lg' width={"auto"}>
                     <Input
                         type={showEyePwd ? 'text' : 'password'}
                         placeholder='Enter password'
@@ -69,7 +69,7 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='md' width={"auto"}>
+                <InputGroup size='lg' width={"auto"}>
                     <Input
                         type={showEyeVerifPwd ? 'text' : 'password'}
                         placeholder='Verify password'

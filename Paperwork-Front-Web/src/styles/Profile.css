@@ -29,13 +29,14 @@
 }
 
 .Profile-CalendarButton {
-    margin-top: 200px;
     height: 50px;
-    width: 400px;
+    width: 50%;
     background-color: white;
     color: tomato;
     border-color: tomato;
     border-radius: 100px;
+    display: inline-block;
+    align-self: flex-end;
 }
 
 .Profile-Input-Icon {
@@ -45,7 +46,7 @@
 .Profil-ProcessBox {
     border: 1px solid lightgray;
     background-color: whitesmoke;
-    width: 40%;
+    width: 90%;
     color: black;
     border-radius: 10px;
 }
