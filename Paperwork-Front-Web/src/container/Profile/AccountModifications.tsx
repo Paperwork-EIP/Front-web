@@ -19,20 +19,20 @@ const AccountModifications = () => {
                 <Input
                 type={'file'}
                 placeholder='Choose a file'
-                mb={4}
+                mb={8}
                 value={file}
                 onChange={({ target }) => setFile(target.value)}
                 hidden
                 />
-                <Avatar size='2xl' name='Christian Nwamba' src='https://bit.ly/dan-abramov' />{' '}
+                <Avatar size='2xl' name='Christian Nwamba' mb={8} mt={8} src='https://bit.ly/dan-abramov' />{' '}
             </Center>
             <Center>
-                <InputGroup size='lg' width={"auto"}>
+                <InputGroup size='lg' width={"55%"}>
                     <Input
                         type={'text'}
                         placeholder='Enter username'
                         variant="filled"
-                        mb={4}
+                        mb={8}
                         value={username}
                         onChange={({ target }) => setUsername(target.value)} />
                     <InputRightElement>
@@ -40,12 +40,12 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='lg' width={"auto"}>
+                <InputGroup size='lg' width={"55%"}>
                     <Input
                         type={'email'}
                         placeholder='Enter email'
                         variant="filled"
-                        mb={4}
+                        mb={8}
                         value={emailAdress}
                         onChange={({ target }) => setEmailAddress(target.value)} />
                     <InputRightElement>
@@ -53,12 +53,12 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='lg' width={"auto"}>
+                <InputGroup size='lg' width={"55%"}>
                     <Input
                         type={showEyePwd ? 'text' : 'password'}
                         placeholder='Enter password'
                         variant="filled"
-                        mb={4}
+                        mb={8}
                         value={password}
                         onChange={({ target }) => setPassword(target.value)} />
                     <InputRightElement>
@@ -69,12 +69,12 @@ const AccountModifications = () => {
                 </InputGroup>
             </Center>
             <Center>
-                <InputGroup size='lg' width={"auto"}>
+                <InputGroup size='lg' width={"55%"}>
                     <Input
                         type={showEyeVerifPwd ? 'text' : 'password'}
                         placeholder='Verify password'
                         variant="filled"
-                        mb={4}
+                        mb={8}
                         value={verifPassword}
                         onChange={({ target }) => setVerifPassword(target.value)} />
                     <InputRightElement>
