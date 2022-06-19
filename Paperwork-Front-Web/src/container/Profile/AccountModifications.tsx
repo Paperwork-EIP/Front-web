@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Center, Input, InputGroup, InputRightElement, Button, Avatar } from '@chakra-ui/react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import "../../styles/Profile.css";
 
 const AccountModifications = () => {
     const [showEyePwd, setShowEyePwd] = React.useState(false)
@@ -19,46 +20,49 @@ const AccountModifications = () => {
                 <Input
                 type={'file'}
                 placeholder='Choose a file'
-                mb={8}
+                mb={6}
                 value={file}
                 onChange={({ target }) => setFile(target.value)}
                 hidden
                 />
-                <Avatar size='2xl' name='Christian Nwamba' mb={8} mt={8} src='https://bit.ly/dan-abramov' />{' '}
+                <Avatar size='2xl' name='Christian Nwamba' mb={6} mt={8} src='https://bit.ly/dan-abramov' />{' '}
             </Center>
+            <p className="ProfilTextLabel">Username</p>
             <Center>
-                <InputGroup size='lg' width={"55%"}>
+                <InputGroup size='lg' width={"60%"}>
                     <Input
                         type={'text'}
                         placeholder='Enter username'
                         variant="filled"
-                        mb={8}
+                        mb={6}
                         value={username}
                         onChange={({ target }) => setUsername(target.value)} />
                     <InputRightElement>
                     </InputRightElement>
                 </InputGroup>
             </Center>
+            <p className="ProfilTextLabel">Email</p>
             <Center>
-                <InputGroup size='lg' width={"55%"}>
+                <InputGroup size='lg' width={"60%"}>
                     <Input
                         type={'email'}
                         placeholder='Enter email'
                         variant="filled"
-                        mb={8}
+                        mb={6}
                         value={emailAdress}
                         onChange={({ target }) => setEmailAddress(target.value)} />
                     <InputRightElement>
                     </InputRightElement>
                 </InputGroup>
             </Center>
+            <p className="ProfilTextLabel">Username</p>
             <Center>
-                <InputGroup size='lg' width={"55%"}>
+                <InputGroup size='lg' width={"60%"}>
                     <Input
                         type={showEyePwd ? 'text' : 'password'}
                         placeholder='Enter password'
                         variant="filled"
-                        mb={8}
+                        mb={6}
                         value={password}
                         onChange={({ target }) => setPassword(target.value)} />
                     <InputRightElement>
@@ -68,13 +72,14 @@ const AccountModifications = () => {
                     </InputRightElement>
                 </InputGroup>
             </Center>
+            <p className="ProfilTextLabel">Verify password</p>
             <Center>
-                <InputGroup size='lg' width={"55%"}>
+                <InputGroup size='lg' width={"60%"}>
                     <Input
                         type={showEyeVerifPwd ? 'text' : 'password'}
                         placeholder='Verify password'
                         variant="filled"
-                        mb={8}
+                        mb={6}
                         value={verifPassword}
                         onChange={({ target }) => setVerifPassword(target.value)} />
                     <InputRightElement>
