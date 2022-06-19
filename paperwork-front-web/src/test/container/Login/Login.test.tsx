@@ -2,11 +2,9 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
-
 import LoginPage from "../../../pages/Login";
-import Login from "../../../container/Login/Login";
-
 import { postRequest } from "../../mocks/api/api";
+import LoginContent from "../../../container/Login/LoginContent";
 
 jest.mock("@chakra-ui/react", () => {
     const originalModule = jest.requireActual("@chakra-ui/react");
@@ -125,7 +123,7 @@ describe("Integration tests", () => {
         /* const request = await postRequest("/login", mockData); */
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
@@ -151,7 +149,7 @@ describe("Integration tests", () => {
         /* const request = await postRequest("/login", mockData); */
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
@@ -181,7 +179,7 @@ describe("Integration tests", () => {
         /* const request = await postRequest("/login", mockData); */
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
@@ -197,7 +195,7 @@ describe("Integration tests", () => {
     test("Press create an account link : should be redirected in the create profile page", async () => {
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
@@ -209,7 +207,7 @@ describe("Integration tests", () => {
     test("Press Google login auth : should be connected with a Google account", async () => {
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
@@ -224,7 +222,7 @@ describe("Integration tests", () => {
     test("Press Facebook login auth : should be connected with a Facebook account", async () => {
         render(
             <BrowserRouter>
-                <Login />
+                <LoginContent />
             </BrowserRouter>
         );
 
