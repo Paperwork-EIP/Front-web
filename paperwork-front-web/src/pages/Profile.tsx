@@ -9,7 +9,8 @@ import Header from '../components/Header';
 const ProfilePage = () => {
     return (
         <>
-            <Grid h='600px' gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' >
+            <Header/>
+            <Grid h='600px' gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' mt={6} >
                 <GridItem w='100%' rowSpan={2} colSpan={5}>
                     <AccountModifications />
                 </GridItem>
