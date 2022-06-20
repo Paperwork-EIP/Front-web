@@ -2,9 +2,8 @@ import '@testing-library/jest-dom';
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
-
-import Login from "../../../container/Login/Login";
 import mockFetch from '../../mocks/api/api';
+import LoginContent from '../../../container/Login/LoginContent';
 
 beforeEach(() => {
     jest.spyOn(window, 'fetch').mockImplementation(mockFetch);
@@ -13,7 +12,7 @@ beforeEach(() => {
     })
     render(
         <BrowserRouter>
-            <Login />
+            <LoginContent />
         </BrowserRouter>
     );
 })

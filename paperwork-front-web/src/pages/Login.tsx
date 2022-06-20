@@ -1,9 +1,9 @@
-import Login from '../container/Login/Login';
+import LoginContent from '../container/Login/LoginContent';
 
 const LoginPage = () => {
 
     return (
-        <Login/>
+        <LoginContent/>
     );
 }
 
