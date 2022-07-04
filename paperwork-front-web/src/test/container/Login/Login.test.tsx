@@ -2,7 +2,6 @@ import '@testing-library/jest-dom';
 import { BrowserRouter } from "react-router-dom";
 import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
-
 import mockFetch from '../../mocks/api/api';
 import LoginContent from '../../../container/Login/LoginContent';
 

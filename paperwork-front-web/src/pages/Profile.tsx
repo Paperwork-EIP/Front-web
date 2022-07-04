@@ -10,14 +10,14 @@ const ProfilePage = () => {
     return (
         <>
             <Header/>
-            <Grid h='600px' templateRows='repeat(2, 1fr)' templateColumns='repeat(5, 1fr)' gap={4} mt={6} >
-                <GridItem rowSpan={2} colSpan={2}>
+            <Grid h='600px' gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' mt={6} >
+                <GridItem w='100%' rowSpan={2} colSpan={5}>
                     <AccountModifications />
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3}>
+                <GridItem w='100%' rowSpan={1} colSpan={7} display={"flex"}>
                     <CalendarButton />
                 </GridItem>
-                <GridItem rowSpan={1} colSpan={3}>
+                <GridItem w='100%' rowSpan={1} colSpan={7}>
                     <ProcessBar />
                 </GridItem>
             </Grid>
