@@ -14,6 +14,7 @@
     "axios": "^0.27.2",
     "framer-motion": "^6.3.11",
     "jest-styled-components": "^7.0.8",
+    "pre-commit": "^1.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^3.11.0",
@@ -21,12 +22,12 @@
     "react-scripts": "5.0.1",
     "swagger-ui": "^4.12.0",
     "typescript": "^4.7.3",
-    "web-vitals": "^0.2.4",
-    "axios": "^0.27.2"
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prestart": "cp scripts/pre-commit ../.github/hooks/ && chmod +x ../.github/hooks/pre-commit && echo 'hook copied'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
