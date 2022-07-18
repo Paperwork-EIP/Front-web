@@ -14,7 +14,6 @@
     "axios": "^0.27.2",
     "framer-motion": "^6.3.11",
     "jest-styled-components": "^7.0.8",
-    "pre-commit": "^1.2.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-icons": "^3.11.0",
@@ -27,10 +26,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "prestart": "cp scripts/pre-commit ../.github/hooks/ && chmod +x ../.github/hooks/pre-commit && echo 'hook copied'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "pre-commit": [
+    "test"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -50,6 +51,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
     "jest": "^28.1.1",
-    "jest-dom": "^4.0.0"
+    "jest-dom": "^4.0.0",
+    "pre-commit": "^1.2.2"
   }
 }
