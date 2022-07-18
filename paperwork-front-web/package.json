@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts tes --code-coverage --watch=false",
     "eject": "react-scripts eject"
   },
   "pre-commit": [
