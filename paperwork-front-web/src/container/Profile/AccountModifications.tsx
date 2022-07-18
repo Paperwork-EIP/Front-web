@@ -49,6 +49,7 @@ const AccountModifications = () => {
                     <Input
                         id="email"
                         aria-label="email"
+                        type={'email'}
                         placeholder='Enter email'
                         variant="filled"
                         mb={6}
