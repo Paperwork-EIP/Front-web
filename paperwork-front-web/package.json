@@ -28,18 +28,17 @@
     "build": "react-scripts build",
     "test": "jest --watchAll --coverage=true",
     "eject": "react-scripts eject",
-    "prepare": "husky install"
+    "prepare": "cd .. && npx husky install paperwork-front-web/.husky",
+    "lint-staged": "lint-staged"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test"
+      "pre-commit": "npm run lint-staged"
     }
   },
   "lint-staged": {
-    "*.tsx": [
-      "eslint --fix",
-      "git add"
+    "*.{js, ts, tsx}": [
+      "eslint --cache --quiet --fix"
     ]
   },
   "eslintConfig": {
@@ -60,7 +59,8 @@
   "devDependencies": {
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
-    "husky": "^8.0.1",
+    "eslint": "^8.20.0",
+    "husky": "^4.3.8",
     "jest": "^28.1.1",
     "jest-dom": "^4.0.0",
     "lint-staged": "^9.5.0"
