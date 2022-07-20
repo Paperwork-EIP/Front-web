@@ -60,7 +60,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
     "eslint": "^8.20.0",
-    "husky": "^4.3.8",
+    "husky": "^8.0.1",
     "jest": "^28.1.1",
     "jest-dom": "^4.0.0",
     "lint-staged": "^9.5.0"
