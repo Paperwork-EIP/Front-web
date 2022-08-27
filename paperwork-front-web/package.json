@@ -61,8 +61,8 @@
     "@testing-library/user-event": "^14.2.0",
     "eslint": "^8.20.0",
     "husky": "^8.0.1",
-    "jest": "^28.1.1",
     "jest-dom": "^4.0.0",
-    "lint-staged": "^9.5.0"
+    "lint-staged": "^9.5.0",
+    "ts-jest": "^28.0.8"
   }
 }
