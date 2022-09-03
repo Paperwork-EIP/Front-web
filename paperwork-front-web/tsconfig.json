@@ -21,6 +21,7 @@
     "jsx": "react"
   },
   "include": [
-    "src"
-, "public/Logo.tsx"  ]
+    "src",
+    "public/Logo.tsx"
+  ]
 }
