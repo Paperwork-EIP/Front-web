@@ -18,6 +18,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
 import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import React from "react";
 
 const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");

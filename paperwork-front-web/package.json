@@ -57,12 +57,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.15.0",
+    "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.2.0",
+    "@types/jest": "^27.0.2",
     "eslint": "^8.20.0",
     "husky": "^8.0.1",
-    "jest-dom": "^4.0.0",
-    "lint-staged": "^9.5.0",
-    "ts-jest": "^28.0.8"
+    "jest": "^27.3.1",
+    "lint-staged": "^9.5.0"
   }
 }
