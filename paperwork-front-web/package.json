@@ -26,7 +26,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --watchAll --coverage=true",
+    "test": "jest --watchAll",
+    "test:coverage": "jest --coverage=true",
     "eject": "react-scripts eject",
     "prepare": "cd .. && npx husky install paperwork-front-web/.husky",
     "lint-staged": "lint-staged"
