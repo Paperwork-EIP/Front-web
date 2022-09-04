@@ -1,4 +1,5 @@
 import { Button } from '@chakra-ui/react';
+import React from 'react';
 import { AiOutlineCalendar } from "react-icons/ai";
 import "../../styles/Profile.css";
 

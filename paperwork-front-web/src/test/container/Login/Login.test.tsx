@@ -4,6 +4,7 @@ import { render, screen, configure } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import mockFetch from '../../mocks/api/api';
 import LoginContent from '../../../container/Login/LoginContent';
+import React from 'react';
 
 beforeEach(() => {
     jest.spyOn(window, 'fetch').mockImplementation(mockFetch);

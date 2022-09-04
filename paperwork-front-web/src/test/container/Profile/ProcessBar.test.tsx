@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { render, screen, configure, within } from "@testing-library/react";
+import React from 'react';
 
 import ProcessBar from "../../../container/Profile/ProcessBar";
 

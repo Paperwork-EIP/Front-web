@@ -1,4 +1,5 @@
 import { Progress, Box, Center } from '@chakra-ui/react';
+import React from 'react';
 import "../../styles/Profile.css";
 
 const ProcessBar = () => {
