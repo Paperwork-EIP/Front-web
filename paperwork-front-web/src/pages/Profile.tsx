@@ -5,6 +5,7 @@ import AccountModifications from '../container/Profile/AccountModifications';
 import CalendarButton from '../container/Profile/CalendarButton';
 import ProcessBar from '../container/Profile/ProcessBar';
 import Header from '../components/Header';
+import React from 'react';
 
 const ProfilePage = () => {
     return (
