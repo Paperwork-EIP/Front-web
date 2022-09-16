@@ -1,9 +1,12 @@
 version: '3'
 services:
   react-ui:
+    restart: on-failure
     build:
       context: ./paperwork-front-web
       dockerfile: Dockerfile
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
     ports:
       - "3000:3000"
     container_name: react-ui
