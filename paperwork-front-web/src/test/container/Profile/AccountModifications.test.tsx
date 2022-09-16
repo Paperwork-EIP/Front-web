@@ -20,7 +20,6 @@ beforeEach(() => {
 })
 
 describe("###### Account modification page ######", () => {
-    const mockFunction = jest.fn();
     const screen = render(
         <BrowserRouter>
             <AccountModifications />

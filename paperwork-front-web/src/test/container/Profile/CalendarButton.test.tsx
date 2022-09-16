@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 
-import { render, configure, fireEvent, getByRole } from "@testing-library/react";
+import { render, configure, fireEvent } from "@testing-library/react";
 
 import CalendarButton from "../../../container/Profile/CalendarButton";
 
@@ -22,13 +22,14 @@ describe("###### Calendar button component ######", () => {
         );
     });
 
-    it('[INTERGRATION TEST] simulate click event on calendar button', () => {
+    test('[INTERGRATION TEST] simulate click event on calendar button', async () => {
         const screen = render(
             <BrowserRouter>
                 <CalendarButton />
             </BrowserRouter>
         );
         const calendarButton = screen.getByRole('button', { name: /calendar\-button/i });
-        fireEvent.click(calendarButton);
+
+        await fireEvent.click(calendarButton);
     });
 });
