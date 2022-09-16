@@ -23,12 +23,12 @@ describe("###### Calendar button component ######", () => {
     });
 
     it('[INTERGRATION TEST] simulate click event on calendar button', () => {
-        const container = render(
+        const screen = render(
             <BrowserRouter>
                 <CalendarButton />
             </BrowserRouter>
         );
-        const calendarButton = container.getByRole('button', { name: /calendar\-button/i });
+        const calendarButton = screen.getByRole('button', { name: /calendar\-button/i });
         fireEvent.click(calendarButton);
     });
 });

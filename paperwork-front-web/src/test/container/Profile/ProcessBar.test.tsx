@@ -19,5 +19,5 @@ beforeEach(() => {
 })
 
 describe("###### Process bar component ######", () => {
-    it("should render Process bar component without crashes", () => { });
+    it("[UNIT TEST] should render Process bar component without crashes", () => { });
 });
