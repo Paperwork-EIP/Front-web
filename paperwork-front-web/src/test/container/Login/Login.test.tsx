@@ -1,10 +1,11 @@
 import '@testing-library/jest-dom';
-import { BrowserRouter } from "react-router-dom";
-import { render, screen, configure } from "@testing-library/react";
-import user from "@testing-library/user-event";
-import mockFetch from '../../mocks/api/api';
-import LoginContent from '../../../container/Login/LoginContent';
+
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
+
+import { render, configure } from "@testing-library/react";
+
+import LoginContent from '../../../container/Login/LoginContent';
 
 beforeEach(() => {
     configure({
@@ -18,5 +19,5 @@ beforeEach(() => {
 })
 
 describe("###### Login page ######", () => {
-    test("should render Login page component without crashes", () => { });
+    it("should render Login page component without crashes", () => { });
 });

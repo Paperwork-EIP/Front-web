@@ -19,5 +19,5 @@ beforeEach(() => {
 })
 
 describe('###### Register page ######', () => {
-    test("should render Register page component without crashes", () => { });
+    it("should render Register page component without crashes", () => { });
 });

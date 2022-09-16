@@ -19,5 +19,5 @@ beforeEach(() => {
 })
 
 describe("###### Account modification page ######", () => {
-    test("should render Account modification component without crashes", () => { });
+    it("should render Account modification component without crashes", () => { });
 });

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { BrowserRouter } from "react-router-dom";
 
-import { render, configure } from "@testing-library/react";
+import { render, configure, fireEvent, getByRole } from "@testing-library/react";
 
 import CalendarButton from "../../../container/Profile/CalendarButton";
 
@@ -11,13 +11,24 @@ beforeEach(() => {
     configure({
         throwSuggestions: true,
     });
-    render(
-        <BrowserRouter>
-            <CalendarButton />
-        </BrowserRouter>
-    );
 })
 
 describe("###### Calendar button component ######", () => {
-    test("should render Calendar button component without crashes", () => { });
+    it("[UNIT TEST] should render Calendar button component without crashes", () => {
+        render(
+            <BrowserRouter>
+                <CalendarButton />
+            </BrowserRouter>
+        );
+    });
+
+    it('[INTERGRATION TEST] simulate click event on calendar button', () => {
+        const container = render(
+            <BrowserRouter>
+                <CalendarButton />
+            </BrowserRouter>
+        );
+        const calendarButton = container.getByRole('button', { name: /calendar\-button/i });
+        fireEvent.click(calendarButton);
+    });
 });

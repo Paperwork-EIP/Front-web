@@ -18,8 +18,6 @@ beforeEach(() => {
     );
 })
 
-/////////////////////////// VALID CASE TESTS ///////////////////////////
-
 describe("###### Process bar component ######", () => {
-    test("should render Process bar component without crashes", () => { });
+    it("should render Process bar component without crashes", () => { });
 });
