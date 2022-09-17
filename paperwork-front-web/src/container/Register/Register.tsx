@@ -81,6 +81,7 @@ const Register = () => {
                   onChange={({ target }) => setConfirmPassword(target.value)}
                 />       
                 <Button
+                  aria-label="submit_button"
                   colorScheme="purple"
                   mb={3}
                   type="submit"
@@ -90,7 +91,7 @@ const Register = () => {
                 </Button>
                 <Center>
                   <Link to="/">
-                    <Button colorScheme="white" variant="link" mb={6}>
+                    <Button aria-label="signin_button" colorScheme="white" variant="link" mb={6}>
                       Sign in
                     </Button>
                   </Link>
@@ -99,8 +100,8 @@ const Register = () => {
                   ----------------------------------- Or
                   -----------------------------------
                 </Text>
-                <Button colorScheme="twitter" leftIcon={<FaFacebook />} mb={4}>Facebook</Button>
-                <Button colorScheme="facebook" leftIcon={<FcGoogle />}>Google</Button>
+                <Button aria-label="facebook_button" colorScheme="twitter" leftIcon={<FaFacebook />} mb={4}>Facebook</Button>
+                <Button aria-label="google_button" colorScheme="facebook" leftIcon={<FcGoogle />}>Google</Button>
               </Flex>
             </Flex>
             <Flex flex={1}>
