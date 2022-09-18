@@ -1,4 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 import "../styles/Profile.css"
 import "../container/Profile/AccountModifications";
 import AccountModifications from '../container/Profile/AccountModifications';
@@ -15,8 +16,10 @@ const ProfilePage = () => {
                 <GridItem w='100%' rowSpan={2} colSpan={5}>
                     <AccountModifications />
                 </GridItem>
-                <GridItem w='100%' rowSpan={1} colSpan={7} display={"flex"}>
-                    <CalendarButton />
+                <GridItem w='10%' rowSpan={1} colSpan={7} display={"flex"}>
+                    <Link to="/calendar">
+                        <CalendarButton />
+                    </Link>    
                 </GridItem>
                 <GridItem w='100%' rowSpan={1} colSpan={7}>
                     <ProcessBar />

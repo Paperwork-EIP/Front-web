@@ -9,6 +9,8 @@ import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import ProfilePage from './pages/Profile';
 import RegisterPage from './pages/Register';
+import CalendarPage from './pages/Calendar';
+import QuizPage from './pages/Quiz';
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage/>}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
+            <Route path= "/calendar" element={<CalendarPage/>}/>
+            <Route path= "/quiz" element={<QuizPage/>}/>
             <Route
               path="*"
               element={<ErrorPage />}
