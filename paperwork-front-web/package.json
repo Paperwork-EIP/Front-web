@@ -29,7 +29,7 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "test:coverage": "jest --coverage=true",
-    "test:all": "jest --watchAll--coverage=true",
+    "test:all": "jest --watchAll --coverage=true",
     "eject": "react-scripts eject",
     "prepare": "cd .. && npx husky install paperwork-front-web/.husky",
     "lint-staged": "lint-staged"
