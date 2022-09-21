@@ -20,18 +20,24 @@ import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import React from "react";
 import axios from "axios";
-import { url } from "inspector";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const { colorMode, toggleColorMode } = useColorMode();
 
-
     const handleSubmit = async (event : any) => {
       event.preventDefault();
       let res = await signIn(emailAdress, password);
       if (res) {
+        cookies.set('loginToken', res.jwt, {
+          path:'/',
+          secure:true,
+      	  sameSite:'none'
+      });
         window.location.assign("/home");
       } else {
         console.log(res);

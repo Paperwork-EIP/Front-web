@@ -15,6 +15,9 @@ import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Register = () => {
   const api = "http://localhost:8080";
@@ -32,6 +35,11 @@ const Register = () => {
       email: emailAdress,
       password: password
     }).then(response => {
+      cookies.set('loginToken', response.data.jwt, {
+        path:'/',
+        secure:true,
+        sameSite:'none'
+    });
       window.location.assign("/home");
     }).catch(err => {
       window.location.assign("/register")
@@ -73,13 +81,13 @@ const Register = () => {
                 />
                 <Input
                   aria-label="confirmPassword"
-                  placeholder="confirm password"
+                  placeholder="Confirm password"
                   variant="filled"
                   mb={8}
                   type="password"
                   value={confirmPassword}
                   onChange={({ target }) => setConfirmPassword(target.value)}
-                />       
+                />    
                 <Button
                   colorScheme="purple"
                   mb={3}
