@@ -1,6 +1,5 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
-import "../styles/Profile.css"
 import "../container/Profile/AccountModifications";
 import AccountModifications from '../container/Profile/AccountModifications';
 import CalendarButton from '../container/Profile/CalendarButton';
