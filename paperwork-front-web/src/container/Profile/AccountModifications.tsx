@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Center, Input, InputGroup, InputRightElement, Button, Avatar } from '@chakra-ui/react';
+import { Center, Input, InputGroup, InputRightElement, Button, Avatar, Text } from '@chakra-ui/react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import "../../styles/Profile.css";
 
 const AccountModifications = () => {
     const [showEyePwd, setShowEyePwd] = React.useState(false)
@@ -27,7 +26,7 @@ const AccountModifications = () => {
                 />
                 <Avatar size='2xl' width={"30%"} height="30%" name='Christian Nwamba' mb={6} mt={8} src='https://bit.ly/dan-abramov' border={"5px solid white"} boxShadow={"0px 5px 5px lightgray"} />{' '}
             </Center>
-            <p className="ProfilTextLabel">Username</p>
+            <Text className="ProfilTextLabel">Username</Text>
             <Center>
                 <InputGroup size='lg' width={"60%"}>
                     <Input
