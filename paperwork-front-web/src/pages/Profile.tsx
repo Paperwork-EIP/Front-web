@@ -10,7 +10,7 @@ const ProfilePage = () => {
     return (
         <>
             <Header/>
-            <Grid gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' mt={6} >
+            <Grid templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' mt={6} >
                 <GridItem rowSpan={2} colSpan={5}>
                     <AccountModifications />
                 </GridItem>
