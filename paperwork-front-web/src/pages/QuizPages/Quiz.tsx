@@ -3,7 +3,8 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { TiBusinessCard } from "react-icons/ti";
 import { MdDirectionsCar } from "react-icons/md";
 import { BsFillHouseFill } from "react-icons/bs";
-import Header from '../components/Header';
+import { Link } from "react-router-dom";
+import Header from '../../components/Header';
 import React from 'react';
 
 const QuizPage = () => {
@@ -61,6 +62,7 @@ const QuizPage = () => {
                     </Box>
                     <Box pt={20}>
                     <Center>
+                    <Link to="/vitalcard1">
                         <Button
                             bgColor="#29C9B3"
                             color={'white'}
@@ -70,6 +72,7 @@ const QuizPage = () => {
                             fontSize={"24px"}>
                             Submit
                         </Button>
+                    </Link>
                     </Center>
                     </Box>
                 </Box>
