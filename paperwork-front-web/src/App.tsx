@@ -58,7 +58,6 @@ const App = () => {
             <Route path= "/calendar" element={<CalendarPage/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path= "/vitalcard1" element={<VitalCard1Page/>}/>
-            <Route path= "/vitalcard2" element={<VitalCard2Page/>}/>
             <Route path= "/processResult" element={<ProcessResult processInfo={processInfo} />}/>
             <Route
               path="*"

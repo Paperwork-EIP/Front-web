@@ -1,12 +1,32 @@
-import { Button } from '@chakra-ui/react';
 import React from 'react';
 import { AiOutlineCalendar } from "react-icons/ai";
-import "../../styles/Profile.css";
+import { Button, Box } from '@chakra-ui/react';
+import { Link } from "react-router-dom";
 
-const CalendarButton = () => {
-    
+function CalendarButton() {
     return (
-        <Button aria-label='calendar-button' size="lg" mb={8} className='Profile-CalendarButton' fontSize={"24px"}><AiOutlineCalendar color="#FC6976" size={50} className="Profile-Calendar-Icon"/>Calendar</Button>
+        <>
+            <Box position={"relative"} h={"100%"}>
+                <Box position={"absolute"} bottom={"0"}>
+                    <Link to="/calendar">
+                        <Button
+                            size="lg"
+                            borderRadius={'5px'}
+                            mb={4}
+                            px={16}
+                            py={8}
+                            fontSize={"24px"}
+                            variant='outline'>
+                            <AiOutlineCalendar
+                                color="#FC6976"
+                                size={50}
+                            />
+                            Calendar
+                        </Button>
+                    </Link>
+                </Box>
+            </Box>
+        </>
     );
 }
 

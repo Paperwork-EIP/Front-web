@@ -1,13 +1,14 @@
 import '@testing-library/jest-dom';
-import { BrowserRouter } from "react-router-dom";
-import { render, screen, configure } from "@testing-library/react";
-import user from "@testing-library/user-event";
-import mockFetch from '../../mocks/api/api';
-import LoginContent from '../../../container/Login/LoginContent';
+
 import React from 'react';
+import { BrowserRouter } from "react-router-dom";
+
+import { render, configure, fireEvent } from "@testing-library/react";
+import userEvent from '@testing-library/user-event';
+
+import LoginContent from '../../../container/Login/LoginContent';
 
 beforeEach(() => {
-    jest.spyOn(window, 'fetch').mockImplementation(mockFetch);
     configure({
         throwSuggestions: true,
     })
@@ -18,153 +19,103 @@ beforeEach(() => {
     );
 })
 
-afterEach(() => {
-    jest.restoreAllMocks();
-});
+describe("###### Login page ######", () => {
+    const screen = render(
+        <BrowserRouter>
+            <LoginContent />
+        </BrowserRouter>
+    );
 
-/////////////////////////// VALID CASE TESTS ///////////////////////////
+    it("[UNIT TEST] should render Login page component without crashes", () => { });
 
-describe("Login page", () => {
-    test("should render the login form", () => { });
-});
+    it("[UNIT TEST] should have email input", () => {
+        const input = screen.getByRole('textbox', { name: /email/i });
 
-describe('Valid unit tests', () => {
-    test('should render the email input', () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-
-        expect(emailInput).toBeVisible();
-        expect(emailInput).toBeInTheDocument();
-        expect(emailInput).toHaveClass('chakra-input');
-        expect(emailInput).toHaveAttribute('aria-label', 'email');
-        expect(emailInput).toHaveAttribute('type', 'email');
-        expect(emailInput).toHaveAttribute('placeholder');
+        expect(input).toBeInTheDocument();
+        expect(input).toBeVisible();
+        expect(input).toBeTruthy();
     });
 
-    test('should render the password input', async () => {
-        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+    it("[UNIT TEST] should have password input", () => {
+        const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
 
-        expect(passwordInput).toBeVisible();
-        expect(passwordInput).toBeInTheDocument();
-        expect(passwordInput).toHaveClass('chakra-input');
-        expect(passwordInput).toHaveAttribute('aria-label');
-        expect(passwordInput).toHaveAttribute('type', 'password');
-        expect(passwordInput).toHaveAttribute('placeholder');
+        expect(input[0]).toBeInTheDocument();
+        expect(input[0]).toBeVisible();
+        expect(input[0]).toBeTruthy();
     });
 
-    test('should render the submit button', async () => {
-        const submitButton = screen.getByRole('button', { name: /submit/i });
+    it("[UNIT TEST] should have submit button", () => {
+        const button = screen.getByRole('button', { name: /submit_button/i });
 
-        expect(submitButton).toBeVisible();
-        expect(submitButton).toBeInTheDocument();
-        expect(submitButton).toHaveClass('chakra-button');
-        expect(submitButton).toHaveTextContent('submit');
+        expect(button).toBeInTheDocument();
+        expect(button).toBeVisible();
+        expect(button).toBeTruthy();
     });
 
-    test('should render the create an account button', async () => {
-        const createAccountButton = screen.getByRole('button', { name: /create an account/i });
+    it("[UNIT TEST] should have create account button", () => {
+        const button = screen.getByRole('button', { name: /create_account_button/i });
 
-        expect(createAccountButton).toBeVisible();
-        expect(createAccountButton).toBeInTheDocument();
-        expect(createAccountButton).toHaveClass('chakra-button');
-        expect(createAccountButton).toHaveTextContent('Create an account');
+        expect(button).toBeInTheDocument();
+        expect(button).toBeVisible();
+        expect(button).toBeTruthy();
     });
 
-    test('should render the facebook button', async () => {
-        const facebookButton = screen.getByRole('button', { name: /facebook/i });
+    it("[UNIT TEST] should have Facebook button", () => {
+        const button = screen.getByRole('button', { name: /facebook_button/i });
 
-        expect(facebookButton).toBeVisible();
-        expect(facebookButton).toBeInTheDocument();
-        expect(facebookButton).toHaveClass('chakra-button');
-        expect(facebookButton).toHaveTextContent('Facebook');
+        expect(button).toBeInTheDocument();
+        expect(button).toBeVisible();
+        expect(button).toBeTruthy();
     });
 
-    test('should render the google button', async () => {
-        const googleButton = screen.getByRole('button', { name: /google/i });
+    it("[UNIT TEST] should have Google button", () => {
+        const button = screen.getByRole('button', { name: /google_button/i });
 
-        expect(googleButton).toBeVisible();
-        expect(googleButton).toBeInTheDocument();
-        expect(googleButton).toHaveClass('chakra-button');
-        expect(googleButton).toHaveTextContent('Google');
-    });
-});
-
-describe('Valid integration tests', () => {
-    test('should submit the form', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
-        const submitButton = screen.getByRole('button', { name: /submit/i });
-        const mockUserData = {
-            email: 'test@test.com',
-            password: 'toto'
-        };
-
-        await user.clear(emailInput);
-        await user.type(emailInput, mockUserData.email);
-        
-        await user.clear(passwordInput);
-        await user.type(passwordInput, mockUserData.password);
-
-        expect(submitButton).toBeEnabled();
-
-        await user.click(submitButton);
-
-        expect(emailInput).toHaveValue(mockUserData.email);
-        expect(passwordInput).toHaveValue(mockUserData.password);
-        expect(window.fetch).toHaveBeenCalledTimes(1);
-        expect(window.fetch).toHaveBeenCalledWith('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(mockUserData)
-        });
-    });
-});
-
-/////////////////////////// INVALID CASE TESTS ///////////////////////////
-
-describe('Invalid integration tests', () => {
-    test('Type in email field : should bu null', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
-        const submitButton = screen.getByRole('button', { name: /submit/i });
-        const mockUserData = {
-            email: 'test@test.com',
-            password: 'toto'
-        };
-
-        await user.clear(emailInput);
-        
-        await user.clear(passwordInput);
-        await user.type(passwordInput, mockUserData.password);
-
-        expect(submitButton).toBeEnabled();
-
-        await user.click(submitButton);
-
-        expect(emailInput).not.toBeNull();
-        expect(window.fetch).not.toBeCalled();
+        expect(button).toBeInTheDocument();
+        expect(button).toBeVisible();
+        expect(button).toBeTruthy();
     });
 
-    test('Type in password field : should bu null', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-        const passwordInput = screen.getByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
-        const submitButton = screen.getByRole('button', { name: /submit/i });
-        const mockUserData = {
-            email: 'test@test.com',
-            password: 'toto'
-        };
+    test("[INTEGRATION TEST] email input filled", async () => {
+        const input = screen.getByRole('textbox', { name: /email/i });
 
-        await user.clear(emailInput);
-        await user.type(emailInput, mockUserData.email);
-        
-        await user.clear(passwordInput);
+        await userEvent.clear(input);
+        await userEvent.type(input, "test@gmail.com");
 
-        expect(submitButton).toBeEnabled();
+        expect(input).toHaveValue("test@gmail.com");
+    });
 
-        await user.click(submitButton);
+    test("[INTEGRATION TEST] password input filled", async () => {
+        const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+        const password = input[0];
 
-        expect(passwordInput).not.toBeNull();
-        expect(window.fetch).not.toBeCalled();
+        await userEvent.clear(password);
+        await userEvent.type(password, "123456789test");
+
+        expect(password).toHaveValue("123456789test");
+    });
+
+    test("[INTEGRATION TEST] simulate click event on submit button", async () => {
+        const button = screen.getByRole('button', { name: /submit_button/i });
+
+        await fireEvent.click(button);
+    });
+
+    test("[INTEGRATION TEST] simulate click event on create account button", async () => {
+        const button = screen.getByRole('button', { name: /create_account_button/i });
+
+        await fireEvent.click(button);
+    });
+
+    test("[INTEGRATION TEST] simulate click event on create account button", async () => {
+        const button = screen.getByRole('button', { name: /facebook_button/i });
+
+        await fireEvent.click(button);
+    });
+
+    test("[INTEGRATION TEST] simulate click event on create account button", async () => {
+        const button = screen.getByRole('button', { name: /google_button/i });
+
+        await fireEvent.click(button);
     });
 });
