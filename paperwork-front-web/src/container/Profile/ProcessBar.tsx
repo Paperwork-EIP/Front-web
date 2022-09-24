@@ -1,5 +1,5 @@
 import React from 'react';
-import { Progress, Box, Grid, Text, Center } from '@chakra-ui/react';
+import { Progress, Box, Text, Center } from '@chakra-ui/react';
 
 const ProcessBar = () => {
 

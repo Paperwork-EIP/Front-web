@@ -64,8 +64,8 @@ const AccountModifications = () => {
                                     placeholder='Enter username'
                                     variant="filled"
                                     mb={6}
-                                    value={username}
-                                    onChange={({ target }) => setUsername(target.value)} />
+                                    value={emailAdress}
+                                    onChange={({ target }) => setEmailAddress(target.value)} />
                                 <InputRightElement>
                                 </InputRightElement>
                             </InputGroup>
