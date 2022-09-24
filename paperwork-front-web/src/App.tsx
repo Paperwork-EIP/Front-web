@@ -1,5 +1,3 @@
-process result
-
 import {
   ChakraProvider,
   ColorModeScript
