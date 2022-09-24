@@ -1,20 +1,28 @@
-import { Grid, GridItem, Text } from '@chakra-ui/react';
+import { Center, Grid, GridItem, Text, Box } from '@chakra-ui/react';
 import Header from '../components/Header';
-import React from 'react';
+import React, { useState } from 'react';
+import Calendar from 'react-calendar'
+import "../styles/Calendar.css"
 
 const CalendarPage = () => {
+    const [value, onChange] = useState(new Date());
     return (
         <>
             <Header/>
-            <Grid h='600px' gap={2} templateRows='repeat(2, 1fr)' templateColumns='repeat(12, 1fr)' mt={6} >
-                <GridItem w='100%' rowSpan={2} colSpan={5}>
-                </GridItem>
-                <Text fontSize='lg' fontWeight={'bold'}>Calendar</Text>
-                <GridItem w='100%' rowSpan={1} colSpan={7} display={"flex"}>
-                </GridItem>
-                <GridItem w='100%' rowSpan={1} colSpan={7}>
-                </GridItem>
-            </Grid>
+            <Box p={15} m={50}>
+                <Box pb={2}>
+                    <Center>
+                        <Text fontSize='lg' fontWeight={'bold'}>Calendar</Text>
+                    </Center>
+                </Box>
+                <Box borderRadius={'10px'} boxShadow='dark-lg' p={5} mx={20} minH="60vh">
+                    <Box pt={9}>
+                    <Center>
+                    <Calendar className={['c1','c2']} onChange={onChange} value={value} />
+                    </Center>
+                    </Box>
+                </Box>
+            </Box>
         </>
     );
 }
