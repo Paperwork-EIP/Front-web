@@ -25,7 +25,7 @@ const VitalCard2Page = () => {
                     <Flex>
 
                     <Box p='4'>
-                    <Link to="/calendar">
+                    <Link to="/processresult">
                         <Button
                             bgColor="#FC6976"
                             color={'white'}
@@ -40,7 +40,7 @@ const VitalCard2Page = () => {
                     </Box>
                     <Spacer />
                     <Box p='4'>
-                    <Link to="/calendar">
+                    <Link to="/processresult">
                         <Button
                             bgColor="#29C9B3"
                             color={'white'}

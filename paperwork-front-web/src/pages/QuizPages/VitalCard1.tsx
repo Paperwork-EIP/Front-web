@@ -25,7 +25,7 @@ const VitalCard1Page = () => {
                     <Flex>
 
                     <Box p='4'>
-                    <Link to="/vitalcard2">
+                    <Link to="/processresult">
                         <Button
                             bgColor="#FC6976"
                             color={'white'}
