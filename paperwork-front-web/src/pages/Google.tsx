@@ -9,18 +9,19 @@ const GooglePage = () => {
     const api = "http://localhost:8080";
     const search = useLocation().search;
     const code = new URLSearchParams(search).get('code');
+    console.log(code);
     if(!code) {
-        console.log('Error');
         window.location.assign("/");
     } else {
-    axios.get(`${api}/oauth/google/login?code=${code}`).then(res => {
-        cookies.set('loginToken', res.data.jwt, {
-            path:'/',
-            secure:true,
-            sameSite:'none'
-        });
-        window.location.assign("/home");
-      })
+        axios.get(`${api}/oauth/google/login?code=${code}`).then(res => {
+            console.log(res);
+            cookies.set('loginToken', res.data.jwt, {
+                path:'/',
+                secure:true,
+                sameSite:'none'
+            });
+            window.location.assign("/home");
+        })
     }
     return (
         <div></div>
