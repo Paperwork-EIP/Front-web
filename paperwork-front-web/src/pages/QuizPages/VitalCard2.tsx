@@ -7,7 +7,6 @@ const VitalCard2Page = () => {
     return (
         <>
             <Header/>
-
             <Box p={15} m={50}>
                 <Box pb={2}>
                     <Center>
@@ -22,31 +21,29 @@ const VitalCard2Page = () => {
                     </Box>
 
                     <Center>  
-                    <Flex>
-
+                    <Flex m={20} width={'300px'} justifyContent={'space-between'}>
                     <Box p='4'>
                     <Link to="/processresult">
                         <Button
                             bgColor="#FC6976"
                             color={'white'}
                             size="lg"
-                            minWidth={'95px'}
-                            maxWidth={'200px'}
+                            minWidth={'85px'}
+                            maxWidth={'300px'}
                             borderRadius={'5px'}
                             fontSize={"24px"}>
                             No
                         </Button>
                     </Link>
                     </Box>
-                    <Spacer />
                     <Box p='4'>
                     <Link to="/processresult">
                         <Button
                             bgColor="#29C9B3"
                             color={'white'}
                             size="lg"
-                            minWidth={'95px'}
-                            maxWidth={'200px'}
+                            minWidth={'85px'}
+                            maxWidth={'300px'}
                             borderRadius={'5px'}
                             fontSize={"24px"}>
                             Yes
@@ -55,8 +52,6 @@ const VitalCard2Page = () => {
                     </Box>
                     </Flex>
                     </Center>
-                    
-                    
                 </Box>
             </Box>
         </>
