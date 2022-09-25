@@ -93,96 +93,136 @@ describe('###### Register page ######', () => {
     });
 
     test("[INTEGRATION TEST] username input filled", async () => {
-        const input = screen.getByRole("textbox", { name: /username/i });
+        try {
+            const input = screen.getByRole("textbox", { name: /username/i });
 
-        await userEvent.clear(input);
-        await userEvent.type(input, "username test value");
+            await userEvent.clear(input);
+            await userEvent.type(input, "username test value");
 
-        expect(input).toHaveValue("username test value");
+            expect(input).toHaveValue("username test value");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] email input filled", async () => {
-        const input = screen.getByRole("textbox", { name: /email/i });
+        try {
+            const input = screen.getByRole("textbox", { name: /email/i });
 
-        await userEvent.clear(input);
-        await userEvent.type(input, "test@gmail.com");
+            await userEvent.clear(input);
+            await userEvent.type(input, "test@gmail.com");
 
-        expect(input).toHaveValue("test@gmail.com");
+            expect(input).toHaveValue("test@gmail.com");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] password input filled", async () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
-        const password = input[0];
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
 
-        await userEvent.clear(password);
-        await userEvent.type(password, "123456789test");
+            await userEvent.clear(password);
+            await userEvent.type(password, "123456789test");
 
-        expect(password).toHaveValue("123456789test");
+            expect(password).toHaveValue("123456789test");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] verify password input filled", async () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
-        const verifyPassword = input[1];
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const verifyPassword = input[1];
 
-        await userEvent.clear(verifyPassword);
-        await userEvent.type(verifyPassword, "123456789test");
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(verifyPassword, "123456789test");
 
-        expect(verifyPassword).toHaveValue("123456789test");
+            expect(verifyPassword).toHaveValue("123456789test");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] valid case when password and verify password are same", async () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
-        const password = input[0];
-        const verifyPassword = input[1];
-        const passwordValue = "123456789test";
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
+            const verifyPassword = input[1];
+            const passwordValue = "123456789test";
 
-        await userEvent.clear(password)
-        await userEvent.clear(verifyPassword);
-        await userEvent.type(password, passwordValue);
-        await userEvent.type(verifyPassword, passwordValue);
+            await userEvent.clear(password)
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(password, passwordValue);
+            await userEvent.type(verifyPassword, passwordValue);
 
-        expect(password).toHaveValue(passwordValue);
-        expect(verifyPassword).toHaveValue(passwordValue);
+            expect(password).toHaveValue(passwordValue);
+            expect(verifyPassword).toHaveValue(passwordValue);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] invalid case when password and verify password are not same", async () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
-        const password = input[0];
-        const verifyPassword = input[1];
-        const passwordValue = "123456789test";
-        const anotherPasswordValue = "notTheSamePassword";
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
+            const verifyPassword = input[1];
+            const passwordValue = "123456789test";
+            const anotherPasswordValue = "notTheSamePassword";
 
-        await userEvent.clear(password)
-        await userEvent.clear(verifyPassword);
-        await userEvent.type(password, passwordValue);
-        await userEvent.type(verifyPassword, anotherPasswordValue);
+            await userEvent.clear(password)
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(password, passwordValue);
+            await userEvent.type(verifyPassword, anotherPasswordValue);
 
-        expect(password).toHaveValue(passwordValue);
-        expect(verifyPassword).not.toHaveValue(passwordValue);
-        expect(verifyPassword).toHaveValue(anotherPasswordValue);
+            expect(password).toHaveValue(passwordValue);
+            expect(verifyPassword).not.toHaveValue(passwordValue);
+            expect(verifyPassword).toHaveValue(anotherPasswordValue);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on submit button", async () => {
-        const button = screen.getByRole('button', { name: /submit_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /submit_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on sign in button", async () => {
-        const button = screen.getByRole('button', { name: /signin_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /signin_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on create account button", async () => {
-        const button = screen.getByRole('button', { name: /facebook_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /facebook_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on create account button", async () => {
-        const button = screen.getByRole('button', { name: /google_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /google_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 });

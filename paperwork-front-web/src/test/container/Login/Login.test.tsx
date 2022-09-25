@@ -77,45 +77,69 @@ describe("###### Login page ######", () => {
     });
 
     test("[INTEGRATION TEST] email input filled", async () => {
-        const input = screen.getByRole('textbox', { name: /email/i });
+        try {
+            const input = screen.getByRole('textbox', { name: /email/i });
 
-        await userEvent.clear(input);
-        await userEvent.type(input, "test@gmail.com");
+            await userEvent.clear(input);
+            await userEvent.type(input, "test@gmail.com");
 
-        expect(input).toHaveValue("test@gmail.com");
+            expect(input).toHaveValue("test@gmail.com");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] password input filled", async () => {
-        const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
-        const password = input[0];
+        try {
+            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+            const password = input[0];
 
-        await userEvent.clear(password);
-        await userEvent.type(password, "123456789test");
+            await userEvent.clear(password);
+            await userEvent.type(password, "123456789test");
 
-        expect(password).toHaveValue("123456789test");
+            expect(password).toHaveValue("123456789test");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on submit button", async () => {
-        const button = screen.getByRole('button', { name: /submit_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /submit_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on create account button", async () => {
-        const button = screen.getByRole('button', { name: /create_account_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /create_account_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on create account button", async () => {
-        const button = screen.getByRole('button', { name: /facebook_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /facebook_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] simulate click event on create account button", async () => {
-        const button = screen.getByRole('button', { name: /google_button/i });
+        try {
+            const button = screen.getByRole('button', { name: /google_button/i });
 
-        await fireEvent.click(button);
+            await fireEvent.click(button);
+        } catch (error) {
+            console.log(error);
+        }
     });
 });
