@@ -10,6 +10,8 @@ function CalendarButton() {
                 <Box position={"absolute"} bottom={"0"}>
                     <Link to="/calendar">
                         <Button
+                            id="calendar-button"
+                            aria-label="calendar-button"
                             size="lg"
                             borderRadius={'5px'}
                             mb={4}
