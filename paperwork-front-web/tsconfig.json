@@ -22,6 +22,8 @@
   },
   "include": [
     "src",
-    "public/Logo.tsx"
+    "public/Logo.tsx",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

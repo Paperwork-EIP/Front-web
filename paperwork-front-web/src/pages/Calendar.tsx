@@ -1,11 +1,18 @@
 import { Center, Grid, GridItem, Text, Box } from '@chakra-ui/react';
 import Header from '../components/Header';
 import React, { useState } from 'react';
-import Calendar from 'react-calendar'
-import "../styles/Calendar.css"
+import Calendar from 'react-calendar';
+import "../styles/Calendar.css";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const CalendarPage = () => {
     const [value, onChange] = useState(new Date());
+
+    if(!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>
