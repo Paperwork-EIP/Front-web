@@ -54,7 +54,11 @@
             "<rootDir>/__mocks__/fileMock.js",
         "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     },
-    "moduleFileExtensions": ["jsx"]
+    "moduleFileExtensions": ["jsx"],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest",
+      "\\.css$": "some-css-transformer"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
