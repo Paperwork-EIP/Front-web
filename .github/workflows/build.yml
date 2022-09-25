@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: cd paperwork-front-web/ && npm install
       - name: Test and coverage
-        run: npm run test:coverage
+        run: cd paperwork-front-web/ && npm run test:coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
