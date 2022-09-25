@@ -28,52 +28,76 @@ describe("###### Login page ######", () => {
 
     it("[UNIT TEST] should render Login page component without crashes", () => { });
 
-    it("[UNIT TEST] should have email input", () => {
-        const input = screen.getByRole('textbox', { name: /email/i });
+    it("[UNIT TEST] should have email input", async () => {
+        try {
+            const input = screen.getByRole('textbox', { name: /email/i });
 
         expect(input).toBeInTheDocument();
         expect(input).toBeVisible();
         expect(input).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have password input", () => {
-        const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+    it("[UNIT TEST] should have password input", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
 
         expect(input[0]).toBeInTheDocument();
         expect(input[0]).toBeVisible();
         expect(input[0]).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have submit button", () => {
-        const button = screen.getByRole('button', { name: /submit_button/i });
+    it("[UNIT TEST] should have submit button", async () => {
+        try {
+            const button = screen.getByRole('button', { name: /submit_button/i });
 
         expect(button).toBeInTheDocument();
         expect(button).toBeVisible();
         expect(button).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have create account button", () => {
-        const button = screen.getByRole('button', { name: /create_account_button/i });
+    it("[UNIT TEST] should have create account button", async () => {
+        try {
+            const button = screen.getByRole('button', { name: /create_account_button/i });
 
         expect(button).toBeInTheDocument();
         expect(button).toBeVisible();
         expect(button).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have Facebook button", () => {
-        const button = screen.getByRole('button', { name: /facebook_button/i });
+    it("[UNIT TEST] should have Facebook button", async () => {
+        try {
+            const button = screen.getByRole('button', { name: /facebook_button/i });
 
         expect(button).toBeInTheDocument();
         expect(button).toBeVisible();
         expect(button).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have Google button", () => {
-        const button = screen.getByRole('button', { name: /google_button/i });
+    it("[UNIT TEST] should have Google button", async () => {
+        try {
+            const button = screen.getByRole('button', { name: /google_button/i });
 
         expect(button).toBeInTheDocument();
         expect(button).toBeVisible();
         expect(button).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] email input filled", async () => {

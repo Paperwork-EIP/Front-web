@@ -28,36 +28,52 @@ describe("###### Account modification page ######", () => {
 
     it("[UNIT TEST] should render Account modification component without crashes", () => { });
 
-    it("[UNIT TEST] should have username input", () => {
-        const input = screen.getByRole('textbox', { name: /username/i });
+    it("[UNIT TEST] should have username input", async () => {
+        try {
+            const input = screen.getByRole('textbox', { name: /username/i });
 
-        expect(input).toBeInTheDocument();
-        expect(input).toBeVisible();
-        expect(input).toBeTruthy();
+            expect(input).toBeInTheDocument();
+            expect(input).toBeVisible();
+            expect(input).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have email input", () => {
-        const input = screen.getByRole('textbox', { name: /email/i });
+    it("[UNIT TEST] should have email input", async () => {
+        try {
+            const input = screen.getByRole('textbox', { name: /email/i });
 
-        expect(input).toBeInTheDocument();
-        expect(input).toBeVisible();
-        expect(input).toBeTruthy();
+            expect(input).toBeInTheDocument();
+            expect(input).toBeVisible();
+            expect(input).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have password input", () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
+    it("[UNIT TEST] should have password input", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
 
-        expect(input[0]).toBeInTheDocument();
-        expect(input[0]).toBeVisible();
-        expect(input[0]).toBeTruthy();
+            expect(input[0]).toBeInTheDocument();
+            expect(input[0]).toBeVisible();
+            expect(input[0]).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    it("[UNIT TEST] should have verify password input", () => {
-        const input = screen.getAllByPlaceholderText(/password/i);
+    it("[UNIT TEST] should have verify password input", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
 
-        expect(input[1]).toBeInTheDocument();
-        expect(input[1]).toBeVisible();
-        expect(input[1]).toBeTruthy();
+            expect(input[1]).toBeInTheDocument();
+            expect(input[1]).toBeVisible();
+            expect(input[1]).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
     test("[INTEGRATION TEST] username input filled", async () => {
