@@ -10,6 +10,7 @@ import LoginPage from './pages/Login';
 import ProfilePage from './pages/Profile';
 import RegisterPage from './pages/Register';
 import ProcessResult from './pages/ProcessResult';
+import ProcessIdea from './pages/ProcessIdea';
 import CalendarPage from './pages/Calendar';
 import QuizPage from './pages/QuizPages/Quiz';
 import VitalCard1Page from './pages/QuizPages/VitalCard1';
@@ -57,6 +58,7 @@ const App = () => {
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path= "/vitalcard1" element={<VitalCard1Page/>}/>
             <Route path= "/processResult" element={<ProcessResult processInfo={processInfo} />}/>
+            <Route path= "/processIdea" element={<ProcessIdea/>}/>
             <Route
               path="*"
               element={<ErrorPage />}
