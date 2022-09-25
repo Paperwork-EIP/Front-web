@@ -5,8 +5,14 @@ import Header from '../components/Header';
 import { AiFillCheckSquare } from "react-icons/ai";
 import { BsSquareFill } from "react-icons/bs";
 import { FaLessThan } from "react-icons/fa";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 function ProcessResult(props: any) {
+    if(!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>
