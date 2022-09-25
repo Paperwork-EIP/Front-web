@@ -218,7 +218,9 @@ describe('###### Register page ######', () => {
         }
     });
 
-    test("[INTEGRATION TEST] simulate click event on submit button", async () => {
+    // Rajouter expect() avec une mock function pour reproduire le call d'une fonction.
+
+    /* test("[INTEGRATION TEST] simulate click event on submit button", async () => {
         try {
             const button = screen.getByRole('button', { name: /submit_button/i });
 
@@ -256,5 +258,5 @@ describe('###### Register page ######', () => {
         } catch (error) {
             console.log(error);
         }
-    });
+    }); */
 });
