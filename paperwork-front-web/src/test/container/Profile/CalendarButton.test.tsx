@@ -23,13 +23,17 @@ describe("###### Calendar button component ######", () => {
     });
 
     test('[INTERGRATION TEST] simulate click event on calendar button', async () => {
-        const screen = render(
-            <BrowserRouter>
-                <CalendarButton />
-            </BrowserRouter>
-        );
-        const calendarButton = screen.getByRole('button', { name: /calendar\-button/i });
+        try {
+            const screen = render(
+                <BrowserRouter>
+                    <CalendarButton />
+                </BrowserRouter>
+            );
+            const calendarButton = screen.getByRole('button', { name: /calendar\-button/i });
 
-        await fireEvent.click(calendarButton);
+            await fireEvent.click(calendarButton);
+        } catch (error) {
+            console.log(error);
+        }
     });
 });

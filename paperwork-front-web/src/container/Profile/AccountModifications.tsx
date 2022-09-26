@@ -58,10 +58,10 @@ const AccountModifications = () => {
                         <GridItem>
                             <InputGroup size='lg'>
                                 <Input
-                                    id="username"
-                                    aria-label="username"
+                                    id="email"
+                                    aria-label="email"
                                     type={'text'}
-                                    placeholder='Enter username'
+                                    placeholder='Enter email'
                                     variant="filled"
                                     mb={6}
                                     value={emailAdress}

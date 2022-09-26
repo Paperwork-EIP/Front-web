@@ -15,6 +15,8 @@ import CalendarPage from './pages/Calendar';
 import QuizPage from './pages/QuizPages/Quiz';
 import VitalCard1Page from './pages/QuizPages/VitalCard1';
 import VitalCard2Page from './pages/QuizPages/VitalCard2';
+import GooglePage from './pages/Google';
+import FacebookPage from './pages/Facebook';
 
 const App = () => {
   // Variable temporaire remplacant le JSON reçu par ProcessResult (afin de tester la page)
@@ -57,8 +59,11 @@ const App = () => {
             <Route path= "/calendar" element={<CalendarPage/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path= "/vitalcard1" element={<VitalCard1Page/>}/>
+            <Route path= "/vitalcard2" element={<VitalCard2Page/>}/>
             <Route path= "/processResult" element={<ProcessResult processInfo={processInfo} />}/>
             <Route path= "/processIdea" element={<ProcessIdea/>}/>
+            <Route path= "/googleLogin" element={<GooglePage/>}/>
+            <Route path= "/facebookLogin" element={<FacebookPage/>}/>
             <Route
               path="*"
               element={<ErrorPage />}

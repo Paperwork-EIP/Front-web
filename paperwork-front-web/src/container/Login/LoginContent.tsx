@@ -19,6 +19,10 @@ import { Link } from "react-router-dom";
 import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import React from "react";
+import axios from "axios";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
@@ -26,31 +30,30 @@ const LoginContent = () => {
     const { colorMode, toggleColorMode } = useColorMode();
 
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async (event : any) => {
         event.preventDefault();
         let res = await signIn(emailAdress, password);
         if (res) {
-            window.location.assign("/home");
+          cookies.set('loginToken', res.jwt, {
+            path:'/',
+            secure:true,
+              sameSite:'none'
+        });
+          window.location.assign("/home");
         } else {
-            console.log(res);
+          console.log(res);
         }
-
-        // axios
-        //   .post("/api/login", payload)
-        //   .then((res) => {
-        //     console.log(payload);
-        //     //axios.post('/welcome', payload).then(res => {
-        //     // printToast(res);
-        //     // console.log(document.cookies);
-        //     window.location.assign("/home");
-        //   })
-        //   .catch((err) => {
-        //     if (err.response.status == 401) {
-        //       window.location.assign("/signup")
-        //     }
-        //   });
-    };
-
+      };
+    const googleConnect = () => {
+      axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
+        window.location.replace(res.data)
+      })
+    }
+    const facebookConnect = () => {
+      axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
+        window.location.replace(res.data)
+      })
+    }
 
     return (
         <FormControl as="fieldset">
@@ -114,13 +117,15 @@ const LoginContent = () => {
                             aria-label="facebook_button"
                             colorScheme="twitter"
                             leftIcon={<FaFacebook />}
-                            mb={4}>
+                            mb={4}
+                            onClick={facebookConnect}>
                             Facebook
                         </Button>
                         <Button
                             aria-label="google_button"
                             colorScheme="facebook"
-                            leftIcon={<FcGoogle />}>
+                            leftIcon={<FcGoogle />}
+                            onClick={googleConnect}>
                             Google
                         </Button>
                     </Flex>
