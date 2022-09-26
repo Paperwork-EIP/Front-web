@@ -4,8 +4,21 @@ import { TiBusinessCard } from "react-icons/ti";
 import { MdDirectionsCar } from "react-icons/md";
 import { BsFillHouseFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Select from 'react-select';
 import Header from '../../components/Header';
-import React from 'react';
+import React, { useState } from 'react';
+import "../../styles/Quiz.css";
+
+const procedures = [
+    { label: "VLS-TS", value: 1 },
+    { label: "Residence permit", value: 2 },
+    { label: "French nationality", value: 3 },
+    { label: "Work permit", value: 4 },
+    { label: "travel document", value: 5 },
+    { label: "Visa", value: 6 },
+    { label: "Vital Card", value: 7 },
+    { label: "Driver license", value: 8 }
+  ];
 
 const QuizPage = () => {
     return (
@@ -27,36 +40,7 @@ const QuizPage = () => {
                     <Box pt={20}>
                     <Center>
                         
-                    <Menu>
-                    <MenuButton size="lg" as={Button} rightIcon={<ChevronDownIcon />}>
-                        Procédures
-                    </MenuButton>
-                    <MenuList>
-                        <MenuItem minH='48px'>
-                            <TiBusinessCard
-                            color="#056900"
-                            size={20}
-                            />
-                            <Text p={5} >Carte Vitale Française</Text>
-                        </MenuItem>
-                        <MenuItem minH='48px'>
-                            <MdDirectionsCar
-                            color="#FFBBF8"
-                            size={20}
-                            />
-                            <Text p={5} >Permis de Conduire Français</Text>
-                        </MenuItem>
-                        <MenuItem minH='48px'>
-                            <BsFillHouseFill
-                            color="#58BAFF"
-                            size={20}
-                            />
-                            <Text p={5} >Titre de Séjour</Text>
-                        </MenuItem>
-                    </MenuList>
-                    </Menu>
-
-
+                    <Select className='quiz-select' placeholder={'Select the Procedure'} options={ procedures } />
 
                     </Center>
                     </Box>

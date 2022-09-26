@@ -7,6 +7,11 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
+const eventDate = [
+    { label: "1", value: "Fri Sep 30 2022" },
+    { label: "2", value: "Thu Oct 13 2022" },
+  ];
+
 const CalendarPage = () => {
     const [date, setDate] = useState(new Date());
     const [showTime, setShowTime] = useState(false);
@@ -81,6 +86,7 @@ const CalendarPage = () => {
                 <Popover>
                     <PopoverTrigger>
                     <Center>
+                        
                         <Button bgColor="#29C9B3" color="white" width={'160px'} isDisabled>Edit/Delete an Event</Button>
                     </Center>
                     </PopoverTrigger>
