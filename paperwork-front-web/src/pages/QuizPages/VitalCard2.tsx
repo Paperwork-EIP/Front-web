@@ -10,7 +10,7 @@ const VitalCard2Page = () => {
             <Box p={15} m={50}>
                 <Box pb={2}>
                     <Center>
-                        <Text fontSize='lg' fontWeight={'bold'}>“Carte Vitale Française” Process</Text>
+                        <Text fontSize='lg' fontWeight={'bold'}>“Vital Card” Process</Text>
                     </Center>
                 </Box>
                 <Box borderRadius={'10px'} boxShadow='dark-lg' p={5} mx={20} minH="60vh">
