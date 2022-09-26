@@ -3,12 +3,18 @@ import Header from '../components/Header';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import "../styles/Calendar.css";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const CalendarPage = () => {
     const [date, setDate] = useState(new Date());
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
 
+    if(!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>

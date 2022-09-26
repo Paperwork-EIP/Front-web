@@ -5,8 +5,14 @@ import CalendarButton from '../container/Profile/CalendarButton';
 import ProcessBar from '../container/Profile/ProcessBar';
 import Header from '../components/Header';
 import React from 'react';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const ProfilePage = () => {
+    if(!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>
