@@ -23,14 +23,15 @@ import {
 import { SVGProps } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import React from "react";
 
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
+// interface TestimonialCardProps {
+//   name: string;
+//   role: string;
+//   content: string;
+//   avatar: string;
+//   index: number;
+// }
 
 const CircleIcon = (
   props: JSX.IntrinsicAttributes &
