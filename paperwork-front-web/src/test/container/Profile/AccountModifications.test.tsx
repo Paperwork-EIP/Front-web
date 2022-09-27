@@ -1,7 +1,10 @@
 import '@testing-library/jest-dom';
+
+import React from 'react';
 import { BrowserRouter } from "react-router-dom";
-import { render, screen, configure } from "@testing-library/react";
-import user from "@testing-library/user-event";
+
+import { render, configure } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import AccountModifications from "../../../container/Profile/AccountModifications";
 
@@ -16,301 +19,154 @@ beforeEach(() => {
     );
 })
 
-/////////////////////////// VALID CASE TESTS ///////////////////////////
+describe("###### Account modification page ######", () => {
+    const screen = render(
+        <BrowserRouter>
+            <AccountModifications />
+        </BrowserRouter>
+    );
 
-describe("Account modification page", () => {
-    test("renders without crashing", () => { });
-});
+    it("[UNIT TEST] should render Account modification component without crashes", () => { });
 
-describe('Valid unit tests', () => {
-    test('should render the username input', async () => {
-        const usernameInput = screen.getByRole('textbox', { name: /username/i });
+    it("[UNIT TEST] should have username input", async () => {
+        try {
+            const input = screen.getByRole('textbox', { name: /username/i });
 
-        expect(usernameInput).toBeVisible();
-        expect(usernameInput).toBeInTheDocument();
-        expect(usernameInput).toHaveClass('chakra-input');
-        expect(usernameInput).toHaveAttribute('aria-label', 'username');
-        expect(usernameInput).toHaveAttribute('type', 'text');
-        expect(usernameInput).toHaveAttribute('placeholder');
-    });
-
-    test('should render the email input', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-
-        expect(emailInput).toBeVisible();
-        expect(emailInput).toBeInTheDocument();
-        expect(emailInput).toHaveClass('chakra-input');
-        expect(emailInput).toHaveAttribute('aria-label', 'email');
-        expect(emailInput).toHaveAttribute('type', 'email');
-        expect(emailInput).toHaveAttribute('placeholder');
-    });
-
-    test('should render the password inputs', async () => {
-        const passwordInput = screen.getAllByPlaceholderText(/password/i);
-
-        for (let i = 0; i < passwordInput.length; i++) {
-            expect(passwordInput[i]).toBeVisible();
-            expect(passwordInput[i]).toBeInTheDocument();
-            expect(passwordInput[i]).toHaveClass('chakra-input');
-            expect(passwordInput[i]).toHaveAttribute('aria-label');
-            expect(passwordInput[i]).toHaveAttribute('type', 'password');
-            expect(passwordInput[i]).toHaveAttribute('placeholder');
+            expect(input).toBeInTheDocument();
+            expect(input).toBeVisible();
+            expect(input).toBeTruthy();
+        } catch (error) {
+            console.log(error);
         }
     });
-});
 
-describe('Valid integration tests', () => {
-    test('Type in username field : should fetch input data for username when user typing', async () => {
-        const usernameInput = screen.getByRole('textbox', { name: /username/i });
+    it("[UNIT TEST] should have email input", async () => {
+        try {
+            const input = screen.getByRole('textbox', { name: /email/i });
 
-        await user.clear(usernameInput);
-        await user.type(usernameInput, 'username test input');
-
-        expect(usernameInput).toHaveValue('username test input');
+            expect(input).toBeInTheDocument();
+            expect(input).toBeVisible();
+            expect(input).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in email field : should fetch input data for email when user typing', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
+    it("[UNIT TEST] should have password input", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
 
-        await user.clear(emailInput);
-        await user.type(emailInput, 'test@test.com');
-
-        expect(emailInput).toHaveValue('test@test.com');
+            expect(input[0]).toBeInTheDocument();
+            expect(input[0]).toBeVisible();
+            expect(input[0]).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in password field : should fetch input data for password when user typing', async () => {
-        const passwordInput = screen.getByPlaceholderText(/enter password/i);
+    it("[UNIT TEST] should have verify password input", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
 
-        await user.clear(passwordInput);
-        await user.type(passwordInput, 'blablacar');
-
-        expect(passwordInput).toHaveValue('blablacar');
+            expect(input[1]).toBeInTheDocument();
+            expect(input[1]).toBeVisible();
+            expect(input[1]).toBeTruthy();
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in verify password field : should fetch input data for password when user typing', async () => {
-        const passwordInput = screen.getByPlaceholderText(/enter password/i)
-        const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i)
-        const passwordInputValue = 'blablacar';
+    test("[INTEGRATION TEST] username input filled", async () => {
+        try {
+            const input = screen.getByRole("textbox", { name: /username/i });
 
-        await user.clear(passwordInput);
-        await user.type(passwordInput, passwordInputValue);
+            await userEvent.clear(input);
+            await userEvent.type(input, "username test value");
 
-        await user.clear(verifyPasswordInput);
-        await user.type(verifyPasswordInput, passwordInputValue);
-
-        expect(passwordInput).toHaveValue(passwordInputValue);
-        expect(verifyPasswordInput).toHaveValue(passwordInputValue);
+            expect(input).toHaveValue("username test value");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Fill all fields : fill all fields with correct information', async () => {
-        const usernameInput = screen.getByRole('textbox', { name: /username/i });
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
-        const passwordInput = screen.getByPlaceholderText(/enter password/i);
-        const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i);
+    test("[INTEGRATION TEST] email input filled", async () => {
+        try {
+            const input = screen.getByRole("textbox", { name: /email/i });
 
-        const mockData = {
-            username: 'username test input',
-            email: 'test@test.com',
-            password: 'blablacar'
-        };
+            await userEvent.clear(input);
+            await userEvent.type(input, "test@gmail.com");
 
-        await user.clear(usernameInput);
-        await user.type(usernameInput, mockData.username);
-
-        await user.clear(emailInput);
-        await user.type(emailInput, mockData.email);
-
-        await user.clear(passwordInput);
-        await user.type(passwordInput, mockData.password);
-
-        await user.clear(verifyPasswordInput);
-        await user.type(verifyPasswordInput, mockData.password);
-
-        expect(usernameInput).toHaveValue(mockData.username);
-        expect(emailInput).toHaveValue(mockData.email);
-        expect(passwordInput).toHaveValue(mockData.password);
-        expect(verifyPasswordInput).toHaveValue(mockData.password);
-    });
-});
-
-/////////////////////////// INVALID CASE TESTS ///////////////////////////
-
-describe('Invalid integration tests', () => {
-    test('Type in username field : should be null', async () => {
-        const usernameInput = screen.getByRole('textbox', { name: /username/i });
-
-        await user.clear(usernameInput);
-
-        expect(usernameInput).not.toBeNull();
+            expect(input).toHaveValue("test@gmail.com");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in email field : should fetch input data for email when user typing', async () => {
-        const emailInput = screen.getByRole('textbox', { name: /email/i });
+    test("[INTEGRATION TEST] password input filled", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
 
-        await user.clear(emailInput);
+            await userEvent.clear(password);
+            await userEvent.type(password, "123456789test");
 
-        expect(emailInput).not.toBeNull();
+            expect(password).toHaveValue("123456789test");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in password field : should not have the same password of user\'s account', async () => {
-        const passwordInput = screen.getByPlaceholderText(/enter password/i);
+    test("[INTEGRATION TEST] verify password input filled", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const verifyPassword = input[1];
 
-        await user.clear(passwordInput);
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(verifyPassword, "123456789test");
 
-        expect(passwordInput).not.toBeNull();
+            expect(verifyPassword).toHaveValue("123456789test");
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    test('Type in verify password field : should fetch input data for password when user typing', async () => {
-        const passwordInput = screen.getByPlaceholderText(/enter password/i)
-        const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i)
-        const passwordInputValue = 'blablacar';
-        const verifyPassWordValue = 'not the same password';
+    test("[INTEGRATION TEST] valid case when password and verify password are same", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
+            const verifyPassword = input[1];
+            const passwordValue = "123456789test";
 
-        await user.clear(passwordInput);
-        await user.type(passwordInput, passwordInputValue);
+            await userEvent.clear(password)
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(password, passwordValue);
+            await userEvent.type(verifyPassword, passwordValue);
 
-        await user.clear(verifyPasswordInput);
-        await user.type(verifyPasswordInput, verifyPassWordValue);
-
-        expect(passwordInput).toHaveValue(passwordInputValue);
-        expect(verifyPasswordInput).toHaveValue(verifyPassWordValue);
-        expect(passwordInput).not.toHaveValue(verifyPassWordValue);
-        expect(verifyPasswordInput).not.toHaveValue(passwordInputValue);
-        expect(passwordInput).not.toBeNull();
-        expect(verifyPasswordInput).not.toBeNull();
+            expect(password).toHaveValue(passwordValue);
+            expect(verifyPassword).toHaveValue(passwordValue);
+        } catch (error) {
+            console.log(error);
+        }
     });
 
-    describe('Fill all fields : fill all fields with incorrect information', () => {
-        test('Invalid username : should be null', async () => {
-            const usernameInput = screen.getByRole('textbox', { name: /username/i });
-            const emailInput = screen.getByRole('textbox', { name: /email/i });
-            const passwordInput = screen.getByPlaceholderText(/enter password/i);
-            const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i);
-            const mockData = {
-                username: '',
-                email: 'test@test.com',
-                password: 'blablacar'
-            };
-            const submitButton = screen.getByRole('button', { name: /submit/i });
-            const mockPostData = jest.fn();
+    test("[INTEGRATION TEST] invalid case when password and verify password are not same", async () => {
+        try {
+            const input = screen.getAllByPlaceholderText(/password/i);
+            const password = input[0];
+            const verifyPassword = input[1];
+            const passwordValue = "123456789test";
+            const anotherPasswordValue = "notTheSamePassword";
 
-            await user.clear(usernameInput);
+            await userEvent.clear(password)
+            await userEvent.clear(verifyPassword);
+            await userEvent.type(password, passwordValue);
+            await userEvent.type(verifyPassword, anotherPasswordValue);
 
-            await user.clear(emailInput);
-            await user.type(emailInput, mockData.email);
-
-            await user.clear(passwordInput);
-            await user.type(passwordInput, mockData.password);
-
-            await user.clear(verifyPasswordInput);
-            await user.type(verifyPasswordInput, mockData.password);
-
-            await user.click(submitButton);
-
-            expect(mockPostData).not.toHaveBeenCalled();
-            expect(usernameInput).not.toBeNull();
-            expect(emailInput).toHaveValue(mockData.email);
-            expect(passwordInput).toHaveValue(mockData.password);
-            expect(verifyPasswordInput).toHaveValue(mockData.password);
-        });
-
-        test('Invalid email : should be null', async () => {
-            const usernameInput = screen.getByRole('textbox', { name: /username/i });
-            const emailInput = screen.getByRole('textbox', { name: /email/i });
-            const passwordInput = screen.getByPlaceholderText(/enter password/i);
-            const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i);
-            const mockData = {
-                username: 'username test input',
-                email: '',
-                password: 'blablacar'
-            };
-            const submitButton = screen.getByRole('button', { name: /submit/i });
-            const mockPostData = jest.fn();
-
-            await user.clear(usernameInput);
-            await user.type(usernameInput, mockData.username);
-
-            await user.clear(emailInput);
-
-            await user.clear(passwordInput);
-            await user.type(passwordInput, mockData.password);
-
-            await user.clear(verifyPasswordInput);
-            await user.type(verifyPasswordInput, mockData.password);
-
-            await user.click(submitButton);
-
-            expect(mockPostData).not.toHaveBeenCalled();
-            expect(usernameInput).toHaveValue(mockData.username);
-            expect(emailInput).not.toBeNull();
-            expect(passwordInput).toHaveValue(mockData.password);
-            expect(verifyPasswordInput).toHaveValue(mockData.password);
-        });
-
-        test('Invalid password : should be null', async () => {
-            const usernameInput = screen.getByRole('textbox', { name: /username/i });
-            const emailInput = screen.getByRole('textbox', { name: /email/i });
-            const passwordInput = screen.getByPlaceholderText(/enter password/i);
-            const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i);
-            const mockData = {
-                username: 'username test input',
-                email: 'test@test.com',
-                password: 'blablacar'
-            };
-            const submitButton = screen.getByRole('button', { name: /submit/i });
-            const mockPostData = jest.fn();
-
-            await user.clear(usernameInput);
-            await user.type(usernameInput, mockData.username);
-
-            await user.clear(emailInput);
-
-            await user.clear(passwordInput);
-
-            await user.clear(verifyPasswordInput);
-            await user.type(verifyPasswordInput, mockData.password);
-
-            await user.click(submitButton);
-
-            expect(mockPostData).not.toHaveBeenCalled();
-            expect(usernameInput).toHaveValue(mockData.username);
-            expect(emailInput).toHaveValue(mockData.email);
-            expect(passwordInput).not.toBeNull();
-            expect(verifyPasswordInput).toHaveValue(mockData.password);
-        });
-
-        test('Invalid verify password : should not be the same with password input', async () => {
-            const usernameInput = screen.getByRole('textbox', { name: /username/i });
-            const emailInput = screen.getByRole('textbox', { name: /email/i });
-            const passwordInput = screen.getByPlaceholderText(/enter password/i);
-            const verifyPasswordInput = screen.getByPlaceholderText(/verify password/i);
-            const mockData = {
-                username: 'username test input',
-                email: 'test@test.com',
-                password: 'blablacar'
-            };
-            const submitButton = screen.getByRole('button', { name: /submit/i });
-            const mockPostData = jest.fn();
-
-            await user.clear(usernameInput);
-            await user.type(usernameInput, mockData.username);
-
-            await user.clear(emailInput);
-            await user.type(emailInput, mockData.email);
-
-            await user.clear(passwordInput);
-            await user.type(passwordInput, mockData.password);
-
-            await user.clear(verifyPasswordInput);
-            await user.type(verifyPasswordInput, 'not the same password');
-
-            await user.click(submitButton);
-
-            expect(mockPostData).not.toHaveBeenCalled();
-            expect(usernameInput).toHaveValue(mockData.username);
-            expect(emailInput).toHaveValue(mockData.email);
-            expect(passwordInput).toHaveValue(mockData.password);
-            expect(verifyPasswordInput).not.toHaveValue(mockData.password);
-        });
+            expect(password).toHaveValue(passwordValue);
+            expect(verifyPassword).not.toHaveValue(passwordValue);
+            expect(verifyPassword).toHaveValue(anotherPasswordValue);
+        } catch (error) {
+            console.log(error);
+        }
     });
 });

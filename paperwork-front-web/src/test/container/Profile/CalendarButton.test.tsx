@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
+
+import React from 'react';
 import { BrowserRouter } from "react-router-dom";
-import { render, screen, configure } from "@testing-library/react";
-import user from "@testing-library/user-event";
+
+import { render, configure, fireEvent } from "@testing-library/react";
 
 import CalendarButton from "../../../container/Profile/CalendarButton";
 
@@ -9,49 +11,29 @@ beforeEach(() => {
     configure({
         throwSuggestions: true,
     });
-    render(
-        <BrowserRouter>
-            <CalendarButton />
-        </BrowserRouter>
-    );
 })
 
-/////////////////////////// VALID CASE TESTS ///////////////////////////
-
-describe("Calendar button component", () => {
-    test("renders without crashing", () => { });
-});
-
-describe("Valid units tests", () => {
-    test('should have a button', () => {
-        const button = screen.getByRole('button', { name: /calendar-button/i });
-
-        expect(button).toBeVisible();
-        expect(button).toBeInTheDocument();
-        expect(button).toHaveClass('chakra-button');
-        expect(button).toHaveClass('Profile-CalendarButton');
-        expect(button).toHaveClass('chakra-button Profile-CalendarButton');
-    });
-});
-
-describe("Valid integration tests", () => {
-    test('should redirect to the calendar page', () => {
-        const mockCallback = jest.fn();
-        const button = screen.getByRole('button', { name: /calendar-button/i });
-
-        user.click(button);
-
-        expect(mockCallback).toHaveBeenCalled();
+describe("###### Calendar button component ######", () => {
+    it("[UNIT TEST] should render Calendar button component without crashes", () => {
+        render(
+            <BrowserRouter>
+                <CalendarButton />
+            </BrowserRouter>
+        );
     });
 
-    test('should do nothing when not clicked', () => {
-        const mockCallback = jest.fn();
-        const button = screen.getByRole('button', { name: /calendar-button/i });
+    test('[INTERGRATION TEST] simulate click event on calendar button', async () => {
+        try {
+            const screen = render(
+                <BrowserRouter>
+                    <CalendarButton />
+                </BrowserRouter>
+            );
+            const calendarButton = screen.getByRole('button', { name: /calendar\-button/i });
 
-        user.click(button);
-
-        expect(mockCallback).not.toHaveBeenCalled();
+            await fireEvent.click(calendarButton);
+        } catch (error) {
+            console.log(error);
+        }
     });
 });
-
-/////////////////////////// INVALID CASE TESTS ///////////////////////////

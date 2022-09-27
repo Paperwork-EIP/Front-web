@@ -1,23 +1,39 @@
-import { Progress, Box, Center } from '@chakra-ui/react';
-import "../../styles/Profile.css";
+import React from 'react';
+import { Progress, Box, Text, Center } from '@chakra-ui/react';
 
 const ProcessBar = () => {
-    
+
     return (
         <>
-            <Box className='Profil-ProcessBox'>
-                <p className='Profile-ProcessText'>Your current process</p>
-                <Center>
-                    <p className='Profile-ProcessDiagText'>Vital Card</p>
-                    <Progress colorScheme='red' size='lg' value={20} className='Profil-ProcessBar'/>
-                </Center>
-                <p className='Profile-ProcessText'>Your current process</p>
-                <Center>
-                    <p className='Profile-ProcessDiagText'>Another document</p>
-                    <Progress colorScheme='red' size='lg' value={90} className='Profil-ProcessBar'/>
-                </Center>
-            </Box>
-        </>
+            <Box mr={8} p={8} borderWidth='1px' borderRadius='lg' overflow='hidden'>
+                <Box>
+                    <Text fontSize='lg' fontWeight={'bold'}>Your current process</Text>
+                </Box>
+                <Box px={4} height={"auto"}>
+                    <Center>
+                        <Box w={"10%"} my={4} transform="rotate(45deg)">
+                            <Text as='sub'>Vital Card</Text>
+                        </Box>
+                        <Box w={"100%"} justifyContent={"end"}>
+                            <Progress w={"80%"} borderRadius={'10px'} colorScheme='red' size='lg' value={20} />
+                        </Box>
+                    </Center>
+                </Box>
+
+                <Box>
+                    <Text fontSize='lg' fontWeight={'bold'}>Your current process</Text>
+                </Box>
+                <Box px={4} height={"auto"}>
+                    <Center>
+                        <Box w={"10%"} my={4} transform="rotate(45deg)">
+                            <Text as='sub'>Another document</Text>
+                        </Box>
+                        <Box w={"100%"} justifyContent={"end"}>
+                            <Progress w={"80%"} borderRadius={'10px'} colorScheme='red' size='lg' value={20} />
+                        </Box>
+                    </Center>
+                </Box>
+            </Box></>
     );
 }
 

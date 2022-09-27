@@ -15,6 +15,9 @@ import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const Register = () => {
   const api = "http://localhost:8080";
@@ -32,11 +35,26 @@ const Register = () => {
       email: emailAdress,
       password: password
     }).then(response => {
+      cookies.set('loginToken', response.data.jwt, {
+        path:'/',
+        secure:true,
+        sameSite:'none'
+    });
       window.location.assign("/home");
     }).catch(err => {
       window.location.assign("/register")
     })
   };
+  const googleConnect = () => {
+    axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
+      window.location.replace(res.data)
+    })
+  }
+  const facebookConnect = () => {
+    axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
+      window.location.replace(res.data)
+    })
+  }
   return (
       <FormControl as="fieldset">
           <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
@@ -73,14 +91,15 @@ const Register = () => {
                 />
                 <Input
                   aria-label="confirmPassword"
-                  placeholder="confirm password"
+                  placeholder="Confirm password"
                   variant="filled"
                   mb={8}
                   type="password"
                   value={confirmPassword}
                   onChange={({ target }) => setConfirmPassword(target.value)}
-                />       
+                />      
                 <Button
+                  aria-label="submit_button"
                   colorScheme="purple"
                   mb={3}
                   type="submit"
@@ -90,7 +109,7 @@ const Register = () => {
                 </Button>
                 <Center>
                   <Link to="/">
-                    <Button colorScheme="white" variant="link" mb={6}>
+                    <Button aria-label="signin_button" colorScheme="white" variant="link" mb={6}>
                       Sign in
                     </Button>
                   </Link>
@@ -99,8 +118,8 @@ const Register = () => {
                   ----------------------------------- Or
                   -----------------------------------
                 </Text>
-                <Button colorScheme="twitter" leftIcon={<FaFacebook />} mb={4}>Facebook</Button>
-                <Button colorScheme="facebook" leftIcon={<FcGoogle />}>Google</Button>
+                <Button aria-label="facebook_button" colorScheme="twitter" leftIcon={<FaFacebook />} mb={4} onClick={facebookConnect}>Facebook</Button>
+                <Button aria-label="google_button" colorScheme="facebook" leftIcon={<FcGoogle />} onClick={googleConnect}>Google</Button>
               </Flex>
             </Flex>
             <Flex flex={1}>

@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { Link } from "react-router-dom";
+import React from "react";
 
 const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -57,10 +58,14 @@ const Header = () => {
                     <p>{name}</p>
                   </Center>
                   <MenuDivider />
-                  <MenuItem>Start a process</MenuItem>
+                  <Link to="/quiz">
+                    <MenuItem>Start a process</MenuItem>
+                  </Link>
                   <MenuItem><Link to='/home'>Home</Link></MenuItem>
                   <MenuItem>Forum</MenuItem>
-                  <MenuItem>Calendar</MenuItem>
+                  <Link to="/calendar">
+                    <MenuItem>Calendar</MenuItem>
+                  </Link>
                   <MenuItem>Find an association</MenuItem>
                   <MenuItem>Help</MenuItem>
                   <MenuItem>Logout</MenuItem>
