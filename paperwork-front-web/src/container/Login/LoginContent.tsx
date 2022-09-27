@@ -3,7 +3,6 @@ import {
   Flex,
   FormControl,
   Heading,
-  Input,
   Button,
   Image,
   Text,
@@ -18,36 +17,20 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link } from "react-router-dom";
 import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { ApiCall, callbackhandle } from "../../api/ApiCall";
+import InputBase from "../../components/DS/Input";
 
 const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const { colorMode, toggleColorMode } = useColorMode();
+    const [color, setColor] = useState(false);
 
 
     const handleSubmit = async (event : any) => {
       event.preventDefault();
-      let res = await signIn(emailAdress, password);
-      if (res) {
-        window.location.assign("/home");
-      } else {
-        console.log(res);
-      }
-
-      // axios
-      //   .post("/api/login", payload)
-      //   .then((res) => {
-      //     console.log(payload);
-      //     //axios.post('/welcome', payload).then(res => {
-      //     // printToast(res);
-      //     // console.log(document.cookies);
-      //     window.location.assign("/home");
-      //   })
-      //   .catch((err) => {
-      //     if (err.response.status == 401) {
-      //       window.location.assign("/signup")
-      //     }
-      //   });
+      const data = callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);
+      window.location.assign("/home");
     };
 
     
@@ -62,25 +45,23 @@ const LoginContent = () => {
             </Box>
               <Flex alignItems="center" bg={useColorModeValue('gray.50', 'gray.800')} justifyContent="center">
                 <Flex direction="column" bg={useColorModeValue('white', 'gray.700')}
-                boxShadow={'xl'} p={8} rounded={6}>
-                  <Heading mb={12}>Sign in to your account</Heading>
-                  <Input
-                    aria-label="email"
+                boxShadow={'xl'} p={8} rounded={6} gap='6'>
+                  <Heading mb={6}>Sign in to your account</Heading>
+                  <InputBase
+                    name="email"
                     placeholder="mama@gmail.com"
                     variant="filled"
-                    mb={8}
                     type="email"
                     value={emailAdress}
-                    onChange={({ target }) => setEmailAddress(target.value)}
+                    onChange={( target ) => setEmailAddress(target.currentTarget.value)}
                   />
-                  <Input
-                    aria-label="password"
+                  <InputBase
+                    name="password"
                     placeholder="************"
                     variant="filled"
-                    mb={8}
                     type="password"
                     value={password}
-                    onChange={({ target }) => setPassword(target.value)}
+                    onChange={( target ) => setPassword(target.currentTarget.value)}
                   />                
                   <Button
                     colorScheme="purple"
@@ -94,18 +75,18 @@ const LoginContent = () => {
                   </Button>
                   <Center>
                     <Link to="/register">
-                      <Button colorScheme="white" variant="link" mb={6}>
+                      <Button colorScheme="white" variant="link" mb={2}>
                         Create an account
                       </Button>
                     </Link>
                   </Center>
                   <Center>
-                    <Text mb={8}>
+                    <Text mb={4}>
                       ---------------- Or
                       ----------------
                     </Text>
                   </Center>
-                  <Button colorScheme="twitter" leftIcon={<FaFacebook />} mb={4}>Facebook</Button>
+                  <Button colorScheme="twitter" leftIcon={<FaFacebook />} >Facebook</Button>
                   <Button colorScheme="facebook" leftIcon={<FcGoogle />}>Google</Button>
                 </Flex>
               </Flex>
