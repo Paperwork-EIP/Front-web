@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { render, configure, fireEvent } from "@testing-library/react";
 
-import CalendarButton from "../../../container/Profile/CalendarButton";
+import CalendarButton from '../../../src/container/Profile/CalendarButton';
 
 beforeEach(() => {
     configure({

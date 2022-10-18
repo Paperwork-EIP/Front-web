@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { render, configure, fireEvent } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 
-import LoginContent from '../../../container/Login/LoginContent';
+import LoginContent from '../../../src/container/Login/LoginContent';
 
 beforeEach(() => {
     configure({
