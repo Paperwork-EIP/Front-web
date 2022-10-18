@@ -9,6 +9,9 @@ package-lock.json
 # testing
 /coverage
 
+# ESlint
+.eslintcache
+
 # production
 /build
 
