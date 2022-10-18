@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { render, configure } from "@testing-library/react";
 
-import ProcessBar from "../../../container/Profile/ProcessBar";
+import ProcessBar from '../../../src/container/Profile/ProcessBar';
 
 beforeEach(() => {
     configure({

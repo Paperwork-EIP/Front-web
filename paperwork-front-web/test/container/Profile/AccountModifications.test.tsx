@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { render, configure } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import AccountModifications from "../../../container/Profile/AccountModifications";
+import AccountModifications from '../../../src/container/Profile/AccountModifications';
 
 beforeEach(() => {
     configure({
