@@ -1,21 +1,102 @@
-import React from 'react';
-import { Box, FormControl, FormLabel, Input, Textarea, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
+import React, { useRef, useState } from 'react';
+import { Box, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Textarea, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
 import Header from '../components/Header';
 
 function ProcessIdea() {
-    const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
+    const { isOpen: isOpenSubmitModal, onOpen: onOpenSubmitModal, onClose: onCloseSubmitModal } = useDisclosure();
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [content, setContent] = useState("");
+
+    const isTitleError = useRef(false);
+    const isDescriptionError = useRef(false);
+    const isContentError = useRef(false);
+    const handleTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setTitle(e.target.value);
+        isTitleError.current = e.target.value === '';
+    }
+    const handleDescriptionChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setDescription(e.target.value);
+        isDescriptionError.current = e.target.value === '';
+    }
+    const handleContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setContent(e.target.value);
+        isContentError.current = e.target.value === '';
+    }
+
+    const cancelProcessIdea = () => {
+        setTitle("");
+        setDescription("");
+        setContent("");
+        onCloseCancelModal();
+    }
+    
+    const submitProcessIdea = () => {
+        isTitleError.current = title === '';
+        isDescriptionError.current = description === '';
+        isContentError.current = content === '';
+        onCloseSubmitModal();
+        var processIdeaContent = {
+            title: title,
+            description: description,
+            content: content
+        }
+        // Back-end code to submit processIdeaContent variable here
+    }
 
     return (
         <>
             <Header/>
             <Box p={16}>
-                <FormControl isRequired>
+                <FormControl isInvalid={isTitleError.current} isRequired>
                     <FormLabel>Title</FormLabel>
-                    <Input placeholder='Title' />
+                    <Input
+                        placeholder='Title'
+                        value={title}
+                        // onChange={({ target }) => setTitle(target.value)}
+                        onChange={handleTitleChange}
+                    />
+                    {!isTitleError ? (
+                        <FormHelperText>
+                        Title of the document.
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>Title is required.</FormErrorMessage>
+                    )}
+                </FormControl>
+                <FormControl isInvalid={isDescriptionError.current} isRequired>
                     <FormLabel pt={4}>Description</FormLabel>
-                    <Input placeholder='Description' />
+                    <Input
+                        placeholder='Description'
+                        value={description}
+                        // onChange={({ target }) => setDescription(target.value)}
+                        onChange={handleDescriptionChange}
+                    />
+                    {!isDescriptionError ? (
+                        <FormHelperText>
+                        Short description of the document.
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>Description is required.</FormErrorMessage>
+                    )}
+                </FormControl>
+                <FormControl isInvalid={isContentError.current} isRequired>
                     <FormLabel pt={4}>Content</FormLabel>
-                    <Textarea placeholder='Content' />
+                    <Textarea
+                        placeholder='Content'
+                        value={content}
+                        // onChange={({ target }) => setContent(target.value)}
+                        onChange={handleContentChange}
+                    />
+                    {!isDescriptionError ? (
+                        <FormHelperText>
+                        Description of the document.
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>Content is required.</FormErrorMessage>
+                    )}
+
                     <Box pt={8} display="flex" alignItems="center" justifyContent="space-between">
                         <Button
                             bgColor="#FC6976"
@@ -25,7 +106,8 @@ function ProcessIdea() {
                             maxWidth={'200px'}
                             borderRadius={'5px'}
                             fontSize={"24px"}
-                            onClick={onOpen}>
+                            onClick={onOpenCancelModal}
+                        >
                             Cancel
                         </Button>
                         <Button
@@ -35,15 +117,18 @@ function ProcessIdea() {
                             minWidth={'95px'}
                             maxWidth={'200px'}
                             borderRadius={'5px'}
-                            fontSize={"24px"}>
+                            fontSize={"24px"}
+                            onClick={onOpenSubmitModal}
+                        >
                             Submit
                         </Button>
 
                         <Modal
                             isCentered
-                            onClose={onClose}
-                            isOpen={isOpen}
-                            motionPreset='slideInBottom'>
+                            onClose={onCloseCancelModal}
+                            isOpen={isOpenCancelModal}
+                            motionPreset='slideInBottom'
+                        >
                             <ModalOverlay />
                             <ModalContent>
                                 <ModalHeader>Cancel</ModalHeader>
@@ -54,12 +139,46 @@ function ProcessIdea() {
                                         bgColor="#FC6976"
                                         color={'white'}
                                         mr={3}
-                                        onClick={onClose}>
+                                        onClick={onCloseCancelModal}
+                                    >
                                         Close
                                     </Button>
                                     <Button 
                                         bgColor="#29C9B3"
-                                        color={'white'}>
+                                        color={'white'}
+                                        onClick={cancelProcessIdea}
+                                    >
+                                        Continue
+                                    </Button>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
+
+                        <Modal
+                            isCentered
+                            onClose={onCloseSubmitModal}
+                            isOpen={isOpenSubmitModal}
+                            motionPreset='slideInBottom'
+                        >
+                            <ModalOverlay />
+                            <ModalContent>
+                                <ModalHeader>Submit</ModalHeader>
+                                <ModalCloseButton />
+                                <ModalBody>Are you sure you want to submit the process idea?</ModalBody>
+                                <ModalFooter>
+                                    <Button
+                                        bgColor="#FC6976"
+                                        color={'white'}
+                                        mr={3}
+                                        onClick={onCloseSubmitModal}
+                                    >
+                                        Close
+                                    </Button>
+                                    <Button 
+                                        bgColor="#29C9B3"
+                                        color={'white'}
+                                        onClick={submitProcessIdea}
+                                    >
                                         Continue
                                     </Button>
                                 </ModalFooter>
