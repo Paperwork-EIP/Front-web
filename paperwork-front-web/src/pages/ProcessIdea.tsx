@@ -52,9 +52,9 @@ function ProcessIdea() {
                 <FormControl isInvalid={isTitleError.current} isRequired>
                     <FormLabel>Title</FormLabel>
                     <Input
+                        aria-label="title"
                         placeholder='Title'
                         value={title}
-                        // onChange={({ target }) => setTitle(target.value)}
                         onChange={handleTitleChange}
                     />
                     {!isTitleError ? (
@@ -68,9 +68,9 @@ function ProcessIdea() {
                 <FormControl isInvalid={isDescriptionError.current} isRequired>
                     <FormLabel pt={4}>Description</FormLabel>
                     <Input
+                        aria-label="description"
                         placeholder='Description'
                         value={description}
-                        // onChange={({ target }) => setDescription(target.value)}
                         onChange={handleDescriptionChange}
                     />
                     {!isDescriptionError ? (
@@ -84,9 +84,9 @@ function ProcessIdea() {
                 <FormControl isInvalid={isContentError.current} isRequired>
                     <FormLabel pt={4}>Content</FormLabel>
                     <Textarea
+                        aria-label="content"
                         placeholder='Content'
                         value={content}
-                        // onChange={({ target }) => setContent(target.value)}
                         onChange={handleContentChange}
                     />
                     {!isDescriptionError ? (
@@ -99,6 +99,7 @@ function ProcessIdea() {
 
                     <Box pt={8} display="flex" alignItems="center" justifyContent="space-between">
                         <Button
+                            aria-label="cancel_button"
                             bgColor="#FC6976"
                             color={'white'}
                             size="lg"
@@ -111,6 +112,7 @@ function ProcessIdea() {
                             Cancel
                         </Button>
                         <Button
+                            aria-label="submit_button"
                             bgColor="#29C9B3"
                             color={'white'}
                             size="lg"
@@ -136,6 +138,7 @@ function ProcessIdea() {
                                 <ModalBody>Are you sure you want to cancel the process idea?</ModalBody>
                                 <ModalFooter>
                                     <Button
+                                        aria-label="cancel_close_button"
                                         bgColor="#FC6976"
                                         color={'white'}
                                         mr={3}
@@ -144,6 +147,7 @@ function ProcessIdea() {
                                         Close
                                     </Button>
                                     <Button 
+                                        aria-label="cancel_continue_button"
                                         bgColor="#29C9B3"
                                         color={'white'}
                                         onClick={cancelProcessIdea}
@@ -167,6 +171,7 @@ function ProcessIdea() {
                                 <ModalBody>Are you sure you want to submit the process idea?</ModalBody>
                                 <ModalFooter>
                                     <Button
+                                        aria-label="submit_close_button"
                                         bgColor="#FC6976"
                                         color={'white'}
                                         mr={3}
@@ -174,7 +179,8 @@ function ProcessIdea() {
                                     >
                                         Close
                                     </Button>
-                                    <Button 
+                                    <Button
+                                        aria-label="submit_continue_button"
                                         bgColor="#29C9B3"
                                         color={'white'}
                                         onClick={submitProcessIdea}
