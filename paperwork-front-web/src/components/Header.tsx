@@ -50,7 +50,7 @@ const Header = () => {
                   <Center mb={2}>
                     <Link to="/profile">
                         <Avatar
-                          size={'2xl'}
+                          size={'xl'}
                         />
                     </Link>
                   </Center>
@@ -58,10 +58,14 @@ const Header = () => {
                     <p>{name}</p>
                   </Center>
                   <MenuDivider />
-                  <MenuItem>Start a process</MenuItem>
+                  <Link to="/quiz">
+                    <MenuItem>Start a process</MenuItem>
+                  </Link>
                   <MenuItem><Link to='/home'>Home</Link></MenuItem>
                   <MenuItem>Forum</MenuItem>
-                  <MenuItem>Calendar</MenuItem>
+                  <Link to="/calendar">
+                    <MenuItem>Calendar</MenuItem>
+                  </Link>
                   <MenuItem>Find an association</MenuItem>
                   <MenuItem>Help</MenuItem>
                   <MenuItem>Logout</MenuItem>
