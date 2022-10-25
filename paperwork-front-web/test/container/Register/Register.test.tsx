@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { BrowserRouter } from "react-router-dom";
 
 import { render, configure, fireEvent } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 
-import Register from "../../../container/Register/Register";
+import Register from '../../../src/container/Register/Register';
 
 beforeEach(() => {
     configure({
@@ -20,11 +20,22 @@ beforeEach(() => {
 })
 
 describe('###### Register page ######', () => {
+    interface Props {
+        children?: ReactNode,
+        onClick?: jest.Mock
+    }
+
+    const Button = ({ onClick, children }: Props) => (
+        <button onClick={onClick}>{children}</button>
+    )
+
     const screen = render(
         <BrowserRouter>
             <Register />
         </BrowserRouter>
     );
+
+    const mockCallBack = jest.fn();
 
     it("should render Register page component without crashes", () => { });
 
@@ -218,13 +229,17 @@ describe('###### Register page ######', () => {
         }
     });
 
-    // Rajouter expect() avec une mock function pour reproduire le call d'une fonction.
-
-    /* test("[INTEGRATION TEST] simulate click event on submit button", async () => {
+    test("[INTEGRATION TEST] simulate click event on submit button", async () => {
         try {
             const button = screen.getByRole('button', { name: /submit_button/i });
 
+            render(<Button onClick={mockCallBack}>Submit</Button>);
+
             await fireEvent.click(button);
+            await fireEvent.click(screen.getAllByText(/submit/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(1);
         } catch (error) {
             console.log(error);
         }
@@ -234,7 +249,13 @@ describe('###### Register page ######', () => {
         try {
             const button = screen.getByRole('button', { name: /signin_button/i });
 
+            render(<Button onClick={mockCallBack}>Sign in</Button>);
+
             await fireEvent.click(button);
+            await fireEvent.click(screen.getAllByText(/sign in/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(2);
         } catch (error) {
             console.log(error);
         }
@@ -244,7 +265,12 @@ describe('###### Register page ######', () => {
         try {
             const button = screen.getByRole('button', { name: /facebook_button/i });
 
-            await fireEvent.click(button);
+            await render(<Button onClick={mockCallBack}>Facebook</Button>);
+
+            await fireEvent.click(screen.getAllByText(/facebook/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(3);
         } catch (error) {
             console.log(error);
         }
@@ -254,9 +280,14 @@ describe('###### Register page ######', () => {
         try {
             const button = screen.getByRole('button', { name: /google_button/i });
 
-            await fireEvent.click(button);
+            render(<Button onClick={mockCallBack}>Google</Button>);
+
+            await fireEvent.click(screen.getAllByText(/google/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(4);
         } catch (error) {
             console.log(error);
         }
-    }); */
+    });
 });

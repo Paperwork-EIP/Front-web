@@ -1,12 +1,12 @@
 import '@testing-library/jest-dom';
 
-import React from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, FC, ReactNode } from 'react';
 import { BrowserRouter } from "react-router-dom";
 
 import { render, configure, fireEvent } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 
-import LoginContent from '../../../container/Login/LoginContent';
+import LoginContent from '../../../src/container/Login/LoginContent';
 
 beforeEach(() => {
     configure({
@@ -20,11 +20,22 @@ beforeEach(() => {
 })
 
 describe("###### Login page ######", () => {
+    interface Props {
+        children?: ReactNode,
+        onClick?: jest.Mock
+    }
+
+    const Button = ({ onClick, children }: Props) => (
+        <button onClick={onClick}>{children}</button>
+    )
+
     const screen = render(
         <BrowserRouter>
             <LoginContent />
         </BrowserRouter>
     );
+
+    const mockCallBack = jest.fn();
 
     it("[UNIT TEST] should render Login page component without crashes", () => { });
 
@@ -32,9 +43,9 @@ describe("###### Login page ######", () => {
         try {
             const input = screen.getByRole('textbox', { name: /email/i });
 
-        expect(input).toBeInTheDocument();
-        expect(input).toBeVisible();
-        expect(input).toBeTruthy();
+            expect(input).toBeInTheDocument();
+            expect(input).toBeVisible();
+            expect(input).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -44,9 +55,9 @@ describe("###### Login page ######", () => {
         try {
             const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
 
-        expect(input[0]).toBeInTheDocument();
-        expect(input[0]).toBeVisible();
-        expect(input[0]).toBeTruthy();
+            expect(input[0]).toBeInTheDocument();
+            expect(input[0]).toBeVisible();
+            expect(input[0]).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -56,9 +67,9 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /submit_button/i });
 
-        expect(button).toBeInTheDocument();
-        expect(button).toBeVisible();
-        expect(button).toBeTruthy();
+            expect(button).toBeInTheDocument();
+            expect(button).toBeVisible();
+            expect(button).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -68,9 +79,9 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /create_account_button/i });
 
-        expect(button).toBeInTheDocument();
-        expect(button).toBeVisible();
-        expect(button).toBeTruthy();
+            expect(button).toBeInTheDocument();
+            expect(button).toBeVisible();
+            expect(button).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -80,9 +91,9 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /facebook_button/i });
 
-        expect(button).toBeInTheDocument();
-        expect(button).toBeVisible();
-        expect(button).toBeTruthy();
+            expect(button).toBeInTheDocument();
+            expect(button).toBeVisible();
+            expect(button).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -92,9 +103,9 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /google_button/i });
 
-        expect(button).toBeInTheDocument();
-        expect(button).toBeVisible();
-        expect(button).toBeTruthy();
+            expect(button).toBeInTheDocument();
+            expect(button).toBeVisible();
+            expect(button).toBeTruthy();
         } catch (error) {
             console.log(error);
         }
@@ -127,13 +138,17 @@ describe("###### Login page ######", () => {
         }
     });
 
-    // Rajouter expect() avec une mock function pour reproduire le call d'une fonction.
-
-    /* test("[INTEGRATION TEST] simulate click event on submit button", async () => {
+    test("[INTEGRATION TEST] simulate click event on submit button", async () => {
         try {
             const button = screen.getByRole('button', { name: /submit_button/i });
 
+            render(<Button onClick={mockCallBack}>Submit</Button>);
+
             await fireEvent.click(button);
+            await fireEvent.click(screen.getAllByText(/submit/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(1);
         } catch (error) {
             console.log(error);
         }
@@ -143,17 +158,28 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /create_account_button/i });
 
+            render(<Button onClick={mockCallBack}>Create an account</Button>);
+
             await fireEvent.click(button);
+            await fireEvent.click(screen.getAllByText(/create an account/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(2);
         } catch (error) {
             console.log(error);
         }
     });
 
-    test("[INTEGRATION TEST] simulate click event on create account button", async () => {
+    test("[INTEGRATION TEST] simulate click event on create a Facebook account button", async () => {
         try {
             const button = screen.getByRole('button', { name: /facebook_button/i });
 
-            await fireEvent.click(button);
+            await render(<Button onClick={mockCallBack}>Facebook</Button>);
+
+            await fireEvent.click(screen.getAllByText(/facebook/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(3);
         } catch (error) {
             console.log(error);
         }
@@ -163,9 +189,14 @@ describe("###### Login page ######", () => {
         try {
             const button = screen.getByRole('button', { name: /google_button/i });
 
-            await fireEvent.click(button);
+            render(<Button onClick={mockCallBack}>Google</Button>);
+
+            await fireEvent.click(screen.getAllByText(/google/i)[1]);
+
+            expect(button).toBeInTheDocument();
+            expect(mockCallBack).toHaveBeenCalledTimes(4);
         } catch (error) {
             console.log(error);
         }
-    }); */
+    });
 });
