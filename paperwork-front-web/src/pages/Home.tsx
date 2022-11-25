@@ -6,9 +6,9 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const HomePage = () => {
-    // if(!cookies.get('loginToken')) {
-    //     window.location.assign('/');
-    // }
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>
