@@ -1,26 +1,34 @@
-import { Box, Text, Center, Menu, MenuButton, MenuList, MenuItem, Image, Button, Icon } from '@chakra-ui/react';
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { TiBusinessCard } from "react-icons/ti";
-import { MdDirectionsCar } from "react-icons/md";
-import { BsFillHouseFill } from "react-icons/bs";
+import { Box, Text, Center, Button } from '@chakra-ui/react';
 import { Link } from "react-router-dom";
 import Select from 'react-select';
 import Header from '../../components/Header';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../../styles/Quiz.css";
-
-const procedures = [
-    { label: "VLS-TS", value: 1 },
-    { label: "Residence permit", value: 2 },
-    { label: "French nationality", value: 3 },
-    { label: "Work permit", value: 4 },
-    { label: "travel document", value: 5 },
-    { label: "Visa", value: 6 },
-    { label: "Vital Card", value: 7 },
-    { label: "Driver license", value: 8 }
-  ];
+import axios from "axios";
 
 const QuizPage = () => {
+
+    const [posts, setPosts] = useState([{}]);
+
+    useEffect(() => {
+      axios.get('http://localhost:8080/process/getAll')
+      .then(res => {
+        var procedures = [];
+        for (var i = 0; i < res.data.response.length; i++)
+        {
+            procedures.push({
+                label: res.data.response[i]['title'],
+                source: res.data.response[i]['source'],
+                value: i
+            });
+        }
+        console.log(procedures);
+        setPosts(procedures);
+    }).catch(err => {
+        console.log(err)
+    });
+    }, [])
+
     return (
         <>
             <Header/>
@@ -40,7 +48,7 @@ const QuizPage = () => {
                     <Box pt={20}>
                     <Center>
                         
-                    <Select className='quiz-select' placeholder={'Select the Procedure'} options={ procedures } />
+                    <Select className='quiz-select' placeholder={'Select the Procedure'} options={ posts } />
 
                     </Center>
                     </Box>
