@@ -46,6 +46,44 @@ const App = () => {
     ],
   }
 
+  const ongoingProcess = {
+    // Variable temporaire remplacant le JSON reçu par Home (afin de tester la page)
+    "list": [
+      {
+        "process": "VLS-TS",
+        "percentage": 25,
+      },
+      {
+        "process": "Residence Permit",
+        "percentage": 50,
+      },
+      {
+        "process": "French Nationality",
+        "percentage": 0,
+      },
+      {
+        "process": "Work Permit",
+        "percentage": 50,
+      },
+      {
+        "process": "Travel Document",
+        "percentage": 0,
+      },
+      {
+        "process": "Visa",
+        "percentage": 25,
+      },
+      {
+        "process": "Vital card",
+        "percentage": 75,
+      },
+      {
+        "process": "Driver License",
+        "percentage": 25,
+      },
+    ],
+  }
+
   return (
       
     <div className="App">
@@ -54,7 +92,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
-            <Route path="/home" element={<HomePage/>}/>
+            <Route path="/home" element={<HomePage ongoingProcess={ongoingProcess} />}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
             <Route path= "/calendar" element={<CalendarPage/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
