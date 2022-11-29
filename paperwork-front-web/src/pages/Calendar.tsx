@@ -1,21 +1,41 @@
 import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Calendar from 'react-calendar';
 import "../styles/Calendar.css";
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
-const eventDate = [
-    { label: "1", value: "Fri Sep 30 2022" },
-    { label: "2", value: "Thu Oct 13 2022" },
-  ];
-
-const CalendarPage = () => {
+const CalendarPage = (props: any) => {
     const [date, setDate] = useState(new Date());
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
+    var isEvent = 0;
+
+    const [time, setTime] = useState("");
+    const isTimeError = useRef(false);
+
+    const handleTimeChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setTime(e.target.value);
+        isTimeError.current = e.target.value === '';
+    }
+
+    const [object, setObject] = useState("");
+    const isObjectError = useRef(false);
+    
+    const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setObject(e.target.value);
+        isObjectError.current = e.target.value === '';
+    }
+
+    {
+        props.events.list?.map((item: any) => {
+            return (
+                item.date === date.toDateString() ? isEvent += 1 : isEvent += 0
+            )
+        })
+    }
 
     if(!cookies.get('loginToken')) {
         window.location.assign('/');
@@ -75,9 +95,27 @@ const CalendarPage = () => {
                     <PopoverArrow />
                     <PopoverCloseButton color="#FC6976"/>
                     <PopoverHeader color="#BDBDBD" fontSize='xs'>{date.toDateString()}</PopoverHeader>
-                    <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
-                        Nothing Planned
-                    </PopoverBody>
+                    {
+                    isEvent === 0 ?
+                        <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
+                            Nothing Planned
+                        </PopoverBody>
+                    :
+                        <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
+                            {
+                                props.events.list?.map((item: any) => {
+                                    return (
+                                        item.date === date.toDateString() ?
+                                        <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
+                                            <Text fontSize='xs' mt='1' px='1'> {item.hour} </Text>
+                                            <Text fontSize='small' px='1'> {item.object} </Text>
+                                        </Box>
+                                        : ''
+                                    )
+                                })
+                            }
+                        </PopoverBody>
+                    }
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
                     </PopoverFooter>
                     </PopoverContent>
@@ -86,8 +124,12 @@ const CalendarPage = () => {
                 <Popover>
                     <PopoverTrigger>
                     <Center>
-                        
+                    {
+                    isEvent === 0 ?
                         <Button bgColor="#29C9B3" color="white" width={'160px'} isDisabled>Edit/Delete an Event</Button>
+                        :
+                        <Button bgColor="#29C9B3" color="white" width={'160px'}>Edit/Delete an Event</Button>
+                    }
                     </Center>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -95,10 +137,31 @@ const CalendarPage = () => {
                     <PopoverCloseButton color="#FC6976"/>
                     <PopoverHeader color="#BDBDBD" fontSize='xs'>{date.toDateString()}</PopoverHeader>
                     <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
-                        Create
+                    Edit/Delete
+                    {
+                        props.events.list?.map((item: any) => {
+                            return (
+                                item.date === date.toDateString() ?
+                                <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
+                                    <Center p={'10px'}>
+                                    <Flex width={'200px'} justifyContent={'space-between'}>
+                                        <Input type="time" defaultValue={item.hour} onChange={handleTimeChange}/>
+                                    </Flex>
+                                    </Center>
+                                    <Center>
+                                        <Input width={'200px'} defaultValue={item.object} onChange={handleObjectChange}/>
+                                    </Center>
+                                    <Center p={'10px'}>
+                                        <Button bgColor="#FC6976" color="white">Delete Event</Button>
+                                    </Center>                   
+                                </Box>
+                                : ''
+                            )
+                        })
+                    }
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                    <Button bgColor="#29C9B3" color="white">Submit</Button>
+                            <Button justifyContent='right' bgColor="#29C9B3" color="white">Submit</Button>
                     </PopoverFooter>
                     </PopoverContent>
                 </Popover>

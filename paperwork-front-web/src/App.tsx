@@ -84,6 +84,27 @@ const App = () => {
     ],
   }
 
+  const events = {
+    // Variable temporaire remplacant le JSON reçu par Calendar (afin de tester la page)
+    "list": [
+      {
+        "date": "Wed Nov 30 2022",
+        "hour": "17:00",
+        "object": "CPAM social security number 3 Pl. Adolphe Chérioux 75015 Paris",
+      },
+      {
+        "date": "Thu Dec 22 2022",
+        "hour": "14:15",
+        "object": "RDV Vital Card 5 Av. de la porte de Montmartre 75018 Paris",
+      },
+      {
+        "date": "Thu Dec 22 2022",
+        "hour": "16:00",
+        "object": "RDV Residence Permit 5 Av. de la porte de Montmartre 75018 Paris",
+      },
+    ],
+  }
+
   return (
       
     <div className="App">
@@ -94,7 +115,7 @@ const App = () => {
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage ongoingProcess={ongoingProcess} />}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
-            <Route path= "/calendar" element={<CalendarPage/>}/>
+            <Route path= "/calendar" element={<CalendarPage events={events}/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path= "/vitalcard1" element={<VitalCard1Page/>}/>
             <Route path= "/vitalcard2" element={<VitalCard2Page/>}/>

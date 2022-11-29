@@ -67,6 +67,7 @@ const Bg = (props: any) => {
           name: res.data.response[i]['process_title'],
         })
       }
+      console.log(res.data);
     }).catch(err => {
       console.log(err);
     })
@@ -158,11 +159,11 @@ const Bg = (props: any) => {
                   {
                     activePriority === true ?
                     activeAsc ?
-                    ascendingArray?.map((item: any) => {
+                    ascendingArray?.map((item) => {
                         return (
                           <Tr>
-                            <Td>{item.process}</Td>
-                            <Td isNumeric>{item.percentage}</Td>
+                            <Td key="{itemAscProcess}">{item.process}</Td>
+                            <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
                           </Tr>
                         );
                       })
@@ -170,8 +171,8 @@ const Bg = (props: any) => {
                     descendingArray?.map((item: any) => {
                         return (
                           <Tr>
-                            <Td>{item.process}</Td>
-                            <Td isNumeric>{item.percentage}</Td>
+                            <Td key="{itemDscProcess}">{item.process}</Td>
+                            <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
                           </Tr>
                         );
                       })
@@ -180,8 +181,8 @@ const Bg = (props: any) => {
                     alphabeticArray?.map((item: any) => {
                         return (
                           <Tr>
-                            <Td>{item.process}</Td>
-                            <Td isNumeric>{item.percentage}</Td>
+                            <Td key="{itemAlpProcess}">{item.process}</Td>
+                            <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
                           </Tr>
                         );
                       })
@@ -189,8 +190,8 @@ const Bg = (props: any) => {
                     invertArray?.map((item: any) => {
                         return (
                           <Tr>
-                            <Td>{item.process}</Td>
-                            <Td isNumeric>{item.percentage}</Td>
+                            <Td key="{itemInvProcess}">{item.process}</Td>
+                            <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
                           </Tr>
                         );
                     })
