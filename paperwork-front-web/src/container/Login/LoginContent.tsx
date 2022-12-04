@@ -29,12 +29,11 @@ const LoginContent = () => {
     const [password, setPassword] = useState("");
     const { colorMode, toggleColorMode } = useColorMode();
 
-
     const handleSubmit = async (event : any) => {
         event.preventDefault();
         let res = await signIn(emailAdress, password);
         if (res) {
-          cookies.set('loginToken', res.jwt, {
+          cookies.set('loginToken', { loginToken: res.jwt, email: emailAdress }, {
             path:'/',
             secure:true,
               sameSite:'none'

@@ -5,29 +5,44 @@ import Header from '../../components/Header';
 import React, { useState, useEffect } from 'react';
 import "../../styles/Quiz.css";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 
 const QuizPage = () => {
 
+    const cookies = new Cookies();
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
+    const email = cookies.get('loginToken');
+    console.log(email);
+
     const [posts, setPosts] = useState([{}]);
+    const [processSelected, setProcessSelected] = useState();
 
     useEffect(() => {
       axios.get('http://localhost:8080/process/getAll')
-      .then(res => {
-        var procedures = [];
-        for (var i = 0; i < res.data.response.length; i++)
-        {
-            procedures.push({
-                label: res.data.response[i]['title'],
-                source: res.data.response[i]['source'],
-                value: i
-            });
-        }
-        console.log(procedures);
-        setPosts(procedures);
-    }).catch(err => {
-        console.log(err)
-    });
+        .then(res => {
+            var procedures = [];
+            for (var i = 0; i < res.data.response.length; i++)
+            {
+                procedures.push({
+                    label: res.data.response[i]['title'],
+                    source: res.data.response[i]['source'],
+                    value: i
+                });
+            }
+            // console.log(procedures);
+            setPosts(procedures);
+            setProcessSelected(procedures[0]['label']);
+        }).catch(err => {
+            console.log(err)
+        });
     }, [])
+
+    const handleProcessSelected = (e: any) => {
+        setProcessSelected(e.label);
+        // console.log(processSelected);
+    }
 
     return (
         <>
@@ -48,13 +63,18 @@ const QuizPage = () => {
                     <Box pt={20}>
                     <Center>
                         
-                    <Select className='quiz-select' placeholder={'Select the Procedure'} options={ posts } />
+                    <Select
+                        className='quiz-select'
+                        placeholder={'Select the Procedure'}
+                        options={posts}
+                        onChange={handleProcessSelected}
+                    />
 
                     </Center>
                     </Box>
                     <Box pt={20}>
                     <Center>
-                    <Link to="/vitalcard1">
+                    <Link to={`/quiz/${processSelected}/0`}>
                         <Button
                             bgColor="#29C9B3"
                             color={'white'}
