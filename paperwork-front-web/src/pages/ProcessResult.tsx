@@ -25,13 +25,13 @@ const ProcessResult = () => {
         window.location.assign('/');
     }
     // console.log(email);
-    const email = cookies.get('loginToken').email;
+    const email = cookies.get('loginToken');
 
     var { processSelected } = useParams();
     // console.log(processSelected);
     
     useEffect(() => {
-        axios.get(`${api}userProcess/getUserSteps?process_title=${processSelected}&user_email=${email}`)
+        axios.get(`${api}userProcess/getUserSteps?process_title=${processSelected}&user_email=${email.email}`)
         .then(res => {
             console.log(res.data.response);
             setStepsAnswer(res.data.response);
