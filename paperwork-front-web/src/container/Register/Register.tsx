@@ -35,7 +35,7 @@ const Register = () => {
       email: emailAdress,
       password: password
     }).then(response => {
-      cookies.set('loginToken', response.data.jwt, {
+      cookies.set('loginToken', { loginToken: response.data.jwt, email: emailAdress }, {
         path:'/',
         secure:true,
         sameSite:'none'
