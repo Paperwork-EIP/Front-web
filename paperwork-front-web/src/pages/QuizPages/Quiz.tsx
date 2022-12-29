@@ -1,11 +1,16 @@
-import { Box, Text, Center, Button } from '@chakra-ui/react';
-import { Link } from "react-router-dom";
-import Select from 'react-select';
-import Header from '../../components/Header';
+// React Import
 import React, { useState, useEffect } from 'react';
-import "../../styles/Quiz.css";
+import { Link } from "react-router-dom";
+import { Box, Text, Center, Button } from '@chakra-ui/react';
+
+// Utils Import
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import Select from 'react-select';
+
+// Pages Import
+import Header from '../../components/Header';
+import "../../styles/Quiz.css";
 
 const QuizPage = () => {
 

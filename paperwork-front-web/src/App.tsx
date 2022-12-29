@@ -14,7 +14,6 @@ import ProcessIdea from './pages/ProcessIdea';
 import CalendarPage from './pages/Calendar';
 import QuizPage from './pages/QuizPages/Quiz';
 import QuizQuestion from './pages/QuizPages/QuizQuestion';
-import VitalCard2Page from './pages/QuizPages/VitalCard2';
 import GooglePage from './pages/Google';
 import FacebookPage from './pages/Facebook';
 
@@ -32,7 +31,6 @@ const App = () => {
             <Route path="/calendar" element={<CalendarPage/>}/>
             <Route path="/quiz" element={<QuizPage/>}/>
             <Route path="/quiz/:processSelected/:step" element={<QuizQuestion/>}/>
-            <Route path="/vitalcard2" element={<VitalCard2Page/>}/>
             <Route path="/processResult/:processSelected" element={<ProcessResult/>}/>
             <Route path="/processIdea" element={<ProcessIdea/>}/>
             <Route path="/googleLogin" element={<GooglePage/>}/>
