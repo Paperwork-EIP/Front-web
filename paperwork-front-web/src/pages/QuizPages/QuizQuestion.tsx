@@ -1,9 +1,14 @@
-import { Box, Text, Center,Button, Flex, EASINGS } from '@chakra-ui/react';
-import { useParams } from "react-router-dom";
-import Header from '../../components/Header';
+// React Import
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import { Box, Text, Center, Button, Flex } from '@chakra-ui/react';
+
+// Utils Import
 import axios from "axios";
 import Cookies from 'universal-cookie';
+
+// Pages Import
+import Header from '../../components/Header';
 
 const QuizQuestion = () => {
 
@@ -31,11 +36,11 @@ const QuizQuestion = () => {
         }).catch(err => {
             console.log(err)
         });
-    }, [])
+    }, [nextStep, processSelected])
 
     function handleClick(currentQuestionAnswer: string) {
-        console.log("process_title = " + processSelected);
-        console.log("email = " + email.email);
+        // console.log("process_title = " + processSelected);
+        // console.log("email = " + email.email);
         // console.log("currentQuestionAnswer");
         // console.log(currentQuestionAnswer);
         const urlAnswers = window.location.search.substring(1);
@@ -67,8 +72,8 @@ const QuizQuestion = () => {
             // console.log("queryArr = ");
             // console.log(queryArr);
             const post = { process_title: processSelected, user_email: email.email, questions: queryParams }
-            console.log("queryParams = ");
-            console.log(queryParams);
+            // console.log("queryParams = ");
+            // console.log(queryParams);
             axios.post(`${api}userProcess/add`, post)
             .then(res => {
                 console.log("res");
@@ -77,7 +82,7 @@ const QuizQuestion = () => {
                 console.log("err")
                 console.log(err)
             });
-            window.location.href = `/processResult`;
+            window.location.href = `/processResult/${processSelected}`;
         }
     }
 
