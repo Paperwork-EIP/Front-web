@@ -21,13 +21,13 @@ const QuizQuestion = () => {
     var { processSelected } = useParams();
     var { step } = useParams();
     const nextStep = parseInt(step!) + 1;
-    const api = "http://localhost:8080/";
+    const api = process.env.REACT_APP_BASE_URL;
     const [currentId, setCurrentId] = useState();
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState();
     const [questions, setQuestions] = useState<any[]>([]);
 
     useEffect(() => {
-        axios.get(`${api}processQuestions/get`, { params: { title: processSelected } })
+        axios.get(`${api}/processQuestions/get`, { params: { title: processSelected } })
         .then(res => {
             console.log(res.data.questions);
             setCurrentId(res.data.questions[nextStep - 1][0]);

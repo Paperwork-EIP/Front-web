@@ -38,12 +38,12 @@ const LoginContent = () => {
     };
 
     const googleConnect = () => {
-        axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
           window.location.replace(res.data)
         })
     }
       const facebookConnect = () => {
-        axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
           window.location.replace(res.data)
         })
     }
