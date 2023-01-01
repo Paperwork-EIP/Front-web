@@ -25,7 +25,7 @@ const QuizPage = () => {
     const [processSelected, setProcessSelected] = useState();
 
     useEffect(() => {
-      axios.get('http://localhost:8080/process/getAll')
+      axios.get(`${process.env.REACT_APP_BASE_URL}/process/getAll`)
         .then(res => {
             var procedures = [];
             for (var i = 0; i < res.data.response.length; i++)

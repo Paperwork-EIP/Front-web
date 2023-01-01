@@ -17,7 +17,7 @@ import { FaLessThan } from "react-icons/fa";
 
 const ProcessResult = () => {
 
-    const api = "http://localhost:8080/";
+    const api = process.env.REACT_APP_BASE_URL;
     const cookies = new Cookies();
     const [stepsAnswer, setStepsAnswer] = useState([]);
 
@@ -31,7 +31,7 @@ const ProcessResult = () => {
     // console.log(processSelected);
     
     useEffect(() => {
-        axios.get(`${api}userProcess/getUserSteps?process_title=${processSelected}&user_email=${email.email}`)
+        axios.get(`${api}/userProcess/getUserSteps?process_title=${processSelected}&user_email=${email.email}`)
         .then(res => {
             console.log(res.data.response);
             setStepsAnswer(res.data.response);
