@@ -1,5 +1,8 @@
 import { AxiosResponse } from "axios";
 import { Api } from "./api";
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 export const signIn = async (mail: string, pwd: string) => {
     const payload = {
@@ -23,6 +26,14 @@ export const signInCallback = (res: AxiosResponse, params: any) => {
     if (res.status == 400) {
         params.setBadPassword(true);
     }
+    if (res.status == 200) {
+        cookies.set('loginToken', { loginToken: res.data.jwt }, {
+            path:'/',
+            secure:true,
+            sameSite:'none'
+        });
+    }
+    
 }
 
 // const 
