@@ -24,15 +24,14 @@ import { SVGProps } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import React from "react";
-import { Link } from "react-router-dom";
 
-// interface TestimonialCardProps {
-//   name: string;
-//   role: string;
-//   content: string;
-//   avatar: string;
-//   index: number;
-// }
+interface TestimonialCardProps {
+  name: string;
+  role: string;
+  content: string;
+  avatar: string;
+  index: number;
+}
 
 const CircleIcon = (
   props: JSX.IntrinsicAttributes &
@@ -49,7 +48,7 @@ const CircleIcon = (
 );
 
 const Bg = () => {
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <Box
@@ -69,7 +68,6 @@ const Bg = () => {
       <Box zIndex="2" pos="relative">
         <Stack spacing={16} mx={40} mt={20}>
           <Flex alignItems="center" justify="space-around">
-          <Link to="/quiz">
             <Box
               bgColor={useColorModeValue("white", "gray.800")}
               as="button"
@@ -88,7 +86,6 @@ const Bg = () => {
               Start a process
               <ChevronRightIcon ml={35} w={55} h={55} />
             </Box>
-            </Link>
             <Spacer />
             <Card
               maxW="700px"

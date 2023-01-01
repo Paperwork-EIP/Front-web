@@ -1,17 +1,16 @@
 import { useState } from "react";
 import {
-    Flex,
-    FormControl,
-    Heading,
-    Input,
-    Button,
-    Image,
-    Text,
-    Stack,
-    Box,
-    Center,
-    useColorModeValue,
-    useColorMode
+  Flex,
+  FormControl,
+  Heading,
+  Button,
+  Image,
+  Text,
+  Stack,
+  Box,
+  Center,
+  useColorModeValue,
+  useColorMode
 } from "@chakra-ui/react";
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
@@ -21,6 +20,8 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import React from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { ApiCall, callbackhandle } from "../../api/ApiCall";
+import InputBase from "../../components/DS/Input";
 
 const cookies = new Cookies();
 
@@ -28,92 +29,78 @@ const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const { colorMode, toggleColorMode } = useColorMode();
+    const [color, setColor] = useState(false);
 
 
     const handleSubmit = async (event : any) => {
-        event.preventDefault();
-        let res = await signIn(emailAdress, password);
-        if (res) {
-          cookies.set('loginToken', res.jwt, {
-            path:'/',
-            secure:true,
-              sameSite:'none'
-        });
-          window.location.assign("/home");
-        } else {
-          console.log(res);
-        }
-      };
+      event.preventDefault();
+      const data = callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);
+      window.location.assign("/home");
+    };
+
     const googleConnect = () => {
-      axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
-        window.location.replace(res.data)
-      })
+        axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
+          window.location.replace(res.data)
+        })
     }
-    const facebookConnect = () => {
-      axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
-        window.location.replace(res.data)
-      })
+      const facebookConnect = () => {
+        axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
+          window.location.replace(res.data)
+        })
     }
 
     return (
         <FormControl as="fieldset">
             <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
-                <Box boxSize="30px">
-                    <Button onClick={toggleColorMode}>
-                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-                    </Button>
-                </Box>
-                <Flex alignItems="center" bg={useColorModeValue('gray.50', 'gray.800')} justifyContent="center">
-                    <Flex direction="column" bg={useColorModeValue('white', 'gray.700')}
-                        boxShadow={'xl'} p={8} rounded={6}>
-                        <Heading mb={12}>Sign in to your account</Heading>
-                        <Input
-                            aria-label="email"
-                            placeholder="mama@gmail.com"
-                            variant="filled"
-                            mb={8}
-                            type="email"
-                            value={emailAdress}
-                            onChange={({ target }) => setEmailAddress(target.value)}
-                        />
-                        <Input
-                            aria-label="password"
-                            placeholder="************"
-                            variant="filled"
-                            mb={8}
-                            type="password"
-                            value={password}
-                            onChange={({ target }) => setPassword(target.value)}
-                        />
-                        <Button
-                            aria-label="submit_button"
-                            colorScheme="purple"
-                            mb={3}
-                            type="submit"
-                            onClick={(e) => {
-                                handleSubmit(e)
-                            }}
-                        >
-                            submit
-                        </Button>
-                        <Center>
-                            <Link to="/register">
-                                <Button
-                                    aria-label="create_account_button"
-                                    colorScheme="white"
-                                    variant="link"
-                                    mb={6}>
-                                    Create an account
-                                </Button>
-                            </Link>
-                        </Center>
-                        <Center>
-                            <Text mb={8}>
-                                ---------------- Or
-                                ----------------
-                            </Text>
-                        </Center>
-                        <Button
+            <Box boxSize="30px">
+              <Button onClick={toggleColorMode}>
+                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+              </Button>
+            </Box>
+              <Flex alignItems="center" bg={useColorModeValue('gray.50', 'gray.800')} justifyContent="center">
+                <Flex direction="column" bg={useColorModeValue('white', 'gray.700')}
+                    boxShadow={'xl'} p={8} rounded={6} gap='6'>
+                  <Heading mb={6}>Sign in to your account</Heading>
+                  <InputBase
+                    name="email"
+                    placeholder="mama@gmail.com"
+                    variant="filled"
+                    type="email"
+                    value={emailAdress}
+                    onChange={( target ) => setEmailAddress(target.currentTarget.value)}
+                  />
+                  <InputBase
+                    name="password"
+                    placeholder="************"
+                    variant="filled"
+                    type="password"
+                    value={password}
+                    onChange={( target ) => setPassword(target.currentTarget.value)}
+                  />                
+                  <Button
+                    colorScheme="purple"
+                    mb={3}
+                    type="submit"
+                    onClick={(e) => {
+                      handleSubmit(e)
+                    }}
+                  >
+                    submit
+                  </Button>
+                  <Center>
+                    <Link to="/register">
+                      <Button colorScheme="white" variant="link" mb={2}>
+                        Create an account
+                      </Button>
+                    </Link>
+                  </Center>
+                  <Center>
+                    <Text mb={4}>
+                      ---------------- Or
+                      ----------------
+                    </Text>
+                  </Center>
+                  <Button
                             aria-label="facebook_button"
                             colorScheme="twitter"
                             leftIcon={<FaFacebook />}
@@ -128,7 +115,7 @@ const LoginContent = () => {
                             onClick={googleConnect}>
                             Google
                         </Button>
-                    </Flex>
+                </Flex>
                 </Flex>
                 <Flex flex={1}>
                     <Image
@@ -143,5 +130,7 @@ const LoginContent = () => {
         </FormControl>
     );
 }
+
+
 
 export default LoginContent;
