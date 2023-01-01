@@ -31,7 +31,6 @@ const LoginContent = () => {
     const { colorMode, toggleColorMode } = useColorMode();
     const [color, setColor] = useState(false);
 
-
     const handleSubmit = async (event : any) => {
       event.preventDefault();
       const data = callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);

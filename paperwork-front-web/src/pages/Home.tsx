@@ -7,9 +7,9 @@ const cookies = new Cookies();
 // import GridBlurredBackdrop from '../container/Home/HomeContent';
 
 const HomePage = () => {
-    // if(!cookies.get('loginToken')) {
-    //     window.location.assign('/');
-    // }
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
     return (
         <>
             <Header/>
