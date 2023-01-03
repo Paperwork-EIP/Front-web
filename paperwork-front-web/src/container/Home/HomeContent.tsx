@@ -57,7 +57,7 @@ const CircleIcon = (
 
 const Bg = (props: any) => {
 
-  const api = "http://localhost:8080/";
+  const api = "http://localhost:8282/";
   var intSorter = 0;
   const [process, setProcess]= useState([[]]);
   const [percentage, setPercentage]= useState([]);

@@ -87,11 +87,11 @@ const App = () => {
     // Variable temporaire remplacant le JSON reçu par Calendar (afin de tester la page)
     "list": [
       {
-        "date": "2023-01-01 17:00:00",
+        "date": "2023-01-02 17:00:00",
         "object": "CPAM social security number 3 Pl. Adolphe Chérioux 75015 Paris",
       },
       {
-        "date": "2023-01-07 17:00:00",
+        "date": "2023-01-08 17:00:00",
         "object": "RDV Vital Card 5 Av. de la porte de Montmartre 75018 Paris",
       },
       {

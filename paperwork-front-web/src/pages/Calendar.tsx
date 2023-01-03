@@ -1,4 +1,4 @@
-import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
+import { Textarea, Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
@@ -15,11 +15,13 @@ const CalendarPage = (props: any) => {
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
     var isEvent = 0;
+    var indexDai = 0;
+    var indexEdi = 0;
 
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
-    const api = "http://localhost:8080/";
+    const api = "http://localhost:8282/";
     const [rdv, setRDV]= useState([[]]);
 
     useEffect(() => {
@@ -27,7 +29,7 @@ const CalendarPage = (props: any) => {
         }) .then(res => {
         var rdvTmp =  [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
-            rdvTmp.push(res.data.appoinment[i]['date']);
+            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
         }
         setRDV(rdvTmp);
         //console.log(res.data.response[i].process_title)
@@ -54,9 +56,9 @@ const CalendarPage = (props: any) => {
     }
 
     {
-        props.events.list?.map((item: any) => {
+        rdv?.map((item: any) => {
             return (
-                item.date.split(" ")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
+                item.toString().split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
             )
         })
     }
@@ -78,7 +80,7 @@ const CalendarPage = (props: any) => {
                     </Center>
             </Box>
             <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[0]}</Text>
+                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[1]}</Text>
             </Center>
             <Center>
             <Flex width={'600px'} justifyContent={'space-between'}>
@@ -99,8 +101,15 @@ const CalendarPage = (props: any) => {
                                 <Input type="time"/>
                             </Flex>
                         </Center>
+                        <Center p={'10px'}>
+                        <Input width={'200px'} placeholder='Title'/>
+                        </Center>
                         <Center>
-                        <Input width={'200px'} placeholder='Object'/>
+                            <Textarea 
+                                width={'200px'}
+                                placeholder='Object'
+                                onChange={handleObjectChange}
+                            />
                         </Center>
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
@@ -127,13 +136,14 @@ const CalendarPage = (props: any) => {
                     :
                         <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
                             {
-                                props.events.list?.map((item: any) => {
+                                rdv?.map((item: any) => {
+                                    indexDai++;
                                     return (
-                                        item.date.split(" ")[0] === comparativeDate ?
-
+                                        item.toString().split("T")[0] === comparativeDate ?
                                         <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                            <Text fontSize='xs' mt='1' px='1'> {item.date.split(" ")[1]} </Text>
-                                            <Text fontSize='small' px='1'> {item.object} </Text>
+                                            <Text fontSize='xs' mt='1' px='1'> {item.toString().split("T")[1].split(".")[0]} </Text>
+                                            <Text fontSize='small' mt='2' px='1'> {rdv[indexDai]} </Text>
+                                            <Text fontSize='2xs' px='1'> {rdv[indexDai + 1]} </Text>
                                         </Box>
                                         : ''
                                     )
@@ -164,17 +174,26 @@ const CalendarPage = (props: any) => {
                     <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
                     Edit/Delete
                     {
-                        props.events.list?.map((item: any) => {
+                        rdv?.map((item: any) => {
+                            indexEdi++;
                             return (
-                                item.date.split(" ")[0] === comparativeDate ?
+                                item.toString().split("T")[0] === comparativeDate ?
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.date.split(" ")[1]} onChange={handleTimeChange}/>
+                                        <Input type="time" defaultValue={item.toString().split("T")[1].split(".")[0]} onChange={handleTimeChange}/>
                                     </Flex>
                                     </Center>
+                                    <Center p={'10px'}>
+                                        <Input width={'200px'} defaultValue={rdv[indexEdi]} onChange={handleObjectChange}/>
+                                    </Center>
                                     <Center>
-                                        <Input width={'200px'} defaultValue={item.object} onChange={handleObjectChange}/>
+                                    <Textarea 
+                                        width={'200px'}
+                                        placeholder='Object'
+                                        defaultValue={rdv[indexEdi + 1]}
+                                        onChange={handleObjectChange}
+                                    />
                                     </Center>
                                     <Center p={'10px'}>
                                         <Button bgColor="#FC6976" color="white">Delete Event</Button>
