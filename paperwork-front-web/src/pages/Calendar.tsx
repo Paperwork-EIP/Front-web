@@ -18,6 +18,51 @@ const CalendarPage = (props: any) => {
     var indexDai = 0;
     var indexEdi = 0;
 
+    const [newDate, setNewDate] = useState("");
+    const [newTitle, setNewTitle] = useState("");
+    const [newContent, setNewContent] = useState("");
+
+    const isNewDateError = useRef(false);
+    const isNewTitleError = useRef(false);
+    const isNewContentError = useRef(false);
+
+    const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewDate(e.target.value);
+        isNewDateError.current = e.target.value === '';
+    }
+    const handleNewTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewTitle(e.target.value);
+        isNewTitleError.current = e.target.value === '';
+    }
+    
+    const handleNewContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewContent(e.target.value);
+        isNewContentError.current = e.target.value === '';
+    }
+
+
+    const [modDate, setModDate] = useState("");
+    const [modTitle, setModTitle] = useState("");
+    const [modContent, setModContent] = useState("");
+
+    const isModDateError = useRef(false);
+    const isModTitleError = useRef(false);
+    const isModContentError = useRef(false);
+
+    const handleModDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModDate(e.target.value);
+        isModDateError.current = e.target.value === '';
+    }
+    const handleModTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModTitle(e.target.value);
+        isModTitleError.current = e.target.value === '';
+    }
+    
+    const handleModContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModContent(e.target.value);
+        isModContentError.current = e.target.value === '';
+    }
+
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
@@ -53,6 +98,32 @@ const CalendarPage = (props: any) => {
     const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setObject(e.target.value);
         isObjectError.current = e.target.value === '';
+    }
+
+    const submitNewEvent = () => {
+        isNewDateError.current = newDate === '';
+        isNewTitleError.current = newTitle === '';
+        isNewContentError.current = newContent === '';
+        var newEventContent = {
+            date: newDate,
+            title: newTitle,
+            content: newContent
+        }
+        // Back-end code to submit newEventContent variable here
+        console.log(newEventContent);
+    }
+
+    const submitModEvent = () => {
+        isModDateError.current = modDate === '';
+        isModTitleError.current = modTitle === '';
+        isModContentError.current = modContent === '';
+        var modEventContent = {
+            date: modDate,
+            title: modTitle,
+            content: modContent
+        }
+        // Back-end code to submit modEventContent variable here
+        console.log(modEventContent);
     }
 
     {
@@ -98,22 +169,27 @@ const CalendarPage = (props: any) => {
                         Create
                         <Center p={'10px'}>
                             <Flex width={'200px'} justifyContent={'space-between'}>
-                                <Input type="time"/>
+                                <Input onChange={handleNewDateChange} type="time"/>
                             </Flex>
                         </Center>
                         <Center p={'10px'}>
-                        <Input width={'200px'} placeholder='Title'/>
+                        <Input onChange={handleNewTitleChange} width={'200px'} placeholder='Title'/>
                         </Center>
                         <Center>
                             <Textarea 
                                 width={'200px'}
                                 placeholder='Object'
-                                onChange={handleObjectChange}
+                                onChange={handleNewContentChange}
                             />
                         </Center>
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                    <Button bgColor="#29C9B3" color="white">Submit</Button>
+                    <Button 
+                    bgColor="#29C9B3"
+                    color="white"
+                    onClick={submitNewEvent}>
+                        Submit
+                    </Button>
                     </PopoverFooter>
                     </PopoverContent>
                 </Popover>
@@ -181,22 +257,27 @@ const CalendarPage = (props: any) => {
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.toString().split("T")[1].split(".")[0]} onChange={handleTimeChange}/>
+                                        <Input type="time" defaultValue={item.toString().split("T")[1].split(".")[0]} onChange={handleModDateChange}/>
                                     </Flex>
                                     </Center>
                                     <Center p={'10px'}>
-                                        <Input width={'200px'} defaultValue={rdv[indexEdi]} onChange={handleObjectChange}/>
+                                        <Input width={'200px'} defaultValue={rdv[indexEdi]} onChange={handleModTitleChange}/>
                                     </Center>
                                     <Center>
                                     <Textarea 
                                         width={'200px'}
                                         placeholder='Object'
                                         defaultValue={rdv[indexEdi + 1]}
-                                        onChange={handleObjectChange}
+                                        onChange={handleModContentChange}
                                     />
                                     </Center>
                                     <Center p={'10px'}>
-                                        <Button bgColor="#FC6976" color="white">Delete Event</Button>
+                                        <Button 
+                                        bgColor="#FC6976"
+                                        color="white"
+                                        /*onClick={deleteEvent}*/>
+                                            Delete Event
+                                        </Button>
                                     </Center>                   
                                 </Box>
                                 : ''
@@ -205,7 +286,13 @@ const CalendarPage = (props: any) => {
                     }
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                            <Button justifyContent='right' bgColor="#29C9B3" color="white">Submit</Button>
+                            <Button
+                            justifyContent='right'
+                            bgColor="#29C9B3"
+                            color="white"
+                            onClick={submitModEvent}>
+                                Submit
+                            </Button>
                     </PopoverFooter>
                     </PopoverContent>
                 </Popover>
