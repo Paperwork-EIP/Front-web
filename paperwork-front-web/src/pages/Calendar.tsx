@@ -1,11 +1,14 @@
 import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import "../styles/Calendar.css";
 import Cookies from 'universal-cookie';
+import axios from "axios";
 
 const cookies = new Cookies();
+
+const cookieList = cookies.get('loginToken');
 
 const CalendarPage = (props: any) => {
     const [date, setDate] = useState(new Date());
@@ -16,6 +19,25 @@ const CalendarPage = (props: any) => {
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
+    const api = "http://localhost:8080/";
+    const [rdv, setRDV]= useState([]);
+
+    useEffect(() => {
+        axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
+        }) .then(res => {
+        console.log(res);
+          for (var i = 0; i < res.data.appoinment.length; i++) {
+              setRDV(res.data.appoinment[i]['date']);
+            //console.log(res.data.response[i].process_title)
+          }
+          
+        }).catch(err => {
+          console.log(err);
+        })
+    
+        console.log(rdv);
+    })
+
     const handleTimeChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setTime(e.target.value);
         isTimeError.current = e.target.value === '';
@@ -24,6 +46,9 @@ const CalendarPage = (props: any) => {
     const [object, setObject] = useState("");
     const isObjectError = useRef(false);
     
+    const selectedMonth =  date.toDateString().split(" ")[1] == "Jan" ? "01" : "Not Set";
+    const comparativeDate = date.toDateString().split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString().split(" ")[2];
+
     const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setObject(e.target.value);
         isObjectError.current = e.target.value === '';
@@ -32,7 +57,7 @@ const CalendarPage = (props: any) => {
     {
         props.events.list?.map((item: any) => {
             return (
-                item.date === date.toDateString() ? isEvent += 1 : isEvent += 0
+                item.date.split(" ")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
             )
         })
     }
@@ -54,7 +79,7 @@ const CalendarPage = (props: any) => {
                     </Center>
             </Box>
             <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{date.toDateString()}</Text>
+                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/comparativeDate}</Text>
             </Center>
             <Center>
             <Flex width={'600px'} justifyContent={'space-between'}>
@@ -105,9 +130,10 @@ const CalendarPage = (props: any) => {
                             {
                                 props.events.list?.map((item: any) => {
                                     return (
-                                        item.date === date.toDateString() ?
+                                        item.date.split(" ")[0] === comparativeDate ?
+
                                         <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                            <Text fontSize='xs' mt='1' px='1'> {item.hour} </Text>
+                                            <Text fontSize='xs' mt='1' px='1'> {item.date.split(" ")[1]} </Text>
                                             <Text fontSize='small' px='1'> {item.object} </Text>
                                         </Box>
                                         : ''
@@ -141,11 +167,11 @@ const CalendarPage = (props: any) => {
                     {
                         props.events.list?.map((item: any) => {
                             return (
-                                item.date === date.toDateString() ?
+                                item.date.split(" ")[0] === comparativeDate ?
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.hour} onChange={handleTimeChange}/>
+                                        <Input type="time" defaultValue={item.date.split(" ")[1]} onChange={handleTimeChange}/>
                                     </Flex>
                                     </Center>
                                     <Center>
