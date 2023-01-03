@@ -3,7 +3,7 @@ import {
   ColorModeScript
 } from '@chakra-ui/react';
 import React from 'react';
-import { Routes, Route, } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
@@ -13,8 +13,7 @@ import ProcessResult from './pages/ProcessResult';
 import ProcessIdea from './pages/ProcessIdea';
 import CalendarPage from './pages/Calendar';
 import QuizPage from './pages/QuizPages/Quiz';
-import VitalCard1Page from './pages/QuizPages/VitalCard1';
-import VitalCard2Page from './pages/QuizPages/VitalCard2';
+import QuizQuestion from './pages/QuizPages/QuizQuestion';
 import GooglePage from './pages/Google';
 import FacebookPage from './pages/Facebook';
 
@@ -101,7 +100,6 @@ const App = () => {
       },
     ],
   }
-
   return (
       
     <div className="App">
@@ -114,16 +112,12 @@ const App = () => {
             <Route path= "/profile" element={<ProfilePage/>}/>
             <Route path= "/calendar" element={<CalendarPage events={events}/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
-            <Route path= "/vitalcard1" element={<VitalCard1Page/>}/>
-            <Route path= "/vitalcard2" element={<VitalCard2Page/>}/>
-            <Route path= "/processResult" element={<ProcessResult processInfo={processInfo} />}/>
+            <Route path="/quiz/:processSelected/:step" element={<QuizQuestion/>}/>
+            <Route path="/processResult/:processSelected" element={<ProcessResult/>}/>
             <Route path= "/processIdea" element={<ProcessIdea/>}/>
             <Route path= "/googleLogin" element={<GooglePage/>}/>
             <Route path= "/facebookLogin" element={<FacebookPage/>}/>
-            <Route
-              path="*"
-              element={<ErrorPage />}
-            />
+            <Route path="*" element={<ErrorPage />}/>
           </Routes>   
       </ChakraProvider>
     </div>

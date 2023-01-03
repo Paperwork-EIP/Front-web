@@ -1,26 +1,54 @@
-import { Box, Text, Center, Menu, MenuButton, MenuList, MenuItem, Image, Button, Icon } from '@chakra-ui/react';
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import { TiBusinessCard } from "react-icons/ti";
-import { MdDirectionsCar } from "react-icons/md";
-import { BsFillHouseFill } from "react-icons/bs";
+// React Import
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import { Box, Text, Center, Button } from '@chakra-ui/react';
+
+// Utils Import
+import axios from "axios";
+import Cookies from 'universal-cookie';
 import Select from 'react-select';
+
+// Pages Import
 import Header from '../../components/Header';
-import React, { useState } from 'react';
 import "../../styles/Quiz.css";
 
-const procedures = [
-    { label: "VLS-TS", value: 1 },
-    { label: "Residence permit", value: 2 },
-    { label: "French nationality", value: 3 },
-    { label: "Work permit", value: 4 },
-    { label: "travel document", value: 5 },
-    { label: "Visa", value: 6 },
-    { label: "Vital Card", value: 7 },
-    { label: "Driver license", value: 8 }
-  ];
-
 const QuizPage = () => {
+
+    const cookies = new Cookies();
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
+    const email = cookies.get('loginToken');
+    console.log(email);
+
+    const [posts, setPosts] = useState([{}]);
+    const [processSelected, setProcessSelected] = useState();
+
+    useEffect(() => {
+      axios.get(`${process.env.REACT_APP_BASE_URL}/process/getAll`)
+        .then(res => {
+            var procedures = [];
+            for (var i = 0; i < res.data.response.length; i++)
+            {
+                procedures.push({
+                    label: res.data.response[i]['title'],
+                    source: res.data.response[i]['source'],
+                    value: i
+                });
+            }
+            // console.log(procedures);
+            setPosts(procedures);
+            setProcessSelected(procedures[0]['label']);
+        }).catch(err => {
+            console.log(err)
+        });
+    }, [])
+
+    const handleProcessSelected = (e: any) => {
+        setProcessSelected(e.label);
+        // console.log(processSelected);
+    }
+
     return (
         <>
             <Header/>
@@ -40,13 +68,18 @@ const QuizPage = () => {
                     <Box pt={20}>
                     <Center>
                         
-                    <Select className='quiz-select' placeholder={'Select the Procedure'} options={ procedures } />
+                    <Select
+                        className='quiz-select'
+                        placeholder={'Select the Procedure'}
+                        options={posts}
+                        onChange={handleProcessSelected}
+                    />
 
                     </Center>
                     </Box>
                     <Box pt={20}>
                     <Center>
-                    <Link to="/vitalcard1">
+                    <Link to={`/quiz/${processSelected}/0`}>
                         <Button
                             bgColor="#29C9B3"
                             color={'white'}
