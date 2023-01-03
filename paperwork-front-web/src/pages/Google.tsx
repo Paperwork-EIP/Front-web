@@ -6,7 +6,7 @@ import axios from "axios";
 const cookies = new Cookies();
 
 const GooglePage = () => {
-    const api = "http://localhost:8080";
+    const api = process.env.REACT_APP_BASE_URL;
     const search = useLocation().search;
     const code = new URLSearchParams(search).get('code');
     console.log(code);

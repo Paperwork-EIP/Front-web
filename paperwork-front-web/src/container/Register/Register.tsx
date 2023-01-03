@@ -20,7 +20,7 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 const Register = () => {
-  const api = "http://localhost:8080";
+  const api = process.env.REACT_APP_BASE_URL;
   const [username, setUsername] = useState("");
   const [emailAdress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
@@ -46,12 +46,12 @@ const Register = () => {
     })
   };
   const googleConnect = () => {
-    axios.get(`http://localhost:8080/oauth/google/urlLogin`).then(res => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
       window.location.replace(res.data)
     })
   }
   const facebookConnect = () => {
-    axios.get(`http://localhost:8080/oauth/facebook/url`).then(res => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
       window.location.replace(res.data)
     })
   }

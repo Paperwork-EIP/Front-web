@@ -29,13 +29,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'universal-cookie';
 
-// interface TestimonialCardProps {
-//   name: string;
-//   role: string;
-//   content: string;
-//   avatar: string;
-//   index: number;
-// }
+interface TestimonialCardProps {
+  name: string;
+  role: string;
+  content: string;
+  avatar: string;
+  index: number;
+}
 
 const cookies = new Cookies();
 
@@ -137,7 +137,6 @@ const Bg = (props: any) => {
       <Box zIndex="2" pos="relative">
         <Stack spacing={16} mx={40} mt={20}>
           <Flex alignItems="center" justify="space-around">
-          <Link to="/quiz">
             <Box
               bgColor={useColorModeValue("white", "gray.800")}
               as="button"
@@ -156,7 +155,6 @@ const Bg = (props: any) => {
               Start a process
               <ChevronRightIcon ml={35} w={55} h={55} />
             </Box>
-            </Link>
             <Spacer />
             <Card
               maxW="700px"
