@@ -20,23 +20,22 @@ const CalendarPage = (props: any) => {
     const isTimeError = useRef(false);
 
     const api = "http://localhost:8080/";
-    const [rdv, setRDV]= useState([]);
+    const [rdv, setRDV]= useState([[]]);
 
     useEffect(() => {
         axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
         }) .then(res => {
-        console.log(res);
-          for (var i = 0; i < res.data.appoinment.length; i++) {
-              setRDV(res.data.appoinment[i]['date']);
-            //console.log(res.data.response[i].process_title)
-          }
+        var rdvTmp =  [];
+        for (var i = 0; i < res.data.appoinment.length; i++) {
+            rdvTmp.push(res.data.appoinment[i]['date']);
+        }
+        setRDV(rdvTmp);
+        //console.log(res.data.response[i].process_title)
           
         }).catch(err => {
           console.log(err);
         })
-    
-        console.log(rdv);
-    })
+    }, rdv)
 
     const handleTimeChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setTime(e.target.value);
@@ -79,7 +78,7 @@ const CalendarPage = (props: any) => {
                     </Center>
             </Box>
             <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/comparativeDate}</Text>
+                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[0]}</Text>
             </Center>
             <Center>
             <Flex width={'600px'} justifyContent={'space-between'}>

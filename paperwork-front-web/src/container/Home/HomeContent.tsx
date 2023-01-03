@@ -59,7 +59,7 @@ const Bg = (props: any) => {
 
   const api = "http://localhost:8080/";
   var intSorter = 0;
-  const [process, setProcess]= useState([{}]);
+  const [process, setProcess]= useState([[]]);
   const [percentage, setPercentage]= useState([]);
   var listPercentage = [];
 
