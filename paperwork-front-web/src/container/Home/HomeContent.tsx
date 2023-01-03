@@ -19,11 +19,15 @@ import {
   OmitCommonProps,
   Flex,
   useColorMode,
+  Button,
 } from "@chakra-ui/react";
-import { SVGProps } from "react";
+import { SVGProps, useLayoutEffect } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Cookies from 'universal-cookie';
 
 interface TestimonialCardProps {
   name: string;
@@ -33,12 +37,16 @@ interface TestimonialCardProps {
   index: number;
 }
 
+const cookies = new Cookies();
+
+const cookieList = cookies.get('loginToken');
+
 const CircleIcon = (
-  props: JSX.IntrinsicAttributes &
+  prop: JSX.IntrinsicAttributes &
     OmitCommonProps<SVGProps<SVGSVGElement>, keyof IconProps> &
     IconProps & { as?: "svg" | undefined }
 ) => (
-  <Icon viewBox="0 0 100 100" {...props}>
+  <Icon viewBox="0 0 100 100" {...prop}>
     <path
       margin-top="2px"
       fill="currentColor"
@@ -47,9 +55,70 @@ const CircleIcon = (
   </Icon>
 );
 
-const Bg = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+const Bg = (props: any) => {
 
+  const api = "http://localhost:8080/";
+  var intSorter = 0;
+  const [process, setProcess]= useState([[]]);
+  const [percentage, setPercentage]= useState([]);
+  var listPercentage = [];
+
+  useEffect(() => {
+    axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`, {
+    }) .then(res => {
+      var processTmp =  [];
+      for (var i = 0; i < res.data.response.length; i++) {
+        processTmp.push(res.data.response[i]['process_title']);
+      }
+      setProcess(processTmp);
+      //console.log(listProcess);
+
+      //setProcess(res.data.response[i]['process_title']);
+      
+      /*
+      if (process.length != 0) {
+        for (var i = 0; i < process.length; i++) {
+          axios.get(`${api}userProcess/getUserSteps?process_title=${process}&user_email=${cookieList.email}`, {
+        }) .then(res => {
+          setPercentage(res.data.pourcentage);
+        }).catch(err => {
+          console.log(err);
+        })
+
+        }
+    }
+    */
+
+    }).catch(err => {
+      console.log(err);
+    })
+
+    //setPercentage(res.data.pourcentage);
+
+  }, process)
+
+  console.log(process);
+
+  const [activeAsc, setActiveAsc] = useState(false);
+  const [activeAlp, setActiveAlp] = useState(false);
+  const [activePriority, setActivePriority] = useState(false);
+
+  const handleClickAsc = () => {
+    setActiveAsc(!activeAsc);
+    setActivePriority(true);
+  }
+
+  const handleClickAlp = () => {
+    setActiveAlp(!activeAlp);
+    setActivePriority(false);
+  }
+  
+  const ascendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.percentage - b.percentage);
+  const descendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => b.percentage - a.percentage);
+  const alphabeticArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1);
+  const invertArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? -1 : 1);
+
+  const { colorMode } = useColorMode();
   return (
     <Box
       bgImage={
@@ -93,50 +162,68 @@ const Bg = () => {
               w={"900px"}
               height="345px"
             >
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th><b>Ongoing process</b></Th>
-                      <Th isNumeric>Descending</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>Vital card</Td>
-                      <Td isNumeric>25</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Driver’s license</Td>
-                      <Td isNumeric>30</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Job center</Td>
-                      <Td isNumeric>91</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Residence permit</Td>
-                      <Td isNumeric>55</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Vital card</Td>
-                      <Td isNumeric>25</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Driver’s license</Td>
-                      <Td isNumeric>30</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Job center</Td>
-                      <Td isNumeric>91</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Residence permit</Td>
-                      <Td isNumeric>55</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+                <TableContainer>
+                  <Table variant="simple">
+                    <Thead>
+                      <Tr>
+                        <Th>
+                        <Button onClick={handleClickAlp}>
+                        { activeAlp ? "Z...A" : "A...Z"}
+                        </Button>
+                        </Th>
+                        <Th isNumeric>
+                        <Button onClick={handleClickAsc}>
+                        { activeAsc ? "Ascending" : "Descending"}
+                        </Button>
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                    {
+                      activePriority === true ?
+                      activeAsc ?
+                      ascendingArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemAscProcess}">{item.process}</Td>
+                              <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      descendingArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemDscProcess}">{item.process}</Td>
+                              <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      activeAlp ?
+                      alphabeticArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemAlpProcess}">{item.process}</Td>
+                              <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      invertArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemInvProcess}">{item.process}</Td>
+                              <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                      })
+                    }
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+
+
             </Card>
           </Flex>
           <Card

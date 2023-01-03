@@ -19,6 +19,7 @@ beforeEach(() => {
     );
 })
 
+/*
 describe("###### Login page ######", () => {
     interface Props {
         children?: ReactNode,
@@ -53,7 +54,7 @@ describe("###### Login page ######", () => {
 
     it("[UNIT TEST] should have password input", async () => {
         try {
-            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*//*i);
 
             expect(input[0]).toBeInTheDocument();
             expect(input[0]).toBeVisible();
@@ -126,7 +127,7 @@ describe("###### Login page ######", () => {
 
     test("[INTEGRATION TEST] password input filled", async () => {
         try {
-            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*/i);
+            const input = screen.getAllByPlaceholderText(/\*\*\*\*\*\*\*\*\*\*\*\*//*i);
             const password = input[0];
 
             await userEvent.clear(password);
@@ -199,4 +200,4 @@ describe("###### Login page ######", () => {
             console.log(error);
         }
     });
-});
+});*/

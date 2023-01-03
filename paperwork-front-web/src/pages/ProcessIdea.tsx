@@ -37,12 +37,13 @@ function ProcessIdea() {
         isDescriptionError.current = description === '';
         isContentError.current = content === '';
         onCloseSubmitModal();
-        // var processIdeaContent = {
-        //     title: title,
-        //     description: description,
-        //     content: content
-        // }
+        var processIdeaContent = {
+             title: title,
+             description: description,
+             content: content
+        }
         // Back-end code to submit processIdeaContent variable here
+        console.log(processIdeaContent);
     }
 
     return (
