@@ -27,7 +27,7 @@ export const signInCallback = (res: AxiosResponse, params: any) => {
         params.setBadPassword(true);
     }
     if (res.status == 200) {
-        cookies.set('loginToken', { loginToken: res.data.jwt }, {
+        cookies.set('loginToken', { token: res.data.jwt, email: res.data.email }, {
             path:'/',
             secure:true,
             sameSite:'none'

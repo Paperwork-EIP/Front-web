@@ -33,7 +33,7 @@ const ProcessResult = () => {
     useEffect(() => {
         axios.get(`${api}/userProcess/getUserSteps?process_title=${processSelected}&user_email=${email.email}`)
         .then(res => {
-            console.log(res.data.response);
+            // console.log(res.data.response);
             setStepsAnswer(res.data.response);
         }).catch(err => {
             console.log(err)

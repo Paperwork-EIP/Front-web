@@ -6,18 +6,18 @@ import { BrowserRouter } from "react-router-dom";
 import { render, configure, fireEvent } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 
-// import ProcessResult from '../../pages/ProcessResult';
+import ProcessResult from '../../../src/pages/ProcessResult';
 
-// beforeEach(() => {
-//     configure({
-//         throwSuggestions: true,
-//     })
-//     render(
-//         <BrowserRouter>
-//             <ProcessResult/>
-//         </BrowserRouter>
-//     );
-// })
+beforeEach(() => {
+    configure({
+        throwSuggestions: true,
+    })
+    render(
+        <BrowserRouter>
+            <ProcessResult/>
+        </BrowserRouter>
+    );
+})
 
 // describe("###### Process Result page ######", () => {
 //     const screen = render(

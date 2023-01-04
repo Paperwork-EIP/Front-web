@@ -74,15 +74,15 @@ const QuizQuestion = () => {
             const post = { process_title: processSelected, user_email: email.email, questions: queryParams }
             // console.log("queryParams = ");
             // console.log(queryParams);
-            axios.post(`${api}userProcess/add`, post)
+            axios.post(`${api}/userProcess/add`, post)
             .then(res => {
                 console.log("res");
                 console.log(res);
+                window.location.href = `/processResult/${processSelected}`;
             }).catch(err => {
                 console.log("err")
                 console.log(err)
             });
-            window.location.href = `/processResult/${processSelected}`;
         }
     }
 
