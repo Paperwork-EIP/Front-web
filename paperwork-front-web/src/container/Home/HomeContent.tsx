@@ -96,7 +96,7 @@ const Bg = (props: any) => {
             axios.get(`${api}userProcess/getUserSteps?process_title=${item}&user_email=${cookieList.email}`, {
             }) .then(res => {
               listPercentage.push({process: item, percentage: res.data.pourcentage});
-              //console.log(listPercentage)
+              console.log(listPercentage)
             }).catch(err => {
               console.log(err);
             })
@@ -110,7 +110,7 @@ const Bg = (props: any) => {
     //console.log(listPercentage)
   }, process)
 
-  console.log(listPercentage)
+  //console.log(listPercentage)
   const [activeAsc, setActiveAsc] = useState(false);
   const [activeAlp, setActiveAlp] = useState(false);
   const [activePriority, setActivePriority] = useState(false);

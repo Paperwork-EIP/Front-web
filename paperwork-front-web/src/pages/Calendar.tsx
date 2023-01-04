@@ -17,6 +17,7 @@ const CalendarPage = (props: any) => {
     var isEvent = 0;
     var indexDai = 0;
     var indexEdi = 0;
+    var indexDel = 0;
 
     const [newDate, setNewDate] = useState("");
     const [newTitle, setNewTitle] = useState("");
@@ -63,6 +64,22 @@ const CalendarPage = (props: any) => {
         isModContentError.current = e.target.value === '';
     }
 
+    const deleteEvent = () => {
+        rdv?.map((item: any) => {
+            indexDel++;
+            return(
+                item.toString()?.split("T")[0] === comparativeDate ?
+                    axios.get(`${api}calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    }).then(res => {
+                        window.location.reload();
+                    }).catch(err => {
+                    console.log(err);
+                    })
+                : ''
+            )
+        })
+    }
+
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
@@ -74,7 +91,7 @@ const CalendarPage = (props: any) => {
         }) .then(res => {
         var rdvTmp =  [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
-            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
+            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
         }
         setRDV(rdvTmp);
         //console.log(res.data.response[i].process_title)
@@ -275,7 +292,7 @@ const CalendarPage = (props: any) => {
                                         <Button 
                                         bgColor="#FC6976"
                                         color="white"
-                                        /*onClick={deleteEvent}*/>
+                                        onClick={deleteEvent}>
                                             Delete Event
                                         </Button>
                                     </Center>                   
