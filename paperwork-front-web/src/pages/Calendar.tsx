@@ -1,4 +1,4 @@
-import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
+import { Textarea, Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
@@ -15,11 +15,75 @@ const CalendarPage = (props: any) => {
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
     var isEvent = 0;
+    var indexDai = 0;
+    var indexEdi = 0;
+    var indexDel = 0;
+
+    const [newDate, setNewDate] = useState("");
+    const [newTitle, setNewTitle] = useState("");
+    const [newContent, setNewContent] = useState("");
+
+    const isNewDateError = useRef(false);
+    const isNewTitleError = useRef(false);
+    const isNewContentError = useRef(false);
+
+    const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewDate(e.target.value);
+        isNewDateError.current = e.target.value === '';
+    }
+    const handleNewTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewTitle(e.target.value);
+        isNewTitleError.current = e.target.value === '';
+    }
+    
+    const handleNewContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setNewContent(e.target.value);
+        isNewContentError.current = e.target.value === '';
+    }
+
+
+    const [modDate, setModDate] = useState("");
+    const [modTitle, setModTitle] = useState("");
+    const [modContent, setModContent] = useState("");
+
+    const isModDateError = useRef(false);
+    const isModTitleError = useRef(false);
+    const isModContentError = useRef(false);
+
+    const handleModDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModDate(e.target.value);
+        isModDateError.current = e.target.value === '';
+    }
+    const handleModTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModTitle(e.target.value);
+        isModTitleError.current = e.target.value === '';
+    }
+    
+    const handleModContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+        setModContent(e.target.value);
+        isModContentError.current = e.target.value === '';
+    }
+
+    const deleteEvent = () => {
+        rdv?.map((item: any) => {
+            indexDel++;
+            return(
+                item.toString()?.split("T")[0] === comparativeDate ?
+                    axios.get(`${api}calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    }).then(res => {
+                        window.location.reload();
+                    }).catch(err => {
+                    console.log(err);
+                    })
+                : ''
+            )
+        })
+    }
 
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
-    const api = "http://localhost:8080/";
+    const api = "http://localhost:8282/";
     const [rdv, setRDV]= useState([[]]);
 
     useEffect(() => {
@@ -27,7 +91,7 @@ const CalendarPage = (props: any) => {
         }) .then(res => {
         var rdvTmp =  [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
-            rdvTmp.push(res.data.appoinment[i]['date']);
+            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
         }
         setRDV(rdvTmp);
         //console.log(res.data.response[i].process_title)
@@ -45,18 +109,44 @@ const CalendarPage = (props: any) => {
     const [object, setObject] = useState("");
     const isObjectError = useRef(false);
     
-    const selectedMonth =  date.toDateString().split(" ")[1] == "Jan" ? "01" : "Not Set";
-    const comparativeDate = date.toDateString().split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString().split(" ")[2];
+    const selectedMonth =  date.toDateString()?.split(" ")[1] == "Jan" ? "01" : "Not Set";
+    const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
 
     const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setObject(e.target.value);
         isObjectError.current = e.target.value === '';
     }
 
+    const submitNewEvent = () => {
+        isNewDateError.current = newDate === '';
+        isNewTitleError.current = newTitle === '';
+        isNewContentError.current = newContent === '';
+        var newEventContent = {
+            date: newDate,
+            title: newTitle,
+            content: newContent
+        }
+        // Back-end code to submit newEventContent variable here
+        console.log(newEventContent);
+    }
+
+    const submitModEvent = () => {
+        isModDateError.current = modDate === '';
+        isModTitleError.current = modTitle === '';
+        isModContentError.current = modContent === '';
+        var modEventContent = {
+            date: modDate,
+            title: modTitle,
+            content: modContent
+        }
+        // Back-end code to submit modEventContent variable here
+        console.log(modEventContent);
+    }
+
     {
-        props.events.list?.map((item: any) => {
+        rdv?.map((item: any) => {
             return (
-                item.date.split(" ")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
+                item.toString()?.split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
             )
         })
     }
@@ -78,7 +168,7 @@ const CalendarPage = (props: any) => {
                     </Center>
             </Box>
             <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[0]}</Text>
+                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[1]}</Text>
             </Center>
             <Center>
             <Flex width={'600px'} justifyContent={'space-between'}>
@@ -96,15 +186,27 @@ const CalendarPage = (props: any) => {
                         Create
                         <Center p={'10px'}>
                             <Flex width={'200px'} justifyContent={'space-between'}>
-                                <Input type="time"/>
+                                <Input onChange={handleNewDateChange} type="time"/>
                             </Flex>
                         </Center>
+                        <Center p={'10px'}>
+                        <Input onChange={handleNewTitleChange} width={'200px'} placeholder='Title'/>
+                        </Center>
                         <Center>
-                        <Input width={'200px'} placeholder='Object'/>
+                            <Textarea 
+                                width={'200px'}
+                                placeholder='Object'
+                                onChange={handleNewContentChange}
+                            />
                         </Center>
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                    <Button bgColor="#29C9B3" color="white">Submit</Button>
+                    <Button 
+                    bgColor="#29C9B3"
+                    color="white"
+                    onClick={submitNewEvent}>
+                        Submit
+                    </Button>
                     </PopoverFooter>
                     </PopoverContent>
                 </Popover>
@@ -127,13 +229,14 @@ const CalendarPage = (props: any) => {
                     :
                         <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
                             {
-                                props.events.list?.map((item: any) => {
+                                rdv?.map((item: any) => {
+                                    indexDai++;
                                     return (
-                                        item.date.split(" ")[0] === comparativeDate ?
-
+                                        item.toString()?.split("T")[0] === comparativeDate ?
                                         <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                            <Text fontSize='xs' mt='1' px='1'> {item.date.split(" ")[1]} </Text>
-                                            <Text fontSize='small' px='1'> {item.object} </Text>
+                                            <Text fontSize='xs' mt='1' px='1'> {item.toString()?.split("T")[1]?.split(".")[0]} </Text>
+                                            <Text fontSize='small' mt='2' px='1'> {rdv[indexDai]} </Text>
+                                            <Text fontSize='2xs' px='1'> {rdv[indexDai + 1]} </Text>
                                         </Box>
                                         : ''
                                     )
@@ -164,20 +267,34 @@ const CalendarPage = (props: any) => {
                     <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
                     Edit/Delete
                     {
-                        props.events.list?.map((item: any) => {
+                        rdv?.map((item: any) => {
+                            indexEdi++;
                             return (
-                                item.date.split(" ")[0] === comparativeDate ?
+                                item.toString()?.split("T")[0] === comparativeDate ?
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.date.split(" ")[1]} onChange={handleTimeChange}/>
+                                        <Input type="time" defaultValue={item.toString()?.split("T")[1]?.split(".")[0]} onChange={handleModDateChange}/>
                                     </Flex>
                                     </Center>
+                                    <Center p={'10px'}>
+                                        <Input width={'200px'} defaultValue={rdv[indexEdi]} onChange={handleModTitleChange}/>
+                                    </Center>
                                     <Center>
-                                        <Input width={'200px'} defaultValue={item.object} onChange={handleObjectChange}/>
+                                    <Textarea 
+                                        width={'200px'}
+                                        placeholder='Object'
+                                        defaultValue={rdv[indexEdi + 1]}
+                                        onChange={handleModContentChange}
+                                    />
                                     </Center>
                                     <Center p={'10px'}>
-                                        <Button bgColor="#FC6976" color="white">Delete Event</Button>
+                                        <Button 
+                                        bgColor="#FC6976"
+                                        color="white"
+                                        onClick={deleteEvent}>
+                                            Delete Event
+                                        </Button>
                                     </Center>                   
                                 </Box>
                                 : ''
@@ -186,7 +303,13 @@ const CalendarPage = (props: any) => {
                     }
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                            <Button justifyContent='right' bgColor="#29C9B3" color="white">Submit</Button>
+                            <Button
+                            justifyContent='right'
+                            bgColor="#29C9B3"
+                            color="white"
+                            onClick={submitModEvent}>
+                                Submit
+                            </Button>
                     </PopoverFooter>
                     </PopoverContent>
                 </Popover>

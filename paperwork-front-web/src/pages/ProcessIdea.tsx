@@ -1,6 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Textarea, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
 import Header from '../components/Header';
+import Cookies from 'universal-cookie';
+import axios from 'axios';
+
+const cookies = new Cookies();
+
+const cookieList = cookies.get('loginToken');
 
 function ProcessIdea() {
     const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
@@ -32,18 +38,21 @@ function ProcessIdea() {
         onCloseCancelModal();
     }
     
+    const api = "http://localhost:8282/";
+
     const submitProcessIdea = () => {
         isTitleError.current = title === '';
         isDescriptionError.current = description === '';
         isContentError.current = content === '';
         onCloseSubmitModal();
-        var processIdeaContent = {
-             title: title,
-             description: description,
-             content: content
-        }
-        // Back-end code to submit processIdeaContent variable here
-        console.log(processIdeaContent);
+        axios.post(`${api}processProposal/add`, {
+            title: title,
+            description: description,
+            content: content,
+            user_email: cookieList.email
+        }).catch(err => {
+          console.log(err);
+        })
     }
 
     return (

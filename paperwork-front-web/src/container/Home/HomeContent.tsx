@@ -55,13 +55,31 @@ const CircleIcon = (
   </Icon>
 );
 
+
+
 const Bg = (props: any) => {
 
-  const api = "http://localhost:8080/";
-  var intSorter = 0;
+  const api = "http://localhost:8282/";
+  var index = -2;
   const [process, setProcess]= useState([[]]);
-  const [percentage, setPercentage]= useState([]);
-  var listPercentage = [];
+
+  const [rdv, setRDV]= useState([[]]);
+  var listPercentage: { process: any; percentage: any; }[] = [];
+
+  useEffect(() => {
+      axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
+      }) .then(res => {
+      var rdvTmp =  [];
+      for (var i = 0; i < res.data.appoinment.length; i++) {
+          rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
+      }
+      setRDV(rdvTmp);
+      //console.log(res.data.response[i].process_title)
+        
+      }).catch(err => {
+        console.log(err);
+      })
+  }, rdv)
 
   useEffect(() => {
     axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`, {
@@ -71,34 +89,28 @@ const Bg = (props: any) => {
         processTmp.push(res.data.response[i]['process_title']);
       }
       setProcess(processTmp);
-      //console.log(listProcess);
 
-      //setProcess(res.data.response[i]['process_title']);
-      
-      /*
-      if (process.length != 0) {
-        for (var i = 0; i < process.length; i++) {
-          axios.get(`${api}userProcess/getUserSteps?process_title=${process}&user_email=${cookieList.email}`, {
-        }) .then(res => {
-          setPercentage(res.data.pourcentage);
-        }).catch(err => {
-          console.log(err);
-        })
-
+      process?.map((item: any) => {
+        if (item.length != 0) {
+          return (
+            axios.get(`${api}userProcess/getUserSteps?process_title=${item}&user_email=${cookieList.email}`, {
+            }) .then(res => {
+              listPercentage.push({process: item, percentage: res.data.pourcentage});
+              console.log(listPercentage)
+            }).catch(err => {
+              console.log(err);
+            })
+          )
         }
-    }
-    */
+    })
 
     }).catch(err => {
       console.log(err);
     })
-
-    //setPercentage(res.data.pourcentage);
-
+    //console.log(listPercentage)
   }, process)
 
-  console.log(process);
-
+  //console.log(listPercentage)
   const [activeAsc, setActiveAsc] = useState(false);
   const [activeAlp, setActiveAlp] = useState(false);
   const [activePriority, setActivePriority] = useState(false);
@@ -112,11 +124,24 @@ const Bg = (props: any) => {
     setActiveAlp(!activeAlp);
     setActivePriority(false);
   }
+
   
   const ascendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.percentage - b.percentage);
+  
+  //console.log(ascendingArray);
+  
   const descendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => b.percentage - a.percentage);
+  
+  //console.log(descendingArray);
+  
   const alphabeticArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1);
+
+  //console.log(listPercentage);
+  //console.log([...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1));
+
   const invertArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? -1 : 1);
+
+  //console.log(invertArray);
 
   const { colorMode } = useColorMode();
   return (
@@ -222,8 +247,6 @@ const Bg = (props: any) => {
                     </Tbody>
                   </Table>
                 </TableContainer>
-
-
             </Card>
           </Flex>
           <Card
@@ -231,22 +254,59 @@ const Bg = (props: any) => {
             color={useColorModeValue("white", "gray.800")}
             height="400px"
           >
-            <Stack direction="column" p={2}>
-              <Stack direction="row">
-                <Heading size="lg">Calendar</Heading>
-                <Spacer />
-                <CircleIcon color="pink.400" mt="15" />
-                <Text fontSize="md">Applied</Text>
-                <CircleIcon color="green" />
-                <Text fontSize="md">Left</Text>
-              </Stack>
-              <Divider />
-              <Center>
-                <Heading as="h2" size="2xl" colorScheme="grey" mt={100}>
-                  Nothing to show
-                </Heading>
-              </Center>
-            </Stack>
+            {
+              rdv.length != 0 ?
+
+              
+              <Stack direction="column" p={2}>
+                <Stack direction="row">
+                  <Heading size="lg">Calendar</Heading>
+                  <Spacer />
+                  <CircleIcon color="pink.400" mt="15" />
+                  <Text fontSize="md">Applied</Text>
+                  <CircleIcon color="green" />
+                  <Text fontSize="md">Left</Text>
+                </Stack>
+                <Divider />
+                <Center>
+                  <Heading as="h2" size="2xl" colorScheme="grey" >
+                  {
+                    rdv?.map((item: any) => {
+                        index += 3;
+                        if (index <= rdv.length) {
+                          return (
+                              <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
+                                <Text fontSize='xs' mt='1' px='1'> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </Text>
+                                  <Text fontSize='small' mt='2' px='1'> {rdv[index]} </Text>
+                                  <Text fontSize='2xs' px='1'> {rdv[index + 1]} </Text>
+                              </Box>
+                          )
+                        }
+                    })
+                  }
+                  </Heading>
+                </Center>
+                </Stack>
+
+              :
+
+              <Stack direction="column" p={2}>
+                <Stack direction="row">
+                  <Heading size="lg">Calendar</Heading>
+                  <Spacer />
+                  <CircleIcon color="pink.400" mt="15" />
+                  <Text fontSize="md">Applied</Text>
+                  <CircleIcon color="green" />
+                  <Text fontSize="md">Left</Text>
+                </Stack>
+                <Divider />
+                <Center>
+                  <Heading as="h2" size="2xl" colorScheme="grey" mt={100}>
+                    Nothing to show
+                  </Heading>
+                </Center>
+                </Stack>
+            }
           </Card>
         </Stack>
       </Box>
