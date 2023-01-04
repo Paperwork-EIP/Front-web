@@ -59,9 +59,9 @@ const CircleIcon = (
 
 const Bg = (props: any) => {
 
-  const api = "http://localhost:8282/";
+  const api = process.env.REACT_APP_BASE_URL;
   var index = -2;
-  const [process, setProcess]= useState([[]]);
+  const [processes, setProcess]= useState([[]]);
 
   const [rdv, setRDV]= useState([[]]);
   var listPercentage: { process: any; percentage: any; }[] = [];
@@ -90,7 +90,7 @@ const Bg = (props: any) => {
       }
       setProcess(processTmp);
 
-      process?.map((item: any) => {
+      processes?.map((item: any) => {
         if (item.length != 0) {
           return (
             axios.get(`${api}userProcess/getUserSteps?process_title=${item}&user_email=${cookieList.email}`, {
@@ -108,7 +108,7 @@ const Bg = (props: any) => {
       console.log(err);
     })
     //console.log(listPercentage)
-  }, process)
+  }, processes)
 
   //console.log(listPercentage)
   const [activeAsc, setActiveAsc] = useState(false);
