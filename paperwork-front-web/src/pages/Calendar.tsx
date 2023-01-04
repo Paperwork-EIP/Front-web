@@ -83,7 +83,7 @@ const CalendarPage = (props: any) => {
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
-    const api = "http://localhost:8282/";
+    const api = process.env.REACT_APP_BASE_URL;
     const [rdv, setRDV]= useState([[]]);
 
     useEffect(() => {

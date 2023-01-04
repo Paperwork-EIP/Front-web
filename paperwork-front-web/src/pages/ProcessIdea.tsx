@@ -38,8 +38,8 @@ function ProcessIdea() {
         onCloseCancelModal();
     }
     
-    const api = "http://localhost:8282/";
-
+    const api = process.env.REACT_APP_BASE_URL;
+    
     const submitProcessIdea = () => {
         isTitleError.current = title === '';
         isDescriptionError.current = description === '';
