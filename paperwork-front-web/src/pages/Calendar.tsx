@@ -92,8 +92,8 @@ const CalendarPage = (props: any) => {
     const [object, setObject] = useState("");
     const isObjectError = useRef(false);
     
-    const selectedMonth =  date.toDateString().split(" ")[1] == "Jan" ? "01" : "Not Set";
-    const comparativeDate = date.toDateString().split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString().split(" ")[2];
+    const selectedMonth =  date.toDateString()?.split(" ")[1] == "Jan" ? "01" : "Not Set";
+    const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
 
     const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setObject(e.target.value);
@@ -129,7 +129,7 @@ const CalendarPage = (props: any) => {
     {
         rdv?.map((item: any) => {
             return (
-                item.toString().split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
+                item.toString()?.split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
             )
         })
     }
@@ -215,9 +215,9 @@ const CalendarPage = (props: any) => {
                                 rdv?.map((item: any) => {
                                     indexDai++;
                                     return (
-                                        item.toString().split("T")[0] === comparativeDate ?
+                                        item.toString()?.split("T")[0] === comparativeDate ?
                                         <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                            <Text fontSize='xs' mt='1' px='1'> {item.toString().split("T")[1].split(".")[0]} </Text>
+                                            <Text fontSize='xs' mt='1' px='1'> {item.toString()?.split("T")[1]?.split(".")[0]} </Text>
                                             <Text fontSize='small' mt='2' px='1'> {rdv[indexDai]} </Text>
                                             <Text fontSize='2xs' px='1'> {rdv[indexDai + 1]} </Text>
                                         </Box>
@@ -253,11 +253,11 @@ const CalendarPage = (props: any) => {
                         rdv?.map((item: any) => {
                             indexEdi++;
                             return (
-                                item.toString().split("T")[0] === comparativeDate ?
+                                item.toString()?.split("T")[0] === comparativeDate ?
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.toString().split("T")[1].split(".")[0]} onChange={handleModDateChange}/>
+                                        <Input type="time" defaultValue={item.toString()?.split("T")[1]?.split(".")[0]} onChange={handleModDateChange}/>
                                     </Flex>
                                     </Center>
                                     <Center p={'10px'}>
