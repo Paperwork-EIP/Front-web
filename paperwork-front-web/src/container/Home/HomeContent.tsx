@@ -28,6 +28,7 @@ import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { isTemplateExpression } from "typescript";
 
 interface TestimonialCardProps {
   name: string;
@@ -40,6 +41,8 @@ interface TestimonialCardProps {
 const cookies = new Cookies();
 
 const cookieList = cookies.get('loginToken');
+
+var i = 0;
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -60,11 +63,10 @@ const CircleIcon = (
 const Bg = (props: any) => {
 
   const api = process.env.REACT_APP_BASE_URL;
+
   var index = -2;
-  const [processes, setProcess]= useState([[]]);
 
   const [rdv, setRDV]= useState([[]]);
-  var listPercentage: { process: any; percentage: any; }[] = [];
 
   useEffect(() => {
       axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
@@ -81,36 +83,28 @@ const Bg = (props: any) => {
       })
   }, rdv)
 
-  useEffect(() => {
-    axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`, {
-    }) .then(res => {
-      var processTmp =  [];
-      for (var i = 0; i < res.data.response.length; i++) {
-        processTmp.push(res.data.response[i]['process_title']);
-      }
-      setProcess(processTmp);
+  const [userProcessInfo, setUserProcessInfo]: any= useState([{}]);
 
-      processes?.map((item: any) => {
-        if (item.length != 0) {
-          return (
-            axios.get(`${api}userProcess/getUserSteps?process_title=${item}&user_email=${cookieList.email}`, {
-            }) .then(res => {
-              listPercentage.push({process: item, percentage: res.data.pourcentage});
-              console.log(listPercentage)
-            }).catch(err => {
-              console.log(err);
-            })
-          )
+    // console.log("email");
+    // console.log(props.email);
+    
+    useEffect(() => {
+        axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`)
+        .then(res => {
+        var userProcessTmp = [];
+        for (var j = 0; j < res.data.response.length; j++) {
+          if (res.data.response[j]['pourcentage'] != null)
+            userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
+          else
+            userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
         }
-    })
+        setUserProcessInfo(userProcessTmp);
 
-    }).catch(err => {
-      console.log(err);
-    })
-    //console.log(listPercentage)
-  }, processes)
-
-  //console.log(listPercentage)
+        }).catch(err => {
+            console.log(err)
+        });
+    }, userProcessInfo)
+    
   const [activeAsc, setActiveAsc] = useState(false);
   const [activeAlp, setActiveAlp] = useState(false);
   const [activePriority, setActivePriority] = useState(false);
@@ -125,23 +119,10 @@ const Bg = (props: any) => {
     setActivePriority(false);
   }
 
-  
-  const ascendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.percentage - b.percentage);
-  
-  //console.log(ascendingArray);
-  
-  const descendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => b.percentage - a.percentage);
-  
-  //console.log(descendingArray);
-  
-  const alphabeticArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1);
-
-  //console.log(listPercentage);
-  //console.log([...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1));
-
-  const invertArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? -1 : 1);
-
-  //console.log(invertArray);
+  const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
+  const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
+  const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
+  const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
   const { colorMode } = useColorMode();
   return (

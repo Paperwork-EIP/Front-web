@@ -1,16 +1,20 @@
 import { Textarea, Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
+import Select from 'react-select';
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import "../styles/Calendar.css";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
-const cookies = new Cookies();
-
-const cookieList = cookies.get('loginToken');
-
 const CalendarPage = (props: any) => {
+
+    const cookies = new Cookies();
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
+    const cookieList = cookies.get('loginToken')
+
     const [date, setDate] = useState(new Date());
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
@@ -80,10 +84,39 @@ const CalendarPage = (props: any) => {
         })
     }
 
+    const [posts, setPosts] = useState([{}]);
+    const [processSelected, setProcessSelected] = useState();
+
+    useEffect(() => {
+      axios.get(`${api}/process/getAll`)
+        .then(res => {
+            var procedures = [];
+            for (var i = 0; i < res.data.response.length; i++)
+            {
+                procedures.push({
+                    label: res.data.response[i]['title'],
+                    source: res.data.response[i]['source'],
+                    value: i
+                });
+            }
+            // console.log(procedures);
+            setPosts(procedures);
+            setProcessSelected(procedures[0]['label']);
+        }).catch(err => {
+            console.log(err)
+        });
+    }, [])
+
+    const handleProcessSelected = (e: any) => {
+        setProcessSelected(e.label);
+        // console.log(processSelected);
+    }
+
     const [time, setTime] = useState("");
     const isTimeError = useRef(false);
 
     const api = process.env.REACT_APP_BASE_URL;
+
     const [rdv, setRDV]= useState([[]]);
 
     useEffect(() => {
@@ -168,7 +201,7 @@ const CalendarPage = (props: any) => {
                     </Center>
             </Box>
             <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{/*date.toDateString()*/rdv[1]}</Text>
+                <Text as='em' color="#FC6976" fontSize='lg'>{date.toDateString()}</Text>
             </Center>
             <Center>
             <Flex width={'600px'} justifyContent={'space-between'}>
@@ -190,7 +223,16 @@ const CalendarPage = (props: any) => {
                             </Flex>
                         </Center>
                         <Center p={'10px'}>
-                        <Input onChange={handleNewTitleChange} width={'200px'} placeholder='Title'/>
+                        <div style={{width: '200px', fontSize: 13}}>
+                        <Select
+                        className='calendar-add-select'
+                        placeholder={'Select the Procedure'}
+                        options={posts}
+                        onChange={handleProcessSelected}
+                        /> 
+                        </div>
+                        
+
                         </Center>
                         <Center>
                             <Textarea 
