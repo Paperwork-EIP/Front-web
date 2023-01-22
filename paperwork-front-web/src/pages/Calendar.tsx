@@ -19,53 +19,28 @@ const CalendarPage = (props: any) => {
     const [showTime, setShowTime] = useState(false);
     const initRef = React.useRef()
     var isEvent = 0;
-    var indexDai = 0;
-    var indexEdi = 0;
-    var indexDel = 0;
+    var indexDai = 1;
+    var indexEdi = 1;
+    var indexMod = 1;
+    var indexRep = 1;
+    var indexDel = 1;
 
     const [newDate, setNewDate] = useState("");
-    const [newTitle, setNewTitle] = useState("");
-    const [newContent, setNewContent] = useState("");
 
     const isNewDateError = useRef(false);
-    const isNewTitleError = useRef(false);
-    const isNewContentError = useRef(false);
 
     const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setNewDate(e.target.value);
         isNewDateError.current = e.target.value === '';
     }
-    const handleNewTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setNewTitle(e.target.value);
-        isNewTitleError.current = e.target.value === '';
-    }
-    
-    const handleNewContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setNewContent(e.target.value);
-        isNewContentError.current = e.target.value === '';
-    }
-
 
     const [modDate, setModDate] = useState("");
-    const [modTitle, setModTitle] = useState("");
-    const [modContent, setModContent] = useState("");
 
     const isModDateError = useRef(false);
-    const isModTitleError = useRef(false);
-    const isModContentError = useRef(false);
 
     const handleModDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setModDate(e.target.value);
         isModDateError.current = e.target.value === '';
-    }
-    const handleModTitleChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setModTitle(e.target.value);
-        isModTitleError.current = e.target.value === '';
-    }
-    
-    const handleModContentChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setModContent(e.target.value);
-        isModContentError.current = e.target.value === '';
     }
 
     const deleteEvent = () => {
@@ -84,11 +59,25 @@ const CalendarPage = (props: any) => {
         })
     }
 
-    const [posts, setPosts] = useState([{}]);
+    const replaceEvent = () => {
+        rdv?.map((item: any) => {
+            indexRep++;
+            return(
+                item.toString()?.split("T")[0] === comparativeDate ?
+                    axios.get(`${api}calendar/delete?user_process_id=${rdv[indexRep + 2]}&step_id=${rdv[indexRep + 3]}`, {
+                    }).catch(err => {
+                    console.log(err);
+                    })
+                : ''
+            )
+        })
+    }
+
+    const [posts, setPosts]: any = useState([{}]);
     const [processSelected, setProcessSelected] = useState();
 
     useEffect(() => {
-      axios.get(`${api}/process/getAll`)
+      axios.get(`${api}process/getAll`)
         .then(res => {
             var procedures = [];
             for (var i = 0; i < res.data.response.length; i++)
@@ -99,7 +88,6 @@ const CalendarPage = (props: any) => {
                     value: i
                 });
             }
-            // console.log(procedures);
             setPosts(procedures);
             setProcessSelected(procedures[0]['label']);
         }).catch(err => {
@@ -107,9 +95,33 @@ const CalendarPage = (props: any) => {
         });
     }, [])
 
-    const handleProcessSelected = (e: any) => {
+    const handleProcessSelected = (e: React.SetStateAction<any>) => {
         setProcessSelected(e.label);
-        // console.log(processSelected);
+        axios.get(`${api}userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
+        .then(res => {
+            var steps = [];
+            for (var i = 0; i < res.data.response.length; i++)
+            {
+                steps.push({
+                    label: res.data.response[i]['step_title'],
+                    step_id: res.data.response[i]['step_id'],
+                    user_process_id: res.data.response[i]['user_process_id'],
+                    value: i
+                });
+            }
+            setPostsStep(steps);
+            setStepSelected(steps[0]['label']);
+        }).catch(err => {
+            console.log(err)
+        });
+        setStepSelected(e.label);
+    }
+
+    const [postsStep, setPostsStep] : any = useState([{}]);
+    const [stepSelected, setStepSelected] = useState();
+
+    const handleStepSelected = (e: React.SetStateAction<any>) => {
+        setStepSelected(e.label);
     }
 
     const [time, setTime] = useState("");
@@ -124,7 +136,7 @@ const CalendarPage = (props: any) => {
         }) .then(res => {
         var rdvTmp =  [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
-            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
+            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
         }
         setRDV(rdvTmp);
         //console.log(res.data.response[i].process_title)
@@ -142,7 +154,10 @@ const CalendarPage = (props: any) => {
     const [object, setObject] = useState("");
     const isObjectError = useRef(false);
     
-    const selectedMonth =  date.toDateString()?.split(" ")[1] == "Jan" ? "01" : "Not Set";
+    const selectedMonth =  date.toDateString()?.split(" ")[1] == "Jan" ? "01" : date.toDateString()?.split(" ")[1] == "Feb" ? "012" : date.toDateString()?.split(" ")[1] == "Mar" ? "03" :
+                           date.toDateString()?.split(" ")[1] == "Apr" ? "04" : date.toDateString()?.split(" ")[1] == "May" ? "05" : date.toDateString()?.split(" ")[1] == "Jun" ? "06" :
+                           date.toDateString()?.split(" ")[1] == "Jul" ? "07" : date.toDateString()?.split(" ")[1] == "Aug" ? "08" : date.toDateString()?.split(" ")[1] == "Sep" ? "09" :
+                           date.toDateString()?.split(" ")[1] == "Oct" ? "10" : date.toDateString()?.split(" ")[1] == "Nov" ? "11" : date.toDateString()?.split(" ")[1] == "Dec" ? "12" : "Not Set";
     const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
 
     const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
@@ -152,28 +167,80 @@ const CalendarPage = (props: any) => {
 
     const submitNewEvent = () => {
         isNewDateError.current = newDate === '';
-        isNewTitleError.current = newTitle === '';
-        isNewContentError.current = newContent === '';
-        var newEventContent = {
-            date: newDate,
-            title: newTitle,
-            content: newContent
-        }
-        // Back-end code to submit newEventContent variable here
-        console.log(newEventContent);
+
+        postsStep?.map((item: any) => {
+            return (
+                item['label'] === stepSelected ?  
+                axios.post(`${api}calendar/set`, {
+                    date: comparativeDate + ' ' + newDate + ':00',
+                    user_process_id: item['user_process_id'],
+                    step_id: item['step_id']
+                }).then(res => {
+                    window.location.reload();
+                }).catch(err => {
+                  console.log(err);
+                })
+                : 
+                ''
+            )
+        })
+    }
+
+
+    const [stepEdit, setStepEdit] = useState();
+    const [postsStepEdit, setPostsStepEdit] : any = useState([{}]);
+    
+
+    const handleProcessEdit = (e: React.SetStateAction<any>) => {
+        rdv?.map((item: any) => {
+            indexMod++;
+            return(
+                item.toString()?.split("T")[0] === comparativeDate ?
+                axios.get(`${api}userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_email=${cookieList.email}`)
+                .then(res => {
+                    var steps = [];
+                    for (var i = 0; i < res.data.response.length; i++)
+                    {
+                        steps.push({
+                            label: res.data.response[i]['step_title'],
+                            step_id: res.data.response[i]['step_id'],
+                            user_process_id: res.data.response[i]['user_process_id'],
+                            value: i
+                        });
+                    }
+                    setPostsStepEdit(steps);
+                    setStepEdit(e.label);
+                }).catch(err => {
+                    console.log(err)
+                })
+                : ''
+            )
+            
+        })
     }
 
     const submitModEvent = () => {
+        
         isModDateError.current = modDate === '';
-        isModTitleError.current = modTitle === '';
-        isModContentError.current = modContent === '';
-        var modEventContent = {
-            date: modDate,
-            title: modTitle,
-            content: modContent
-        }
-        // Back-end code to submit modEventContent variable here
-        console.log(modEventContent);
+        replaceEvent();
+        console.log(stepEdit)
+
+        postsStepEdit?.map((item: any) => {
+            return (
+                item['label'] === stepEdit ?  
+                axios.post(`${api}calendar/set`, {
+                    date: comparativeDate + ' ' + modDate + ':00',
+                    user_process_id: item['user_process_id'],
+                    step_id: item['step_id']
+                }).then(res => {
+                    window.location.reload();
+                }).catch(err => {
+                console.log(err);
+                })
+                : 
+                ''
+            )
+        })
     }
 
     {
@@ -224,22 +291,34 @@ const CalendarPage = (props: any) => {
                         </Center>
                         <Center p={'10px'}>
                         <div style={{width: '200px', fontSize: 13}}>
-                        <Select
-                        className='calendar-add-select'
-                        placeholder={'Select the Procedure'}
-                        options={posts}
-                        onChange={handleProcessSelected}
-                        /> 
-                        </div>
-                        
-
+                            <Select
+                            className='calendar-add-select'
+                            placeholder={'Select the Process'}
+                            options={posts}
+                            onChange={handleProcessSelected}
+                            /> 
+                        </div>                        
                         </Center>
-                        <Center>
-                            <Textarea 
-                                width={'200px'}
-                                placeholder='Object'
-                                onChange={handleNewContentChange}
-                            />
+                        <Center p={'10px'}>
+                        {
+                                postsStep.length != 0 ?
+                        <div style={{width: '200px', fontSize: 13}}>
+                            <Select
+                            className='calendar-add-select'
+                            placeholder={'Select the Step'}
+                            options={postsStep}
+                            onChange={handleStepSelected}
+                            /> 
+                        </div>
+                        :
+                        <div style={{width: '200px', fontSize: 13}}>
+                            <Select
+                            className='calendar-add-select'
+                            placeholder={'Select the Step'}
+                            options={undefined}
+                            /> 
+                        </div>
+                        }
                         </Center>
                     </PopoverBody>
                     <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
@@ -298,7 +377,7 @@ const CalendarPage = (props: any) => {
                     isEvent === 0 ?
                         <Button bgColor="#29C9B3" color="white" width={'160px'} isDisabled>Edit/Delete an Event</Button>
                         :
-                        <Button bgColor="#29C9B3" color="white" width={'160px'}>Edit/Delete an Event</Button>
+                        <Button onClick={handleProcessEdit} bgColor="#29C9B3" color="white" width={'160px'}>Edit/Delete an Event</Button>
                     }
                     </Center>
                     </PopoverTrigger>
@@ -316,19 +395,32 @@ const CalendarPage = (props: any) => {
                                 <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
                                     <Center p={'10px'}>
                                     <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" defaultValue={item.toString()?.split("T")[1]?.split(".")[0]} onChange={handleModDateChange}/>
+                                        <Input type="time" onChange={handleModDateChange}/>
                                     </Flex>
                                     </Center>
                                     <Center p={'10px'}>
-                                        <Input width={'200px'} defaultValue={rdv[indexEdi]} onChange={handleModTitleChange}/>
+                                    <Input width={'200px'} value={rdv[indexEdi - 1]}/>                      
                                     </Center>
-                                    <Center>
-                                    <Textarea 
-                                        width={'200px'}
-                                        placeholder='Object'
-                                        defaultValue={rdv[indexEdi + 1]}
-                                        onChange={handleModContentChange}
-                                    />
+                                    <Center p={'10px'}>
+                                    {
+                                    postsStepEdit.length != 0 ?
+                                    <div style={{width: '200px', fontSize: 13}}>
+                                        <Select
+                                        className='calendar-edit-select'
+                                        placeholder={'Select the Step'}
+                                        options={postsStepEdit}
+                                        onChange={handleProcessEdit}
+                                        /> 
+                                    </div>
+                                    :
+                                    <div style={{width: '200px', fontSize: 13}}>
+                                        <Select
+                                        className='calendar-edit-select'
+                                        placeholder={'Select the Step'}
+                                        defaultValue={"Show List"}
+                                        /> 
+                                    </div>
+                                    }
                                     </Center>
                                     <Center p={'10px'}>
                                         <Button 
