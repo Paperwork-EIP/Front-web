@@ -38,7 +38,7 @@ const ProcessResult = () => {
         }).catch(err => {
             console.log(err)
         });
-    }, [email, processSelected])
+    }, [email, processSelected, api])
 
     return (
         <>
