@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Box, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Textarea, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
