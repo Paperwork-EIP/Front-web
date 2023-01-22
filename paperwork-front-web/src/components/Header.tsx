@@ -29,21 +29,21 @@ const Header = () => {
       window.location.assign('/');
   }
 
-  const email = cookies.get('loginToken');
+  const cookiesInfo = cookies.get('loginToken');
   const api = process.env.REACT_APP_BASE_URL;
 
   const { colorMode, toggleColorMode } = useColorMode();
   const [name, setName] = useState('Username');
 
   useEffect(() => {
-      axios.get(`${api}/user/getbyemail`, { params: { email: email.email } })
+      axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
       .then(res => {
           console.log(res.data);
           setName(res.data.username);
       }).catch(err => {
           console.log(err)
       });
-  }, [api, email.email])
+  }, [api, cookiesInfo.email])
 
   return (
     <>
