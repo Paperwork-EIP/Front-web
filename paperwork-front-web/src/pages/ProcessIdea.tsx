@@ -4,11 +4,16 @@ import Header from '../components/Header';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-const cookies = new Cookies();
-
-const cookieList = cookies.get('loginToken');
-
 function ProcessIdea() {
+
+    const cookies = new Cookies();
+
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
+
+    const cookieList = cookies.get('loginToken');
+
     const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
     const { isOpen: isOpenSubmitModal, onOpen: onOpenSubmitModal, onClose: onCloseSubmitModal } = useDisclosure();
     const [title, setTitle] = useState("");
