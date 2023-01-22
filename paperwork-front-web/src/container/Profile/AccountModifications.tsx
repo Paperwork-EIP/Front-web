@@ -30,7 +30,6 @@ const AccountModifications = () => {
 
     // const [userInfos, setUserInfos] = useState<any[]>([]);
 
-
     useEffect(() => {
         axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
         .then(res => {
@@ -70,9 +69,8 @@ const AccountModifications = () => {
                         secure:true,
                         sameSite:'none'
                     });
-                    window.location.reload();
                 }
-
+                window.location.reload();
             }).catch(err => {
                 console.log(err)
                 alert("Error during the modification of the account");

@@ -18,32 +18,6 @@ import GooglePage from './pages/Google';
 import FacebookPage from './pages/Facebook';
 
 const App = () => {
-  // Variable temporaire remplacant le JSON reçu par ProcessResult (afin de tester la page)
-  const processInfo = {
-    "type": "Carte vitale",
-    "tasks": [
-      {
-        "state": true,
-        "description": "Take a appointment at the CPAM to this number : 01 84 90 36 46 (between 9 am and 6 pm)",
-      },
-      {
-        "state": true,
-        "description": "You must go to your appointement with your identity card and your residence permit (adress : 3 Pl. Adolphe Chérioux, 75015 Paris)",
-      },
-      {
-        "state": false,
-        "description": "Create an ameli account with your new social security number",
-      },
-      {
-        "state": false,
-        "description": "Go to your account process and select “carte vitale”",
-      },
-      {
-        "state": false,
-        "description": "Enter your scanned ID photo and your ID card and check your information and valide your request",
-      },
-    ],
-  }
 
   const ongoingProcess = {
     // Variable temporaire remplacant le JSON reçu par Home (afin de tester la page)

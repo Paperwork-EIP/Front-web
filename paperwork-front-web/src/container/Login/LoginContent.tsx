@@ -19,21 +19,23 @@ import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import React from "react";
 import axios from "axios";
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import { ApiCall, callbackhandle } from "../../api/ApiCall";
 import InputBase from "../../components/DS/Input";
 
-const cookies = new Cookies();
+// const cookies = new Cookies();
 
 const LoginContent = () => {
     const [emailAdress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
     const { colorMode, toggleColorMode } = useColorMode();
-    const [color, setColor] = useState(false);
+    // const [color, setColor] = useState(false);
+    const [setColor] = useState(false);
 
     const handleSubmit = async (event : any) => {
       event.preventDefault();
-      const data = callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);
+      // const data = callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);
+      callbackhandle(ApiCall.SIGNIN, (await signIn(emailAdress, password))!, setColor);
       window.location.assign("/home");
     };
 
