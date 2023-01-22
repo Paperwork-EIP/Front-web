@@ -19,7 +19,7 @@ import { signIn } from "../../api/Auth";
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import React from "react";
 import axios from "axios";
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import { ApiCall, callbackhandle } from "../../api/ApiCall";
 import InputBase from "../../components/DS/Input";
 
