@@ -13,6 +13,7 @@ const ProfilePage = () => {
     if(!cookies.get('loginToken')) {
         window.location.assign('/');
     }
+    const email = cookies.get('loginToken');
     return (
         <>
             <Header/>
@@ -24,7 +25,7 @@ const ProfilePage = () => {
                     <CalendarButton />
                 </GridItem>
                 <GridItem rowSpan={1} colSpan={7}>
-                    <ProcessBar />
+                    <ProcessBar email={email.email} />
                 </GridItem>
             </Grid>
         </>

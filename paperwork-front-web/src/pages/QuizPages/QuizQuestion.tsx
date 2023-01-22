@@ -36,7 +36,7 @@ const QuizQuestion = () => {
         }).catch(err => {
             console.log(err)
         });
-    }, [nextStep, processSelected])
+    }, [nextStep, processSelected, api])
 
     function handleClick(currentQuestionAnswer: string) {
         // console.log("process_title = " + processSelected);
