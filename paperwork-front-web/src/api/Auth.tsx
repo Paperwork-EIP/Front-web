@@ -22,11 +22,12 @@ interface SignInCallbackProps
 };
 
 export const signInCallback = (res: AxiosResponse, params: any) => {
-    const objects = params as SignInCallbackProps;
-    if (res.status == 400) {
+    // const objects = params as SignInCallbackProps;
+    params as SignInCallbackProps;
+    if (res.status === 400) {
         params.setBadPassword(true);
     }
-    if (res.status == 200) {
+    if (res.status === 200) {
         cookies.set('loginToken', { token: res.data.jwt, email: res.data.email }, {
             path:'/',
             secure:true,
