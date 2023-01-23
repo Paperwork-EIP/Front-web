@@ -53,7 +53,7 @@ const CalendarPage = (props: any) => {
             indexDel++;
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
                     }).then(res => {
                         window.location.reload();
                     }).catch(err => {
@@ -69,7 +69,7 @@ const CalendarPage = (props: any) => {
             indexRep++;
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}calendar/delete?user_process_id=${rdv[indexRep + 2]}&step_id=${rdv[indexRep + 3]}`, {
+                    axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexRep + 2]}&step_id=${rdv[indexRep + 3]}`, {
                     }).catch(err => {
                     console.log(err);
                     })
@@ -79,7 +79,7 @@ const CalendarPage = (props: any) => {
     }
 
     useEffect(() => {
-      axios.get(`${api}process/getAll`)
+      axios.get(`${api}/process/getAll`)
         .then(res => {
             var procedures = [];
             for (var i = 0; i < res.data.response.length; i++)
@@ -97,7 +97,7 @@ const CalendarPage = (props: any) => {
     })
 
     const handleProcessSelected = (e: React.SetStateAction<any>) => {
-        axios.get(`${api}userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
+        axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
         .then(res => {
             var steps = [];
             for (var i = 0; i < res.data.response.length; i++)
@@ -122,7 +122,7 @@ const CalendarPage = (props: any) => {
     }
 
     useEffect(() => {
-        axios.get(`${api}calendar/getAll?email=${cookieList.email}`)
+        axios.get(`${api}/calendar/getAll?email=${cookieList.email}`)
         .then(res => {
         var rdvTmp = [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
@@ -140,7 +140,7 @@ const CalendarPage = (props: any) => {
         postsStep?.map((item: any) => {
             return (
                 item['label'] === stepSelected ?  
-                axios.post(`${api}calendar/set`, {
+                axios.post(`${api}/calendar/set`, {
                     date: comparativeDate + ' ' + newDate + ':00',
                     user_process_id: item['user_process_id'],
                     step_id: item['step_id']
@@ -160,7 +160,7 @@ const CalendarPage = (props: any) => {
             indexMod++;
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                axios.get(`${api}userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_email=${cookieList.email}`)
+                axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_email=${cookieList.email}`)
                 .then(res => {
                     var steps = [];
                     for (var i = 0; i < res.data.response.length; i++)
@@ -192,7 +192,7 @@ const CalendarPage = (props: any) => {
         postsStepEdit?.map((item: any) => {
             return (
                 item['label'] === stepEdit ?  
-                axios.post(`${api}calendar/set`, {
+                axios.post(`${api}/calendar/set`, {
                     date: comparativeDate + ' ' + modDate + ':00',
                     user_process_id: item['user_process_id'],
                     step_id: item['step_id']

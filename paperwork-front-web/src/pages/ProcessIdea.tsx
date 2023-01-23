@@ -50,7 +50,7 @@ function ProcessIdea() {
         isDescriptionError.current = description === '';
         isContentError.current = content === '';
         onCloseSubmitModal();
-        axios.post(`${api}processProposal/add`, {
+        axios.post(`${api}/processProposal/add`, {
             title: title,
             description: description,
             content: content,
