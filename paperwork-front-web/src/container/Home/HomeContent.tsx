@@ -58,8 +58,8 @@ const Bg = (props: any) => {
   const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
   useEffect(() => {
-      axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
-      }) .then(res => {
+      axios.get(`${api}calendar/getAll?email=${cookieList.email}`)
+      .then(res => {
       var rdvTmp =  [];
       for (var i = 0; i < res.data.appoinment.length; i++) {
           rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
@@ -68,7 +68,7 @@ const Bg = (props: any) => {
       }).catch(err => {
         console.log(err);
       })
-  }, rdv)
+  })
 
   useEffect(() => {
       axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`)
@@ -85,7 +85,7 @@ const Bg = (props: any) => {
       }).catch(err => {
           console.log(err)
       });
-  }, userProcessInfo)
+  })
   
   const handleClickAsc = () => {
     setActiveAsc(!activeAsc);
@@ -231,7 +231,8 @@ const Bg = (props: any) => {
                                   <Text fontSize='2xs' px='1'> {rdv[index + 1]} </Text>
                               </Box>
                           )
-                        }
+                        } else
+                          return ('')
                     })
                   }
                   </Heading>

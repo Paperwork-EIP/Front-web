@@ -97,7 +97,7 @@ const CalendarPage = (props: any) => {
         }).catch(err => {
             console.log(err)
         });
-    }, [])
+    })
 
     const handleProcessSelected = (e: React.SetStateAction<any>) => {
         axios.get(`${api}userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
@@ -125,8 +125,8 @@ const CalendarPage = (props: any) => {
     }
 
     useEffect(() => {
-        axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
-        }) .then(res => {
+        axios.get(`${api}calendar/getAll?email=${cookieList.email}`)
+        .then(res => {
         var rdvTmp = [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
             rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
@@ -135,7 +135,7 @@ const CalendarPage = (props: any) => {
         }).catch(err => {
           console.log(err);
         })
-    }, rdv)
+    })
     
     const submitNewEvent = () => {
         isNewDateError.current = newDate === '';
@@ -210,13 +210,11 @@ const CalendarPage = (props: any) => {
         })
     }
 
-    {
-        rdv?.map((item: any) => {
-            return (
-                item.toString()?.split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
-            )
-        })
-    }
+    rdv?.map((item: any) => {
+        return (
+            item.toString()?.split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
+        )
+    })
 
     return (
         <>
