@@ -21,25 +21,12 @@ import {
   useColorMode,
   Button,
 } from "@chakra-ui/react";
-import { SVGProps, useLayoutEffect } from "react";
+import { SVGProps, } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'universal-cookie';
-
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
-
-const cookies = new Cookies();
-
-const cookieList = cookies.get('loginToken');
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -55,66 +42,51 @@ const CircleIcon = (
   </Icon>
 );
 
-
-
 const Bg = (props: any) => {
-
+  const cookies = new Cookies();
+  const cookieList = cookies.get('loginToken');
   const api = process.env.REACT_APP_BASE_URL;
   var index = -2;
-  const [processes, setProcess]= useState([[]]);
-
   const [rdv, setRDV]= useState([[]]);
-  var listPercentage: { process: any; percentage: any; }[] = [];
+  const [userProcessInfo, setUserProcessInfo]:any = useState([{}]);
+  const [activeAsc, setActiveAsc] = useState(false);
+  const [activeAlp, setActiveAlp] = useState(false);
+  const [activePriority, setActivePriority] = useState(false);
+  const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
+  const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
+  const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
+  const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
   useEffect(() => {
-      axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
-      }) .then(res => {
+      axios.get(`${api}calendar/getAll?email=${cookieList.email}`)
+      .then(res => {
       var rdvTmp =  [];
       for (var i = 0; i < res.data.appoinment.length; i++) {
           rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
       }
       setRDV(rdvTmp);
-      //console.log(res.data.response[i].process_title)
-        
       }).catch(err => {
         console.log(err);
       })
-  }, rdv)
+  })
 
   useEffect(() => {
-    axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`, {
-    }) .then(res => {
-      var processTmp =  [];
-      for (var i = 0; i < res.data.response.length; i++) {
-        processTmp.push(res.data.response[i]['process_title']);
+      axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`)
+      .then(res => {
+      var userProcessTmp = [];
+      for (var j = 0; j < res.data.response.length; j++) {
+        if (res.data.response[j]['pourcentage'] != null)
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
+        else
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
       }
-      setProcess(processTmp);
+      setUserProcessInfo(userProcessTmp);
 
-      processes?.map((item: any) => {
-        if (item.length != 0) {
-          return (
-            axios.get(`${api}userProcess/getUserSteps?process_title=${item}&user_email=${cookieList.email}`, {
-            }) .then(res => {
-              listPercentage.push({process: item, percentage: res.data.pourcentage});
-              console.log(listPercentage)
-            }).catch(err => {
-              console.log(err);
-            })
-          )
-        }
-    })
-
-    }).catch(err => {
-      console.log(err);
-    })
-    //console.log(listPercentage)
-  }, processes)
-
-  //console.log(listPercentage)
-  const [activeAsc, setActiveAsc] = useState(false);
-  const [activeAlp, setActiveAlp] = useState(false);
-  const [activePriority, setActivePriority] = useState(false);
-
+      }).catch(err => {
+          console.log(err)
+      });
+  })
+  
   const handleClickAsc = () => {
     setActiveAsc(!activeAsc);
     setActivePriority(true);
@@ -125,24 +97,6 @@ const Bg = (props: any) => {
     setActivePriority(false);
   }
 
-  
-  const ascendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.percentage - b.percentage);
-  
-  //console.log(ascendingArray);
-  
-  const descendingArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => b.percentage - a.percentage);
-  
-  //console.log(descendingArray);
-  
-  const alphabeticArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1);
-
-  //console.log(listPercentage);
-  //console.log([...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? 1 : -1));
-
-  const invertArray = [...props.ongoingProcess.ongoingProcess.list].sort((a, b) => a.process > b.process ? -1 : 1);
-
-  //console.log(invertArray);
-
   const { colorMode } = useColorMode();
   return (
     <Box
@@ -151,7 +105,6 @@ const Bg = (props: any) => {
           ? "url('/background.png')"
           : "url('/dark-background.png')"
       }
-      // filter='blur(8px)'
       zIndex="-1"
       pos="fixed"
       w="100%"
@@ -175,7 +128,6 @@ const Bg = (props: any) => {
               boxShadow={"0px 4px 20px 10px rgba(0, 0, 0, 0.12)"}
               _hover={{ bg: "rgba(253, 115, 102, 0.07)" }}
               pos="relative"
-              // onClick={() => void}
             >
               Start a process
               <ChevronRightIcon ml={35} w={55} h={55} />
@@ -255,9 +207,7 @@ const Bg = (props: any) => {
             height="400px"
           >
             {
-              rdv.length != 0 ?
-
-              
+              rdv.length !== 0 ?
               <Stack direction="column" p={2}>
                 <Stack direction="row">
                   <Heading size="lg">Calendar</Heading>
@@ -281,7 +231,8 @@ const Bg = (props: any) => {
                                   <Text fontSize='2xs' px='1'> {rdv[index + 1]} </Text>
                               </Box>
                           )
-                        }
+                        } else
+                          return ('')
                     })
                   }
                   </Heading>

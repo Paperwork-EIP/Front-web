@@ -44,7 +44,7 @@ function ProcessIdea() {
     }
     
     const api = process.env.REACT_APP_BASE_URL;
-    
+
     const submitProcessIdea = () => {
         isTitleError.current = title === '';
         isDescriptionError.current = description === '';
