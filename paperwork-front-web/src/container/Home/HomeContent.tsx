@@ -21,28 +21,12 @@ import {
   useColorMode,
   Button,
 } from "@chakra-ui/react";
-import { SVGProps, useLayoutEffect } from "react";
+import { SVGProps, } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import React, {useState, useEffect} from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import { isTemplateExpression } from "typescript";
-
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
-
-const cookies = new Cookies();
-
-const cookieList = cookies.get('loginToken');
-
-var i = 0;
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -58,15 +42,20 @@ const CircleIcon = (
   </Icon>
 );
 
-
-
 const Bg = (props: any) => {
-
+  const cookies = new Cookies();
+  const cookieList = cookies.get('loginToken');
   const api = process.env.REACT_APP_BASE_URL;
-
   var index = -2;
-
   const [rdv, setRDV]= useState([[]]);
+  const [userProcessInfo, setUserProcessInfo]:any = useState([{}]);
+  const [activeAsc, setActiveAsc] = useState(false);
+  const [activeAlp, setActiveAlp] = useState(false);
+  const [activePriority, setActivePriority] = useState(false);
+  const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
+  const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
+  const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
+  const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
   useEffect(() => {
       axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
@@ -76,39 +65,28 @@ const Bg = (props: any) => {
           rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
       }
       setRDV(rdvTmp);
-      //console.log(res.data.response[i].process_title)
-        
       }).catch(err => {
         console.log(err);
       })
   }, rdv)
 
-  const [userProcessInfo, setUserProcessInfo]: any= useState([{}]);
+  useEffect(() => {
+      axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`)
+      .then(res => {
+      var userProcessTmp = [];
+      for (var j = 0; j < res.data.response.length; j++) {
+        if (res.data.response[j]['pourcentage'] != null)
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
+        else
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
+      }
+      setUserProcessInfo(userProcessTmp);
 
-    // console.log("email");
-    // console.log(props.email);
-    
-    useEffect(() => {
-        axios.get(`${api}userProcess/getUserProcesses?user_email=${cookieList.email}`)
-        .then(res => {
-        var userProcessTmp = [];
-        for (var j = 0; j < res.data.response.length; j++) {
-          if (res.data.response[j]['pourcentage'] != null)
-            userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
-          else
-            userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
-        }
-        setUserProcessInfo(userProcessTmp);
-
-        }).catch(err => {
-            console.log(err)
-        });
-    }, userProcessInfo)
-    
-  const [activeAsc, setActiveAsc] = useState(false);
-  const [activeAlp, setActiveAlp] = useState(false);
-  const [activePriority, setActivePriority] = useState(false);
-
+      }).catch(err => {
+          console.log(err)
+      });
+  }, userProcessInfo)
+  
   const handleClickAsc = () => {
     setActiveAsc(!activeAsc);
     setActivePriority(true);
@@ -119,11 +97,6 @@ const Bg = (props: any) => {
     setActivePriority(false);
   }
 
-  const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
-  const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
-  const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
-  const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
-
   const { colorMode } = useColorMode();
   return (
     <Box
@@ -132,7 +105,6 @@ const Bg = (props: any) => {
           ? "url('/background.png')"
           : "url('/dark-background.png')"
       }
-      // filter='blur(8px)'
       zIndex="-1"
       pos="fixed"
       w="100%"
@@ -156,7 +128,6 @@ const Bg = (props: any) => {
               boxShadow={"0px 4px 20px 10px rgba(0, 0, 0, 0.12)"}
               _hover={{ bg: "rgba(253, 115, 102, 0.07)" }}
               pos="relative"
-              // onClick={() => void}
             >
               Start a process
               <ChevronRightIcon ml={35} w={55} h={55} />
@@ -236,9 +207,7 @@ const Bg = (props: any) => {
             height="400px"
           >
             {
-              rdv.length != 0 ?
-
-              
+              rdv.length !== 0 ?
               <Stack direction="column" p={2}>
                 <Stack direction="row">
                   <Heading size="lg">Calendar</Heading>

@@ -1,4 +1,4 @@
-import { Textarea, Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
+import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
 import Header from '../components/Header';
 import Select from 'react-select';
 import React, { useState, useRef, useEffect } from 'react';
@@ -14,29 +14,37 @@ const CalendarPage = (props: any) => {
         window.location.assign('/');
     }
     const cookieList = cookies.get('loginToken')
-
+    const api = process.env.REACT_APP_BASE_URL;
     const [date, setDate] = useState(new Date());
-    const [showTime, setShowTime] = useState(false);
-    const initRef = React.useRef()
     var isEvent = 0;
     var indexDai = 1;
     var indexEdi = 1;
     var indexMod = 1;
     var indexRep = 1;
     var indexDel = 1;
-
+    const [stepEdit, setStepEdit] = useState();
+    const [postsStepEdit, setPostsStepEdit] : any = useState([{}]);
     const [newDate, setNewDate] = useState("");
+    const [posts, setPosts]: any = useState([{}]);
+    const [postsStep, setPostsStep] : any = useState([{}]);
+    const [stepSelected, setStepSelected] = useState();
+    const [rdv, setRDV]= useState([[]]);
+    const [modDate, setModDate] = useState("");
+
+
 
     const isNewDateError = useRef(false);
+    const isModDateError = useRef(false);
+    const selectedMonth =  date.toDateString()?.split(" ")[1] === "Jan" ? "01" : date.toDateString()?.split(" ")[1] === "Feb" ? "012" : date.toDateString()?.split(" ")[1] === "Mar" ? "03" :
+                           date.toDateString()?.split(" ")[1] === "Apr" ? "04" : date.toDateString()?.split(" ")[1] === "May" ? "05" : date.toDateString()?.split(" ")[1] === "Jun" ? "06" :
+                           date.toDateString()?.split(" ")[1] === "Jul" ? "07" : date.toDateString()?.split(" ")[1] === "Aug" ? "08" : date.toDateString()?.split(" ")[1] === "Sep" ? "09" :
+                           date.toDateString()?.split(" ")[1] === "Oct" ? "10" : date.toDateString()?.split(" ")[1] === "Nov" ? "11" : date.toDateString()?.split(" ")[1] === "Dec" ? "12" : "Not Set";
+    const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
 
     const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setNewDate(e.target.value);
         isNewDateError.current = e.target.value === '';
     }
-
-    const [modDate, setModDate] = useState("");
-
-    const isModDateError = useRef(false);
 
     const handleModDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setModDate(e.target.value);
@@ -73,9 +81,6 @@ const CalendarPage = (props: any) => {
         })
     }
 
-    const [posts, setPosts]: any = useState([{}]);
-    const [processSelected, setProcessSelected] = useState();
-
     useEffect(() => {
       axios.get(`${api}process/getAll`)
         .then(res => {
@@ -89,14 +94,12 @@ const CalendarPage = (props: any) => {
                 });
             }
             setPosts(procedures);
-            setProcessSelected(procedures[0]['label']);
         }).catch(err => {
             console.log(err)
         });
     }, [])
 
     const handleProcessSelected = (e: React.SetStateAction<any>) => {
-        setProcessSelected(e.label);
         axios.get(`${api}userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
         .then(res => {
             var steps = [];
@@ -116,55 +119,24 @@ const CalendarPage = (props: any) => {
         });
         setStepSelected(e.label);
     }
-
-    const [postsStep, setPostsStep] : any = useState([{}]);
-    const [stepSelected, setStepSelected] = useState();
-
+    
     const handleStepSelected = (e: React.SetStateAction<any>) => {
         setStepSelected(e.label);
     }
 
-    const [time, setTime] = useState("");
-    const isTimeError = useRef(false);
-
-    const api = process.env.REACT_APP_BASE_URL;
-
-    const [rdv, setRDV]= useState([[]]);
-
     useEffect(() => {
         axios.get(`${api}calendar/getAll?email=${cookieList.email}`, {
         }) .then(res => {
-        var rdvTmp =  [];
+        var rdvTmp = [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
             rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
         }
         setRDV(rdvTmp);
-        //console.log(res.data.response[i].process_title)
-          
         }).catch(err => {
           console.log(err);
         })
     }, rdv)
-
-    const handleTimeChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setTime(e.target.value);
-        isTimeError.current = e.target.value === '';
-    }
-
-    const [object, setObject] = useState("");
-    const isObjectError = useRef(false);
     
-    const selectedMonth =  date.toDateString()?.split(" ")[1] == "Jan" ? "01" : date.toDateString()?.split(" ")[1] == "Feb" ? "012" : date.toDateString()?.split(" ")[1] == "Mar" ? "03" :
-                           date.toDateString()?.split(" ")[1] == "Apr" ? "04" : date.toDateString()?.split(" ")[1] == "May" ? "05" : date.toDateString()?.split(" ")[1] == "Jun" ? "06" :
-                           date.toDateString()?.split(" ")[1] == "Jul" ? "07" : date.toDateString()?.split(" ")[1] == "Aug" ? "08" : date.toDateString()?.split(" ")[1] == "Sep" ? "09" :
-                           date.toDateString()?.split(" ")[1] == "Oct" ? "10" : date.toDateString()?.split(" ")[1] == "Nov" ? "11" : date.toDateString()?.split(" ")[1] == "Dec" ? "12" : "Not Set";
-    const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
-
-    const handleObjectChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setObject(e.target.value);
-        isObjectError.current = e.target.value === '';
-    }
-
     const submitNewEvent = () => {
         isNewDateError.current = newDate === '';
 
@@ -185,11 +157,6 @@ const CalendarPage = (props: any) => {
             )
         })
     }
-
-
-    const [stepEdit, setStepEdit] = useState();
-    const [postsStepEdit, setPostsStepEdit] : any = useState([{}]);
-    
 
     const handleProcessEdit = (e: React.SetStateAction<any>) => {
         rdv?.map((item: any) => {
@@ -251,9 +218,6 @@ const CalendarPage = (props: any) => {
         })
     }
 
-    if(!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
     return (
         <>
             <Header/>
@@ -264,7 +228,7 @@ const CalendarPage = (props: any) => {
                     </Center>
                 </Box>
                     <Center>
-                    <Calendar locale="en-GB" onChange={setDate} value={date} onClickDay={() => setShowTime(true)}/>
+                    <Calendar locale="en-GB" onChange={setDate} value={date}/>
                     </Center>
             </Box>
             <Center m={2}>
@@ -301,7 +265,7 @@ const CalendarPage = (props: any) => {
                         </Center>
                         <Center p={'10px'}>
                         {
-                                postsStep.length != 0 ?
+                                postsStep.length !== 0 ?
                         <div style={{width: '200px', fontSize: 13}}>
                             <Select
                             className='calendar-add-select'
@@ -403,7 +367,7 @@ const CalendarPage = (props: any) => {
                                     </Center>
                                     <Center p={'10px'}>
                                     {
-                                    postsStepEdit.length != 0 ?
+                                    postsStepEdit.length !== 0 ?
                                     <div style={{width: '200px', fontSize: 13}}>
                                         <Select
                                         className='calendar-edit-select'
