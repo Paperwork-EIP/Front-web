@@ -19,26 +19,21 @@ import {
   OmitCommonProps,
   Flex,
   useColorMode,
+  Button,
 } from "@chakra-ui/react";
-import { SVGProps } from "react";
+import { SVGProps, } from "react";
 import Card from "../../components/Card";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-import React from "react";
-
-interface TestimonialCardProps {
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
-  index: number;
-}
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import Cookies from 'universal-cookie';
 
 const CircleIcon = (
-  props: JSX.IntrinsicAttributes &
+  prop: JSX.IntrinsicAttributes &
     OmitCommonProps<SVGProps<SVGSVGElement>, keyof IconProps> &
     IconProps & { as?: "svg" | undefined }
 ) => (
-  <Icon viewBox="0 0 100 100" {...props}>
+  <Icon viewBox="0 0 100 100" {...prop}>
     <path
       margin-top="2px"
       fill="currentColor"
@@ -47,9 +42,62 @@ const CircleIcon = (
   </Icon>
 );
 
-const Bg = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+const Bg = (props: any) => {
+  const cookies = new Cookies();
+  const cookieList = cookies.get('loginToken');
+  const api = process.env.REACT_APP_BASE_URL;
+  var index = -2;
+  const [rdv, setRDV]= useState([[]]);
+  const [userProcessInfo, setUserProcessInfo]:any = useState([{}]);
+  const [activeAsc, setActiveAsc] = useState(false);
+  const [activeAlp, setActiveAlp] = useState(false);
+  const [activePriority, setActivePriority] = useState(false);
+  const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
+  const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
+  const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
+  const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
+  useEffect(() => {
+      axios.get(`${api}/calendar/getAll?email=${cookieList.email}`)
+      .then(res => {
+      var rdvTmp =  [];
+      for (var i = 0; i < res.data.appoinment.length; i++) {
+          rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
+      }
+      setRDV(rdvTmp);
+      }).catch(err => {
+        console.log(err);
+      })
+  })
+
+  useEffect(() => {
+      axios.get(`${api}/userProcess/getUserProcesses?user_email=${cookieList.email}`)
+      .then(res => {
+      var userProcessTmp = [];
+      for (var j = 0; j < res.data.response.length; j++) {
+        if (res.data.response[j]['pourcentage'] != null)
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
+        else
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
+      }
+      setUserProcessInfo(userProcessTmp);
+
+      }).catch(err => {
+          console.log(err)
+      });
+  })
+  
+  const handleClickAsc = () => {
+    setActiveAsc(!activeAsc);
+    setActivePriority(true);
+  }
+
+  const handleClickAlp = () => {
+    setActiveAlp(!activeAlp);
+    setActivePriority(false);
+  }
+
+  const { colorMode } = useColorMode();
   return (
     <Box
       bgImage={
@@ -57,7 +105,6 @@ const Bg = () => {
           ? "url('/background.png')"
           : "url('/dark-background.png')"
       }
-      // filter='blur(8px)'
       zIndex="-1"
       pos="fixed"
       w="100%"
@@ -81,7 +128,6 @@ const Bg = () => {
               boxShadow={"0px 4px 20px 10px rgba(0, 0, 0, 0.12)"}
               _hover={{ bg: "rgba(253, 115, 102, 0.07)" }}
               pos="relative"
-              // onClick={() => void}
             >
               Start a process
               <ChevronRightIcon ml={35} w={55} h={55} />
@@ -93,50 +139,66 @@ const Bg = () => {
               w={"900px"}
               height="345px"
             >
-              <TableContainer>
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th><b>Ongoing process</b></Th>
-                      <Th isNumeric>Descending</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    <Tr>
-                      <Td>Vital card</Td>
-                      <Td isNumeric>25</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Driver’s license</Td>
-                      <Td isNumeric>30</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Job center</Td>
-                      <Td isNumeric>91</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Residence permit</Td>
-                      <Td isNumeric>55</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Vital card</Td>
-                      <Td isNumeric>25</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Driver’s license</Td>
-                      <Td isNumeric>30</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Job center</Td>
-                      <Td isNumeric>91</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>Residence permit</Td>
-                      <Td isNumeric>55</Td>
-                    </Tr>
-                  </Tbody>
-                </Table>
-              </TableContainer>
+                <TableContainer>
+                  <Table variant="simple">
+                    <Thead>
+                      <Tr>
+                        <Th>
+                        <Button onClick={handleClickAlp}>
+                        { activeAlp ? "Z...A" : "A...Z"}
+                        </Button>
+                        </Th>
+                        <Th isNumeric>
+                        <Button onClick={handleClickAsc}>
+                        { activeAsc ? "Ascending" : "Descending"}
+                        </Button>
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                    {
+                      activePriority === true ?
+                      activeAsc ?
+                      ascendingArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemAscProcess}">{item.process}</Td>
+                              <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      descendingArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemDscProcess}">{item.process}</Td>
+                              <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      activeAlp ?
+                      alphabeticArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemAlpProcess}">{item.process}</Td>
+                              <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                        })
+                      :
+                      invertArray?.map((item: any) => {
+                          return (
+                            <Tr>
+                              <Td key="{itemInvProcess}">{item.process}</Td>
+                              <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
+                            </Tr>
+                          );
+                      })
+                    }
+                    </Tbody>
+                  </Table>
+                </TableContainer>
             </Card>
           </Flex>
           <Card
@@ -144,22 +206,58 @@ const Bg = () => {
             color={useColorModeValue("white", "gray.800")}
             height="400px"
           >
-            <Stack direction="column" p={2}>
-              <Stack direction="row">
-                <Heading size="lg">Calendar</Heading>
-                <Spacer />
-                <CircleIcon color="pink.400" mt="15" />
-                <Text fontSize="md">Applied</Text>
-                <CircleIcon color="green" />
-                <Text fontSize="md">Left</Text>
-              </Stack>
-              <Divider />
-              <Center>
-                <Heading as="h2" size="2xl" colorScheme="grey" mt={100}>
-                  Nothing to show
-                </Heading>
-              </Center>
-            </Stack>
+            {
+              rdv.length !== 0 ?
+              <Stack direction="column" p={2}>
+                <Stack direction="row">
+                  <Heading size="lg">Calendar</Heading>
+                  <Spacer />
+                  <CircleIcon color="pink.400" mt="15" />
+                  <Text fontSize="md">Applied</Text>
+                  <CircleIcon color="green" />
+                  <Text fontSize="md">Left</Text>
+                </Stack>
+                <Divider />
+                <Center>
+                  <Heading as="h2" size="2xl" colorScheme="grey" >
+                  {
+                    rdv?.map((item: any) => {
+                        index += 3;
+                        if (index <= rdv.length) {
+                          return (
+                              <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
+                                <Text fontSize='xs' mt='1' px='1'> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </Text>
+                                  <Text fontSize='small' mt='2' px='1'> {rdv[index]} </Text>
+                                  <Text fontSize='2xs' px='1'> {rdv[index + 1]} </Text>
+                              </Box>
+                          )
+                        } else
+                          return ('')
+                    })
+                  }
+                  </Heading>
+                </Center>
+                </Stack>
+
+              :
+
+              <Stack direction="column" p={2}>
+                <Stack direction="row">
+                  <Heading size="lg">Calendar</Heading>
+                  <Spacer />
+                  <CircleIcon color="pink.400" mt="15" />
+                  <Text fontSize="md">Applied</Text>
+                  <CircleIcon color="green" />
+                  <Text fontSize="md">Left</Text>
+                </Stack>
+                <Divider />
+                <Center>
+                  <Heading as="h2" size="2xl" colorScheme="grey" mt={100}>
+                    Nothing to show
+                  </Heading>
+                </Center>
+                </Stack>
+            }
           </Card>
         </Stack>
       </Box>

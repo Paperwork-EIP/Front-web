@@ -24,21 +24,20 @@ const ProcessResult = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-    // console.log(email);
-    const email = cookies.get('loginToken');
+    const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
     // console.log(processSelected);
     
     useEffect(() => {
-        axios.get(`${api}/userProcess/getUserSteps?process_title=${processSelected}&user_email=${email.email}`)
+        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_email: cookiesInfo.email } })
         .then(res => {
             console.log(res.data.response);
             setStepsAnswer(res.data.response);
         }).catch(err => {
             console.log(err)
         });
-    }, [email, processSelected])
+    }, [cookiesInfo.email, processSelected, api])
 
     return (
         <>
