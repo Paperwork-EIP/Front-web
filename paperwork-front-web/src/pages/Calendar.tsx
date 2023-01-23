@@ -30,12 +30,9 @@ const CalendarPage = (props: any) => {
     const [stepSelected, setStepSelected] = useState();
     const [rdv, setRDV]= useState([[]]);
     const [modDate, setModDate] = useState("");
-
-
-
     const isNewDateError = useRef(false);
     const isModDateError = useRef(false);
-    const selectedMonth =  date.toDateString()?.split(" ")[1] === "Jan" ? "01" : date.toDateString()?.split(" ")[1] === "Feb" ? "012" : date.toDateString()?.split(" ")[1] === "Mar" ? "03" :
+    const selectedMonth =  date.toDateString()?.split(" ")[1] === "Jan" ? "01" : date.toDateString()?.split(" ")[1] === "Feb" ? "02" : date.toDateString()?.split(" ")[1] === "Mar" ? "03" :
                            date.toDateString()?.split(" ")[1] === "Apr" ? "04" : date.toDateString()?.split(" ")[1] === "May" ? "05" : date.toDateString()?.split(" ")[1] === "Jun" ? "06" :
                            date.toDateString()?.split(" ")[1] === "Jul" ? "07" : date.toDateString()?.split(" ")[1] === "Aug" ? "08" : date.toDateString()?.split(" ")[1] === "Sep" ? "09" :
                            date.toDateString()?.split(" ")[1] === "Oct" ? "10" : date.toDateString()?.split(" ")[1] === "Nov" ? "11" : date.toDateString()?.split(" ")[1] === "Dec" ? "12" : "Not Set";
