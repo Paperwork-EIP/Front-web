@@ -31,6 +31,18 @@ header {
             padding: 10px 1px;
             transition: 300ms;
         }
+        
+        .Navbar-link, .Navbar-link-active {
+            color: #f5f5f5;
+        }
+
+        .Navbar-link:hover {
+            border-color: #00B3FF;
+        }
+
+        .Navbar-link-active:hover {
+            border-color: crimson;
+        }
     }
 
     .Navbar-title {
@@ -42,20 +54,6 @@ header {
         .Navbar-logo {
             height: 100%;
             width: auto;
-        }
-    }
-
-    .Navbar-nav {
-        .Navbar-link, .Navbar-link-active {
-            color: #f5f5f5;
-        }
-
-        .Navbar-link:hover {
-            border-color: #00B3FF;
-        }
-
-        .Navbar-link-active:hover {
-            border-color: crimson;
         }
     }
 }
