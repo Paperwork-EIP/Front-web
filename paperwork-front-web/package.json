@@ -32,21 +32,15 @@
     "build": "react-scripts build",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "test:coverage": "jest --coverage=true",
+    "test:coverage": "jest --silent --coverage=true",
     "test:all": "jest --watchAll --coverage=true",
     "eject": "react-scripts eject",
-    "prepare": "cd .. && npx husky install paperwork-front-web/.husky",
-    "lint-staged": "lint-staged"
+    "prepare": "cd .. && npx husky install paperwork-front-web/.husky"
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint-staged"
     }
-  },
-  "lint-staged": {
-    "*.{js, ts, tsx}": [
-      "eslint --cache --quiet --fix"
-    ]
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -55,11 +49,14 @@
       "\\.pnp\\.[^\\/]+$"
     ],
     "coveragePathIgnorePatterns": [
-      "src/components/index.ts"
+      "src/components/index.tsx"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test/setupTests.ts"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
+      "\\.(css|less|scss)$": "identity-obj-proxy"
     }
   },
   "eslintConfig": {
@@ -84,9 +81,8 @@
     "@testing-library/user-event": "^14.2.0",
     "@types/jest": "^27.0.2",
     "@types/react-calendar": "^3.5.2",
-    "eslint": "^8.20.0",
     "husky": "^8.0.1",
-    "jest": "^27.3.1",
-    "lint-staged": "^9.5.0"
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^27.3.1"
   }
 }

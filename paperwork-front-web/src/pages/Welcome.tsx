@@ -16,7 +16,7 @@ function WelcomePage() {
                         A tool to help you for the most annoying task.
                     </p>
                     <Link to="/login">
-                        <button className="Header-description-button">
+                        <button className="Header-description-button" data-testid="Header-description-button">
                             Get Started
                         </button>
                     </Link>
@@ -80,22 +80,26 @@ function WelcomePage() {
             <div className='Footer-container'>
                 <div className='Footer-body'>
                     <div className='Footer-content'>
-                        <div className='Footer-title'>
+                        <div className='Footer-title' data-testid="Footer-title">
                             <img src="logo.png" alt="logo-paperwork" />
                             <h1>
                                 Paperwork
                             </h1>
                         </div>
-                        <div className='Footer-infos'>
+                        <div className='Footer-infos' data-testid="Footer-infos">
                             <div className='Footer-info'>
-                                <a href='/about'>
-                                    About Us
-                                </a>
+                                <Link to='/about'>
+                                    <button data-testid="Footer-about-link">
+                                        About Us
+                                    </button>
+                                </Link>
                             </div>
                             <div className='Footer-info'>
-                                <a href='/contact'>
-                                    Contact Us
-                                </a>
+                                <Link to='/contact'>
+                                    <button data-testid="Footer-contact-link">
+                                        Contact Us
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
