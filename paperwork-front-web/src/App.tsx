@@ -8,6 +8,7 @@ import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import ProfilePage from './pages/Profile';
+import SettingsPage from './pages/Settings';
 import RegisterPage from './pages/Register';
 import ProcessResult from './pages/ProcessResult';
 import ProcessIdea from './pages/ProcessIdea';
@@ -84,6 +85,7 @@ const App = () => {
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage ongoingProcess={ongoingProcess} />}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
+            <Route path= "/settings" element={<SettingsPage/>}/>
             <Route path= "/calendar" element={<CalendarPage events={events}/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path="/quiz/:processSelected/:step" element={<QuizQuestion/>}/>

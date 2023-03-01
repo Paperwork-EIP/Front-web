@@ -1,0 +1,246 @@
+.Profile {
+    // Body color
+    --background-color: none;
+
+    background-color: var(--background-color);
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    .modify-profile-btn {
+        width: 175px;
+        height: 40px;
+        border-radius: 8px;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.2rem;
+        margin-left: 3%;
+
+        .modify-profile-icon {
+            padding-right: 0.5rem;
+        }
+    }
+    
+    .modify-profile-btn:hover {
+        text-decoration: underline;
+    }
+
+    .informations-container {
+        display: flex;
+        flex-wrap: wrap;
+
+        .section-container {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
+            box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+            border: 0.1rem solid white;
+            margin: 3%;
+            padding: 3%;
+        }
+
+        .main-container {
+            @extend .section-container;
+            width: 30%;
+            height: auto;
+            justify-content: center;
+            align-items: center;
+
+            .text-style-main-container {
+                margin-top: 2rem;
+                font-size: 1.2em;
+                letter-spacing: 0.06em;
+                color: #9b9b9b;
+            }
+
+            .Avatar {
+                vertical-align: middle;
+                width: 40%;
+                height: auto;
+                border-radius: 50%;
+                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
+                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+                border: 0.1rem solid white;
+                margin: 2%;
+            }
+
+            .section-username {
+                @extend .text-style-main-container;
+            }
+
+            .section-fullname {
+                @extend .text-style-main-container;
+                display: flex;
+                flex-direction: row;
+
+                .fn-name {
+                    text-transform: uppercase;
+                }
+
+                .fn-firstname {
+                    text-transform: capitalize;
+                    padding-left: 0.5rem;
+                }
+            }
+
+            .section-flag {
+                @extend .text-style-main-container;
+                display: flex;
+                flex-direction: row;
+
+                .flag-lang {
+                    text-transform: capitalize;
+                    padding-left: 0.5rem;
+                }
+            }
+        }
+        
+        .secondary-container {
+            @extend .section-container;
+            width: 58%;
+            justify-content: start;
+            align-items: start;
+
+            .heading {
+                margin-top: 2rem;
+                font-family: 'Roboto Slab', serif;
+                font-size: 1.5em;
+                letter-spacing: 0.08em;
+                color: #FC6976;
+                text-transform: uppercase;
+            }
+
+            .text-style-secondary-container {
+                margin-top: 2rem;
+                font-size: 1.2em;
+                letter-spacing: 0.06em;
+                padding-left: 1rem;
+            }
+
+            .section-email {
+                @extend .text-style-secondary-container;
+                display: flex;
+                flex-direction: row;
+
+                .email-text {
+                    text-transform: lowercase;
+                    padding-left: 0.5rem;
+                }
+            }
+
+            .section-location {
+                @extend .text-style-secondary-container;
+                display: flex;
+                flex-direction: row;
+
+                .location-text {
+                    text-transform: capitalize;
+                    padding-left: 0.5rem;
+                }
+            }
+
+            .section-age {
+                @extend .text-style-secondary-container;
+            }
+
+            .section-phonenumber {
+                @extend .text-style-secondary-container;
+                display: flex;
+                flex-direction: row;
+
+                .phonenumber-text {
+                    padding-left: 0.5rem;
+                }
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                width: 100%;
+            }
+            .secondary-container {
+                width: 100%;
+            }
+        }
+    }
+
+    .process-container {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        border-radius: 8px;
+        -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
+        box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+        border: 0.1rem solid white;
+        margin: 3%;
+        padding-left: 3%;
+
+        .heading {
+            margin-top: 2rem;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .process-progress {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 2%;
+
+            .progress-name {
+                width: 15%;
+            }
+
+            .progress-bar {
+                width: 85%;
+                height: 1.5rem;
+                position: relative;
+                border-radius: 14px;
+                margin-left: 1rem;
+
+                .progress-bar-bg {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgb(237, 240, 255);
+                    border-radius: 14px;
+                }
+
+                .progress-bar-front {
+                    position: absolute;
+                    width: 5%;
+                    height: 100%;
+                    background-color: #FC6976;
+                    border-radius: 14px;
+                }
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-progress {
+                display: flex;
+                flex-direction: column;
+                .progress-name {
+                    width: 100%;
+                }
+                .progress-bar {
+                    margin-left: 0;
+                    margin-top: 0.5rem;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

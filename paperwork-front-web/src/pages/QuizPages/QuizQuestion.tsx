@@ -89,6 +89,7 @@ const QuizQuestion = () => {
     return (
         <>
             <Header/>
+
             <Box p={15} m={50}>
                 <Box pb={2}>
                     <Center>
