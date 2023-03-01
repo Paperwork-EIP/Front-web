@@ -7,7 +7,7 @@ import "../styles/Calendar.css";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
-const CalendarPage = (props: any) => {
+const CalendarPage = () => {
 
     const cookies = new Cookies();
     if (!cookies.get('loginToken')) {
@@ -314,9 +314,9 @@ const CalendarPage = (props: any) => {
                                     return (
                                         item.toString()?.split("T")[0] === comparativeDate ?
                                         <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                            <Text fontSize='xs' mt='1' px='1'> {item.toString()?.split("T")[1]?.split(".")[0]} </Text>
-                                            <Text fontSize='small' mt='2' px='1'> {rdv[indexDai]} </Text>
-                                            <Text fontSize='2xs' px='1'> {rdv[indexDai + 1]} </Text>
+                                            <Text color="black" fontSize='xs' mt='1' px='1'> {item.toString()?.split("T")[1]?.split(".")[0]} </Text>
+                                            <Text color="black" fontSize='small' mt='2' px='1'> {rdv[indexDai]} </Text>
+                                            <Text color="black" fontSize='2xs' px='1'> {rdv[indexDai + 1]} </Text>
                                         </Box>
                                         : ''
                                     )

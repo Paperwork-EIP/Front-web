@@ -42,7 +42,7 @@ const CircleIcon = (
   </Icon>
 );
 
-const Bg = (props: any) => {
+const Bg = () => {
   const cookies = new Cookies();
   const cookieList = cookies.get('loginToken');
   const api = process.env.REACT_APP_BASE_URL;
