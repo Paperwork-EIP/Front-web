@@ -1,10 +1,10 @@
 .Welcome {
     // Header color
-    --header-gradient-color-1: #E0FDF7;
-    --header-gradient-color-2: #29C9B3;
+    --header-gradient-color-1: #e0fdf7;
+    --header-gradient-color-2: #29c9b3;
     --header-gradient-color-3: crimson;
     --header-gradient-color-4: #a5a5a5;
-    --header-gradient-color-5: #29C9B3;
+    --header-gradient-color-5: #29c9b3;
     --header-gradient-color-6: purple;
     --header-gradient-color-7: #23d5ab;
     --header-font-color: whitesmoke;
@@ -12,16 +12,22 @@
     // Body color
     --background-color: #f5f5f5;
     --separator-color: #90909068;
+    --download-button-color: #909090;
+    --download-button-hover-color: #d3d3d3;
 
     // Footer color
     --footer-background-color: #151515;
     --footer-font-color: white;
 
     background-color: var(--background-color);
-    width: 100vw;
 
     .Header-container {
-        background: linear-gradient(-30deg, var(--header-gradient-color-1), var(--header-gradient-color-2), var(--header-gradient-color-3), var(--header-gradient-color-4), var(--header-gradient-color-5));
+        background: linear-gradient(-30deg,
+                var(--header-gradient-color-1),
+                var(--header-gradient-color-2),
+                var(--header-gradient-color-3),
+                var(--header-gradient-color-4),
+                var(--header-gradient-color-5));
         background-size: 500% 130%;
         animation: gradientBackground 40s ease-in-out infinite;
         color: var(--header-font-color);
@@ -54,7 +60,10 @@
             }
 
             .Header-description-button {
-                background: linear-gradient(70deg, var(--header-gradient-color-6), var(--header-gradient-color-7), var(--header-gradient-color-6));
+                background: linear-gradient(70deg,
+                        var(--header-gradient-color-6),
+                        var(--header-gradient-color-7),
+                        var(--header-gradient-color-6));
                 background-size: 300%;
                 width: 200px;
                 height: 80px;
@@ -91,7 +100,7 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
                 letter-spacing: 1px;
                 padding: 10px 15px;
             }
@@ -104,7 +113,7 @@
                 font-weight: bold;
                 color: #000;
                 text-align: center;
-                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
                 letter-spacing: 1px;
                 padding: 10px 20px;
             }
@@ -169,6 +178,42 @@
                     margin: 0;
                     margin-right: 2em;
                     margin-top: 1em;
+                }
+            }
+        }
+
+        .Welcome-download {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .Welcome-download-title {
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+                font-size: larger;
+                padding: 0.5em 0;
+            }
+
+            .Welcome-download-links {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                width: 70%;
+
+                .Welcome-download-link {
+                    font-size: large;
+                    margin-top: 1.5em;
+                    padding: 0.5em;
+                    border: 1px solid var(--download-button-color);
+                    border-radius: 5px;
+                    transition: all 350ms ease;
+                }
+
+                .Welcome-download-link:hover {
+                    border: 1px solid var(--download-button-hover-color);
+                    background-color: var(--download-button-hover-color);
                 }
             }
         }
@@ -238,7 +283,7 @@
                         }
 
                         a::before {
-                            content: '';
+                            content: "";
                             display: block;
                             position: absolute;
                             width: 100%;
@@ -250,7 +295,7 @@
                         }
 
                         a::after {
-                            content: '';
+                            content: "";
                             display: block;
                             position: absolute;
                             width: 100%;
@@ -339,6 +384,8 @@
     }
 
     .Welcome-container {
+        width: 100% !important;
+
         .Welcome-sections {
             padding: 1em !important;
 
@@ -368,6 +415,17 @@
                         text-align: justify !important;
                     }
                 }
+            }
+        }
+
+        .Welcome-download {
+            .Welcome-download-title {
+                font-size: medium !important;
+                padding: 0.5em !important;
+            }
+
+            .Welcome-download-link {
+                margin-top: 1em;
             }
         }
     }

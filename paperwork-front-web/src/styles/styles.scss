@@ -4,10 +4,6 @@
     scrollbar-color: transparent;
 }
 
-body {
-    overflow: overlay;
-}
-
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -16,7 +12,7 @@ body {
 
 ::-webkit-scrollbar-track {
     height: 6px;
-    background-color: transparent;
+    background-color: rgb(30, 30, 30);
 }
 
 ::-webkit-scrollbar-thumb {
