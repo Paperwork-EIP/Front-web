@@ -9,6 +9,7 @@ import Cookies from 'universal-cookie';
 
 // Pages Import
 import Header from '../components/Header';
+import "../styles/pages/ProcessResult.scss";
 
 // Icons Import
 import { AiFillCheckSquare } from "react-icons/ai";
@@ -42,6 +43,10 @@ const ProcessResult = () => {
     return (
         <>
             <Header/>
+            
+            <div className='ProcessResult'>
+                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={25}/>Start a new process</a>
+            </div>
             <Box p={5} m={50} color='black'>
                 <Box pb={2}>
                     <Button

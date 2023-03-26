@@ -57,6 +57,7 @@ const ProfilePage = () => {
     return (
         <>
             <Header/>
+
             <div className='Profile'>
                 <a href='/settings' className='modify-profile-btn'><FaCog className='modify-profile-icon' size={25}/>Modify Profile</a>
                 <div className='informations-container'>
