@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd ./paperwork-front-web && npm run lint-staged && npm run test
+cd ./paperwork-front-web npm run test:coverage

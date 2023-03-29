@@ -1,0 +1,25 @@
+// Change scrollbar colors
+* {
+    scrollbar-width: thin;
+    scrollbar-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-track {
+    height: 6px;
+    background-color: rgb(30, 30, 30);
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(106, 106, 106);
+}

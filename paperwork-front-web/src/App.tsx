@@ -17,6 +17,9 @@ import QuizPage from './pages/QuizPages/Quiz';
 import QuizQuestion from './pages/QuizPages/QuizQuestion';
 import GooglePage from './pages/Google';
 import FacebookPage from './pages/Facebook';
+import WelcomePage from './pages/Welcome';
+
+import "./styles/styles.scss";
 
 const App = () => {
 
@@ -81,7 +84,8 @@ const App = () => {
       <ChakraProvider>
         <ColorModeScript initialColorMode="light"/>
           <Routes>
-            <Route path="/" element={<LoginPage/>}/>
+            <Route path="/" element={<WelcomePage/>}/>
+            <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage ongoingProcess={ongoingProcess} />}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
