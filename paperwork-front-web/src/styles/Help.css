@@ -35,13 +35,12 @@
   }
 
   .faq-image-contact-us {
-    width: 700px;
+    width: 300px;
     max-width: 100%;
     height: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 12%;
   }
 
   .faq-image-contact-us:hover {opacity: 0.6}

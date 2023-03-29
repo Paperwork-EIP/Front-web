@@ -1,23 +1,15 @@
 import {
-  Center,
   TableContainer,
   Table,
   Thead,
   Tr,
   Th,
-  Box,
   Tbody,
   Td,
-  Stack,
-  Divider,
-  Spacer,
-  Text,
   Icon,
-  Heading,
   useColorModeValue,
   IconProps,
   OmitCommonProps,
-  Flex,
   useColorMode,
   Button,
 } from "@chakra-ui/react";
@@ -27,6 +19,8 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import "../../styles/HomeContent.css";
+import { Link } from "react-router-dom";
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -35,7 +29,7 @@ const CircleIcon = (
 ) => (
   <Icon viewBox="0 0 100 100" {...prop}>
     <path
-      margin-top="2px"
+      margin-left="2px"
       fill="currentColor"
       d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
     />
@@ -98,170 +92,134 @@ const Bg = () => {
   }
 
   const { colorMode } = useColorMode();
+  const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
+  const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
+
   return (
-    <Box
-      bgImage={
-        colorMode === "light"
-          ? "url('/background.png')"
-          : "url('/dark-background.png')"
+    <>
+
+    {colorMode === "light" ?
+    <div className="home-content-main-box-light">
+    </div>
+    :
+    <div className="home-content-main-box-dark">
+    </div>
+    }
+    
+    <div className="home-content-box-percentages" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+    <TableContainer>
+      <Table variant="simple">
+        <Thead>
+          <Tr>
+            <Th>
+            <Button onClick={handleClickAlp}>
+            { activeAlp ? "Z...A" : "A...Z"}
+            </Button>
+            </Th>
+            <Th isNumeric>
+            <Button onClick={handleClickAsc}>
+            { activeAsc ? "Ascending" : "Descending"}
+            </Button>
+            </Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+        {
+          activePriority === true ?
+          activeAsc ?
+          ascendingArray?.map((item: any) => {
+              return (
+                <Tr>
+                  <Td key="{itemAscProcess}">{item.process}</Td>
+                  <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
+                </Tr>
+              );
+            })
+          :
+          descendingArray?.map((item: any) => {
+              return (
+                <Tr>
+                  <Td key="{itemDscProcess}">{item.process}</Td>
+                  <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
+                </Tr>
+              );
+            })
+          :
+          activeAlp ?
+          alphabeticArray?.map((item: any) => {
+              return (
+                <Tr>
+                  <Td key="{itemAlpProcess}">{item.process}</Td>
+                  <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
+                </Tr>
+              );
+            })
+          :
+          invertArray?.map((item: any) => {
+              return (
+                <Tr>
+                  <Td key="{itemInvProcess}">{item.process}</Td>
+                  <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
+                </Tr>
+              );
+          })
+        }
+        </Tbody>
+      </Table>
+    </TableContainer>
+    
+    
+    <Link to="/quiz">
+      <button className='home-content-start-process-button' aria-label="submit_button">
+        New Process
+      </button>
+    </Link>
+    </div>
+
+
+
+    <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+    {
+      rdv.length !== 0 ?
+      <>
+      
+      <div className="home-content-box-calendar-icons-box">
+        <div className="home-content-calendar-text"> Calendar </div>
+        <CircleIcon className="home-content-box-calendar-icon" color="pink.400" mt={'3px'}/>
+        <div className="home-content-calendar-icon-text"> Applied </div>
+        <CircleIcon className="home-content-box-calendar-icon" color="green" mt={'23px'}/>
+        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> Left </div>
+      </div>
+      
+      <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
+      <div className="home-content-box-calendar-in">
+      {
+        rdv?.map((item: any) => {
+            index += 3;
+            if (index <= rdv.length) {
+              return (
+                //<Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'></Box>
+                <div className="home-content-box-rendez-vous" style={{backgroundColor: adaptedColor}}>
+                  <div className="home-content-rendez-vous-date-text" style={{color: adaptedTextColor}}> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </div>
+                  <div className="home-content-rendez-vous-process-name-text" style={{color: adaptedTextColor}}> {rdv[index]} </div>
+                  <div className="home-content-rendez-vous-process-description-text" style={{color: adaptedTextColor}}> {rdv[index + 1]} </div>
+                </div>
+                //</Box>
+              )
+            } else
+              return ('')
+        })
       }
-      zIndex="-1"
-      pos="fixed"
-      w="100%"
-      h="100%"
-      backgroundSize={"cover"}
-      bgPosition="center"
-    >
-      <Box zIndex="2" pos="relative">
-        <Stack spacing={16} mx={40} mt={20}>
-          <Flex alignItems="center" justify="space-around">
-            <Box
-              bgColor={useColorModeValue("white", "gray.800")}
-              as="button"
-              height="206px"
-              w="xl"
-              zIndex="2"
-              lineHeight="1.2"
-              borderRadius="8px"
-              fontSize="30px"
-              fontWeight="semibold"
-              boxShadow={"0px 4px 20px 10px rgba(0, 0, 0, 0.12)"}
-              _hover={{ bg: "rgba(253, 115, 102, 0.07)" }}
-              pos="relative"
-            >
-              Start a process
-              <ChevronRightIcon ml={35} w={55} h={55} />
-            </Box>
-            <Spacer />
-            <Card
-              maxW="700px"
-              color={useColorModeValue("white", "gray.800")}
-              w={"900px"}
-              height="345px"
-            >
-                <TableContainer>
-                  <Table variant="simple">
-                    <Thead>
-                      <Tr>
-                        <Th>
-                        <Button onClick={handleClickAlp}>
-                        { activeAlp ? "Z...A" : "A...Z"}
-                        </Button>
-                        </Th>
-                        <Th isNumeric>
-                        <Button onClick={handleClickAsc}>
-                        { activeAsc ? "Ascending" : "Descending"}
-                        </Button>
-                        </Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody>
-                    {
-                      activePriority === true ?
-                      activeAsc ?
-                      ascendingArray?.map((item: any) => {
-                          return (
-                            <Tr>
-                              <Td key="{itemAscProcess}">{item.process}</Td>
-                              <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
-                            </Tr>
-                          );
-                        })
-                      :
-                      descendingArray?.map((item: any) => {
-                          return (
-                            <Tr>
-                              <Td key="{itemDscProcess}">{item.process}</Td>
-                              <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
-                            </Tr>
-                          );
-                        })
-                      :
-                      activeAlp ?
-                      alphabeticArray?.map((item: any) => {
-                          return (
-                            <Tr>
-                              <Td key="{itemAlpProcess}">{item.process}</Td>
-                              <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
-                            </Tr>
-                          );
-                        })
-                      :
-                      invertArray?.map((item: any) => {
-                          return (
-                            <Tr>
-                              <Td key="{itemInvProcess}">{item.process}</Td>
-                              <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
-                            </Tr>
-                          );
-                      })
-                    }
-                    </Tbody>
-                  </Table>
-                </TableContainer>
-            </Card>
-          </Flex>
-          <Card
-            maxW="full"
-            color={useColorModeValue("white", "gray.800")}
-            height="400px"
-          >
-            {
-              rdv.length !== 0 ?
-              <Stack direction="column" p={2}>
-                <Stack direction="row">
-                  <Heading size="lg">Calendar</Heading>
-                  <Spacer />
-                  <CircleIcon color="pink.400" mt="15" />
-                  <Text fontSize="md">Applied</Text>
-                  <CircleIcon color="green" />
-                  <Text fontSize="md">Left</Text>
-                </Stack>
-                <Divider />
-                <Center>
-                  <Heading as="h2" size="2xl" colorScheme="grey" >
-                  {
-                    rdv?.map((item: any) => {
-                        index += 3;
-                        if (index <= rdv.length) {
-                          return (
-                              <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'>
-                                <Text fontSize='xs' mt='1' px='1'> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </Text>
-                                  <Text fontSize='small' mt='2' px='1'> {rdv[index]} </Text>
-                                  <Text fontSize='2xs' px='1'> {rdv[index + 1]} </Text>
-                              </Box>
-                          )
-                        } else
-                          return ('')
-                    })
-                  }
-                  </Heading>
-                </Center>
-                </Stack>
-
-              :
-
-              <Stack direction="column" p={2}>
-                <Stack direction="row">
-                  <Heading size="lg">Calendar</Heading>
-                  <Spacer />
-                  <CircleIcon color="pink.400" mt="15" />
-                  <Text fontSize="md">Applied</Text>
-                  <CircleIcon color="green" />
-                  <Text fontSize="md">Left</Text>
-                </Stack>
-                <Divider />
-                <Center>
-                  <Heading as="h2" size="2xl" colorScheme="grey" mt={100}>
-                    Nothing to show
-                  </Heading>
-                </Center>
-                </Stack>
-            }
-          </Card>
-        </Stack>
-      </Box>
-    </Box>
+      </div>
+      </>
+      :
+      <>
+      <div className="home-content-calendar-text"> Calendar </div>
+      <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
+      <div className="home-content-nothing-text"> Nothing to Show</div>
+      </>
+    } </div>
+      </>
   );
 };
 

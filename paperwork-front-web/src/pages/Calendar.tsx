@@ -1,4 +1,4 @@
-import { Center, Text, Box, Button, Flex, Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverBody, PopoverFooter, PopoverArrow, PopoverCloseButton, Input} from '@chakra-ui/react';
+import { Center, Text, Box, Button, Flex, Input, useDisclosure, useColorModeValue} from '@chakra-ui/react';
 import Header from '../components/Header';
 import Select from 'react-select';
 import React, { useState, useRef, useEffect } from 'react';
@@ -6,6 +6,7 @@ import Calendar from 'react-calendar';
 import "../styles/Calendar.css";
 import Cookies from 'universal-cookie';
 import axios from "axios";
+import Modal from 'react-modal';
 
 const CalendarPage = () => {
 
@@ -213,37 +214,50 @@ const CalendarPage = () => {
         )
     })
 
+    const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
+    const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
+    const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
+
+    const adaptedColor = useColorModeValue("rgba(255,255,255,1)", "rgba(45,45,55,1)");
+    const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
+
     return (
         <>
             <Header/>
-            <Box p={15} m={50}>
-                <Box pb={20}>
-                    <Center>
-                        <Text fontSize='lg' fontWeight={'bold'}>Calendar</Text>
-                    </Center>
-                </Box>
-                    <Center>
-                    <Calendar locale="en-GB" onChange={setDate} value={date}/>
-                    </Center>
-            </Box>
-            <Center m={2}>
-                <Text as='em' color="#FC6976" fontSize='lg'>{date.toDateString()}</Text>
-            </Center>
-            <Center>
-            <Flex width={'600px'} justifyContent={'space-between'}>
-            <Popover>
-                    <PopoverTrigger>
-                    <Center>
-                        <Button bgColor="#29C9B3" color="white" width={'160px'}>Add an Event</Button>
-                    </Center>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton color="#FC6976"/>
-                    <PopoverHeader color="#BDBDBD" fontSize='xs'>{date.toDateString()}</PopoverHeader>
-                    <PopoverBody fontSize='lg' fontWeight={'bold'}>
-                        Create
-                        <Center p={'10px'}>
+            <div className="calendar-main-box">
+                <div className="calendar-main-text" style={{marginBottom:'20px'}}> Calendar </div>
+                <Calendar className='react-calendar-main-component' locale="en-GB" onChange={setDate} value={date}/>
+            </div>
+            <div className="calendar-main-box-buttons">
+                <button className='calendar-main-button' style={{left: "32%"}} aria-label="add_an_event_button" onClick={onOpenAddModal}>
+                    Add an Event
+                </button>
+                <button className='calendar-main-button' style={{left: "45%"}} aria-label="daily_event_button" onClick={onOpenDailyModal}>
+                    Daily Events
+                </button>
+                {
+                isEvent === 0 ?
+                    <button className='calendar-main-button-disable' disabled aria-label="delete_edit_event_button" onClick={onOpenDeleteModal}>
+                        Edit/Delete an Event
+                    </button>
+                    :
+                    <button className='calendar-main-button' style={{left: "58%"}} aria-label="delete_edit_event_button" onClick={onOpenDeleteModal}>
+                        Edit/Delete an Event
+                    </button>
+                }
+            </div>
+
+            <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenAddModal} onRequestClose={onCloseAddModal}>
+                <div className='calendar-modal-date'>{date.toDateString()}</div>
+                <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
+                <div className='calendar-modal-text'>Create</div>
+                <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseAddModal}>
+                    Close
+                </button>
+                <button className='calendar-submit-button' aria-label="add_submit_button" onClick={submitNewEvent}>
+                    Submit
+                </button>
+                <Center p={'10px'}>
                             <Flex width={'200px'} justifyContent={'space-between'}>
                                 <Input onChange={handleNewDateChange} type="time"/>
                             </Flex>
@@ -279,35 +293,21 @@ const CalendarPage = () => {
                         </div>
                         }
                         </Center>
-                    </PopoverBody>
-                    <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                    <Button 
-                    bgColor="#29C9B3"
-                    color="white"
-                    onClick={submitNewEvent}>
-                        Submit
-                    </Button>
-                    </PopoverFooter>
-                    </PopoverContent>
-                </Popover>
+            </Modal>
 
-                <Popover>
-                    <PopoverTrigger>
-                    <Center>
-                        <Button bgColor="#29C9B3" color="white" width={'160px'}>Daily Events</Button>
-                    </Center>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton color="#FC6976"/>
-                    <PopoverHeader color="#BDBDBD" fontSize='xs'>{date.toDateString()}</PopoverHeader>
-                    {
+            <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenDailyModal} onRequestClose={onCloseDailyModal}>
+                <div className='calendar-modal-date'>{date.toDateString()}</div>
+                <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
+                <div className='calendar-modal-text'>Daily Event</div>
+                <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseDailyModal}>
+                    Close
+                </button>
+                {
                     isEvent === 0 ?
-                        <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
-                            Nothing Planned
-                        </PopoverBody>
+                        <div className='calendar-modal-text' style={{paddingTop: "12%", textAlign: "center"}}> Nothing Planned </div>
+
                     :
-                        <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
+                        <div className='calendar-event-list'>
                             {
                                 rdv?.map((item: any) => {
                                     indexDai++;
@@ -322,93 +322,73 @@ const CalendarPage = () => {
                                     )
                                 })
                             }
-                        </PopoverBody>
+                        </div>
                     }
-                    <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                    </PopoverFooter>
-                    </PopoverContent>
-                </Popover>
+            </Modal>
 
-                <Popover>
-                    <PopoverTrigger>
-                    <Center>
-                    {
-                    isEvent === 0 ?
-                        <Button bgColor="#29C9B3" color="white" width={'160px'} isDisabled>Edit/Delete an Event</Button>
-                        :
-                        <Button onClick={handleProcessEdit} bgColor="#29C9B3" color="white" width={'160px'}>Edit/Delete an Event</Button>
-                    }
-                    </Center>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton color="#FC6976"/>
-                    <PopoverHeader color="#BDBDBD" fontSize='xs'>{date.toDateString()}</PopoverHeader>
-                    <PopoverBody pb={20} fontSize='lg' fontWeight={'bold'}>
-                    Edit/Delete
-                    {
-                        rdv?.map((item: any) => {
-                            indexEdi++;
-                            return (
-                                item.toString()?.split("T")[0] === comparativeDate ?
-                                <Box m={3} borderColor="#dbdbdb" borderRadius='lg' borderWidth='1px' p={'10px'}>
-                                    <Center p={'10px'}>
-                                    <Flex width={'200px'} justifyContent={'space-between'}>
-                                        <Input type="time" onChange={handleModDateChange}/>
-                                    </Flex>
-                                    </Center>
-                                    <Center p={'10px'}>
-                                    <Input width={'200px'} value={rdv[indexEdi - 1]}/>                      
-                                    </Center>
-                                    <Center p={'10px'}>
-                                    {
-                                    postsStepEdit.length !== 0 ?
-                                    <div style={{width: '200px', fontSize: 13}}>
-                                        <Select
-                                        className='calendar-edit-select'
-                                        placeholder={'Select the Step'}
-                                        options={postsStepEdit}
-                                        onChange={handleProcessEdit}
-                                        /> 
-                                    </div>
-                                    :
-                                    <div style={{width: '200px', fontSize: 13}}>
-                                        <Select
-                                        className='calendar-edit-select'
-                                        placeholder={'Select the Step'}
-                                        defaultValue={"Show List"}
-                                        /> 
-                                    </div>
-                                    }
-                                    </Center>
-                                    <Center p={'10px'}>
-                                        <Button 
-                                        bgColor="#FC6976"
-                                        color="white"
-                                        onClick={deleteEvent}>
-                                            Delete Event
-                                        </Button>
-                                    </Center>                   
-                                </Box>
-                                : ''
-                            )
-                        })
-                    }
-                    </PopoverBody>
-                    <PopoverFooter border='0' display='flex' justifyContent='right' pb={4}>
-                            <Button
-                            justifyContent='right'
-                            bgColor="#29C9B3"
-                            color="white"
-                            onClick={submitModEvent}>
-                                Submit
-                            </Button>
-                    </PopoverFooter>
-                    </PopoverContent>
-                </Popover>
-            </Flex>
-            </Center>
+            <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenDeleteModal} onRequestClose={onCloseDeleteModal}>
+                <div className='calendar-modal-date'>{date.toDateString()}</div>
+                <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
+                <div className='calendar-modal-text'>Edit/Delete</div>
+                <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseDeleteModal}>
+                    Close
+                </button>
+                <button className='calendar-submit-button' aria-label="add_submit_button">
+                    Submit
+                </button>
+                {
+                    <div className='calendar-event-list'>
+                        {
+                            rdv?.map((item: any) => {
+                        indexEdi++;
+                        return (
+                            item.toString()?.split("T")[0] === comparativeDate ?
+                            <Box>
+                                <Center p={'10px'}>
+                                <Flex width={'200px'} justifyContent={'space-between'}>
+                                    <Input type="time" onChange={handleModDateChange}/>
+                                </Flex>
+                                </Center>
+                                <Center p={'10px'}>
+                                <Input width={'200px'} value={rdv[indexEdi - 1]}/>                      
+                                </Center>
+                                <Center p={'10px'}>
+                                {
+                                postsStepEdit.length !== 0 ?
+                                <div style={{width: '200px', fontSize: 13}}>
+                                    <Select
+                                    className='calendar-edit-select'
+                                    placeholder={'Select the Step'}
+                                    options={postsStepEdit}
+                                    onChange={handleProcessEdit}
+                                    /> 
+                                </div>
+                                :
+                                <div style={{width: '200px', fontSize: 13}}>
+                                    <Select
+                                    className='calendar-edit-select'
+                                    placeholder={'Select the Step'}
+                                    defaultValue={"Show List"}
+                                    /> 
+                                </div>
+                                }
+                                </Center>
+                                <Center p={'10px'}>
+                                    <Button 
+                                    bgColor="#FC6976"
+                                    color="white"
+                                    onClick={deleteEvent}>
+                                        Delete Event
+                                    </Button>
+                                </Center>                   
+                            </Box>
+                            : ''
+                        )
+                    })
+                        }
+                    </div>
+                }
+            </Modal>
    </>);
 }
-
 export default CalendarPage;

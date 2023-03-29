@@ -1,8 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { Box, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Textarea, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
+import { FormControl, FormErrorMessage, FormHelperText, useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
+import "../styles/ProcessIdea.css";
+import Modal from 'react-modal';
 
 function ProcessIdea() {
 
@@ -60,155 +62,86 @@ function ProcessIdea() {
         })
     }
 
+    const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
+    const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
+
     return (
         <>
             <Header/>
-            <Box p={16}>
-                <FormControl isInvalid={isTitleError.current} isRequired>
-                    <FormLabel>Title</FormLabel>
-                    <Input
-                        aria-label="title"
-                        placeholder='Title'
-                        value={title}
-                        onChange={handleTitleChange}
-                    />
-                    {!isTitleError ? (
+            <div className="process-idea-image">
+                <img src="assets/processidea-page/Webinar-cuate.svg" alt="processidea_cover_image" />
+            </div>
+            <div className="process-idea-main-box">
+            
+            {/* <FormControl isInvalid={isTitleError.current} isRequired> */}
+            <label className='process-idea-label'> Title </label>
+            <input className='process-idea-input' value={title} onChange={handleTitleChange} aria-label="title" placeholder='Title'/>
+                {/* {!isTitleError ? (
                         <FormHelperText>
                         Title of the document.
                         </FormHelperText>
                     ) : (
                         <FormErrorMessage>Title is required.</FormErrorMessage>
-                    )}
-                </FormControl>
-                <FormControl isInvalid={isDescriptionError.current} isRequired>
-                    <FormLabel pt={4}>Description</FormLabel>
-                    <Input
-                        aria-label="description"
-                        placeholder='Description'
-                        value={description}
-                        onChange={handleDescriptionChange}
-                    />
-                    {!isDescriptionError ? (
-                        <FormHelperText>
-                        Short description of the document.
-                        </FormHelperText>
-                    ) : (
-                        <FormErrorMessage>Description is required.</FormErrorMessage>
-                    )}
-                </FormControl>
-                <FormControl isInvalid={isContentError.current} isRequired>
-                    <FormLabel pt={4}>Content</FormLabel>
-                    <Textarea
-                        aria-label="content"
-                        placeholder='Content'
-                        value={content}
-                        onChange={handleContentChange}
-                    />
-                    {!isDescriptionError ? (
-                        <FormHelperText>
-                        Description of the document.
-                        </FormHelperText>
-                    ) : (
-                        <FormErrorMessage>Content is required.</FormErrorMessage>
-                    )}
+                )}
+            
+            </FormControl> */}
 
-                    <Box pt={8} display="flex" alignItems="center" justifyContent="space-between">
-                        <Button
-                            aria-label="cancel_button"
-                            bgColor="#FC6976"
-                            color={'white'}
-                            size="lg"
-                            minWidth={'95px'}
-                            maxWidth={'200px'}
-                            borderRadius={'5px'}
-                            fontSize={"24px"}
-                            onClick={onOpenCancelModal}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            aria-label="submit_button"
-                            bgColor="#29C9B3"
-                            color={'white'}
-                            size="lg"
-                            minWidth={'95px'}
-                            maxWidth={'200px'}
-                            borderRadius={'5px'}
-                            fontSize={"24px"}
-                            onClick={onOpenSubmitModal}
-                        >
-                            Submit
-                        </Button>
+            {/* <FormControl isInvalid={isDescriptionError.current} isRequired> */}
+            <label className='process-idea-label'> Description </label>
+            <input className='process-idea-input' value={description} onChange={handleDescriptionChange} aria-label="description" placeholder='Description'/>
+                {/* {!isDescriptionError ? (
+                    <FormHelperText>
+                    Short description of the document.
+                    </FormHelperText>
+                ) : (
+                    <FormErrorMessage>Description is required.</FormErrorMessage>
+                )}
+            </FormControl> */}
 
-                        <Modal
-                            isCentered
-                            onClose={onCloseCancelModal}
-                            isOpen={isOpenCancelModal}
-                            motionPreset='slideInBottom'
-                        >
-                            <ModalOverlay />
-                            <ModalContent>
-                                <ModalHeader>Cancel</ModalHeader>
-                                <ModalCloseButton />
-                                <ModalBody>Are you sure you want to cancel the process idea?</ModalBody>
-                                <ModalFooter>
-                                    <Button
-                                        aria-label="cancel_close_button"
-                                        bgColor="#FC6976"
-                                        color={'white'}
-                                        mr={3}
-                                        onClick={onCloseCancelModal}
-                                    >
-                                        Close
-                                    </Button>
-                                    <Button 
-                                        aria-label="cancel_continue_button"
-                                        bgColor="#29C9B3"
-                                        color={'white'}
-                                        onClick={cancelProcessIdea}
-                                    >
-                                        Continue
-                                    </Button>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
+            {/* <FormControl isInvalid={isContentError.current} isRequired> */}
+            <label className='process-idea-label'> Content </label>
+            <textarea className='process-idea-textarea-content' value={content} onChange={handleContentChange} aria-label="content" placeholder='Content'/>
+                {/* {!isDescriptionError ? (
+                    <FormHelperText>
+                    Description of the document.
+                    </FormHelperText>
+                ) : (
+                    <FormErrorMessage>Content is required.</FormErrorMessage>
+                )}
+            </FormControl> */}
 
-                        <Modal
-                            isCentered
-                            onClose={onCloseSubmitModal}
-                            isOpen={isOpenSubmitModal}
-                            motionPreset='slideInBottom'
-                        >
-                            <ModalOverlay />
-                            <ModalContent>
-                                <ModalHeader>Submit</ModalHeader>
-                                <ModalCloseButton />
-                                <ModalBody>Are you sure you want to submit the process idea?</ModalBody>
-                                <ModalFooter>
-                                    <Button
-                                        aria-label="submit_close_button"
-                                        bgColor="#FC6976"
-                                        color={'white'}
-                                        mr={3}
-                                        onClick={onCloseSubmitModal}
-                                    >
-                                        Close
-                                    </Button>
-                                    <Button
-                                        aria-label="submit_continue_button"
-                                        bgColor="#29C9B3"
-                                        color={'white'}
-                                        onClick={submitProcessIdea}
-                                    >
-                                        Continue
-                                    </Button>
-                                </ModalFooter>
-                            </ModalContent>
-                        </Modal>
+                <div className="process-idea-main-box-buttons">
+                    <button className='process-idea-cancel-button' aria-label="cancel_button" onClick={onOpenCancelModal}>
+                        Cancel
+                    </button>
 
-                    </Box>
-                </FormControl>
-            </Box>
+                    <button className='process-idea-submit-button' aria-label="submit_button" onClick={onOpenSubmitModal}>
+                        Submit
+                    </button>
+
+                    
+
+                    <Modal className='process-idea-modal-cancel' style={{content:{background: adaptedColor}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenCancelModal} onRequestClose={onCloseCancelModal}>
+                        <div className='process-idea-modal-cancel-text'>Are you sure you want to cancel the process idea?</div>
+                        <button className='process-idea-close-button' aria-label="cancel_close_button" onClick={onCloseCancelModal}>
+                            Close
+                        </button>
+                        <button className='process-idea-continue-button' aria-label="cancel_continue_button" onClick={cancelProcessIdea}>
+                            Continue
+                        </button>
+                    </Modal>
+
+                    <Modal className='process-idea-modal-cancel' style={{content:{background: adaptedColor}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenSubmitModal} onRequestClose={onCloseSubmitModal}>
+                        <div className='process-idea-modal-cancel-text'>Are you sure you want to submit the process idea?</div>
+                        <button className='process-idea-close-button' aria-label="submit_close_button" onClick={onCloseSubmitModal}>
+                                Close
+                        </button>
+                        <button className='process-idea-continue-button' aria-label="submit_continue_button" onClick={submitProcessIdea}>
+                                Continue
+                        </button>
+                    </Modal>                    
+                </div>
+            </div>
         </>
     );
 }
