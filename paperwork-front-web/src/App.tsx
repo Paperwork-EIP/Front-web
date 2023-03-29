@@ -13,6 +13,8 @@ import RegisterPage from './pages/Register';
 import ProcessResult from './pages/ProcessResult';
 import ProcessIdea from './pages/ProcessIdea';
 import CalendarPage from './pages/Calendar';
+import HelpPage from './pages/Help';
+import ForgotPasswordPage from './pages/ForgotPassword';
 import QuizPage from './pages/QuizPages/Quiz';
 import QuizQuestion from './pages/QuizPages/QuizQuestion';
 import GooglePage from './pages/Google';
@@ -22,62 +24,6 @@ import WelcomePage from './pages/Welcome';
 import "./styles/styles.scss";
 
 const App = () => {
-
-  const ongoingProcess = {
-    // Variable temporaire remplacant le JSON reçu par Home (afin de tester la page)
-    "list": [
-      {
-        "process": "VLS-TS",
-        "percentage": 25,
-      },
-      {
-        "process": "Residence Permit",
-        "percentage": 50,
-      },
-      {
-        "process": "French Nationality",
-        "percentage": 0,
-      },
-      {
-        "process": "Work Permit",
-        "percentage": 50,
-      },
-      {
-        "process": "Travel Document",
-        "percentage": 0,
-      },
-      {
-        "process": "Visa",
-        "percentage": 25,
-      },
-      {
-        "process": "Vital card",
-        "percentage": 75,
-      },
-      {
-        "process": "Driver License",
-        "percentage": 25,
-      },
-    ],
-  }
-
-  const events = {
-    // Variable temporaire remplacant le JSON reçu par Calendar (afin de tester la page)
-    "list": [
-      {
-        "date": "2023-01-02 17:00:00",
-        "object": "CPAM social security number 3 Pl. Adolphe Chérioux 75015 Paris",
-      },
-      {
-        "date": "2023-01-08 17:00:00",
-        "object": "RDV Vital Card 5 Av. de la porte de Montmartre 75018 Paris",
-      },
-      {
-        "date": "2023-01-09 17:00:00",
-        "object": "RDV Residence Permit 5 Av. de la porte de Montmartre 75018 Paris",
-      },
-    ],
-  }
   return (
       
     <div className="App">
@@ -87,10 +33,12 @@ const App = () => {
             <Route path="/" element={<WelcomePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
-            <Route path="/home" element={<HomePage ongoingProcess={ongoingProcess} />}/>
+            <Route path="/home" element={<HomePage/>}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
+            <Route path= "/calendar" element={<CalendarPage/>}/>
+            <Route path= "/help" element={<HelpPage/>}/>
+            <Route path= "/forgotPassword" element={<ForgotPasswordPage/>}/>
             <Route path= "/settings" element={<SettingsPage/>}/>
-            <Route path= "/calendar" element={<CalendarPage events={events}/>}/>
             <Route path= "/quiz" element={<QuizPage/>}/>
             <Route path="/quiz/:processSelected/:step" element={<QuizQuestion/>}/>
             <Route path="/processResult/:processSelected" element={<ProcessResult/>}/>

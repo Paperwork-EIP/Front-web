@@ -13,7 +13,7 @@ const HomePage = (props: any) => {
     return (
         <>
             <Header/>
-            <Bg ongoingProcess={props}/>
+            <Bg/>
         </>
     );
 }
