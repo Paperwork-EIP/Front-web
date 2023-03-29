@@ -2,7 +2,7 @@ import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
 import Cookies from 'universal-cookie';
 import "../styles/pages/Profile.scss";
-import { FaFlag, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaCog } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa';
 import axios from 'axios';
 
 const cookies = new Cookies();
@@ -68,26 +68,32 @@ const ProfilePage = () => {
                             <div className='fn-name'>{name}</div>
                             <div className='fn-firstname'>{firstname}</div>    
                         </div>
-                        <div className='section-flag'>
-                            <FaFlag />
-                            <div className='flag-lang'>{language}</div>
-                        </div>
                     </div>
                     <div className='secondary-container'>
-                        <h1 className='heading'>Personal Informations</h1>
-                        <div className='section-email'>
-                            <FaEnvelope />
-                            <div className='email-text'>{email}</div>
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Email</div>
+                            <div className='section-text email-text'>{email}</div>
                         </div>
-                        <div className='section-location'>
-                            <FaMapMarkerAlt />
-                            <div className='location-text'>{address}</div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Address</div>
+                            <div className='section-text address-text'>{address}</div>
                         </div>
-                        <div className='section-phonenumber'>
-                            <FaPhoneAlt />
-                            <div className='phonenumber-text'>{phonenumber}</div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Phone Number</div>
+                            <div className='section-text phonenumber-text'>{phonenumber}</div>
                         </div>
-                        <div className='section-age'>{age} years old</div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Language</div>
+                            <div className='section-text language-text'>{language}</div>
+                        </div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Age</div>
+                            <div className='section-text section-age'>{age}</div>
+                        </div>
                     </div>
                 </div>
                 <div className='process-container'>
@@ -95,15 +101,17 @@ const ProfilePage = () => {
                     <>
                     {
                         userProcessInfo?.map((item: any) => {
-                            return(
+                            return (
                                 item.pourcentage ?
-                                    <div className='process-progress' key={item.userProcess.id}>
-                                        <div className='progress-name'>{item.userProcess.process_title}</div>
-                                        <div className='progress-bar'>
-                                            <div className='progress-bar-bg'></div>
-                                            <div className='progress-bar-front' style={{width: item.pourcentage + '%'}}></div>
+                                    <button className='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.process_title }>
+                                        <div className='process-progress' key={item.userProcess.id}>
+                                            <div className='progress-name'>{item.userProcess.process_title}</div>
+                                            <div className='progress-bar'>
+                                                <div className='progress-bar-bg'></div>
+                                                <div className='progress-bar-front' style={{width: item.pourcentage + '%'}}></div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </button>
                                 : null
                                 )
                             })

@@ -1,11 +1,8 @@
 .Profile {
-    // Body color
-    --background-color: none;
-
-    background-color: var(--background-color);
+    background-color: rgb(240, 240, 240);
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    margin: 3rem;
+    padding: 10px 3% 10px 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +13,6 @@
         border-radius: 8px;
         align-items: center;
         justify-content: center;
-        background-color: white;
         display: flex;
         flex-wrap: wrap;
         position: relative;
@@ -37,43 +33,36 @@
 
     .informations-container {
         display: flex;
-        flex-wrap: wrap;
 
         .section-container {
-            background-color: white;
             display: flex;
             flex-direction: column;
-            border-radius: 8px;
-            -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-            box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+            background-color: white;
             border: 0.1rem solid white;
-            margin: 3%;
-            padding: 3%;
+            border-radius: 8px;
         }
 
         .main-container {
             @extend .section-container;
-            width: 30%;
-            height: auto;
+            width: 34%;
+            margin: 2% 1% 2% 3%;
+            padding: 15px;
             justify-content: center;
             align-items: center;
 
             .text-style-main-container {
-                margin-top: 2rem;
+                margin-top: 4px;
                 font-size: 1.2em;
                 letter-spacing: 0.06em;
-                color: #9b9b9b;
+                color: black;
             }
 
             .Avatar {
                 vertical-align: middle;
-                width: 40%;
+                width: 25%;
                 height: auto;
                 border-radius: 50%;
-                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
                 border: 0.1rem solid white;
-                margin: 2%;
             }
 
             .section-username {
@@ -94,24 +83,17 @@
                     padding-left: 0.5rem;
                 }
             }
-
-            .section-flag {
-                @extend .text-style-main-container;
-                display: flex;
-                flex-direction: row;
-
-                .flag-lang {
-                    text-transform: capitalize;
-                    padding-left: 0.5rem;
-                }
-            }
         }
         
         .secondary-container {
             @extend .section-container;
             width: 58%;
-            justify-content: start;
-            align-items: start;
+            margin: 2% 3% 2% 1%;
+            padding: 15px 5% 15px 5%;
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            letter-spacing: 0.06em;
 
             .heading {
                 margin-top: 2rem;
@@ -122,56 +104,39 @@
                 text-transform: uppercase;
             }
 
-            .text-style-secondary-container {
-                margin-top: 2rem;
-                font-size: 1.2em;
-                letter-spacing: 0.06em;
-                padding-left: 1rem;
-            }
-
-            .section-email {
-                @extend .text-style-secondary-container;
+            .secondary-row {
                 display: flex;
                 flex-direction: row;
+                width: 100%;
+                justify-content: center;
+                
+                .section-text {
+                    display: flex;
+                    width: 60%;
+                }
+
+                .secondary-label {
+                    display: flex;
+                    width: 40%;
+                    color: #FC6976;
+                    text-transform: capitalize;
+                    justify-content: left;
+                }
 
                 .email-text {
                     text-transform: lowercase;
-                    padding-left: 0.5rem;
                 }
-            }
 
-            .section-location {
-                @extend .text-style-secondary-container;
-                display: flex;
-                flex-direction: row;
-
-                .location-text {
+                .address-text, .language-text {
                     text-transform: capitalize;
-                    padding-left: 0.5rem;
                 }
             }
 
-            .section-age {
-                @extend .text-style-secondary-container;
-            }
-
-            .section-phonenumber {
-                @extend .text-style-secondary-container;
-                display: flex;
-                flex-direction: row;
-
-                .phonenumber-text {
-                    padding-left: 0.5rem;
-                }
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .main-container {
+            hr {
                 width: 100%;
-            }
-            .secondary-container {
-                width: 100%;
+                border: 1px solid black;
+                margin-top: auto;
+                margin-bottom: auto;
             }
         }
     }
@@ -180,12 +145,9 @@
         background-color: white;
         display: flex;
         flex-direction: column;
+        margin: 0 3% 0 3%;
+        padding: 10px 3% 10px 3%;
         border-radius: 8px;
-        -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-        box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
-        border: 0.1rem solid white;
-        margin: 3%;
-        padding-left: 3%;
 
         .heading {
             margin-top: 2rem;
@@ -193,52 +155,98 @@
             font-weight: bold;
         }
 
-        .process-progress {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 2%;
+        .Process-Btn {
+            border-radius: 8px;
+            margin: 4px 0 4px 0;
 
-            .progress-name {
-                width: 15%;
+            :hover {
+                border-radius: 8px;
+                background-color: rgb(252, 252, 252);
             }
 
-            .progress-bar {
-                width: 85%;
-                height: 1.5rem;
-                position: relative;
-                border-radius: 14px;
-                margin-left: 1rem;
+            .process-progress {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 1%;
 
-                .progress-bar-bg {
-                    position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgb(237, 240, 255);
-                    border-radius: 14px;
+                :hover {
+                    border: none;
                 }
 
-                .progress-bar-front {
-                    position: absolute;
-                    width: 5%;
-                    height: 100%;
-                    background-color: #FC6976;
-                    border-radius: 14px;
+                .progress-name {
+                    width: 15%;
+                }
+
+                .progress-bar {
+                    width: 85%;
+                    height: 1.5rem;
+                    position: relative;
+                    margin-left: 1rem;
+
+                    .progress-bar-bg {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgb(240, 240, 240);
+                        border-radius: 14px;
+                    }
+
+                    .progress-bar-front {
+                        position: absolute;
+                        width: 5%;
+                        height: 100%;
+                        background-color: #FC6976;
+                        border-radius: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+        
+@media (max-width: 768px) {
+    .Profile {
+        padding: 0;
+
+        .informations-container {
+            flex-direction: column;
+
+            .main-container, .secondary-container {
+                width: 100%;
+                margin: 10px;
+                padding: 15px 8px 15px 8px;
+
+                .secondary-row {
+                    width: 100%;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    .secondary-label, .section-text {
+                        width: auto;
+                    }
                 }
             }
         }
 
-        @media (max-width: 768px) {
-            .process-progress {
-                display: flex;
-                flex-direction: column;
-                .progress-name {
-                    width: 100%;
-                }
-                .progress-bar {
-                    margin-left: 0;
-                    margin-top: 0.5rem;
-                    width: 100%;
+        .process-container {
+            width: 100%;
+            margin: 10px;
+            padding: 15px 8px 15px 8px;
+
+            .Process-Btn {
+                .process-progress {
+                    display: flex;
+                    flex-direction: column;
+                    .progress-name {
+                        width: 100%;
+                    }
+                    .progress-bar {
+                        margin-left: 0;
+                        margin-top: 0.5rem;
+                        width: 100%;
+                    }
                 }
             }
         }
