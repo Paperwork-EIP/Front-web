@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
-import axios from 'axios';
 import "../styles/ForgotPassword.css";
 
 function ForgotPasswordPage() {
@@ -11,8 +10,6 @@ function ForgotPasswordPage() {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-
-    const cookieList = cookies.get('loginToken');
 
     const [faqs, setFaqs] = useState([
         {
@@ -39,20 +36,6 @@ function ForgotPasswordPage() {
           open: false
         }
       ]);
-    
-      const toggleFAQ = (index: number) => {
-        setFaqs(
-          faqs.map((faq, i) => {
-            if (i === index) {
-              faq.open = !faq.open;
-            } else {
-              faq.open = false;
-            }
-    
-            return faq;
-          })
-        );
-      };
 
     return (
         <>

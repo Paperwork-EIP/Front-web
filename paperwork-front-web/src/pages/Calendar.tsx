@@ -219,7 +219,6 @@ const CalendarPage = () => {
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
     const adaptedColor = useColorModeValue("rgba(255,255,255,1)", "rgba(45,45,55,1)");
-    const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
 
     return (
         <>
@@ -333,7 +332,7 @@ const CalendarPage = () => {
                 <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseDeleteModal}>
                     Close
                 </button>
-                <button className='calendar-submit-button' aria-label="add_submit_button">
+                <button className='calendar-submit-button' aria-label="add_submit_button" onClick={submitModEvent}>
                     Submit
                 </button>
                 {

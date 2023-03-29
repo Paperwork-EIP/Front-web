@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
-import axios from 'axios';
 import "../styles/Help.css";
 import { Link } from 'react-router-dom';
 
@@ -12,8 +11,6 @@ function HelpPage() {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-
-    const cookieList = cookies.get('loginToken');
 
     const [faqs, setFaqs] = useState([
         {

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { FormControl, FormErrorMessage, FormHelperText, useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
@@ -63,7 +63,6 @@ function ProcessIdea() {
     }
 
     const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
-    const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
 
     return (
         <>
