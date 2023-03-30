@@ -1,16 +1,17 @@
 // React Import
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import { Box, Text, Center, Button } from '@chakra-ui/react';
 
 // Utils Import
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import Select from 'react-select';
 
 // Pages Import
 import Header from '../../components/Header';
 import "../../styles/Quiz.css";
+import "../../styles/pages/Quiz.scss";
+
+// Icon Import
+import { AiOutlineSend } from 'react-icons/ai';
 
 const QuizPage = () => {
 
@@ -22,7 +23,6 @@ const QuizPage = () => {
     console.log(email);
 
     const [posts, setPosts] = useState([{}]);
-    const [processSelected, setProcessSelected] = useState();
 
     useEffect(() => {
       axios.get(`${process.env.REACT_APP_BASE_URL}/process/getAll`)
@@ -38,62 +38,38 @@ const QuizPage = () => {
             }
             // console.log(procedures);
             setPosts(procedures);
-            setProcessSelected(procedures[0]['label']);
         }).catch(err => {
             console.log(err)
         });
     }, [])
 
-    const handleProcessSelected = (e: any) => {
-        setProcessSelected(e.label);
+    const handleSubmit = () => {
         // console.log(processSelected);
-    }
+        const quizSelect = document.getElementById('Quiz-Select') as HTMLSelectElement;
+        if (quizSelect) {
+            const selectedValue = quizSelect.value;
+            window.location.href = `/quiz/${selectedValue}/0`;
+        }
+    }                     
 
     return (
         <>
             <Header/>
 
-            <Box p={15} m={50}>
-                <Box pb={2}>
-                    <Center>
-                        <Text fontSize='lg' fontWeight={'bold'}>New Process Quiz</Text>
-                    </Center>
-                </Box>
-                <Box borderRadius={'10px'} boxShadow='dark-lg' p={5} mx={20} minH="60vh">
-                    <Box pt={9}>
-                    <Center>
-                        <Text fontSize='3xl' fontWeight={'bold'}>What type of procedure do you want to complete ?</Text>
-                    </Center>
-                    </Box>
-                    <Box pt={20}>
-                    <Center>
-                        
-                    <Select
-                        className='quiz-select'
-                        placeholder={'Select the Procedure'}
-                        options={posts}
-                        onChange={handleProcessSelected}
-                    />
-
-                    </Center>
-                    </Box>
-                    <Box pt={20}>
-                    <Center>
-                    <Link to={`/quiz/${processSelected}/0`}>
-                        <Button
-                            bgColor="#29C9B3"
-                            color={'white'}
-                            size="lg"
-                            borderRadius={'5px'}
-                            mb={8}
-                            fontSize={"24px"}>
-                            Submit
-                        </Button>
-                    </Link>
-                    </Center>
-                    </Box>
-                </Box>
-            </Box>
+            <div className='Page-Title'>New Process Quiz</div>
+            <div className='Quiz'>
+                <div className='Question-Style'>What type of procedure do you want to complete ?</div>
+                <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" className='Quiz-Select' placeholder='Select the Procedure'>
+                    {
+                        posts.map((post: any) => {
+                            return (
+                                <option value={post.label}>{post.label}</option>
+                            )
+                        })
+                    }
+                </select>
+                <button type="button" className='Submit-btn' onClick={() => handleSubmit()}>Submit<AiOutlineSend className='Submit-icon' /></button>
+            </div>
         </>
     );
 }

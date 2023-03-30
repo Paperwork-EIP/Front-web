@@ -1,0 +1,116 @@
+.Page-Title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.Quiz {
+    // Body color
+    --background-color: white;
+    color: black;
+
+    background-color: var(--background-color);
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 1rem 9rem 9rem 9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3%;
+    border-radius: 8px;
+    -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
+    box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+    border: 0.1rem solid white;
+
+    .Question-Style {
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+
+    .Quiz-Select {
+        width: 300px;
+        max-width: 100%;
+        color: black;
+        border: 1.5px solid #E8E8E8;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.125em;
+        border-radius: 5px;
+        height: 50px;
+        overflow-y: auto;
+        padding-left: 0.5em;
+        margin-top: 3.5em;
+        color: grey;
+        overflow:hidden; 
+        white-space:nowrap; 
+        text-overflow:ellipsis;
+
+        option {
+            overflow-y: scroll;
+            color: black;
+        }
+    }
+
+    .Submit-btn {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+        background-color: #29C9B3;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 4px;
+        margin-top: 3.5em;
+
+        .Submit-icon {
+            color: white;
+            font-size: 1.3rem;
+            margin-left: 5px;
+        }
+    }
+
+    .QuizQuestionBtn {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+        padding-top: 3em;
+        padding-bottom: 5em;
+
+        @mixin Btn-Style {
+            display: flex;
+            flex-wrap: wrap;
+            position: relative;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-top: 3.5em;
+        }
+        .No-btn {
+            @include Btn-Style;
+            background-color: #FC6976;
+        }
+
+        .Yes-btn {
+            @include Btn-Style;
+            background-color: #29C9B3;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .Quiz {
+        margin: 1rem 1rem 1rem 1rem;
+        padding: 3%;
+    }
+}
