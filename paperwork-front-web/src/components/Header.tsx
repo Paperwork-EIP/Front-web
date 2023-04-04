@@ -72,14 +72,14 @@ function Header() {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, [isOpen, api, cookiesInfo.email])
+    })
 
     return (
         <div className={colorMode === 'light' ? "Header Day-mode" : "Header Night-mode"}>
             <div className="Header-container">
                 <div className="Header-left-side">
                     <div className="Header-logo">
-                        <img src="logo.png" alt="logo-paperwork" />
+                        <img src="logo.png" alt="logo-paperwork-header" />
                     </div>
                 </div>
                 <div className="Header-right-side">
@@ -91,12 +91,12 @@ function Header() {
                             {colorMode === 'light' ? <MdModeNight /> : <MdLightMode />}
                         </button>
                         <button className="Header-avatar-button" onClick={openModal}>
-                            <img className="Header-avatar" src={avatar} alt="profile-picture" />
+                            <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
                         {isOpen && (
                             <div className="Header-modal">
                                 <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
-                                    <img src={avatar} alt="Profile Picture" className="Header-modal-profile-picture" />
+                                    <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
                                     <h2>{name}</h2>
                                     <p>{email}</p>
                                     <div className="Header-separator"></div>

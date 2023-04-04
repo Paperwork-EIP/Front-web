@@ -1,0 +1,162 @@
+$primary: #fc5e6d;
+$secondary: #29c9b3;
+$white: #fff;
+$gray: #9b9b9b;
+
+.Login {
+    height: 100vh;
+
+    .Login-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .Login-title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .Login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .Login-submit-button {
+                border: solid 2px #e2e2e2;
+                border-radius: 15px;
+                padding: 10px 15px;
+                font-size: 1.1rem;
+                margin-top: 2em;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .Login-submit-button:hover {
+                background-color: #FDE0E6;
+                color: black;
+                border-color: transparent;
+            }
+
+            .Login-form-group {
+                position: relative;
+                padding: 15px 0 0;
+                margin-top: 1.3em;
+                width: 50%;
+            }
+
+            .Login-form-field {
+                font-family: inherit;
+                width: 100%;
+                border: 0;
+                border-bottom: 2px solid $gray;
+                outline: 0;
+                font-size: 1.3rem;
+                color: $white;
+                padding: 7px 0;
+                background: transparent;
+                transition: border-color 0.2s;
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown~.Login-form-label {
+                    font-size: 1.3rem;
+                    cursor: text;
+                    top: 20px;
+                }
+            }
+
+            .Login-form-label {
+                position: absolute;
+                top: 0;
+                display: block;
+                transition: 0.2s;
+                font-size: 1rem;
+                color: $gray;
+            }
+
+            .Login-form-field:focus {
+                ~.Login-form-label {
+                    position: absolute;
+                    top: 0;
+                    display: block;
+                    transition: 0.2s;
+                    font-size: 1rem;
+                    color: $primary;
+                    font-weight: 700;
+                }
+
+                padding-bottom: 6px;
+                font-weight: 700;
+                border-width: 3px;
+                border-image: linear-gradient(to right, $primary, $secondary);
+                border-image-slice: 1;
+            }
+
+            .Login-form-field {
+
+                &:required,
+                &:invalid {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .Login-connections {
+            width: 30%;
+            max-width: 500px;
+            margin-top: 4.5em;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .Login-button-api {
+                font-size: 2em;
+                border: solid 1.5px white;
+                padding: 5px;
+                border-radius: 50%;
+                transition: all 0.3s ease-out;
+            }
+
+            .Login-button-api:hover {
+                color: black;
+                background-color: #FDE0E6;
+            }
+        }
+
+        .Login-redirection-to-register {
+            margin-top: 3em;
+
+            .Login-link {
+                a {
+                    margin-left: 3px;
+                    position: relative;
+                }
+
+                a::before {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    height: 2px;
+                    bottom: -4px;
+                    z-index: 2;
+                    background-color: white;
+                    transition: all ease-out 0.4s;
+                }
+            }
+
+            .Login-link:hover {
+                cursor: pointer;
+
+                a::before {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
