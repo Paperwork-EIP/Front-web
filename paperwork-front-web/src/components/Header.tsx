@@ -1,104 +1,133 @@
-import { useState, useEffect } from "react";
-import {
-  Box,
-  Flex,
-  Avatar,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useColorModeValue,
-  Stack,
-  useColorMode,
-  Center,
-  Image,
-} from '@chakra-ui/react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import React, { useState, useEffect } from "react";
+import { useColorMode } from '@chakra-ui/react';
+import { MdCalendarMonth, MdHelpOutline, MdHome, MdLightMode, MdLogout, MdModeNight, MdOutlineAdd, MdPerson } from 'react-icons/md';
 import { Link } from "react-router-dom";
-import React from "react";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
-const Header = () => {
+import "../styles/components/Header.scss";
 
-  const cookies = new Cookies();
+function Header() {
+    const cookies = new Cookies();
+    const cookiesInfo = cookies.get('loginToken');
+    const api = process.env.REACT_APP_BASE_URL;
 
-  if (!cookies.get('loginToken')) {
-      window.location.assign('/');
-  }
+    const { colorMode, toggleColorMode } = useColorMode();
+    const [isOpen, setIsOpen] = useState(false);
+    const [name, setName] = useState('Username');
+    const [email, setEmail] = useState('email@example.com');
+    const [avatar, setAvatar] = useState('assets/header/empty-profile-picture.jpg');
 
-  const cookiesInfo = cookies.get('loginToken');
-  const api = process.env.REACT_APP_BASE_URL;
+    function checkIfCookie() {
+        if (!cookies.get('loginToken')) {
+            window.location.replace('/');
+        }
+    }
 
-  const { colorMode, toggleColorMode } = useColorMode();
-  const [name, setName] = useState('Username');
+    function checkAvatar(url: string) {
+        if (url) {
+            setAvatar(url);
+        }
+    }
+    function handleClickOutside(event: any) {
+        if (event.target.className === 'Header-modal') {
+            closeModal();
+        }
+    }
 
-  useEffect(() => {
-      axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
-      .then(res => {
-          console.log(res.data);
-          setName(res.data.username);
-      }).catch(err => {
-          console.log(err)
-      });
-  }, [api, cookiesInfo.email])
+    function openModal() {
+        setIsOpen(true);
+    }
 
-  return (
-    <>
-      <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-        <Box boxSize='80px'>
-          <Image src='logo.png' alt='PaperWork logo' />
-        </Box>
-          <Flex alignItems={'center'}>
-            <Stack direction={'row'} spacing={7}>
-              <Button onClick={toggleColorMode}>
-                {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button>
-              <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                    <Avatar
-                      size={'sm'}
-                    />
-                </MenuButton>
-                <MenuList alignItems={'center'} mb={2}>
-                  <Center mb={2}>
-                    <Link to="/profile">
-                        <Avatar
-                          size={'xl'}
-                        />
-                    </Link>
-                  </Center>
-                  <Center mb={2}>
-                    <p>{name}</p>
-                  </Center>
-                  <MenuDivider />
-                  <Link to="/quiz">
-                    <MenuItem>Start a process</MenuItem>
-                  </Link>
-                  <MenuItem><Link to='/home'>Home</Link></MenuItem>
-                  <MenuItem>Forum</MenuItem>
-                  <Link to="/calendar">
-                    <MenuItem>Calendar</MenuItem>
-                  </Link>
-                  <MenuItem>Find an association</MenuItem>
-                  <MenuItem>Help</MenuItem>
-                  <MenuItem>Logout</MenuItem>
-                </MenuList>
-              </Menu>
-            </Stack>
-          </Flex>
-        </Flex>
-      </Box>
-    </>
-  );
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    function logout() {
+        cookies.remove('loginToken');
+        checkIfCookie();
+    }
+
+    function getData() {
+        axios.get(`${api}/user/getbyemail`, {
+            params: { email: cookiesInfo.email }
+        })
+            .then(res => {
+                console.log(res);
+                setName(res.data.username);
+                setEmail(res.data.email);
+                checkAvatar(res.data.profile_picture);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+    useEffect(() => {
+        checkIfCookie();
+        getData();
+        if (isOpen) {
+            document.addEventListener('click', handleClickOutside);
+        }
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [isOpen, api, cookiesInfo.email])
+
+    return (
+        <div className={colorMode === 'light' ? "Header Day-mode" : "Header Night-mode"}>
+            <div className="Header-container">
+                <div className="Header-left-side">
+                    <div className="Header-logo">
+                        <img src="logo.png" alt="logo-paperwork" />
+                    </div>
+                </div>
+                <div className="Header-right-side">
+                    <div className="Header-right-content">
+                        <Link to='/quiz' className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"}>
+                            <MdOutlineAdd />
+                        </Link>
+                        <button className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"} onClick={toggleColorMode}>
+                            {colorMode === 'light' ? <MdModeNight /> : <MdLightMode />}
+                        </button>
+                        <button className="Header-avatar-button" onClick={openModal}>
+                            <img className="Header-avatar" src={avatar} alt="profile-picture" />
+                        </button>
+                        {isOpen && (
+                            <div className="Header-modal">
+                                <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
+                                    <img src={avatar} alt="Profile Picture" className="Header-modal-profile-picture" />
+                                    <h2>{name}</h2>
+                                    <p>{email}</p>
+                                    <div className="Header-separator"></div>
+                                    <Link to='/home' className="Header-modal-link">
+                                        <MdHome />
+                                        <span>Home</span>
+                                    </Link>
+                                    <Link to='/profile' className="Header-modal-link">
+                                        <MdPerson />
+                                        <span>Profile</span>
+                                    </Link>
+                                    <Link to='/calendar' className="Header-modal-link">
+                                        <MdCalendarMonth />
+                                        <span>Calendar</span>
+                                    </Link>
+                                    <Link to='/help' className="Header-modal-link">
+                                        <MdHelpOutline />
+                                        <span>Help</span>
+                                    </Link>
+                                    <button className="Header-modal-link" onClick={logout}>
+                                        <MdLogout />
+                                        <span>Logout</span>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default Header;

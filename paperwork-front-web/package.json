@@ -17,7 +17,7 @@
     "react": "^18.1.0",
     "react-calendar": "^3.9.0",
     "react-dom": "^18.1.0",
-    "react-icons": "^3.11.0",
+    "react-icons": "^4.8.0",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -38,11 +38,6 @@
     "eject": "react-scripts eject",
     "prepare": "cd .. && npx husky install paperwork-front-web/.husky"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
-  },
   "jest": {
     "testEnvironment": "jsdom",
     "transformIgnorePatterns": [
@@ -59,9 +54,6 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "identity-obj-proxy",
       "\\.(css|less|scss)$": "identity-obj-proxy"
     }
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -83,7 +75,6 @@
     "@types/jest": "^27.0.2",
     "@types/react-calendar": "^3.5.2",
     "@types/react-modal": "^3.13.1",
-    "eslint": "^8.20.0",
     "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.3.1"

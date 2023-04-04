@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'universal-cookie';
+
 import Navbar from "../components/Navbar";
+
 import "../styles/pages/Welcome.scss";
 
 function WelcomePage() {
+    const cookies = new Cookies();
+
+    function redirectToHome() {
+        if (cookies.get('loginToken')) {
+            window.location.replace('/home');
+        }
+    }
+
+    useEffect(() => {
+        redirectToHome();
+    });
+
     return (
         <div className="Welcome">
             <Navbar />
