@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import "../styles/components/Navbar.scss";
 
 function Navbar() {
-
     const [isShrunk, setShrunk] = useState("Navbar-not-shrunk");
 
     useEffect(() => {
