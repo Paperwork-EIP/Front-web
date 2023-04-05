@@ -3,7 +3,7 @@ $secondary: #29c9b3;
 $white: #fff;
 $gray: #9b9b9b;
 
-.Login {
+.Register {
     --header-gradient-color-1: #e0fdf7;
     --header-gradient-color-2: #29c9b3;
     --header-gradient-color-3: crimson;
@@ -13,7 +13,7 @@ $gray: #9b9b9b;
     --header-gradient-color-7: #23d5ab;
 
     height: 100vh;
-    background: linear-gradient(30deg,
+    background: linear-gradient(-90deg,
             var(--header-gradient-color-1),
             var(--header-gradient-color-2),
             var(--header-gradient-color-3),
@@ -26,7 +26,7 @@ $gray: #9b9b9b;
     align-items: center;
     justify-content: center;
 
-    .Login-container {
+    .Register-container {
         height: 70%;
         width: 60%;
         display: flex;
@@ -36,7 +36,7 @@ $gray: #9b9b9b;
         background-color: #373737;
         border-radius: 5px;
 
-        .Login-container-right {
+        .Register-container-right {
             width: 40%;
             display: flex;
             flex-direction: column;
@@ -44,7 +44,7 @@ $gray: #9b9b9b;
             justify-content: center;
         }
 
-        .Login-container-left {
+        .Register-container-left {
             height: 100%;
             width: 60%;
             display: flex;
@@ -53,9 +53,9 @@ $gray: #9b9b9b;
             justify-content: center;
             position: relative;
 
-            .Login-on-image-text {
+            .Register-on-image-text {
                 position: absolute;
-                padding: 2em;
+                padding: 4em;
 
                 h1 {
                     font-weight: bold;
@@ -77,48 +77,47 @@ $gray: #9b9b9b;
             }
         }
 
-        .Login-title {
+        .Register-title {
             margin-bottom: 1rem;
             font-size: 2rem;
             font-weight: bold;
         }
 
-        .Login-form {
+        .Register-form {
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
 
-            .Login-submit-button {
+            .Register-submit-button {
                 border: solid 2px #e2e2e2;
                 border-radius: 5px;
                 padding: 10px 15px;
-                font-size: 1.1rem;
+                font-size: 0.9em;
                 margin-top: 3em;
                 transition: all 0.3s ease-in-out;
             }
 
-            .Login-submit-button:hover {
+            .Register-submit-button:hover {
                 background-color: #FDE0E6;
                 color: black;
                 border-color: transparent;
             }
 
-            .Login-form-group {
+            .Register-form-group {
                 position: relative;
                 padding: 15px 0 0;
-                margin-top: 1.3em;
+                margin-top: 0.3em;
                 width: 60%;
             }
 
-            .Login-form-field {
-                font-family: inherit;
+            .Register-form-field {
                 width: 100%;
                 border: 0;
                 border-bottom: 2px solid $gray;
                 outline: 0;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 color: $white;
                 padding: 7px 0;
                 background: transparent;
@@ -128,15 +127,19 @@ $gray: #9b9b9b;
                     color: transparent;
                 }
 
-                &:placeholder-shown~.Login-form-label {
+                &:placeholder-shown~.Register-form-label {
                     font-size: 1.3rem;
                     cursor: text;
                     top: 20px;
                 }
             }
 
-            .Login-form-label {
+            .Register-form-label {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
                 position: absolute;
+                width: 100%;
                 top: 0;
                 display: block;
                 transition: 0.2s;
@@ -144,8 +147,8 @@ $gray: #9b9b9b;
                 color: $gray;
             }
 
-            .Login-form-field:focus {
-                ~.Login-form-label {
+            .Register-form-field:focus {
+                ~.Register-form-label {
                     position: absolute;
                     top: 0;
                     display: block;
@@ -162,7 +165,7 @@ $gray: #9b9b9b;
                 border-image-slice: 1;
             }
 
-            .Login-form-field {
+            .Register-form-field {
 
                 &:required,
                 &:invalid {
@@ -171,15 +174,15 @@ $gray: #9b9b9b;
             }
         }
 
-        .Login-connections {
+        .Register-connections {
             width: 30%;
             max-width: 500px;
-            margin-top: 4.5em;
+            margin-top: 3.5em;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
 
-            .Login-button-api {
+            .Register-button-api {
                 font-size: 2em;
                 border: solid 1.5px white;
                 padding: 5px;
@@ -187,16 +190,18 @@ $gray: #9b9b9b;
                 transition: all 0.3s ease-out;
             }
 
-            .Login-button-api:hover {
+            .Register-button-api:hover {
                 color: black;
                 background-color: #FDE0E6;
             }
         }
 
-        .Login-redirection-to-register {
-            margin-top: 3em;
+        .Register-redirection-to-register {
+            margin-top: 1.5em;
+            text-align: center;
+            padding: 0 10px;
 
-            .Login-link {
+            .Register-link {
                 a {
                     margin-left: 3px;
                     position: relative;
@@ -214,7 +219,7 @@ $gray: #9b9b9b;
                 }
             }
 
-            .Login-link:hover {
+            .Register-link:hover {
                 cursor: pointer;
 
                 a::before {
@@ -226,28 +231,28 @@ $gray: #9b9b9b;
 }
 
 @media (max-width: 1200px) {
-    .Login-container {
+    .Register-container {
         background-color: transparent !important;
     }
 
-    .Login-container-right {
+    .Register-container-right {
         width: 100% !important;
     }
 
-    .Login-container-left {
+    .Register-container-left {
         display: none !important;
     }
 
-    .Login-form-group {
+    .Register-form-group {
         width: 100% !important;
     }
 
-    .Login-connections {
+    .Register-connections {
         max-width: none !important;
         width: 70% !important;
     }
 
-    .Login-redirection-to-register {
+    .Register-redirection-to-register {
         text-align: center !important;
     }
 }
