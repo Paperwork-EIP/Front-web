@@ -89,7 +89,7 @@ const RegisterPage = () => {
                             <label htmlFor="password" className="Register-form-label">Password</label>
                         </div>
                         <div className="Register-form-group field">
-                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value), handleConfirmPasswordChange}} required />
+                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">Confirm password</label>
                         </div>
                         <button className='Register-submit-button' type="submit" disabled={buttonDisabled}>
