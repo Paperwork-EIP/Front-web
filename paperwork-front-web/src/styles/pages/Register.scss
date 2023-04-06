@@ -123,6 +123,11 @@ $gray: #9b9b9b;
                 background: transparent;
                 transition: border-color 0.2s;
 
+                &:required,
+                &:invalid {
+                    box-shadow: none;
+                }
+
                 &::placeholder {
                     color: transparent;
                 }
@@ -163,14 +168,6 @@ $gray: #9b9b9b;
                 border-width: 3px;
                 border-image: linear-gradient(to right, $primary, $secondary);
                 border-image-slice: 1;
-            }
-
-            .Register-form-field {
-
-                &:required,
-                &:invalid {
-                    box-shadow: none;
-                }
             }
         }
 
