@@ -1,0 +1,255 @@
+$primary: #fc5e6d;
+$secondary: #29c9b3;
+$white: #fff;
+$gray: #9b9b9b;
+
+.Register {
+    --header-gradient-color-1: #e0fdf7;
+    --header-gradient-color-2: #29c9b3;
+    --header-gradient-color-3: crimson;
+    --header-gradient-color-4: #a5a5a5;
+    --header-gradient-color-5: #29c9b3;
+    --header-gradient-color-6: purple;
+    --header-gradient-color-7: #23d5ab;
+
+    height: 100vh;
+    background: linear-gradient(-90deg,
+            var(--header-gradient-color-1),
+            var(--header-gradient-color-2),
+            var(--header-gradient-color-3),
+            var(--header-gradient-color-4),
+            var(--header-gradient-color-5)) !important;
+    background-size: 400% 130% !important;
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .Register-container {
+        height: 70%;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: #373737;
+        border-radius: 5px;
+
+        .Register-container-right {
+            width: 40%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .Register-container-left {
+            height: 100%;
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .Register-on-image-text {
+                position: absolute;
+                padding: 4em;
+
+                h1 {
+                    font-weight: bold;
+                    font-size: 2rem;
+                    letter-spacing: 3px;
+                }
+
+                h3 {
+                    margin-top: 1em;
+                    font-size: 1.4rem;
+                    letter-spacing: 2px;
+                    word-spacing: 1px;
+                }
+            }
+
+            img {
+                height: 100%;
+                width: auto;
+            }
+        }
+
+        .Register-title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .Register-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .Register-submit-button {
+                border: solid 2px #e2e2e2;
+                border-radius: 5px;
+                padding: 10px 15px;
+                font-size: 0.9em;
+                margin-top: 3em;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .Register-submit-button:hover {
+                background-color: #FDE0E6;
+                color: black;
+                border-color: transparent;
+            }
+
+            .Register-form-group {
+                position: relative;
+                padding: 15px 0 0;
+                margin-top: 0.3em;
+                width: 60%;
+            }
+
+            .Register-form-field {
+                width: 100%;
+                border: 0;
+                border-bottom: 2px solid $gray;
+                outline: 0;
+                font-size: 1.1rem;
+                color: $white;
+                padding: 7px 0;
+                background: transparent;
+                transition: border-color 0.2s;
+
+                &:required,
+                &:invalid {
+                    box-shadow: none;
+                }
+
+                &::placeholder {
+                    color: transparent;
+                }
+
+                &:placeholder-shown~.Register-form-label {
+                    font-size: 1.3rem;
+                    cursor: text;
+                    top: 20px;
+                }
+            }
+
+            .Register-form-label {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                position: absolute;
+                width: 100%;
+                top: 0;
+                display: block;
+                transition: 0.2s;
+                font-size: 1rem;
+                color: $gray;
+            }
+
+            .Register-form-field:focus {
+                ~.Register-form-label {
+                    position: absolute;
+                    top: 0;
+                    display: block;
+                    transition: 0.2s;
+                    font-size: 1rem;
+                    color: $primary;
+                    font-weight: 700;
+                }
+
+                padding-bottom: 6px;
+                font-weight: 700;
+                border-width: 3px;
+                border-image: linear-gradient(to right, $primary, $secondary);
+                border-image-slice: 1;
+            }
+        }
+
+        .Register-connections {
+            width: 30%;
+            max-width: 500px;
+            margin-top: 3.5em;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+
+            .Register-button-api {
+                font-size: 2em;
+                border: solid 1.5px white;
+                padding: 5px;
+                border-radius: 50%;
+                transition: all 0.3s ease-out;
+            }
+
+            .Register-button-api:hover {
+                color: black;
+                background-color: #FDE0E6;
+            }
+        }
+
+        .Register-redirection-to-register {
+            margin-top: 1.5em;
+            text-align: center;
+            padding: 0 10px;
+
+            .Register-link {
+                a {
+                    margin-left: 3px;
+                    position: relative;
+                }
+
+                a::before {
+                    content: "";
+                    position: absolute;
+                    width: 0%;
+                    height: 2px;
+                    bottom: -4px;
+                    z-index: 2;
+                    background-color: white;
+                    transition: all ease-out 0.4s;
+                }
+            }
+
+            .Register-link:hover {
+                cursor: pointer;
+
+                a::before {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .Register {
+        background: #373737 !important;
+    }
+
+    .Register-container-right {
+        width: 100% !important;
+    }
+
+    .Register-container-left {
+        display: none !important;
+    }
+
+    .Register-form-group {
+        width: 100% !important;
+    }
+
+    .Register-connections {
+        max-width: none !important;
+        width: 70% !important;
+    }
+
+    .Register-redirection-to-register {
+        text-align: center !important;
+    }
+}
