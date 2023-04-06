@@ -11,6 +11,7 @@ import "../styles/pages/Register.scss";
 const RegisterPage = () => {
 
     const api = process.env.REACT_APP_BASE_URL;
+    const [buttonDisabled, setButtonDisabled] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -38,11 +39,24 @@ const RegisterPage = () => {
             alert("Incorrect password");
         }
     };
+
+    function handleConfirmPasswordChange(event: any) {
+        const confirm = event.target.value;
+        setConfirmPassword(confirm);
+    
+        if (password !== confirm) {
+          setButtonDisabled(true);
+        } else {
+          setButtonDisabled(false);
+        }
+      };
+
     function googleConnect() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
             window.location.replace(res.data)
         })
     }
+
     function facebookConnect() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
             window.location.replace(res.data)
@@ -75,10 +89,10 @@ const RegisterPage = () => {
                             <label htmlFor="password" className="Register-form-label">Password</label>
                         </div>
                         <div className="Register-form-group field">
-                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value), handleConfirmPasswordChange}} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">Confirm password</label>
                         </div>
-                        <button className='Register-submit-button' type="submit">
+                        <button className='Register-submit-button' type="submit" disabled={buttonDisabled}>
                             Register
                         </button>
                     </form>

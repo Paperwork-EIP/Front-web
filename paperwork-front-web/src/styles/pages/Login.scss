@@ -226,10 +226,9 @@ $gray: #9b9b9b;
 }
 
 @media (max-width: 1200px) {
-    .Login-container {
-        background-color: transparent !important;
+    .Login {
+        background: #373737 !important;
     }
-
     .Login-container-right {
         width: 100% !important;
     }
