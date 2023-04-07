@@ -31,12 +31,10 @@ const RegisterPage = () => {
                     secure: true,
                     sameSite: 'none'
                 });
-            }).catch(err => {
-                alert(err);
+            }).catch(() => {
+                alert("Email, username or password is incorrect.");
+                return;
             })
-        }
-        else {
-            alert("Incorrect password");
         }
     };
 
@@ -45,11 +43,11 @@ const RegisterPage = () => {
         setConfirmPassword(confirm);
     
         if (password !== confirm) {
-          setButtonDisabled(true);
+            setButtonDisabled(true);
         } else {
-          setButtonDisabled(false);
+            setButtonDisabled(false);
         }
-      };
+    };
 
     function googleConnect() {
         axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
@@ -65,7 +63,7 @@ const RegisterPage = () => {
 
     useEffect(() => {
         if (cookies.get('loginToken')) {
-            window.location.assign('/home');
+            window.location.replace('/home');
         }
     });
 
@@ -77,30 +75,30 @@ const RegisterPage = () => {
                     <h1 className='Register-title'>Register</h1>
                     <form className='Register-form' onSubmit={handleSubmit}>
                         <div className="Register-form-group field">
-                            <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             <label htmlFor="email" className="Register-form-label">Email</label>
                         </div>
                         <div className="Register-form-group field">
-                            <input type="text" className="Register-form-field" placeholder="Username" name="username" id='username' value={username} onChange={(e) => setUsername(e.target.value)} required />
+                            <input type="text" className="Register-form-field" placeholder="Username" name="username" id='username' data-testid="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
                             <label htmlFor="username" className="Register-form-label">Username</label>
                         </div>
                         <div className="Register-form-group field">
-                            <input type="password" className="Register-form-field" placeholder="Password" name="password" id='password' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                            <input type="password" className="Register-form-field" placeholder="Password" name="password" id='password' data-testid="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <label htmlFor="password" className="Register-form-label">Password</label>
                         </div>
                         <div className="Register-form-group field">
-                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' value={confirmPassword} onChange={handleConfirmPasswordChange} required />
+                            <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' data-testid="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">Confirm password</label>
                         </div>
-                        <button className='Register-submit-button' type="submit" disabled={buttonDisabled}>
+                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' type="submit" disabled={buttonDisabled}>
                             Register
                         </button>
                     </form>
                     <div className='Register-connections'>
-                        <button className='Register-button-api' onClick={googleConnect}>
+                        <button className='Register-button-api' data-testid="google-link" onClick={googleConnect}>
                             <FaGoogle />
                         </button>
-                        <button className='Register-button-api' onClick={facebookConnect}>
+                        <button className='Register-button-api' data-testid="facebook-link" onClick={facebookConnect}>
                             <FaFacebook />
                         </button>
                     </div>
@@ -109,7 +107,7 @@ const RegisterPage = () => {
                             You already have an account ?
                         </span>
                         <span className='Register-link'>
-                            <Link to='/login'>Click here !</Link>
+                            <Link to='/login' data-testid="link-login">Click here !</Link>
                         </span>
                     </div>
                 </div>

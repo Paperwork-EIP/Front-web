@@ -16,7 +16,7 @@ function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState('Username');
     const [email, setEmail] = useState('email@example.com');
-    const [avatar, setAvatar] = useState('assets/header/empty-profile-picture.jpg');
+    const [avatar, setAvatar] = useState('/assets/header/empty-profile-picture.jpg');
 
     function checkIfCookie() {
         if (!cookies.get('loginToken')) {
@@ -79,7 +79,7 @@ function Header() {
             <div className="Header-container">
                 <div className="Header-left-side">
                     <div className="Header-logo">
-                        <img src="logo.png" alt="logo-paperwork-header" />
+                        <img src="/logo.png" alt="logo-paperwork-header" />
                     </div>
                 </div>
                 <div className="Header-right-side">

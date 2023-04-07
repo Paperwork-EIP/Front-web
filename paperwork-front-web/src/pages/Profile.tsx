@@ -27,7 +27,7 @@ const ProfilePage = () => {
     const [userProcessInfo, setUserProcessInfo]= useState([{}]);
     
     useEffect(() => {
-        axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
         .then(res => {
             console.log(res.data);
             setUsername(res.data.username);
@@ -42,7 +42,7 @@ const ProfilePage = () => {
             console.log(err)
         });
 
-        axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_email: cookiesInfo.email } })
+        axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.token } })
         .then(res => {
             console.log("res.data.response getUserProcesses");
             console.log(res.data.response);

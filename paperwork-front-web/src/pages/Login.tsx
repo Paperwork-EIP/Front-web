@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
@@ -29,14 +29,19 @@ const LoginPage = () => {
             window.location.replace(res.data)
         })
     }
+
     const facebookConnect = () => {
         axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
             window.location.replace(res.data)
         })
     }
-    if (cookies.get('loginToken')) {
-        window.location.assign('/home');
-    }
+
+    useEffect(() => {
+        if (cookies.get('loginToken')) {
+            window.location.replace('/home');
+        }
+    });
+
     return (
         <div className="Login">
             <Navbar />

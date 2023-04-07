@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
 import { render, cleanup, act } from '@testing-library/react';
+
 import Cookies from 'universal-cookie';
+
 import WelcomePage from '../../src/pages/Welcome';
 
 afterEach(() => {
@@ -113,7 +115,7 @@ describe('Welcome Page Tests', () => {
 
         expect(window.location.pathname).not.toEqual('/home');
     });
-    it('should redirects to login page if loginToken cookie exists', () => {
+    it('should redirects to home page if loginToken cookie exists', () => {
         Object.defineProperty(window, 'location', {
             writable: true,
             value: { replace: jest.fn() }

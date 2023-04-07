@@ -43,7 +43,7 @@ const SettingsPage = () => {
 
 
     useEffect(() => {
-        axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
         .then(res => {
             console.log(res.data);
             setUsername(res.data.username);
@@ -73,17 +73,17 @@ const SettingsPage = () => {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         if (variableToChange === "username") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 username: username,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Username updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 409) {
@@ -93,17 +93,17 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "name") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 name: name,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Name updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 500) {
@@ -111,10 +111,10 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "firstname") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 firstname: firstname,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Firstname updated!");
                 window.location.reload();
@@ -129,17 +129,17 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "language") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 language: language,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Language updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 500) {
@@ -147,17 +147,17 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "age") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 age: age,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Age updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 500) {
@@ -165,10 +165,10 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "email") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 new_email: email,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Email updated!");
                 // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
@@ -184,7 +184,7 @@ const SettingsPage = () => {
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 409) {
@@ -194,17 +194,17 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "address") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 adress: address,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Address updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 500) {
@@ -212,17 +212,17 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "phonenumber") {
-            axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.token,
                 number_phone: phonenumber,
-            }}).then(res => {
+            }).then(res => {
                 console.log(res.data);
                 alert("Phonenumber updated!");
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert("Missing parameter email.");
+                    alert("Missing parameter token.");
                 } else if (err.response.status === 404) {
                     alert("User not found.");
                 } else if (err.response.status === 500) {
@@ -231,17 +231,17 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "password") {
             if (password.length >= 8 && password === verifPassword) {
-                axios.get(`${api}/user/modifyDatas`, { params: {
-                    email: cookiesInfo.email,
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.token,
                     password: password,
-                }}).then(res => {
+                }).then(res => {
                     console.log(res.data);
                     alert("Password updated!");
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert("Missing parameter email.");
+                        alert("Missing parameter token.");
                     } else if (err.response.status === 404) {
                         alert("User not found.");
                     } else if (err.response.status === 500) {
@@ -257,7 +257,7 @@ const SettingsPage = () => {
 
     const handleDeleteAccount = (event: any) => {
         axios.get(`${api}/user/delete`, { params: {
-            email: cookiesInfo.email,
+            token: cookiesInfo.token,
         }}).then(res => {
             console.log(res.data);
             alert("Account deleted!");
@@ -266,7 +266,7 @@ const SettingsPage = () => {
         }).catch(err => {
             console.log(err)
             if (err.response.status === 400) {
-                alert("Missing parameter email.");
+                alert("Missing parameter token.");
             } else if (err.response.status === 404) {
                 alert("User not found.");
             } else if (err.response.status === 500) {

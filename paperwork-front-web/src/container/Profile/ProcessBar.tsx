@@ -15,7 +15,7 @@ const ProcessBar = (props: any) => {
     // console.log(props.email);
     
     useEffect(() => {
-        axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_email: props.email } })
+        axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: props.token } })
         .then(res => {
             console.log("res.data.response getUserProcesses");
             console.log(res.data.response);
