@@ -8,6 +8,7 @@ import axios from 'axios';
 import Register from '../../src/pages/Register';
 
 jest.mock('axios');
+jest.mock('../../src/components/Navbar', () => () => <></>);
 
 beforeEach(() => {
     Object.defineProperty(window, 'location', {

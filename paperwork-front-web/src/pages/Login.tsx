@@ -18,16 +18,20 @@ const LoginPage = () => {
 
     const cookies = new Cookies();
 
-    function handleSubmit() {
-        axios.post(`${api}/user/login`, {
-            email: email,
-            password: password
-        }).then(response => {
+    async function handleSubmit() {
+        await axios.post(
+            `${api}/user/login`,
+            {
+                email: email,
+                password: password
+            }
+        ).then(response => {
             cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
                 path: '/',
                 secure: true,
                 sameSite: 'none'
             });
+            window.location.replace('/home');
         }).catch(() => {
             alert("Email or password is incorrect.");
             return;
@@ -43,13 +47,13 @@ const LoginPage = () => {
     }
 
     function googleConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
+        axios.get(`${api}/oauth/google/urlLogin`).then(res => {
             window.location.replace(res.data)
         })
     }
 
     function facebookConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
+        axios.get(`${api}/oauth/facebook/url`).then(res => {
             window.location.replace(res.data)
         })
     }
@@ -67,7 +71,7 @@ const LoginPage = () => {
             <div className='Login-container'>
                 <div className='Login-container-right'>
                     <h1 className='Login-title'>Login</h1>
-                    <form className='Login-form' onSubmit={handleSubmit}>
+                    <div className='Login-form'>
                         <div className="Login-form-group field">
                             <input type="email" className="Login-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             <label htmlFor="email" className="Login-form-label">Email</label>
@@ -76,10 +80,10 @@ const LoginPage = () => {
                             <input type="password" className="Login-form-field" placeholder="Password" name="password" id='password' data-testid="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <label htmlFor="password" className="Login-form-label">Password</label>
                         </div>
-                        <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} aria-label='button-login' type="submit" disabled={buttonDisabled}>
+                        <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
                             Login
                         </button>
-                    </form>
+                    </div>
                     <div className='Login-connections'>
                         <button className='Login-button-api' data-testid="google-link" onClick={googleConnect}>
                             <FaGoogle />

@@ -18,12 +18,6 @@ function Header() {
     const [email, setEmail] = useState('email@example.com');
     const [avatar, setAvatar] = useState('/assets/header/empty-profile-picture.jpg');
 
-    function checkIfCookie() {
-        if (!cookies.get('loginToken')) {
-            window.location.replace('/');
-        }
-    }
-
     function checkAvatar(url: string) {
         if (url) {
             setAvatar(url);
@@ -45,25 +39,29 @@ function Header() {
 
     function logout() {
         cookies.remove('loginToken');
-        checkIfCookie();
     }
 
     function getData() {
-        axios.get(`${api}/user/getbytoken`, {
-            params: { email: cookiesInfo.token }
-        })
-            .then(res => {
-                setName(res.data.username);
-                setEmail(res.data.email);
-                checkAvatar(res.data.profile_picture);
+        if (!cookies.get('loginToken')) {
+            window.location.replace('/');
+        }
+        else {
+            axios.get(`${api}/user/getbytoken`, {
+                params: { email: cookiesInfo.token }
             })
-            .catch(err => {
-                console.error(err);
-            });
+                .then(res => {
+                    setName(res.data.username);
+                    setEmail(res.data.email);
+                    checkAvatar(res.data.profile_picture);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+
     }
 
     useEffect(() => {
-        checkIfCookie();
         getData();
         if (isOpen) {
             document.addEventListener('click', handleClickOutside);

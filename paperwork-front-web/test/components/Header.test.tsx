@@ -60,7 +60,6 @@ describe('Header Tests', () => {
         );
 
         const button = fireEvent.click(getByLabelText(/button-mode/i));
-
         expect(button).toBeTruthy();
     });
     test('should open modal when avatar button clicked', () => {
@@ -71,7 +70,6 @@ describe('Header Tests', () => {
         );
 
         const button = fireEvent.click(getByLabelText(/button-open-modal/i));
-
         expect(button).toBeTruthy();
     });
     // test('should link to the home page when home button clicked', () => {

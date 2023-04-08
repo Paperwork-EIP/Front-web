@@ -8,17 +8,19 @@ import axios from 'axios';
 import Profile from '../../src/pages/Profile';
 
 jest.mock('axios');
+jest.mock('../../src/components/Header', () => () => <></>);
 
 beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            replace: jest.fn()
+            assign: jest.fn().mockImplementation(() => Promise.resolve()),
+            replace: jest.fn().mockImplementation(() => Promise.resolve())
         }
     });
     global.alert = jest.fn();
-    axios.get = jest.fn();
-    axios.post = jest.fn();
+    axios.get = jest.fn().mockImplementation(() => Promise.resolve());
+    axios.post = jest.fn().mockImplementation(() => Promise.resolve());
     axios.get.mockResolvedValueOnce('mockResponse');
     axios.post.mockResolvedValueOnce('mockResponse');
 });
@@ -42,7 +44,7 @@ describe('Profile Tests', () => {
 
     window.location = location;
 
-    expect(window.location.replace).toBeCalledWith('/');
+    expect(window.location.assign).toBeCalledWith('/');
   });
   // test('renders user information correctly', () => {
   //   render(<Profile />);

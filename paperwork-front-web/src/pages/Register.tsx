@@ -20,16 +20,19 @@ const RegisterPage = () => {
     const cookies = new Cookies();
 
     function handleSubmit() {
-        axios.post(`${api}/user/register`, {
-            username: username,
-            email: email,
-            password: password
-        }).then(response => {
+        axios.post(`${api}/user/register`,
+            {
+                username: username,
+                email: email,
+                password: password
+            }
+        ).then(response => {
             cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
                 path: '/',
                 secure: true,
                 sameSite: 'none'
             });
+            window.location.replace('/home');
         }).catch(() => {
             alert("Email, username or password is incorrect.");
             return;
@@ -71,7 +74,7 @@ const RegisterPage = () => {
             <div className='Register-container'>
                 <div className='Register-container-right'>
                     <h1 className='Register-title'>Register</h1>
-                    <form className='Register-form' onSubmit={handleSubmit}>
+                    <div className='Register-form'>
                         <div className="Register-form-group field">
                             <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             <label htmlFor="email" className="Register-form-label">Email</label>
@@ -88,10 +91,10 @@ const RegisterPage = () => {
                             <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' data-testid="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">Confirm password</label>
                         </div>
-                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' type="submit" disabled={buttonDisabled}>
+                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={handleSubmit} disabled={buttonDisabled}>
                             Register
                         </button>
-                    </form>
+                    </div>
                     <div className='Register-connections'>
                         <button className='Register-button-api' data-testid="google-link" onClick={googleConnect}>
                             <FaGoogle />
