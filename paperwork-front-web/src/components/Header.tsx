@@ -49,8 +49,8 @@ function Header() {
     }
 
     function getData() {
-        axios.get(`${api}/user/getbyemail`, {
-            params: { email: cookiesInfo.email }
+        axios.get(`${api}/user/getbytoken`, {
+            params: { email: cookiesInfo.token }
         })
             .then(res => {
                 setName(res.data.username);
