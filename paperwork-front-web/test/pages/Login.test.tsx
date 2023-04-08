@@ -66,7 +66,7 @@ describe('Login Tests', () => {
         fireEvent.click(facebookButton);
         expect(axios.get).toHaveBeenCalled();
     });
-    test('should link to the login page when start button clicked', () => {
+    test('should link to the register page when register button clicked', () => {
         const { getByTestId } = render(
             <BrowserRouter>
                 <Login />
@@ -75,7 +75,6 @@ describe('Login Tests', () => {
 
         const linkElement = getByTestId('link-register');
         expect(linkElement).toHaveAttribute('href', '/register');
-
     });
     test('should not redirects to login page if loginToken cookie not exists', () => {
         const cookies = new Cookies();

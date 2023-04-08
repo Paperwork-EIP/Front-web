@@ -53,7 +53,6 @@ function Header() {
             params: { email: cookiesInfo.email }
         })
             .then(res => {
-                console.log(res);
                 setName(res.data.username);
                 setEmail(res.data.email);
                 checkAvatar(res.data.profile_picture);
@@ -84,13 +83,13 @@ function Header() {
                 </div>
                 <div className="Header-right-side">
                     <div className="Header-right-content">
-                        <Link to='/quiz' className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"}>
+                        <Link to='/quiz' data-testid="link-quiz" className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"}>
                             <MdOutlineAdd />
                         </Link>
-                        <button className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"} onClick={toggleColorMode}>
+                        <button className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"} aria-label="button-mode" onClick={toggleColorMode}>
                             {colorMode === 'light' ? <MdModeNight /> : <MdLightMode />}
                         </button>
-                        <button className="Header-avatar-button" onClick={openModal}>
+                        <button className="Header-avatar-button" aria-label="button-open-modal" onClick={openModal}>
                             <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
                         {isOpen && (
@@ -100,23 +99,23 @@ function Header() {
                                     <h2>{name}</h2>
                                     <p>{email}</p>
                                     <div className="Header-separator"></div>
-                                    <Link to='/home' className="Header-modal-link">
+                                    <Link to='/home' data-testid="link-home" className="Header-modal-link">
                                         <MdHome />
                                         <span>Home</span>
                                     </Link>
-                                    <Link to='/profile' className="Header-modal-link">
+                                    <Link to='/profile' data-testid="link-profile" className="Header-modal-link">
                                         <MdPerson />
                                         <span>Profile</span>
                                     </Link>
-                                    <Link to='/calendar' className="Header-modal-link">
+                                    <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
                                         <MdCalendarMonth />
                                         <span>Calendar</span>
                                     </Link>
-                                    <Link to='/help' className="Header-modal-link">
+                                    <Link to='/help' data-testid="link-help" className="Header-modal-link">
                                         <MdHelpOutline />
                                         <span>Help</span>
                                     </Link>
-                                    <button className="Header-modal-link" onClick={logout}>
+                                    <button className="Header-modal-link" aria-label='button-logout' onClick={logout}>
                                         <MdLogout />
                                         <span>Logout</span>
                                     </button>
