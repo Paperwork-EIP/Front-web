@@ -20,28 +20,26 @@ const RegisterPage = () => {
     const cookies = new Cookies();
 
     function handleSubmit() {
-        if (email && username && password === confirmPassword) {
-            axios.post(`${api}/user/register`, {
-                username: username,
-                email: email,
-                password: password
-            }).then(response => {
-                cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
-                    path: '/',
-                    secure: true,
-                    sameSite: 'none'
-                });
-            }).catch(() => {
-                alert("Email, username or password is incorrect.");
-                return;
-            })
-        }
+        axios.post(`${api}/user/register`, {
+            username: username,
+            email: email,
+            password: password
+        }).then(response => {
+            cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
+                path: '/',
+                secure: true,
+                sameSite: 'none'
+            });
+        }).catch(() => {
+            alert("Email, username or password is incorrect.");
+            return;
+        })
     };
 
     function handleConfirmPasswordChange(event: any) {
         const confirm = event.target.value;
         setConfirmPassword(confirm);
-    
+
         if (password !== confirm) {
             setButtonDisabled(true);
         } else {
