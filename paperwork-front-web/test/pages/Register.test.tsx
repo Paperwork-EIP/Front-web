@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
-import { render, cleanup, act, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { render, cleanup, fireEvent } from '@testing-library/react';
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
