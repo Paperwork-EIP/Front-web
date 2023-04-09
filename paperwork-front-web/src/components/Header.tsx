@@ -25,16 +25,13 @@ function Header() {
     }
     function handleClickOutside(event: any) {
         if (event.target.className === 'Header-modal') {
-            closeModal();
+            setIsOpen(false);
         }
     }
 
     function openModal() {
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
+        const state = !isOpen;
+        setIsOpen(state);
     }
 
     function logout() {
@@ -91,7 +88,7 @@ function Header() {
                             <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
                         {isOpen && (
-                            <div className="Header-modal">
+                            <div className="Header-modal"data-testid="Header-modal" >
                                 <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
                                     <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
                                     <h2>{name}</h2>

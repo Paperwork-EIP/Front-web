@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { render, cleanup, fireEvent, getByLabelText } from '@testing-library/react';
+import { render, cleanup, fireEvent, getByLabelText, getByTestId, waitFor } from '@testing-library/react';
 
 import axios from 'axios';
 import Cookies from 'universal-cookie';
@@ -18,7 +18,7 @@ beforeEach(() => {
             replace: jest.fn()
         }
     });
-    axios.get = jest.fn().mockResolvedValueOnce({ data: { username: "token123", email: "token123", profile_picture: "token123" } });
+    axios.get = jest.fn().mockResolvedValue({ data: { username: "token123", email: "token123", profile_picture: "token123" } });
     axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
     cookies.set('loginToken', 'test');
 });
@@ -60,7 +60,73 @@ describe('Header Tests', () => {
         const button = fireEvent.click(getByLabelText(/button-mode/i));
         expect(button).toBeTruthy();
     });
-    test('should open modal when avatar button clicked', () => {
+    test('should open and close modal', () => {
+        const { getByLabelText, queryByTestId } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = fireEvent.click(getByLabelText(/button-open-modal/i));
+        expect(button).toBeTruthy();
+        
+        fireEvent.click(document.body);
+
+        expect(queryByTestId(/button-logout/i)).not.toBeInTheDocument();
+    });
+    test('should link to the home page when home button clicked', () => {
+        const { getByTestId, getByLabelText } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = fireEvent.click(getByLabelText(/button-open-modal/i));
+        expect(button).toBeTruthy();
+
+        const linkElement = getByTestId('link-home');
+        expect(linkElement).toHaveAttribute('href', '/home');
+    });
+    test('should link to the profile page when profile button clicked', () => {
+        const { getByTestId, getByLabelText } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = fireEvent.click(getByLabelText(/button-open-modal/i));
+        expect(button).toBeTruthy();
+
+        const linkElement = getByTestId('link-profile');
+        expect(linkElement).toHaveAttribute('href', '/profile');
+    });
+    test('should link to the calendar page when calendar button clicked', () => {
+        const { getByTestId, getByLabelText } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = fireEvent.click(getByLabelText(/button-open-modal/i));
+        expect(button).toBeTruthy();
+
+        const linkElement = getByTestId('link-calendar');
+        expect(linkElement).toHaveAttribute('href', '/calendar');
+    });
+    test('should link to the help page when help button clicked', () => {
+        const { getByTestId, getByLabelText } = render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
+
+        const button = fireEvent.click(getByLabelText(/button-open-modal/i));
+        expect(button).toBeTruthy();
+
+        const linkElement = getByTestId('link-help');
+        expect(linkElement).toHaveAttribute('href', '/help');
+    });
+    test('should logout when logout button clicked', () => {
         const { getByLabelText } = render(
             <BrowserRouter>
                 <Header />
@@ -69,51 +135,37 @@ describe('Header Tests', () => {
 
         const button = fireEvent.click(getByLabelText(/button-open-modal/i));
         expect(button).toBeTruthy();
+
+        const logout = fireEvent.click(getByLabelText(/button-logout/i));
+        expect(logout).toBeTruthy();
+
+        expect(cookies.get('loginTest')).toBeUndefined();
     });
-    // test('should link to the home page when home button clicked', () => {
-    //     const { getByTestId, getByRole, getByText } = render(
-    //         <BrowserRouter>
-    //             <Header />
-    //         </BrowserRouter>
-    //     );
+    test('should print an error message with console.error', () => {
+        const axiosSpy = jest.spyOn(axios, 'get').mockRejectedValue(new Error('Example error message'));
 
-    //     const linkElement = getByTestId('link-home');
-    //     expect(linkElement).toHaveAttribute('href', '/home');
+        render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
 
-    //     const icon = getByRole('img', { name: 'Home' });
-    //     expect(icon).toBeInTheDocument();
+        expect(axiosSpy).toHaveBeenCalledTimes(1);
+    });
+    test('should disconnect the user if loginToken cookie exists', () => {
+        const cookies = new Cookies();
+        const location = window.location;
 
-    //     const text = getByText('Home');
-    //     expect(text).toBeInTheDocument();
-    // });
-    // test('should link to the profile page when profile button clicked', () => {
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Header />
-    //         </BrowserRouter>
-    //     );
+        cookies.remove('loginToken');
 
-    //     const linkElement = getByTestId('link-profile');
-    //     expect(linkElement).toHaveAttribute('href', '/profile');
-    // });
-    // test('should link to the calendar page when calendar button clicked', () => {
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Header />
-    //         </BrowserRouter>
-    //     );
+        render(
+            <BrowserRouter>
+                <Header />
+            </BrowserRouter>
+        );
 
-    //     const linkElement = getByTestId('link-calendar');
-    //     expect(linkElement).toHaveAttribute('href', '/calendar');
-    // });
-    // test('should link to the help page when help button clicked', () => {
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Header />
-    //         </BrowserRouter>
-    //     );
+        window.location = location;
 
-    //     const linkElement = getByTestId('link-help');
-    //     expect(linkElement).toHaveAttribute('href', '/help');
-    // });
+        expect(window.location.replace).toBeCalledWith('/');
+    });
 });
