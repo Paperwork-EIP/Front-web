@@ -18,10 +18,8 @@ beforeEach(() => {
             replace: jest.fn()
         }
     });
-    axios.get = jest.fn().mockImplementation(() => Promise.resolve());
-    axios.post = jest.fn().mockImplementation(() => Promise.resolve());
-    axios.get.mockResolvedValueOnce('mockResponse');
-    axios.post.mockResolvedValueOnce('mockResponse');
+    axios.get = jest.fn().mockResolvedValueOnce({ data: { username: "token123", email: "token123", profile_picture: "token123" } });
+    axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
     cookies.set('loginToken', 'test');
 });
 

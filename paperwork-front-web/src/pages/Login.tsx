@@ -18,8 +18,8 @@ const LoginPage = () => {
 
     const cookies = new Cookies();
 
-    async function handleSubmit() {
-        await axios.post(
+    function handleSubmit() {
+        axios.post(
             `${api}/user/login`,
             {
                 email: email,
@@ -34,7 +34,6 @@ const LoginPage = () => {
             window.location.replace('/home');
         }).catch(() => {
             alert("Email or password is incorrect.");
-            return;
         })
     };
 

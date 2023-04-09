@@ -18,10 +18,8 @@ beforeEach(() => {
         }
     });
     global.alert = jest.fn();
-    axios.get = jest.fn();
-    axios.post = jest.fn();
-    axios.get.mockResolvedValueOnce('mockResponse');
-    axios.post.mockResolvedValueOnce('mockResponse');
+    axios.get = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
+    axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
 });
 
 afterEach(() => {
@@ -29,9 +27,13 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-
 describe('Register Tests', () => {
     test('submits the form with valid data when submit button is clicked', async () => {
+        const location = window.location;
+        const cookies = new Cookies();
+
+        cookies.set = jest.fn().mockImplementationOnce(() => { });
+
         const { getByLabelText, getByTestId } = render(
             <BrowserRouter>
                 <Register />
@@ -49,6 +51,9 @@ describe('Register Tests', () => {
         expect(password).toBeTruthy();
         expect(confirmPassword).toBeTruthy();
         expect(register).toBeTruthy();
+
+        window.location = location;
+        expect(axios.post).toHaveBeenCalledTimes(1);
     });
     test('should display alert and not submits the form with invalid data when submit button is clicked', async () => {
         axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));

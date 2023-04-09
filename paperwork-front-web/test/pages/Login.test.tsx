@@ -18,10 +18,8 @@ beforeEach(() => {
         }
     });
     global.alert = jest.fn();
-    axios.get = jest.fn();
-    axios.post = jest.fn();
-    axios.get.mockResolvedValueOnce('mockResponse');
-    axios.post.mockResolvedValueOnce('mockResponse');
+    axios.get = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
+    axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
 });
 
 afterEach(() => {
@@ -31,6 +29,11 @@ afterEach(() => {
 
 describe('Login Tests', () => {
     test('submits the form with valid data when submit button is clicked', async () => {
+        const location = window.location;
+        const cookies = new Cookies();
+
+        cookies.set = jest.fn().mockImplementationOnce(() => { });
+
         const { getByLabelText, getByTestId } = render(
             <BrowserRouter>
                 <Login />
@@ -44,6 +47,24 @@ describe('Login Tests', () => {
         expect(email).toBeTruthy();
         expect(password).toBeTruthy();
         expect(login).toBeTruthy();
+
+        window.location = location;
+        expect(axios.post).toHaveBeenCalledTimes(1);
+    });
+    test('should display alert and not submits the form with invalid data when submit button is clicked', async () => {
+        axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
+
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Login />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/email/i), { target: { value: 'test@test.com' } });
+        fireEvent.change(getByTestId(/password/), { target: { value: 'testpassword' } });
+        fireEvent.click(getByLabelText(/button-login/i));
+
+        expect(axios.post).toHaveBeenCalled();
     });
     test('clicking on google connect button calls googleConnect function', () => {
         const { getByTestId } = render(
