@@ -46,17 +46,18 @@ describe('Help Tests', () => {
     expect(window.location.assign).toBeCalledWith('/');
   });  
   it('should toggle FAQ', async() => {
+    const cookies = new Cookies();
+    cookies.set('loginToken', { token: 'token123' });
     const useStateSpy = jest.spyOn(React, 'useState');
     useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-
-    jest.spyOn(Cookies.prototype, 'get').mockImplementation(() => 'loginToken');
 
     const { getAllByTestId } = render(
     <BrowserRouter>
         <Help />
     </BrowserRouter>
     );
-
+    cookies.remove('loginToken');
+    
     const faqButtons = getAllByTestId('faq-button');
     expect(faqButtons).toHaveLength(5);
 
