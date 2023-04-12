@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
+import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
@@ -21,8 +21,7 @@ beforeEach(() => {
     global.alert = jest.fn();
     axios.get = jest.fn().mockImplementation(() => Promise.resolve());
     axios.post = jest.fn().mockImplementation(() => Promise.resolve());
-    axios.get.mockResolvedValueOnce('mockResponse');
-    axios.post.mockResolvedValueOnce('mockResponse');
+    //axios.get = jest.fn().mockResolvedValueOnce({ data: { username: "test", name: "test", firstname: "test", language: "test", age: 20 } });
 });
 
 afterEach(() => {
@@ -46,30 +45,107 @@ describe('Profile Tests', () => {
 
     expect(window.location.assign).toBeCalledWith('/');
   });
-  // test('renders user information correctly', () => {
-  //   render(<Profile />);
-  //   expect(screen.getByText('Modify Profile')).toBeInTheDocument();
-  //   expect(screen.getByAltText('Avatar')).toBeInTheDocument();
-  //   expect(screen.getByText('Username')).toBeInTheDocument();
-  //   expect(screen.getByText('Full Name')).toBeInTheDocument();
-  //   expect(screen.getByText('Email')).toBeInTheDocument();
-  //   expect(screen.getByText('Address')).toBeInTheDocument();
-  //   expect(screen.getByText('Phone Number')).toBeInTheDocument();
-  //   expect(screen.getByText('Language')).toBeInTheDocument();
-  //   expect(screen.getByText('Age')).toBeInTheDocument();
-  // });
-  // test('renders process information correctly', () => {
-  //   const processInfo = [
-  //     {
-  //       userProcess: {
-  //         id: 1,
-  //         process_title: 'Process Title'
-  //       },
-  //       pourcentage: 50
-  //     }
-  //   ];
-  //   render(<Profile userProcessInfo={processInfo} />);
-  //   expect(screen.getByText('Process Title')).toBeInTheDocument();
-  //   expect(screen.getByText('50%')).toBeInTheDocument();
-  // });
+  it('should render the page correctly', () => {
+    const { getByText, getAllByText } = render(<Router><Profile /></Router>);
+
+    expect(getAllByText('Modify Profile').length).not.toEqual(0);
+    expect(getByText('Email')).not.toBeNull();
+    expect(getByText('Address')).not.toBeNull();
+    expect(getByText('Phone Number')).not.toBeNull();
+    expect(getByText('Language')).not.toBeNull();
+    expect(getByText('Your current process')).not.toBeNull();
+  });
+  it('should link to the modify profile page when about button clicked', () => {
+    const { getByTestId } = render(
+        <BrowserRouter>
+            <Profile />
+        </BrowserRouter>
+    );
+
+    const linkElement = getByTestId('modify-profile-btn');
+    expect(linkElement).toHaveAttribute('href', '/settings');
+  });
+  test('Axios.get used in the use effect to have user\'s datas.', () => {
+    const cookies = new Cookies();
+    cookies.set('loginToken', { token: 'token123' });
+
+    render(
+        <BrowserRouter>
+            <Profile />
+        </BrowserRouter>
+    );
+    cookies.remove('loginToken');
+
+    expect(axios.get).toHaveBeenCalled();
+  });
+  test('Should display user\'s datas', async () => {
+    const cookies = new Cookies();
+    cookies.set('loginToken', { token: 'token123' });
+    const fakeUser =
+    {
+      email: "testEmail",
+      username: "testUsername",
+      address: "testAddress",
+      number_phone: "testPhoneNumber",
+      language: "testLanguage",
+      age: 20
+    };
+
+    axios.get = jest.fn().mockResolvedValue({ status:200, data: fakeUser});
+    const useStateSpy = jest.spyOn(React, 'useState');
+    useStateSpy.mockImplementation((init) => [init, jest.fn()]);
+    const { getByTestId } = render(
+        <BrowserRouter>
+            <Profile />
+        </BrowserRouter>
+    );
+    cookies.remove('loginToken');
+
+    await waitFor(() => {
+      expect(axios.get).toHaveBeenCalled();
+      expect(useStateSpy).toHaveBeenCalled();
+      const emailElement = getByTestId('email');
+      expect(emailElement.textContent).toEqual(fakeUser.email);
+      const usernameElement = getByTestId('username');
+      expect(usernameElement.textContent).toEqual(fakeUser.username);
+      const addressElement = getByTestId('address');
+      expect(addressElement.textContent).toEqual(fakeUser.address);
+      const phonenumberElement = getByTestId('number_phone');
+      expect(phonenumberElement.textContent).toEqual(fakeUser.number_phone);
+      const languageElement = getByTestId('language');
+      expect(languageElement.textContent).toEqual(fakeUser.language);
+      const ageElement = getByTestId('age');
+      expect(ageElement.textContent).toEqual(fakeUser.age.toString());
+    });
+  });
+  test('Should display a button when userProcessInfo not null.', async () => {
+    const cookies = new Cookies();
+    cookies.set('loginToken', { token: 'token123' });
+    const fakeProcess = [
+      {
+        pourcentage: 33,
+        userProcess: {
+          process_title: 'test'
+        }
+      }
+    ];
+
+    axios.get = jest.fn().mockResolvedValue({ status: 200,  data: { response: fakeProcess }});
+    const useStateSpy = jest.spyOn(React, 'useState');
+    useStateSpy.mockImplementation((init) => [init, jest.fn()]);
+    const { getByTestId } = render(
+        <BrowserRouter>
+            <Profile />
+        </BrowserRouter>
+    );
+    cookies.remove('loginToken');
+    
+    await waitFor(() => {
+      expect(useStateSpy).toHaveBeenCalled();
+      const button = getByTestId('Process-Btn');
+      expect(button).not.toBeNull();
+      fireEvent.click(button);
+      expect(window.location.href).toEqual('processResult/' + fakeProcess[0].userProcess.process_title);
+    });
+  });
 });

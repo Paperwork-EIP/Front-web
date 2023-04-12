@@ -31,6 +31,8 @@ const ProfilePage = () => {
         else {
             axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
                 .then(res => {
+                    console.log("user getbytoken")
+                    console.log(res);
                     console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
@@ -38,7 +40,7 @@ const ProfilePage = () => {
                     setLanguage(res.data.language);
                     setAge(res.data.age);
                     setEmail(res.data.email);
-                    setAddress(res.data.adress);
+                    setAddress(res.data.address);
                     setPhonenumber(res.data.number_phone);
                 }).catch(err => {
                     console.log(err)
@@ -47,6 +49,7 @@ const ProfilePage = () => {
             axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.token } })
                 .then(res => {
                     console.log("res.data.response getUserProcesses");
+                    console.log(res);
                     console.log(res.data.response);
                     setUserProcessInfo(res.data.response);
                 }).catch(err => {
@@ -62,11 +65,11 @@ const ProfilePage = () => {
             <Header />
 
             <div className='Profile'>
-                <a href='/settings' className='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />Modify Profile</a>
+                <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />Modify Profile</a>
                 <div className='informations-container'>
                     <div className='main-container'>
                         <img src="https://wallpapers.com/images/featured/4co57dtwk64fb7lv.jpg" alt="Avatar" className="Avatar"></img>
-                        <div className='section-username'>{username}</div>
+                        <div data-testid="username" className='section-username'>{username}</div>
                         <div className='section-fullname'>
                             <div className='fn-name'>{name}</div>
                             <div className='fn-firstname'>{firstname}</div>
@@ -75,27 +78,27 @@ const ProfilePage = () => {
                     <div className='secondary-container'>
                         <div className='secondary-row'>
                             <div className='secondary-label'>Email</div>
-                            <div className='section-text email-text'>{email}</div>
+                            <div data-testid="email" className='section-text email-text'>{email}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Address</div>
-                            <div className='section-text address-text'>{address}</div>
+                            <div data-testid="address" className='section-text address-text'>{address}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Phone Number</div>
-                            <div className='section-text phonenumber-text'>{phonenumber}</div>
+                            <div data-testid="number_phone" className='section-text phonenumber-text'>{phonenumber}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Language</div>
-                            <div className='section-text language-text'>{language}</div>
+                            <div data-testid="language" className='section-text language-text'>{language}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Age</div>
-                            <div className='section-text section-age'>{age}</div>
+                            <div data-testid="age" className='section-text section-age'>{age}</div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +109,7 @@ const ProfilePage = () => {
                             userProcessInfo?.map((item: any) => {
                                 return (
                                     item.pourcentage ?
-                                        <button className='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.process_title}>
+                                        <button className='Process-Btn' data-testid='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.process_title}>
                                             <div className='process-progress' key={item.userProcess.id}>
                                                 <div className='progress-name'>{item.userProcess.process_title}</div>
                                                 <div className='progress-bar'>
