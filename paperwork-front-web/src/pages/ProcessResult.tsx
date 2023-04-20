@@ -28,7 +28,7 @@ const ProcessResult = () => {
     // console.log(processSelected);
     
     useEffect(() => {
-        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_email: cookiesInfo.email } })
+        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.token } })
         .then(res => {
             console.log(res.data.response);
             setStepsAnswer(res.data.response);

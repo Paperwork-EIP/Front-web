@@ -98,7 +98,7 @@ const CalendarPage = () => {
     })
 
     const handleProcessSelected = (e: React.SetStateAction<any>) => {
-        axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_email=${cookieList.email}`)
+        axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_token=${cookieList.token}`)
         .then(res => {
             var steps = [];
             for (var i = 0; i < res.data.response.length; i++)
@@ -123,7 +123,7 @@ const CalendarPage = () => {
     }
 
     useEffect(() => {
-        axios.get(`${api}/calendar/getAll?email=${cookieList.email}`)
+        axios.get(`${api}/calendar/getAll?token=${cookieList.token}`)
         .then(res => {
         var rdvTmp = [];
         for (var i = 0; i < res.data.appoinment.length; i++) {
@@ -161,7 +161,7 @@ const CalendarPage = () => {
             indexMod++;
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_email=${cookieList.email}`)
+                axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_token=${cookieList.token}`)
                 .then(res => {
                     var steps = [];
                     for (var i = 0; i < res.data.response.length; i++)

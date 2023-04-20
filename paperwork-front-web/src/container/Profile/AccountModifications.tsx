@@ -31,7 +31,7 @@ const AccountModifications = () => {
     // const [userInfos, setUserInfos] = useState<any[]>([]);
 
     useEffect(() => {
-        axios.get(`${api}/user/getbyemail`, { params: { email: cookiesInfo.email } })
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
         .then(res => {
             console.log(res.data);
             // setUserInfos(res.data);
@@ -53,7 +53,7 @@ const AccountModifications = () => {
         
         if (password === verifPassword) {
             axios.get(`${api}/user/modifyDatas`, { params: {
-                email: cookiesInfo.email,
+                token: cookiesInfo.token,
                 profile_picture: profilPictureLink,
                 username: username,
                 new_email: emailAdress,

@@ -16,13 +16,7 @@ function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [name, setName] = useState('Username');
     const [email, setEmail] = useState('email@example.com');
-    const [avatar, setAvatar] = useState('assets/header/empty-profile-picture.jpg');
-
-    function checkIfCookie() {
-        if (!cookies.get('loginToken')) {
-            window.location.replace('/');
-        }
-    }
+    const [avatar, setAvatar] = useState('/assets/header/empty-profile-picture.jpg');
 
     function checkAvatar(url: string) {
         if (url) {
@@ -31,40 +25,40 @@ function Header() {
     }
     function handleClickOutside(event: any) {
         if (event.target.className === 'Header-modal') {
-            closeModal();
+            setIsOpen(false);
         }
     }
 
     function openModal() {
-        setIsOpen(true);
-    }
-
-    function closeModal() {
-        setIsOpen(false);
+        const state = !isOpen;
+        setIsOpen(state);
     }
 
     function logout() {
         cookies.remove('loginToken');
-        checkIfCookie();
     }
 
     function getData() {
-        axios.get(`${api}/user/getbyemail`, {
-            params: { email: cookiesInfo.email }
-        })
-            .then(res => {
-                console.log(res);
-                setName(res.data.username);
-                setEmail(res.data.email);
-                checkAvatar(res.data.profile_picture);
+        if (!cookies.get('loginToken')) {
+            window.location.replace('/');
+        }
+        else {
+            axios.get(`${api}/user/getbytoken`, {
+                params: { email: cookiesInfo.token }
             })
-            .catch(err => {
-                console.error(err);
-            });
+                .then(res => {
+                    setName(res.data.username);
+                    setEmail(res.data.email);
+                    checkAvatar(res.data.profile_picture);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
+
     }
 
     useEffect(() => {
-        checkIfCookie();
         getData();
         if (isOpen) {
             document.addEventListener('click', handleClickOutside);
@@ -79,44 +73,44 @@ function Header() {
             <div className="Header-container">
                 <div className="Header-left-side">
                     <div className="Header-logo">
-                        <img src="logo.png" alt="logo-paperwork-header" />
+                        <img src="/logo.png" alt="logo-paperwork-header" />
                     </div>
                 </div>
                 <div className="Header-right-side">
                     <div className="Header-right-content">
-                        <Link to='/quiz' className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"}>
+                        <Link to='/quiz' data-testid="link-quiz" className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"}>
                             <MdOutlineAdd />
                         </Link>
-                        <button className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"} onClick={toggleColorMode}>
+                        <button className={colorMode === 'light' ? "Header-button Day-mode" : "Header-button Night-mode"} aria-label="button-mode" onClick={toggleColorMode}>
                             {colorMode === 'light' ? <MdModeNight /> : <MdLightMode />}
                         </button>
-                        <button className="Header-avatar-button" onClick={openModal}>
+                        <button className="Header-avatar-button" aria-label="button-open-modal" onClick={openModal}>
                             <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
                         {isOpen && (
-                            <div className="Header-modal">
+                            <div className="Header-modal"data-testid="Header-modal" >
                                 <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
                                     <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
                                     <h2>{name}</h2>
                                     <p>{email}</p>
                                     <div className="Header-separator"></div>
-                                    <Link to='/home' className="Header-modal-link">
+                                    <Link to='/home' data-testid="link-home" className="Header-modal-link">
                                         <MdHome />
                                         <span>Home</span>
                                     </Link>
-                                    <Link to='/profile' className="Header-modal-link">
+                                    <Link to='/profile' data-testid="link-profile" className="Header-modal-link">
                                         <MdPerson />
                                         <span>Profile</span>
                                     </Link>
-                                    <Link to='/calendar' className="Header-modal-link">
+                                    <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
                                         <MdCalendarMonth />
                                         <span>Calendar</span>
                                     </Link>
-                                    <Link to='/help' className="Header-modal-link">
+                                    <Link to='/help' data-testid="link-help" className="Header-modal-link">
                                         <MdHelpOutline />
                                         <span>Help</span>
                                     </Link>
-                                    <button className="Header-modal-link" onClick={logout}>
+                                    <button className="Header-modal-link" aria-label='button-logout' onClick={logout}>
                                         <MdLogout />
                                         <span>Logout</span>
                                     </button>

@@ -99,6 +99,10 @@ $gray: #9b9b9b;
                 transition: all 0.3s ease-in-out;
             }
 
+            .disabled {
+                border-color: #fc5e6d;
+            }
+
             .Login-submit-button:hover {
                 background-color: #FDE0E6;
                 color: black;
