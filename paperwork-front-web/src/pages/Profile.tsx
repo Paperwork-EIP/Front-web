@@ -33,7 +33,7 @@ const ProfilePage = () => {
             axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
                 .then(res => {
                     // console.log("user getbytoken")
-                    console.log(res);
+                    // console.log(res);
                     // console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
@@ -51,7 +51,7 @@ const ProfilePage = () => {
             axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
                 .then(res => {
                     // console.log("res.data.response getUserProcesses");
-                    console.log(res);
+                    // console.log(res);
                     // console.log(res.data.response);
                     setUserProcessInfo(res.data.response);
                 }).catch(err => {
@@ -70,7 +70,7 @@ const ProfilePage = () => {
                 <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />Modify Profile</a>
                 <div className='informations-container'>
                     <div className='main-container'>
-                        <img src={profilePicture === null ? "Avatars/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
+                        <img src={profilePicture === null ? "Avatars/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
                         <div data-testid="username" className='section-username'>{username === null ? "No uername found" : username}</div>
                         <div className='section-fullname'>
                             <div className='fn-name'>{name === null ? "No name found" : name}</div>
@@ -108,7 +108,7 @@ const ProfilePage = () => {
                     <h1 className='heading'>Your current process</h1>
                     <>
                         {
-                            userProcessInfo.length === 0 ?
+                            userProcessInfo && userProcessInfo.length === 0 ?
                                 <div className='no-process'>You don't have any process yet</div>
                                 :
                             userProcessInfo?.map((item: any) => {

@@ -21,7 +21,6 @@ beforeEach(() => {
     global.alert = jest.fn();
     axios.get = jest.fn().mockImplementation(() => Promise.resolve());
     axios.post = jest.fn().mockImplementation(() => Promise.resolve());
-    //axios.get = jest.fn().mockResolvedValueOnce({ data: { username: "test", name: "test", firstname: "test", language: "test", age: 20 } });
 });
 
 afterEach(() => {
@@ -85,10 +84,11 @@ describe('Profile Tests', () => {
     {
       email: "testEmail",
       username: "testUsername",
-      address: "testAddress",
+      adress: "testAddress",
       number_phone: "testPhoneNumber",
       language: "testLanguage",
-      age: 20
+      age: 20,
+      profile_picture: "Avatars/Avatar05.png"
     };
 
     axios.get = jest.fn().mockResolvedValue({ status:200, data: fakeUser});
@@ -109,13 +109,15 @@ describe('Profile Tests', () => {
       const usernameElement = getByTestId('username');
       expect(usernameElement.textContent).toEqual(fakeUser.username);
       const addressElement = getByTestId('address');
-      expect(addressElement.textContent).toEqual(fakeUser.address);
+      expect(addressElement.textContent).toEqual(fakeUser.adress);
       const phonenumberElement = getByTestId('number_phone');
       expect(phonenumberElement.textContent).toEqual(fakeUser.number_phone);
       const languageElement = getByTestId('language');
       expect(languageElement.textContent).toEqual(fakeUser.language);
       const ageElement = getByTestId('age');
       expect(ageElement.textContent).toEqual(fakeUser.age.toString());
+      const profilePictureElement = getByTestId('profilePicture');
+      expect(profilePictureElement).toHaveAttribute('src', fakeUser.profilePicture);
     });
   });
   test('Should display a button when userProcessInfo not null.', async () => {
