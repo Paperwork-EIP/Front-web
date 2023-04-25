@@ -19,22 +19,30 @@ const RegisterPage = () => {
 
     const cookies = new Cookies();
 
-    function handleSubmit() {
-        axios.post(`${api}/user/register`,
+    async function handleSubmit() {
+        await axios.post(`${api}/user/register`,
             {
                 username: username,
                 email: email,
                 password: password
             }
-        ).then(response => {
+        ).then(async response => {
             cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
-                path: '/',
-                secure: true,
-                sameSite: 'none'
-            });
-            window.location.replace('/home');
-        }).catch(() => {
+               path: '/',
+               secure: true,
+               sameSite: 'none'
+            });            
+            
+            await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`
+            ).then(res => {
+                    window.location.replace('/emailSent');
+                }).catch(err => {
+                    alert("Failure to send the verification email");
+                    console.log(err);
+                })
+        }).catch((err) => {
             alert("Email, username or password is incorrect.");
+            console.log(err);
             return;
         })
     };
@@ -61,6 +69,8 @@ const RegisterPage = () => {
             window.location.replace(res.data)
         })
     }
+
+    
 
     useEffect(() => {
         if (cookies.get('loginToken')) {
