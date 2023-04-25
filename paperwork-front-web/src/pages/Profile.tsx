@@ -32,9 +32,9 @@ const ProfilePage = () => {
         else {
             axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log("user getbytoken")
+                    // console.log("user getbytoken")
                     console.log(res);
-                    console.log(res.data);
+                    // console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
                     setFirstname(res.data.firstname);
@@ -50,12 +50,12 @@ const ProfilePage = () => {
 
             axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log("res.data.response getUserProcesses");
+                    // console.log("res.data.response getUserProcesses");
                     console.log(res);
-                    console.log(res.data.response);
+                    // console.log(res.data.response);
                     setUserProcessInfo(res.data.response);
                 }).catch(err => {
-                    console.log("err getUserProcesses")
+                    // console.log("err getUserProcesses")
                     console.log(err)
                 });
         }
