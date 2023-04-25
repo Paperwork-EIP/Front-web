@@ -22,6 +22,7 @@ const ProfilePage = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phonenumber, setPhonenumber] = useState("");
+    const [profilePicture, setProfilePicture] = useState("");
     const [userProcessInfo, setUserProcessInfo] = useState([{}]);
 
     useEffect(() => {
@@ -29,31 +30,32 @@ const ProfilePage = () => {
             window.location.assign('/');
         }
         else {
-            axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
+            axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log("user getbytoken")
-                    console.log(res);
-                    console.log(res.data);
+                    // console.log("user getbytoken")
+                    // console.log(res);
+                    // console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
                     setFirstname(res.data.firstname);
                     setLanguage(res.data.language);
                     setAge(res.data.age);
                     setEmail(res.data.email);
-                    setAddress(res.data.address);
+                    setAddress(res.data.adress);
                     setPhonenumber(res.data.number_phone);
+                    setProfilePicture(res.data.profile_picture);
                 }).catch(err => {
                     console.log(err)
                 });
 
-            axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.token } })
+            axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log("res.data.response getUserProcesses");
-                    console.log(res);
-                    console.log(res.data.response);
+                    // console.log("res.data.response getUserProcesses");
+                    // console.log(res);
+                    // console.log(res.data.response);
                     setUserProcessInfo(res.data.response);
                 }).catch(err => {
-                    console.log("err getUserProcesses")
+                    // console.log("err getUserProcesses")
                     console.log(err)
                 });
         }
@@ -68,37 +70,37 @@ const ProfilePage = () => {
                 <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />Modify Profile</a>
                 <div className='informations-container'>
                     <div className='main-container'>
-                        <img src="https://wallpapers.com/images/featured/4co57dtwk64fb7lv.jpg" alt="Avatar" className="Avatar"></img>
-                        <div data-testid="username" className='section-username'>{username}</div>
+                        <img src={profilePicture === null ? "Avatars/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
+                        <div data-testid="username" className='section-username'>{username === null ? "No uername found" : username}</div>
                         <div className='section-fullname'>
-                            <div className='fn-name'>{name}</div>
-                            <div className='fn-firstname'>{firstname}</div>
+                            <div className='fn-name'>{name === null ? "No name found" : name}</div>
+                            <div className='fn-firstname'>{firstname === null ? "No firstname found" : firstname}</div>
                         </div>
                     </div>
                     <div className='secondary-container'>
                         <div className='secondary-row'>
                             <div className='secondary-label'>Email</div>
-                            <div data-testid="email" className='section-text email-text'>{email}</div>
+                            <div data-testid="email" className='section-text email-text'>{email === null ? "No email found" : email}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Address</div>
-                            <div data-testid="address" className='section-text address-text'>{address}</div>
+                            <div data-testid="address" className='section-text address-text'>{address === null ? "No address found" : address}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Phone Number</div>
-                            <div data-testid="number_phone" className='section-text phonenumber-text'>{phonenumber}</div>
+                            <div data-testid="number_phone" className='section-text phonenumber-text'>{phonenumber === null ? "No phonenumber found" : phonenumber}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Language</div>
-                            <div data-testid="language" className='section-text language-text'>{language}</div>
+                            <div data-testid="language" className='section-text language-text'>{language === null ? "No language found" : language}</div>
                         </div>
                         <hr />
                         <div className='secondary-row'>
                             <div className='secondary-label'>Age</div>
-                            <div data-testid="age" className='section-text section-age'>{age}</div>
+                            <div data-testid="age" className='section-text section-age'>{age === null ? "No age found" : age}</div>
                         </div>
                     </div>
                 </div>
@@ -106,6 +108,9 @@ const ProfilePage = () => {
                     <h1 className='heading'>Your current process</h1>
                     <>
                         {
+                            userProcessInfo && userProcessInfo.length === 0 ?
+                                <div className='no-process'>You don't have any process yet</div>
+                                :
                             userProcessInfo?.map((item: any) => {
                                 return (
                                     item.pourcentage ?

@@ -25,7 +25,7 @@ const SettingsPage = () => {
     const [email, setEmail] = useState("");
     const [address, setAddress] = useState("");
     const [phonenumber, setPhonenumber] = useState("");
-    // const [profilPictureLink, setProfilPictureLink] = useState("");
+    const [profilePicture, setProfilePicture] = useState("");
     const [password, setPassword] = useState("");
     const [verifPassword, setVerifPassword] = useState("");
 
@@ -39,11 +39,10 @@ const SettingsPage = () => {
     const [showModal, setShowModal] = React.useState(false);
     const [deleteModal, setDeleteModal] = React.useState(false);
     const [variableToChange, setVariableToChange] = useState("");
-
-
+    const [avatarModal, setAvatarModal] = React.useState(false);
 
     useEffect(() => {
-        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.token } })
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
         .then(res => {
             console.log(res.data);
             setUsername(res.data.username);
@@ -54,6 +53,7 @@ const SettingsPage = () => {
             setEmail(res.data.email);
             setAddress(res.data.adress);
             setPhonenumber(res.data.number_phone);
+            setProfilePicture(res.data.profile_picture);
         }).catch(err => {
             console.log(err)
         });
@@ -74,7 +74,7 @@ const SettingsPage = () => {
         event.preventDefault();
         if (variableToChange === "username") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 username: username,
             }).then(res => {
                 console.log(res.data);
@@ -94,7 +94,7 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "name") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 name: name,
             }).then(res => {
                 console.log(res.data);
@@ -112,7 +112,7 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "firstname") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 firstname: firstname,
             }).then(res => {
                 console.log(res.data);
@@ -130,7 +130,7 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "language") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 language: language,
             }).then(res => {
                 console.log(res.data);
@@ -147,26 +147,30 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "age") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
-                age: age,
-            }).then(res => {
-                console.log(res.data);
-                alert("Age updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error. You should put a number.");
-                }
-            });
+            if (Number(age) < 1 || Number(age) > 200) {
+                alert("Age must be between 1 and 200.");
+            } else {
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    age: age,
+                }).then(res => {
+                    console.log(res.data);
+                    alert("Age updated!");
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert("Missing parameter token.");
+                    } else if (err.response.status === 404) {
+                        alert("User not found.");
+                    } else if (err.response.status === 500) {
+                        alert("System error. You should put a number.");
+                    }
+                });
+            }
         } else if (variableToChange === "email") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 new_email: email,
             }).then(res => {
                 console.log(res.data);
@@ -195,7 +199,7 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "address") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 adress: address,
             }).then(res => {
                 console.log(res.data);
@@ -213,7 +217,7 @@ const SettingsPage = () => {
             });
         } else if (variableToChange === "phonenumber") {
             axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.token,
+                token: cookiesInfo.loginToken,
                 number_phone: phonenumber,
             }).then(res => {
                 console.log(res.data);
@@ -232,7 +236,7 @@ const SettingsPage = () => {
         } else if (variableToChange === "password") {
             if (password.length >= 8 && password === verifPassword) {
                 axios.post(`${api}/user/modifyDatas`, {
-                    token: cookiesInfo.token,
+                    token: cookiesInfo.loginToken,
                     password: password,
                 }).then(res => {
                     console.log(res.data);
@@ -257,7 +261,7 @@ const SettingsPage = () => {
 
     const handleDeleteAccount = (event: any) => {
         axios.get(`${api}/user/delete`, { params: {
-            token: cookiesInfo.token,
+            token: cookiesInfo.loginToken,
         }}).then(res => {
             console.log(res.data);
             alert("Account deleted!");
@@ -276,6 +280,26 @@ const SettingsPage = () => {
         setDeleteModal(!deleteModal);
     }
 
+    const handleSetNewAvatar = (newAvatar: string) => {
+        axios.post(`${api}/user/modifyDatas`, {
+            token: cookiesInfo.loginToken,
+            profile_picture: newAvatar,
+        }).then(res => {
+            console.log(res.data);
+            alert("Avatar updated!");
+            window.location.reload();
+        }).catch(err => {
+            console.log(err)
+            if (err.response.status === 400) {
+                alert("Missing parameter token.");
+            } else if (err.response.status === 404) {
+                alert("User not found.");
+            } else if (err.response.status === 500) {
+                alert("System error.");
+            }
+        });
+        setAvatarModal(!avatarModal);
+    }
     
     return (
         <>
@@ -289,7 +313,10 @@ const SettingsPage = () => {
 
                 <div className='section-container'>
                     <div className="information-container">
-                        <img src="https://wallpapers.com/images/featured/4co57dtwk64fb7lv.jpg" alt="Avatar" className="Avatar"></img>
+                        <div className="avatar-container">
+                            <img src={profilePicture === null ? "Avatars/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
+                            <button onClick={() => setAvatarModal(!avatarModal) }><img src="Avatars/PictureModif.png" alt="PictureModif" className="ModifImg"></img></button>
+                        </div>
                     </div>
 
                     <div className="information-container">
@@ -327,7 +354,7 @@ const SettingsPage = () => {
                     <div className="information-container">
                         <label htmlFor="age">Age</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setAge(target.value)} className='edit-input' type="number" id="age" name="age" placeholder={ age ? age : "Age..."}></input>
+                            <input onChange={({ target }) => setAge(target.value)} className='edit-input' type="number" id="age" name="age" min="1" max="200" placeholder={ age ? age : "Age..."}></input>
                             <button type="button" className='edit-btn' onClick={() => handleChangeVariable("age")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
@@ -423,6 +450,32 @@ const SettingsPage = () => {
                                     <div className="modal-button-container">
                                         <button type="button" className="modal-btn modal-cancel-btn" onClick={() => setDeleteModal(false)}>Cancel</button>
                                         <button type="button" className="modal-btn modal-continue-btn" onClick={handleDeleteAccount}>Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    : null
+                }
+
+                {
+                    avatarModal ?
+                        <div id="changeVariableModal" className="modal-background">
+                            <div className="modal-container">
+                                <div className="modal-content">
+                                    <h1 className="modal-title">Click to choose a new avatar :</h1>
+                                    <div className="divider"> <span></span></div>
+                                    <div className="modal-avatar-container">
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar01.png") }><img src="Avatars/Avatar01.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar02.png") }><img src="Avatars/Avatar02.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar03.png") }><img src="Avatars/Avatar03.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar04.png") }><img src="Avatars/Avatar04.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar05.png") }><img src="Avatars/Avatar05.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar06.png") }><img src="Avatars/Avatar06.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar07.png") }><img src="Avatars/Avatar07.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' onClick={ () => handleSetNewAvatar("Avatars/Avatar08.png") }><img src="Avatars/Avatar08.png" alt="Avatar" className="Avatar"></img></button>
+                                        <div className="modal-avatar-cancel-btn-container">
+                                            <button type="button" className="modal-avatar-cancel-btn" onClick={() => setAvatarModal(false)}>Cancel</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

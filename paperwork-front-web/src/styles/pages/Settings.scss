@@ -34,16 +34,6 @@
         .information-container {
             width: 50%;
             padding: 12px;
-
-            .Avatar {
-                vertical-align: middle;
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
-                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
-                border: 0.1rem solid white;
-            }
             
             label {
                 padding: 12px 12px 0 0;
@@ -151,6 +141,33 @@
                 font-size: 0.8rem;
                 font-weight: bold;
             }
+
+            .avatar-container {
+                position: relative;
+                vertical-align: middle;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
+                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+                border: 0.1rem solid white;
+                
+                .Avatar {
+                    position: relative;
+                    top: 0;
+                    left: 0;
+                    border-radius: 50%;
+                }
+                
+                .ModifImg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-radius: 50%;
+                    background-color: rgba(0, 0, 0, 0.4);
+                    padding: 20px;
+                }
+            }
         }
 
         @media (max-width: 768px) {
@@ -201,6 +218,26 @@
             height: 60%;
             background-color: rgb(226, 253, 248);
             z-index: 1000;
+            
+            /* width */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+            
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: #888;
+            }
+            
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
 
             .modal-content {
                 width: calc(100% - 40px);
@@ -212,6 +249,7 @@
                 color: #FC6976;
                 -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
                 box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+                overflow-y: scroll;
 
                 .divider span {
                     display: block;
@@ -230,7 +268,7 @@
                     .modal-btn {
                         color: white;
                         width: 25%;
-                        height: 20%;
+                        height: auto;
                         padding: 10px;
                         margin-top: 10px;
                         border-radius: 4px;
@@ -247,8 +285,49 @@
                     }
                 }
 
-                
-                @media (max-width: 1068px) {
+                .modal-avatar-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+
+                    .modal-avatar-button {
+                        width: 100px;
+                        margin: 10px 20px 10px 20px;
+                        border-radius: 50%;
+                        
+                        :hover {
+                            cursor: pointer;
+                            border: 1px solid black;
+                            border-radius: 50%;
+                        }
+                    }
+
+                    .modal-avatar-cancel-btn-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+
+                        .modal-avatar-cancel-btn {
+                            color: white;
+                            padding: 10px;
+                            margin-top: 10px;
+                            border-radius: 4px;
+                            -webkit-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+                            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+                            background-color: #FC6976;
+                        }
+                    }
+                }
+            }
+
+            @media (max-width: 1068px) {
+                .modal-content {
+                    font-size: 1em;
+
                     .modal-button-container {
                         flex-direction: column;
                         height: 70%;
@@ -258,7 +337,6 @@
                             padding: 2px;
                         }
                     }
-
                 }
             }
         }

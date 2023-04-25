@@ -16,7 +16,7 @@ const QuizQuestion = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-    const email = cookies.get('loginToken');
+    const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
     var { step } = useParams();
@@ -40,7 +40,7 @@ const QuizQuestion = () => {
 
     function handleClick(currentQuestionAnswer: string) {
         // console.log("process_title = " + processSelected);
-        // console.log("email = " + email.email);
+        // console.log("email = " + cookiesInfo.email);
         // console.log("currentQuestionAnswer");
         // console.log(currentQuestionAnswer);
         const urlAnswers = window.location.search.substring(1);
@@ -71,7 +71,7 @@ const QuizQuestion = () => {
 
             // console.log("queryArr = ");
             // console.log(queryArr);
-            const post = { process_title: processSelected, user_token: email.token, questions: queryParams }
+            const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
             // console.log("queryParams = ");
             // console.log(queryParams);
             axios.post(`${api}/userProcess/add`, post)
