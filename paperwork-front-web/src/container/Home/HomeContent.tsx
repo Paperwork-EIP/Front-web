@@ -50,7 +50,7 @@ const Bg = () => {
   const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
 
   useEffect(() => {
-      axios.get(`${api}/calendar/getAll?email=${cookieList.email}`)
+      axios.get(`${api}/calendar/getAll?token=${cookieList.token}`)
       .then(res => {
       var rdvTmp =  [];
       for (var i = 0; i < res.data.appoinment.length; i++) {
@@ -63,7 +63,7 @@ const Bg = () => {
   })
 
   useEffect(() => {
-      axios.get(`${api}/userProcess/getUserProcesses?user_email=${cookieList.email}`)
+      axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.token}`)
       .then(res => {
       var userProcessTmp = [];
       for (var j = 0; j < res.data.response.length; j++) {

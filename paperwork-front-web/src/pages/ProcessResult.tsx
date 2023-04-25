@@ -25,23 +25,48 @@ const ProcessResult = () => {
     const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
-    // console.log(processSelected);
     
     useEffect(() => {
-        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_email: cookiesInfo.email } })
+        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
         .then(res => {
             console.log(res.data.response);
-            setStepsAnswer(res.data.response);
+            setStepsAnswer(res.data.response.sort((a: { id: number; }, b: { id: number; }) => a.id - b.id));
             stepsAnswer?.map((item: any) => {
                 if (item.is_done === true) {
                     document.getElementById(item.id)?.setAttribute("checked", "checked");
                 }
-                return null;
-            })
+            });
         }).catch(err => {
-            console.log(err)
+            console.log(err);
         });
-    }, [cookiesInfo.email, processSelected, api, stepsAnswer])  
+    }, [api, cookiesInfo.loginToken, processSelected, stepsAnswer]);
+
+    const handleCheckboxClick = (id: any, is_done: any) => {
+        var newStepsAnswer = [];
+        newStepsAnswer = stepsAnswer;
+        newStepsAnswer?.map((item: any) => {
+            if (item.id === id) {
+                item.is_done = !is_done;
+            }
+        })
+        setStepsAnswer(newStepsAnswer);
+        newStepsAnswer = stepsAnswer.map((item: any) => {
+            return {
+                step_id: item.step_id,
+                is_done: item.is_done
+            }
+        })
+        axios.post(`${api}/userProcess/update`, {
+            user_token: cookiesInfo.loginToken,
+            process_title: processSelected,
+            step: newStepsAnswer
+            }).then(res => {
+                console.log(res.data.response);
+                alert("Updated successfully!");
+            }).catch(err => {
+                console.log(err)
+        })
+    }
 
     return (
         <>
@@ -57,7 +82,7 @@ const ProcessResult = () => {
                                 stepsAnswer?.map((item: any) => {
                                     return(
                                         <div>
-                                            <input className='ProcessResult-Checkbox' type="checkbox" id={item.id}></input>
+                                            <input className='ProcessResult-Checkbox' type="checkbox" id={item.id} onClick={() => handleCheckboxClick( item.id, item.is_done) }></input>
                                             <label htmlFor={item.id}> : {item.step_description}</label>
                                         </div>
                                     )

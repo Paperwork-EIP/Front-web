@@ -80,7 +80,7 @@ function HelpPage() {
             <div className="App">
                 <div className="faqs">
                     {faqs.map((faq, index) => (
-                    <div
+                    <div data-testid="faq-button"
                         className={"faq " + (faq.open ? "open" : "")}
                         key={index}
                         onClick={() => toggleFAQ(index)}>

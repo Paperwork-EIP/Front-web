@@ -16,7 +16,7 @@ const QuizQuestion = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-    const email = cookies.get('loginToken');
+    const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
     var { step } = useParams();
@@ -24,14 +24,14 @@ const QuizQuestion = () => {
     const api = process.env.REACT_APP_BASE_URL;
     const [currentId, setCurrentId] = useState();
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState();
-    const [questions, setQuestions] = useState<any[]>([]);
+    const [questions, setQuestions] = useState([{}]);
 
     useEffect(() => {
         axios.get(`${api}/processQuestions/get`, { params: { title: processSelected } })
         .then(res => {
             console.log(res.data.questions);
-            setCurrentId(res.data.questions[nextStep - 1][0]);
-            setCurrentQuestionAnswer(res.data.questions[nextStep - 1][1]);
+            setCurrentId(res.data.questions[nextStep - 1].step_id);
+            setCurrentQuestionAnswer(res.data.questions[nextStep - 1].question);
             setQuestions(res.data.questions);
         }).catch(err => {
             console.log(err)
@@ -40,7 +40,7 @@ const QuizQuestion = () => {
 
     function handleClick(currentQuestionAnswer: string) {
         // console.log("process_title = " + processSelected);
-        // console.log("email = " + email.email);
+        // console.log("email = " + cookiesInfo.email);
         // console.log("currentQuestionAnswer");
         // console.log(currentQuestionAnswer);
         const urlAnswers = window.location.search.substring(1);
@@ -64,14 +64,14 @@ const QuizQuestion = () => {
             for (var q = 0; q < queryArr.length; q++) {
                 var qArr = queryArr[q].split('=');
                 if (qArr[1] === 'true')
-                    queryParams.push([parseInt(qArr[0]), true]);
+                    queryParams.push({ step_id: parseInt(qArr[0]), response: true});
                 else
-                    queryParams.push([parseInt(qArr[0]), false]);
+                    queryParams.push({ step_id: parseInt(qArr[0]), response: false});
             }
 
             // console.log("queryArr = ");
             // console.log(queryArr);
-            const post = { process_title: processSelected, user_email: email.email, questions: queryParams }
+            const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
             // console.log("queryParams = ");
             // console.log(queryParams);
             axios.post(`${api}/userProcess/add`, post)

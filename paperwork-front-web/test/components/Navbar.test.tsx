@@ -111,7 +111,3 @@ describe('Navbar Component Tests', () => {
         expect(window.location.pathname).toBe('/help');
     });
 });
-
-function mount(arg0: JSX.Element) {
-    throw new Error('Function not implemented.');
-}
