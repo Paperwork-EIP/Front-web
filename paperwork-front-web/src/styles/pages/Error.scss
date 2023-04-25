@@ -1,0 +1,76 @@
+$primary: #fc5e6d;
+$secondary: #29c9b3;
+$white: #fff;
+$gray: #9b9b9b;
+
+.Error {
+    --header-gradient-color-1: #1e1e1e;
+    --header-gradient-color-2: #a5a5a5;
+    --header-gradient-color-3: #1e1e1e;
+    --header-gradient-color-4: #a5a5a5;
+    --header-gradient-color-5: #29c9b3;
+    --header-gradient-color-6: purple;
+    --header-gradient-color-7: #23d5ab;
+    --header-font-color: whitesmoke;
+
+    height: 100vh;
+    background: linear-gradient(30deg,
+            var(--header-gradient-color-1),
+            var(--header-gradient-color-2),
+            var(--header-gradient-color-3),
+            var(--header-gradient-color-4),
+            var(--header-gradient-color-5)) !important;
+    background-size: 400% 130% !important;
+    color: white !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .Error-container {
+        height: 70%;
+        width: 60%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        background-color: #5f5f5f;
+        border-radius: 5px;
+        
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+
+    .EmailSent-connections {
+        width: 90%;
+        max-width: 700px;
+        margin-top: 4.5em;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .EmailSent-button-api {
+            font-size: 2em;
+            border: solid 1.5px white;
+            padding: 5px;
+            border-radius: 50%;
+            transition: all 0.3s ease-out;
+        }
+
+        .EmailSent-button-api:hover {
+            color: black;
+            background-color: #FDE0E6;
+        }
+    }
+}
+
+@media (max-width: 1200px) {
+    .Error {
+        background: #1e1e1e !important;
+    }
+    .Error-container {
+        width: 100% !important;
+    }
+}

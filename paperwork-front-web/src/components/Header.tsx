@@ -36,6 +36,7 @@ function Header() {
 
     function logout() {
         cookies.remove('loginToken');
+        window.location.reload();
     }
 
     function getData() {

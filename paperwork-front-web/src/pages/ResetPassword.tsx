@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
-import "../styles/ForgotPassword.css";
+import "../styles/ResetPassword.css";
 
-function ForgotPasswordPage() {
+function ResetPasswordPage() {
 
     const cookies = new Cookies();
 
@@ -15,7 +15,7 @@ function ForgotPasswordPage() {
         <>
             <Header/>
             <div className="fp-image">
-                <img src="assets/forgotpassword-page/ForgotPassword-bro.svg" alt="ForgotPassword_bro_image" />
+                <img src="assets/resetpassword-page/ResetPassword-bro.svg" alt="ResetPassword_bro_image" />
             </div>
             <input placeholder='Email' type="email" className="fp-user-email"></input>
             <button className="fp-button">Envoyer</button>
@@ -23,4 +23,4 @@ function ForgotPasswordPage() {
     );
 }
 
-export default ForgotPasswordPage;
+export default ResetPasswordPage;

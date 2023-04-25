@@ -14,6 +14,7 @@ const CalendarPage = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
+    
     const cookieList = cookies.get('loginToken')
     const api = process.env.REACT_APP_BASE_URL;
     const [date, setDate] = useState(new Date());

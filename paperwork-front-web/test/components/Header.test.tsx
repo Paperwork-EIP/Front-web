@@ -15,7 +15,8 @@ beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            replace: jest.fn()
+            replace: jest.fn(),
+            reload: jest.fn()
         }
     });
     axios.get = jest.fn().mockResolvedValue({ data: { username: "token123", email: "token123", profile_picture: "token123" } });
