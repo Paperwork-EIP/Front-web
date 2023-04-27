@@ -73,7 +73,7 @@ describe('Welcome Page Tests', () => {
             button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
         });
 
-        expect(window.location.pathname).toBe('/about');
+        expect(window.location.pathname).toBe('/aboutus');
     });
     it('should link to the contact page when contact button clicked', () => {
         const { getByTestId } = render(
@@ -83,12 +83,27 @@ describe('Welcome Page Tests', () => {
         );
 
         act(() => {
-            const button = getByTestId('Footer-contact-link');
+            const button = getByTestId('Footer-register-link');
 
             button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
         });
 
-        expect(window.location.pathname).toBe('/contact');
+        expect(window.location.pathname).toBe('/register');
+    });
+    it('should link to the login page when login button clicked', () => {
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <WelcomePage />
+            </BrowserRouter>
+        );
+
+        act(() => {
+            const button = getByTestId('Footer-login-link');
+
+            button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+        });
+
+        expect(window.location.pathname).toBe('/login');
     });
     it('should not redirects to login page if loginToken cookie not exists', () => {
         const cookies = new Cookies();

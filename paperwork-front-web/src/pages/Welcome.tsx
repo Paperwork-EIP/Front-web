@@ -124,12 +124,12 @@ function WelcomePage() {
                             </div>
                             <div className="Footer-info">
                                 <Link to="/register">
-                                    <button data-testid="Footer-contact-link">Register</button>
+                                    <button data-testid="Footer-register-link">Register</button>
                                 </Link>
                             </div>
                             <div className="Footer-info">
                                 <Link to="/login">
-                                    <button data-testid="Footer-contact-link">Login</button>
+                                    <button data-testid="Footer-login-link">Login</button>
                                 </Link>
                             </div>
                         </div>
