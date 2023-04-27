@@ -55,8 +55,6 @@ function VerifyEmailPage() {
                     </div>
                 </div>
             </div>
-
-
         </>
     );
 }

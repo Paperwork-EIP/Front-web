@@ -139,4 +139,38 @@ describe('Welcome Page Tests', () => {
 
         expect(window.location.replace).toHaveBeenCalledWith('/home');
     });
+    it('should not redirects to login page if loginToken cookie not exists', () => {
+        const cookies = new Cookies();
+        cookies.remove('loginToken');
+
+        render(
+            <BrowserRouter>
+                <WelcomePage />
+            </BrowserRouter>
+        );
+
+        expect(window.location.pathname).not.toEqual('/home');
+    });
+    it('should redirects to home page if loginToken cookie exists', () => {
+        Object.defineProperty(window, 'location', {
+            writable: true,
+            value: { replace: jest.fn() }
+        });
+
+        const cookies = new Cookies();
+        const location = window.location;
+
+        cookies.set('loginToken', 'test');
+
+        render(
+            <BrowserRouter>
+                <WelcomePage />
+            </BrowserRouter>
+        );
+
+        cookies.remove('loginToken');
+        window.location = location;
+
+        expect(window.location.replace).toHaveBeenCalledWith('/home');
+    });
 });
