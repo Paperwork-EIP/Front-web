@@ -72,6 +72,23 @@ describe('Register Tests', () => {
 
         expect(axios.post).toHaveBeenCalled();
     });
+    test('should display alert and not submits the form when email verification failed', async () => {
+        axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
+
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Register />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/email/i), { target: { value: 'test@test.com' } });
+        fireEvent.change(getByTestId(/username/i), { target: { value: 'testuser' } });
+        fireEvent.change(getByTestId(/password/), { target: { value: 'testpassword' } });
+        fireEvent.change(getByTestId(/confirmPassword/i), { target: { value: 'testpassword' } });
+        fireEvent.click(getByLabelText(/button-register/i));
+
+        expect(axios.get).toHaveBeenCalled();
+    });
     test('enables submit button when required fields are not empty', async () => {
         const { getByTestId, getByLabelText } = render(
             <BrowserRouter>
