@@ -118,13 +118,18 @@ function WelcomePage() {
                         </div>
                         <div className="Footer-infos" data-testid="Footer-infos">
                             <div className="Footer-info">
-                                <Link to="/about">
+                                <Link to="/aboutus">
                                     <button data-testid="Footer-about-link">About Us</button>
                                 </Link>
                             </div>
                             <div className="Footer-info">
-                                <Link to="/contact">
-                                    <button data-testid="Footer-contact-link">Contact Us</button>
+                                <Link to="/register">
+                                    <button data-testid="Footer-register-link">Register</button>
+                                </Link>
+                            </div>
+                            <div className="Footer-info">
+                                <Link to="/login">
+                                    <button data-testid="Footer-login-link">Login</button>
                                 </Link>
                             </div>
                         </div>

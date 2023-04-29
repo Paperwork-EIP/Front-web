@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import "../styles/EmailSent.scss";
 import { SiIonos, SiGmail, SiMicrosoftoutlook } from 'react-icons/si';
@@ -11,10 +11,6 @@ function EmailSentPage() {
 
     const cookies = new Cookies();
     const api = process.env.REACT_APP_BASE_URL;
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
-
     const cookieList = cookies.get('loginToken');
 
     async function handleSubmit() {
@@ -26,6 +22,12 @@ function EmailSentPage() {
             console.log(err);
         })
     }
+
+    useEffect(() => {
+        if (!cookies.get('loginToken')) {
+            window.location.assign('/');
+        }
+    });
 
     return (
         <>
@@ -50,7 +52,7 @@ function EmailSentPage() {
                             <SiIonos />
                         </a>
                     </div>
-                    <button className='EmailSent-receive-again' data-testid="google-link" onClick={handleSubmit}>
+                    <button className='EmailSent-receive-again' data-testid="send-email-again" onClick={handleSubmit}>
                         I didn't receive it
                     </button>
                 </div>

@@ -108,6 +108,6 @@ describe('Navbar Component Tests', () => {
             link.dispatchEvent(new MouseEvent("click", { bubbles: true }));
         });
 
-        expect(window.location.pathname).toBe('/help');
+        expect(window.location.pathname).toBe('/aboutus');
     });
 });

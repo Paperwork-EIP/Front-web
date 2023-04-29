@@ -111,7 +111,7 @@
                 margin-top: 0.5em;
                 font-size: 1.2em;
                 font-weight: bold;
-                color: #000;
+                color: #000000;
                 text-align: center;
                 font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
                 letter-spacing: 1px;
@@ -150,6 +150,7 @@
 
                 .Welcome-section-left,
                 .Welcome-section-right {
+                    color: #000000 !important;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
@@ -187,6 +188,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            color: #000000 !important;
 
             .Welcome-download-title {
                 width: 100%;

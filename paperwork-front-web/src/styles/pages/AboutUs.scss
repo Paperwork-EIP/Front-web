@@ -1,0 +1,140 @@
+.AboutUs {
+    background-color: #222222;
+    min-height: 100vh;
+
+    .AboutUs-container {
+        .AboutUs-team {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .AboutUs-title {
+                letter-spacing: 2px;
+                word-spacing: 2px;
+                font-size: 2em;
+                font-weight: 700;
+                text-align: center;
+                margin-top: 1em;
+                margin-bottom: 2.3em;
+            }
+
+            .AboutUs-contacts {
+                width: 90vw;
+                display: flex;
+                flex-direction: row;
+                white-space: nowrap;
+                overflow-x: scroll;
+                padding: 1em 0;
+
+                .AboutUs-card {
+                    width: 100%;
+                    max-width: 250px;
+                    height: 337px;
+                    margin: 0 1em;
+                    background-color: #454545;
+                    border-radius: 15px;
+                    padding: 1.5em;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.541);
+
+                    .AboutUs-card-picture-container {
+                        overflow: hidden;
+                        width: 200px;
+                        height: 200px;
+                        background-color: white;
+                        border-radius: 15px;
+
+                        img {
+                            height: auto;
+                            width: 100%;
+                        }
+                    }
+
+                    .AboutUs-card-content {
+                        padding: 0 0.5em;
+
+                        h1 {
+                            position: relative;
+                            font-size: 1.2em;
+                            font-weight: 600;
+                            padding: 1em 0;
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            gap: 0.2em;
+                        }
+
+                        h1::before {
+                            content: '';
+                            display: block;
+                            position: absolute;
+                            background-color: #868686;
+                            height: 2px;
+                            width: 0%;
+                            bottom: 8px;
+                            transition: 0.3s ease-in-out;
+                        }
+
+                        p {
+                            font-size: 0.9em;
+                            font-weight: 400;
+                        }
+                    }
+                }
+
+                .AboutUs-card:hover {
+                    box-shadow: 0px 0px 15px rgba(96, 96, 96, 0.575);
+
+                    .AboutUs-card-content {
+                        h1::before {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .AboutUs-timeline {
+            // Des trucs ici
+        }
+
+        .AboutUs-footer {
+            height: 100%;
+            padding: 3.5em 0;
+            margin-top: 3vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2em;
+            background-color: #3e3e3e;
+
+            h1 {
+                font-size: 2em;
+                font-weight: 700;
+                word-spacing: 2px;
+                letter-spacing: 2px;
+                padding-bottom: 1em;
+            }
+
+            p {
+                word-spacing: 2px;
+                letter-spacing: 2px;
+                text-align: center;
+            }
+
+            .separator {
+                display: block;
+                height: 1px;
+                width: 40%;
+                background-color: #ffffff;
+                margin: 1em 0;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+        }
+    }
+}
