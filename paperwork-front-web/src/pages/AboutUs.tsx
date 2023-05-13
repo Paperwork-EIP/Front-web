@@ -6,6 +6,13 @@ import Navbar from "../components/Navbar";
 
 import "../styles/pages/AboutUs.scss";
 
+
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
+import { IoMoonSharp } from "react-icons/io5";
+import { TbBeta } from "react-icons/tb";
+
 function AboutUsPage() {
     return (
         <div className="AboutUs">
@@ -115,8 +122,73 @@ function AboutUsPage() {
                     </div>
                 </div>
                 <div className="AboutUs-timeline">
-                    {/* Mettre timeline truc */}
+                    <h1 className="AboutUs-timeline-h1">Timeline</h1>
+                    <VerticalTimeline>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid #808080' }}
+                            date="September - October 2021"
+                            iconStyle={{ background: '#808080', color: '#fff' }}
+                            icon={<IoMoonSharp />}
+                        >
+                            <p className="vertical-timeline-element-title">Moonshot</p>
+                            <p className="vertical-timeline-element-subtitle">Paperwork's Idealization.</p>
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid #AA6C39' }}
+                            date="December 2021"
+                            iconStyle={{ background: '#AA6C39', color: '#fff' }}
+                            icon={<MdOutlineModelTraining />}
+                        >
+                            <p className="vertical-timeline-element-title">Forward</p>
+                            <p className="vertical-timeline-element-subtitle">Creation of the first prototype.</p>
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid #FFBD19' }}
+                            date="April - May 2022"
+                            iconStyle={{ background: '#FFBD19', color: '#fff' }}
+                            icon={<MdRocketLaunch />}
+                        >
+                            <p className="vertical-timeline-element-title">TEST & LEARN</p>
+                            <p className="vertical-timeline-element-subtitle">Implementation of the continuous integration and deployment process.</p>
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid red' }}
+                            date="June - October 2022"
+                            iconStyle={{ background: 'red', color: '#fff' }}
+                            icon={<MdManageAccounts />}
+                        >
+                            <p className="vertical-timeline-element-title">MANAGEMENT & PROCESS</p>
+                            <p className="vertical-timeline-element-subtitle">Implementation of the production environment and definition of weekly meetings.</p>
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid #8B008B' }}
+                            date="November 2022 - January 2023"
+                            iconStyle={{ background: '#8B008B', color: '#fff' }}
+                            icon={<MdFastForward />}
+                        >
+                            <p className="vertical-timeline-element-title">Fast forward</p>
+                            <p className="vertical-timeline-element-subtitle">Projection on the beta version.</p>
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            className="vertical-timeline-element--work"
+                            contentStyle={{ borderTop: '6px solid #4B0076' }}
+                            date="February - May 2023"
+                            iconStyle={{ background: '#4B0076', color: '#fff' }}
+                            icon={<TbBeta />}
+                        >
+                            <p className="vertical-timeline-element-title">BETA & GROWTH HACKING</p>
+                            <p className="vertical-timeline-element-subtitle">Implementation of the beta plan.</p>
+                        </VerticalTimelineElement>
+                    </VerticalTimeline>
                 </div>
+
+
+                    
                 <div className="AboutUs-footer">
                     <h1>How to contact us</h1>
                     <p>You can send us an email with this address</p>
