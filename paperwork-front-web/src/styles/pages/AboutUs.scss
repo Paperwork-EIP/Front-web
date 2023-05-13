@@ -96,7 +96,28 @@
         }
 
         .AboutUs-timeline {
-            // Des trucs ici
+            background-color: rgb(33, 33, 33);
+            color: white;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            
+            .AboutUs-timeline-h1 {
+                text-align: center;
+                padding: 20px 0px 20px 0px;
+                text-transform: capitalize;
+                font-size: 2.5em;
+            }
+
+            .vertical-timeline-element-title {
+                text-transform: uppercase;
+                font-weight: 600;
+                color: black;
+            }
+
+            .vertical-timeline-element-subtitle {
+                font-weight: normal;
+                color: black;
+            }
         }
 
         .AboutUs-footer {
