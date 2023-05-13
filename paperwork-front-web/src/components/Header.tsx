@@ -45,9 +45,10 @@ function Header() {
         }
         else {
             axios.get(`${api}/user/getbytoken`, {
-                params: { email: cookiesInfo.token }
+                params: { token: cookiesInfo.loginToken }
             })
                 .then(res => {
+                    console.log(res);
                     setName(res.data.username);
                     setEmail(res.data.email);
                     checkAvatar(res.data.profile_picture);
@@ -89,7 +90,7 @@ function Header() {
                             <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
                         {isOpen && (
-                            <div className="Header-modal"data-testid="Header-modal" >
+                            <div className="Header-modal" data-testid="Header-modal" >
                                 <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
                                     <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
                                     <h2>{name}</h2>

@@ -1,26 +1,9 @@
 .AboutUs {
-    --header-gradient-color-1: #e0fdf7;
-    --header-gradient-color-2: #29c9b3;
-    --header-gradient-color-3: crimson;
-    --header-gradient-color-4: #a5a5a5;
-    --header-gradient-color-5: #29c9b3;
-    --header-gradient-color-6: purple;
-    --header-gradient-color-7: #23d5ab;
-
     background-color: #222222;
     min-height: 100vh;
     color: whitesmoke !important;
 
     .AboutUs-container {
-        background: linear-gradient(-30deg,
-                var(--header-gradient-color-1),
-                var(--header-gradient-color-2),
-                var(--header-gradient-color-3),
-                var(--header-gradient-color-4),
-                var(--header-gradient-color-5));
-        background-size: 500% 130%;
-        animation: gradientBackground 40s ease-in-out infinite;
-
         .AboutUs-team {
             height: 100vh;
             display: flex;
@@ -31,11 +14,15 @@
             .AboutUs-title {
                 letter-spacing: 2px;
                 word-spacing: 2px;
-                font-size: 2em;
+                font-size: 6vh;
                 font-weight: 700;
                 text-align: center;
                 margin-top: 1em;
-                margin-bottom: 2.3em;
+                margin-bottom: 1.8em;
+                background: linear-gradient(-10deg, #29c9b3, purple);
+                background-size: 110%;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .AboutUs-contacts {
@@ -102,7 +89,7 @@
                 }
 
                 .AboutUs-card:hover {
-                    box-shadow: 0px 0px 15px rgba(96, 96, 96, 0.575);
+                    box-shadow: 0px 0px 15px #55555593;
 
                     .AboutUs-card-content {
                         h1::before {
@@ -114,17 +101,21 @@
         }
 
         .AboutUs-timeline {
-            background-color: rgb(33, 33, 33);
             min-height: 100vh;
             color: white;
             padding-top: 30px;
             padding-bottom: 30px;
-            
+
             .AboutUs-timeline-h1 {
                 text-align: center;
                 padding: 20px 0px 20px 0px;
-                text-transform: capitalize;
-                font-size: 2.5em;
+                font-size: 6vh;
+                font-weight: 700;
+                margin-bottom: 2em;
+                background: linear-gradient(10deg, purple, #29c9b3);
+                background-size: 100% 120%;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             .vertical-timeline-element-title {
@@ -147,7 +138,6 @@
             align-items: center;
             justify-content: center;
             gap: 2em;
-            background-color: #3e3e3e;
 
             h1 {
                 font-size: 2em;
@@ -155,6 +145,10 @@
                 word-spacing: 2px;
                 letter-spacing: 2px;
                 padding-bottom: 1em;
+                background: linear-gradient(10deg, #29c9b3, purple);
+                background-size: 140% 110%;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
 
             p {

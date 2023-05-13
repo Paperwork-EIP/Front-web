@@ -113,7 +113,7 @@ const RegisterPage = () => {
                             <FaFacebook />
                         </button>
                     </div>
-                    <div className='Register-redirection-to-register'>
+                    <div className='Register-redirection-to-login'>
                         <span>
                             You already have an account ?
                         </span>

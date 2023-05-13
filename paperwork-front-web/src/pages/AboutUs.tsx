@@ -17,7 +17,7 @@ function AboutUsPage() {
             <Navbar />
             <div className="AboutUs-container">
                 <div className="AboutUs-team">
-                    <h1 className="AboutUs-title">A team of 7 developers</h1>
+                    <h1 className="AboutUs-title">Team of 7 developers</h1>
                     <div className="AboutUs-contacts">
                         <section className="AboutUs-card">
                             <div className="AboutUs-card-picture-container">
@@ -120,7 +120,7 @@ function AboutUsPage() {
                     </div>
                 </div>
                 <div className="AboutUs-timeline">
-                    <h1 className="AboutUs-timeline-h1">Timeline</h1>
+                    <h1 className="AboutUs-timeline-h1">Timeline of the project</h1>
                     <VerticalTimeline>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
@@ -187,8 +187,8 @@ function AboutUsPage() {
                 <div className="AboutUs-footer">
                     <h1>How to contact us</h1>
                     <p>You can send us an email with this address</p>
-                    <div className="separator"></div>
                     <a href="mailto:paperwork_2024@labeip.epitech.eu">paperwork_2024@labeip.epitech.eu</a>
+                    <div className="separator"></div>
                 </div>
             </div>
         </div>
