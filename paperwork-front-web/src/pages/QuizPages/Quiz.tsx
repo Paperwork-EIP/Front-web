@@ -20,7 +20,7 @@ const QuizPage = () => {
         window.location.assign('/');
     }
     const email = cookies.get('loginToken');
-    console.log(email);
+    // console.log(email);
 
     const [posts, setPosts] = useState([{}]);
 
@@ -28,6 +28,7 @@ const QuizPage = () => {
       axios.get(`${process.env.REACT_APP_BASE_URL}/process/getAll`)
         .then(res => {
             var procedures = [];
+            // console.log(res.data);
             for (var i = 0; i < res.data.response.length; i++)
             {
                 procedures.push({
@@ -44,10 +45,10 @@ const QuizPage = () => {
     }, [])
 
     const handleSubmit = () => {
-        // console.log(processSelected);
         const quizSelect = document.getElementById('Quiz-Select') as HTMLSelectElement;
         if (quizSelect) {
             const selectedValue = quizSelect.value;
+            //console.log(selectedValue);
             window.location.href = `/quiz/${selectedValue}/0`;
         }
     }                     
@@ -59,16 +60,16 @@ const QuizPage = () => {
             <div className='Page-Title'>New Process Quiz</div>
             <div className='Quiz'>
                 <div className='Question-Style'>What type of procedure do you want to complete ?</div>
-                <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" className='Quiz-Select' placeholder='Select the Procedure'>
+                <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
                     {
                         posts.map((post: any) => {
                             return (
-                                <option value={post.label}>{post.label}</option>
+                                <option data-testid="select-option" value={post.label}>{post.label}</option>
                             )
                         })
                     }
                 </select>
-                <button type="button" className='Submit-btn' onClick={() => handleSubmit()}>Submit<AiOutlineSend className='Submit-icon' /></button>
+                <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>Submit<AiOutlineSend className='Submit-icon' /></button>
             </div>
         </>
     );
