@@ -1,17 +1,15 @@
 import React from "react";
 
 import { FaLinkedin } from "react-icons/fa";
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
+import { IoMoonSharp } from "react-icons/io5";
+import { TbBeta } from "react-icons/tb";
 
 import Navbar from "../components/Navbar";
 
 import "../styles/pages/AboutUs.scss";
-
-
-import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
-import { IoMoonSharp } from "react-icons/io5";
-import { TbBeta } from "react-icons/tb";
 
 function AboutUsPage() {
     return (
@@ -186,9 +184,6 @@ function AboutUsPage() {
                         </VerticalTimelineElement>
                     </VerticalTimeline>
                 </div>
-
-
-                    
                 <div className="AboutUs-footer">
                     <h1>How to contact us</h1>
                     <p>You can send us an email with this address</p>
