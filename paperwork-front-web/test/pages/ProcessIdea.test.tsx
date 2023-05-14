@@ -16,8 +16,7 @@ beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            assign: jest.fn(),
-            href: "http://localhost:3456/test"
+            assign: jest.fn()
         }
     });
     cookies.set('loginToken', 'test');

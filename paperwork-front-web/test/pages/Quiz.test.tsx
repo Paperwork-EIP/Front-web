@@ -29,7 +29,7 @@ afterEach(() => {
 });
 
 describe("Quiz Tests", () => {
-    test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
+    test('should redirects to login page if loginToken cookie not exist', () => {
         const cookies = new Cookies();
         const location = window.location;
         cookies.remove('loginToken');
