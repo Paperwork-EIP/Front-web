@@ -5,10 +5,12 @@ import { render, cleanup } from '@testing-library/react';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-import VerifyEmailPage from '../../src/pages/VerifyEmail';
+import ResetPassword from '../../src/pages/ResetPassword';
 
 jest.mock('axios');
 jest.mock('../../src/components/Header', () => () => <></>);
+
+const cookies = new Cookies();
 
 beforeEach(() => {
     Object.defineProperty(window, 'location', {
@@ -28,12 +30,11 @@ afterEach(() => {
 
 describe("Reset Password Tests", () => {
     test('should not redirects to login page if loginToken cookie not exists', () => {
-        const cookies = new Cookies();
         cookies.remove('loginToken');
 
         render(
             <BrowserRouter>
-                <VerifyEmailPage />
+                <ResetPassword />
             </BrowserRouter>
         );
 
