@@ -39,7 +39,7 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-describe("Reset Password Tests", () => {
+describe("Process Result Tests", () => {
     test('should display correctly the page', () => {
         render(
             <BrowserRouter>

@@ -29,7 +29,7 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-describe("Reset Password Tests", () => {
+describe("Process Idea Tests", () => {
     test('should not redirects to login page if loginToken cookie not exists', () => {
         cookies.remove('loginToken');
 
