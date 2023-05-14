@@ -27,16 +27,11 @@ const RegisterPage = () => {
                 password: password
             }
         ).then(async response => {
-            cookies.set('loginToken', { loginToken: response.data.jwt, email: email }, {
-               path: '/',
-               secure: true,
-               sameSite: 'none'
-            });            
-            
-            await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`
-            ).then(res => {
+            await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`)
+                .then(() => {
                     window.location.replace('/emailSent');
-                }).catch(err => {
+                })
+                .catch(err => {
                     alert("Failure to send the verification email");
                     console.log(err);
                 })
@@ -59,18 +54,22 @@ const RegisterPage = () => {
     };
 
     function googleConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`).then(res => {
-            window.location.replace(res.data)
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`)
+            .then(res => {
+                window.location.replace(res.data)
+            }).catch(err => {
+                console.error(err);
+            });
     }
 
     function facebookConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`).then(res => {
-            window.location.replace(res.data)
-        })
+        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`)
+            .then(res => {
+                window.location.replace(res.data)
+            }).catch(err => {
+                console.error(err);
+            });
     }
-
-    
 
     useEffect(() => {
         if (cookies.get('loginToken')) {
@@ -101,7 +100,7 @@ const RegisterPage = () => {
                             <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' data-testid="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">Confirm password</label>
                         </div>
-                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={handleSubmit} disabled={buttonDisabled}>
+                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={() => { handleSubmit() }} disabled={buttonDisabled}>
                             Register
                         </button>
                     </div>
