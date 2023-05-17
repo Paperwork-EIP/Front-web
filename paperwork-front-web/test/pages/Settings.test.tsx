@@ -84,6 +84,7 @@ describe("Settings Tests", () => {
             </BrowserRouter>
         );
 
+        expect(useStateSpy).toBeCalled();
         expect(axios.get).toBeCalled();
     });
     test('should click on the buttons and do logics', () => {
@@ -437,6 +438,22 @@ describe("Settings Tests", () => {
         expect(continue_button).not.toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
+    test('name : should change the name when submit', () => {
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-name/), { target: { value: 'name' } });
+        fireEvent.click(getByLabelText(/button-change-name/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
+        expect(axios.post).toBeCalledTimes(1);
+    });
     test('name : should get an error 400 from axios post when submit', () => {
         axios.post = jest.fn(() => Promise.reject({ response: { status: 400 }, data: { test: "test" } }));
 
@@ -494,6 +511,22 @@ describe("Settings Tests", () => {
         expect(continue_button).not.toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
+    test('firstname : should change the firstname when submit', () => {
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-firstname/), { target: { value: 'firstname' } });
+        fireEvent.click(getByLabelText(/button-change-firstname/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
+        expect(axios.post).toBeCalledTimes(1);
+    });
     test('firstname : should get an error 400 from axios post when submit', () => {
         axios.post = jest.fn(() => Promise.reject({ response: { status: 400 }, data: { test: "test" } }));
 
@@ -532,7 +565,7 @@ describe("Settings Tests", () => {
         expect(continue_button).not.toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
-    test('name : should get an error 500 from axios post when submit', () => {
+    test('firstname : should get an error 500 from axios post when submit', () => {
         axios.post = jest.fn(() => Promise.reject({ response: { status: 500 }, data: { test: "test" } }));
 
         const { getByLabelText, getByTestId } = render(
@@ -549,6 +582,22 @@ describe("Settings Tests", () => {
         const continue_button = fireEvent.click(button);
 
         expect(continue_button).not.toBeTruthy();
+        expect(axios.post).toBeCalledTimes(1);
+    });
+    test('language : should change the language when submit', () => {
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+        fireEvent.click(getByLabelText(/button-change-language/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
         expect(axios.post).toBeCalledTimes(1);
     });
     test('language : should get an error 400 from axios post when submit', () => {
@@ -606,6 +655,38 @@ describe("Settings Tests", () => {
         const continue_button = fireEvent.click(button);
 
         expect(continue_button).not.toBeTruthy();
+        expect(axios.post).toBeCalledTimes(1);
+    });
+    test('age : should not send request if age anormal', () => {
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-age/), { target: { value: 0 } });
+        fireEvent.click(getByLabelText(/button-change-age/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
+        expect(axios.post).not.toBeCalled();
+    });
+    test('age : should send request if age anormal', () => {
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-age/), { target: { value: 34 } });
+        fireEvent.click(getByLabelText(/button-change-age/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        fireEvent.click(button);
+
         expect(axios.post).toBeCalledTimes(1);
     });
     test('age : should get an error 400 from axios post when submit', () => {
