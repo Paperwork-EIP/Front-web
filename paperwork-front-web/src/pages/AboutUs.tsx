@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FaLinkedin } from "react-icons/fa";
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward, MdEmail } from "react-icons/md";
+import { IoMoonSharp } from "react-icons/io5";
+import { TbBeta } from "react-icons/tb";
 
 import Navbar from "../components/Navbar";
 
 import "../styles/pages/AboutUs.scss";
-
-
-import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
-import { IoMoonSharp } from "react-icons/io5";
-import { TbBeta } from "react-icons/tb";
 
 function AboutUsPage() {
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [text, setText] = useState("");
+
+    function submitForm() {
+        console.log("Form submitted");
+    }
+
     return (
         <div className="AboutUs">
             <Navbar />
             <div className="AboutUs-container">
                 <div className="AboutUs-team">
-                    <h1 className="AboutUs-title">A team of 7 developers</h1>
+                    <h1 className="AboutUs-title">Team of 7 developers</h1>
                     <div className="AboutUs-contacts">
                         <section className="AboutUs-card">
                             <div className="AboutUs-card-picture-container">
@@ -122,7 +128,7 @@ function AboutUsPage() {
                     </div>
                 </div>
                 <div className="AboutUs-timeline">
-                    <h1 className="AboutUs-timeline-h1">Timeline</h1>
+                    <h1 className="AboutUs-timeline-h1">Timeline of the project</h1>
                     <VerticalTimeline>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
@@ -186,14 +192,27 @@ function AboutUsPage() {
                         </VerticalTimelineElement>
                     </VerticalTimeline>
                 </div>
-
-
-                    
                 <div className="AboutUs-footer">
-                    <h1>How to contact us</h1>
+                    <h1>Contact us</h1>
+                    <div className="AboutUs-contact-form">
+                        <form id="contact">
+                            <fieldset>
+                                <input placeholder="Name" type="text" data-testid="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                            </fieldset>
+                            <fieldset>
+                                <input placeholder="Email Address" type="email" data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                            </fieldset>
+                            <fieldset>
+                                <textarea placeholder="Type your message here...." data-testid="text" value={text} onChange={(e) => setText(e.target.value)} required></textarea>
+                            </fieldset>
+                            <fieldset>
+                                <button type="button" aria-label="button-send" onClick={submitForm}>Send</button>
+                            </fieldset>
+                        </form>
+                    </div>
                     <p>You can send us an email with this address</p>
-                    <div className="separator"></div>
                     <a href="mailto:paperwork_2024@labeip.epitech.eu">paperwork_2024@labeip.epitech.eu</a>
+                    <div className="separator"></div>
                 </div>
             </div>
         </div>

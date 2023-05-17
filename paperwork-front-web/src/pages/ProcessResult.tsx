@@ -25,21 +25,23 @@ const ProcessResult = () => {
     const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
-    
+
     useEffect(() => {
-        axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
-        .then(res => {
-            console.log(res.data.response);
-            setStepsAnswer(res.data.response.sort((a: { id: number; }, b: { id: number; }) => a.id - b.id));
-            stepsAnswer?.map((item: any) => {
-                if (item.is_done === true) {
-                    document.getElementById(item.id)?.setAttribute("checked", "checked");
-                }
-            });
-        }).catch(err => {
-            console.log(err);
-        });
-    }, [api, cookiesInfo.loginToken, processSelected, stepsAnswer]);
+        if (cookiesInfo) {
+            axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
+                .then(res => {
+                    console.log(res.data.response);
+                    setStepsAnswer(res.data.response.sort((a: { id: number; }, b: { id: number; }) => a.id - b.id));
+                    stepsAnswer?.map((item: any) => {
+                        if (item.is_done === true) {
+                            document.getElementById(item.id)?.setAttribute("checked", "checked");
+                        }
+                    });
+                }).catch(err => {
+                    console.log(err);
+                });
+        }
+    });
 
     const handleCheckboxClick = (id: any, is_done: any) => {
         var newStepsAnswer = [];
@@ -60,29 +62,29 @@ const ProcessResult = () => {
             user_token: cookiesInfo.loginToken,
             process_title: processSelected,
             step: newStepsAnswer
-            }).then(res => {
-                console.log(res.data.response);
-                alert("Updated successfully!");
-            }).catch(err => {
-                console.log(err)
+        }).then(res => {
+            console.log(res.data.response);
+            alert("Updated successfully!");
+        }).catch(err => {
+            console.log(err)
         })
     }
 
     return (
         <>
-            <Header/>
-            
+            <Header />
+
             <div className='ProcessResult'>
-                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16}/>Start a new process</a>
+                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16} />Start a new process</a>
                 <div className='ProcessResult-Requires'>
                     <div className='ProcessResult-Title'>Result of the process for “{processSelected}”:</div>
                     <div className='ProcessResult-Checkbox-Container'>
                         <>
                             {
                                 stepsAnswer?.map((item: any) => {
-                                    return(
+                                    return (
                                         <div>
-                                            <input className='ProcessResult-Checkbox' type="checkbox" id={item.id} onClick={() => handleCheckboxClick( item.id, item.is_done) }></input>
+                                            <input className='ProcessResult-Checkbox' type="checkbox" data-testid={item.id} id={item.id} onClick={() => handleCheckboxClick(item.id, item.is_done)}></input>
                                             <label htmlFor={item.id}> : {item.step_description}</label>
                                         </div>
                                     )

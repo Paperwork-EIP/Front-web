@@ -44,6 +44,20 @@ function WelcomePage() {
                 </div>
                 <div className="Welcome-description">
                     <p>An app to help you for your administrative tasks</p>
+                    <div className="Welcome-description-cards">
+                        <div className="Welcome-description-card">
+                            <img src="/assets/welcome-page/icon-1.png" alt="icnon-1" />
+                            <span>Web and Mobile platform !</span>
+                        </div>
+                        <div className="Welcome-description-card">
+                            <img src="/assets/welcome-page/icon-2.png" alt="icnon-2" />
+                            <span>A guide for your administrative procedures in France.</span>
+                        </div>
+                        <div className="Welcome-description-card">
+                            <img src="/assets/welcome-page/icon-3.png" alt="icnon-3" />
+                            <span>Help to be ready for administrative appointments.</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="Welcome-sections">
                     <section className="Welcome-section">

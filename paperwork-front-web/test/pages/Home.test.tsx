@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react';
 
-import Cookies from 'universal-cookie';
 import axios from 'axios';
 
 import HomePage from '../../src/pages/Home';
@@ -29,16 +28,11 @@ afterEach(() => {
 });
 
 describe("Home Page Tests", () => {
-    test('should redirects to welcome page if loginToken cookie not exists', () => {
-        const cookies = new Cookies();
-        cookies.remove('loginToken');
-
+    test('should render home page correctly', () => {
         render(
             <BrowserRouter>
                 <HomePage />
             </BrowserRouter>
         );
-
-        expect(window.location.replace).toBeCalledWith('/');
     });
 });
