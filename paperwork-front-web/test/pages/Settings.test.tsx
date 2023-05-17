@@ -868,49 +868,64 @@ describe("Settings Tests", () => {
 
         expect(axios.post).not.toBeCalled();
     });
-    // test('pswd : should get an error 400 from axios post when submit', () => {
-    //     axios.post = jest.fn(() => Promise.reject({ response: { status: 400 }, data: { test: "test" } }));
+    test('pswd : should get an error 400 from axios post when submit', () => {
+        axios.post = jest.fn(() => Promise.reject({ response: { status: 400 }, data: { test: "test" } }));
 
-    //     const { getByLabelText, getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Settings />
-    //         </BrowserRouter>
-    //     );
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
 
-    //     fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.click(getByLabelText(/button-change-password/i));
+        fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.click(getByLabelText(/button-change-password/i));
 
-    //     expect(axios.post).toBeCalledTimes(1);
-    // });
-    // test('pswd : should get an error 404 from axios post when submit', () => {
-    //     axios.post = jest.fn(() => Promise.reject({ response: { status: 404 }, data: { test: "test" } }));
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        const continue_button = fireEvent.click(button);
 
-    //     const { getByLabelText, getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Settings />
-    //         </BrowserRouter>
-    //     );
+        expect(continue_button).not.toBeTruthy();
+        expect(axios.post).toBeCalledTimes(1);
+    });
+    test('pswd : should get an error 404 from axios post when submit', () => {
+        axios.post = jest.fn(() => Promise.reject({ response: { status: 404 }, data: { test: "test" } }));
 
-    //     fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.click(getByLabelText(/button-change-password/i));
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
 
-    //     expect(axios.post).toBeCalledTimes(1);
-    // });
-    // test('pswd : should get an error 500 from axios post when submit', () => {
-    //     axios.post = jest.fn(() => Promise.reject({ response: { status: 500 }, data: { test: "test" } }));
+        fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.click(getByLabelText(/button-change-password/i));
 
-    //     const { getByLabelText, getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Settings />
-    //         </BrowserRouter>
-    //     );
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        const continue_button = fireEvent.click(button);
 
-    //     fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
-    //     fireEvent.click(getByLabelText(/button-change-password/i));
+        expect(continue_button).not.toBeTruthy();
+        expect(axios.post).toBeCalledTimes(1);
+    });
+    test('pswd : should get an error 500 from axios post when submit', () => {
+        axios.post = jest.fn(() => Promise.reject({ response: { status: 500 }, data: { test: "test" } }));
 
-    //     expect(axios.post).toBeCalledTimes(1);
-    // });
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/input-change-pswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.change(getByTestId(/input-change-cpswd/), { target: { value: 'qwertyuiopasdfghjkl' } });
+        fireEvent.click(getByLabelText(/button-change-password/i));
+
+        const button = getByLabelText(/button-change-continue/i);
+        expect(button).toBeInTheDocument();
+        const continue_button = fireEvent.click(button);
+
+        expect(continue_button).not.toBeTruthy();
+        expect(axios.post).toBeCalledTimes(1);
+    });
 });
