@@ -11,9 +11,6 @@ package-lock.json
 /coverage/clover.xml
 /coverage/coverage-final.json
 
-# A supprimer
-/coverage/lcov.info
-
 # ESlint
 .eslintcache
 
