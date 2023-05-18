@@ -2,10 +2,10 @@
     // Header color
     --header-gradient-color-1: #e0fdf7;
     --header-gradient-color-2: #29c9b3;
-    --header-gradient-color-3: crimson;
+    --header-gradient-color-3: #dc143c;
     --header-gradient-color-4: #a5a5a5;
     --header-gradient-color-5: #29c9b3;
-    --header-gradient-color-6: purple;
+    --header-gradient-color-6: #800080;
     --header-gradient-color-7: #23d5ab;
     --header-font-color: whitesmoke;
 
@@ -107,15 +107,54 @@
         }
 
         .Welcome-description {
+            width: 70vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 3vh;
+            margin-bottom: 5vh;
+
+            .Welcome-description-cards {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+                gap: 0 4vh;
+
+                .Welcome-description-card {
+                    border-radius: 10px;
+                    width: 300px;
+                    min-height: 300px;
+                    max-height: 400px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 2.5vh;
+                    
+                    img {
+                        height: 25vh;
+                        width: auto;
+                    }
+
+                    span {
+                        font-weight: 600;
+                        font-size: 1.2em;
+                        text-align: center;
+                        color:#000000 !important;
+                        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+                    }
+                }
+            }
+
             p {
-                margin-top: 0.5em;
+                margin: 1.8vh 0 3vh 0;
                 font-size: 1.2em;
                 font-weight: bold;
-                color: #000;
+                color: #000000 !important;
                 text-align: center;
                 font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
                 letter-spacing: 1px;
-                padding: 10px 20px;
             }
         }
 
@@ -150,6 +189,7 @@
 
                 .Welcome-section-left,
                 .Welcome-section-right {
+                    color: #000000 !important;
                     display: flex;
                     flex-direction: column;
                     align-items: flex-start;
@@ -187,6 +227,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            color: #000000 !important;
 
             .Welcome-download-title {
                 width: 100%;

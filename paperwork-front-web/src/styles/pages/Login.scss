@@ -95,7 +95,7 @@ $gray: #9b9b9b;
                 border-radius: 5px;
                 padding: 10px 15px;
                 font-size: 1.1rem;
-                margin-top: 3em;
+                margin-top: 5vh;
                 transition: all 0.3s ease-in-out;
             }
 
@@ -112,7 +112,6 @@ $gray: #9b9b9b;
             .Login-form-group {
                 position: relative;
                 padding: 15px 0 0;
-                margin-top: 1.3em;
                 width: 60%;
             }
 
@@ -175,9 +174,9 @@ $gray: #9b9b9b;
         .Login-connections {
             width: 30%;
             max-width: 500px;
-            margin-top: 4.5em;
             display: flex;
             align-items: center;
+            padding: 4vh 0;
             justify-content: space-evenly;
 
             .Login-button-api {
@@ -195,8 +194,6 @@ $gray: #9b9b9b;
         }
 
         .Login-redirection-to-register {
-            margin-top: 3em;
-
             .Login-link {
                 a {
                     margin-left: 3px;

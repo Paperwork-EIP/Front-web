@@ -72,6 +72,23 @@ describe('Register Tests', () => {
 
         expect(axios.post).toHaveBeenCalled();
     });
+    test('should display alert and not submits the form with invalid data when submit button is clicked', async () => {
+        axios.get = jest.fn().mockRejectedValue(new Error("Error"));
+
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <Register />
+            </BrowserRouter>
+        );
+
+        fireEvent.change(getByTestId(/email/i), { target: { value: 'test@test.com' } });
+        fireEvent.change(getByTestId(/username/i), { target: { value: 'testuser' } });
+        fireEvent.change(getByTestId(/password/), { target: { value: 'testpassword' } });
+        fireEvent.change(getByTestId(/confirmPassword/i), { target: { value: 'testpassword' } });
+        fireEvent.click(getByLabelText(/button-register/i));
+
+        expect(axios.post).toHaveBeenCalledTimes(1);
+    });
     test('enables submit button when required fields are not empty', async () => {
         const { getByTestId, getByLabelText } = render(
             <BrowserRouter>
@@ -169,6 +186,21 @@ describe('Register Tests', () => {
 
         fireEvent.click(facebookButton);
         expect(axios.get).toHaveBeenCalled();
+    });
+    test('should get an error from axios.get for google and facebook login', () => {
+        axios.get = jest.fn().mockRejectedValue(new Error("Error"));
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <Register />
+            </BrowserRouter>
+        );
+        const facebookButton = getByTestId('facebook-link');
+        const googleButton = getByTestId('google-link');
+
+        fireEvent.click(facebookButton);
+        fireEvent.click(googleButton);
+
+        expect(axios.get).toHaveBeenCalledTimes(2);
     });
     test('should link to the login page when start button clicked', () => {
         const { getByTestId } = render(

@@ -124,16 +124,18 @@ const CalendarPage = () => {
     }
 
     useEffect(() => {
-        axios.get(`${api}/calendar/getAll?token=${cookieList.token}`)
-        .then(res => {
-        var rdvTmp = [];
-        for (var i = 0; i < res.data.appoinment.length; i++) {
-            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
+        if (cookieList) {
+            axios.get(`${api}/calendar/getAll?token=${cookieList.token}`)
+            .then(res => {
+            var rdvTmp = [];
+            for (var i = 0; i < res.data.appoinment.length; i++) {
+                rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
+            }
+            setRDV(rdvTmp);
+            }).catch(err => {
+            console.log(err);
+            })
         }
-        setRDV(rdvTmp);
-        }).catch(err => {
-          console.log(err);
-        })
     })
     
     const submitNewEvent = () => {
@@ -259,7 +261,7 @@ const CalendarPage = () => {
                 </button>
                 <Center p={'10px'}>
                             <Flex width={'200px'} justifyContent={'space-between'}>
-                                <Input onChange={handleNewDateChange} type="time"/>
+                                <Input aria-label='input-new-date-change' onChange={handleNewDateChange} type="time"/>
                             </Flex>
                         </Center>
                         <Center p={'10px'}>
@@ -375,6 +377,7 @@ const CalendarPage = () => {
                                 </Center>
                                 <Center p={'10px'}>
                                     <Button 
+                                    aria-label='delete-button'
                                     bgColor="#FC6976"
                                     color="white"
                                     onClick={deleteEvent}>

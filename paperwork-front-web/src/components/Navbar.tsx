@@ -32,8 +32,8 @@ function Navbar() {
                 <Link to="/register" className="Navbar-link" data-testid="Navbar-link-3">
                     Register
                 </Link>
-                <Link to="/help" className="Navbar-link" data-testid="Navbar-link-4">
-                    Help
+                <Link to="/aboutus" className="Navbar-link" data-testid="Navbar-link-4">
+                    About Us
                 </Link>
             </nav>
         </header>

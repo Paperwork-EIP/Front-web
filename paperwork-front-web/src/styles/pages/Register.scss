@@ -78,7 +78,6 @@ $gray: #9b9b9b;
         }
 
         .Register-title {
-            margin-bottom: 1rem;
             font-size: 2rem;
             font-weight: bold;
         }
@@ -94,8 +93,8 @@ $gray: #9b9b9b;
                 border: solid 2px #e2e2e2;
                 border-radius: 5px;
                 padding: 10px 15px;
-                font-size: 0.9em;
-                margin-top: 3em;
+                font-size: 1.1rem;
+                margin-top: 3vh;
                 transition: all 0.3s ease-in-out;
             }
 
@@ -112,7 +111,6 @@ $gray: #9b9b9b;
             .Register-form-group {
                 position: relative;
                 padding: 15px 0 0;
-                margin-top: 0.3em;
                 width: 60%;
             }
 
@@ -178,7 +176,7 @@ $gray: #9b9b9b;
         .Register-connections {
             width: 30%;
             max-width: 500px;
-            margin-top: 3.5em;
+            padding: 4vh 0;
             display: flex;
             align-items: center;
             justify-content: space-evenly;
@@ -197,8 +195,7 @@ $gray: #9b9b9b;
             }
         }
 
-        .Register-redirection-to-register {
-            margin-top: 1.5em;
+        .Register-redirection-to-login {
             text-align: center;
             padding: 0 10px;
 

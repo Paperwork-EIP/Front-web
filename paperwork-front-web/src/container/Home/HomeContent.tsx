@@ -110,12 +110,12 @@ const Bg = () => {
         <Thead>
           <Tr>
             <Th>
-            <Button onClick={handleClickAlp}>
+            <Button onClick={handleClickAlp} aria-label="click-alp">
             { activeAlp ? "Z...A" : "A...Z"}
             </Button>
             </Th>
             <Th isNumeric>
-            <Button onClick={handleClickAsc}>
+            <Button onClick={handleClickAsc} aria-label="click-asc">
             { activeAsc ? "Ascending" : "Descending"}
             </Button>
             </Th>

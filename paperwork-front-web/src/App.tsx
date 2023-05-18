@@ -22,6 +22,7 @@ import QuizQuestion from './pages/QuizPages/QuizQuestion';
 import GooglePage from './pages/Google';
 import FacebookPage from './pages/Facebook';
 import WelcomePage from './pages/Welcome';
+import AboutUsPage from './pages/AboutUs';
 
 import "./styles/styles.scss";
 
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/home" element={<HomePage/>}/>
+            <Route path="/aboutus" element={<AboutUsPage/>}/>
             <Route path= "/profile" element={<ProfilePage/>}/>
             <Route path= "/calendar" element={<CalendarPage/>}/>
             <Route path= "/help" element={<HelpPage/>}/>

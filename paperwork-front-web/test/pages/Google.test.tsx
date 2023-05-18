@@ -2,24 +2,25 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup } from '@testing-library/react';
 
+import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-import HomePage from '../../src/pages/Home';
+import ResetPassword from '../../src/pages/ResetPassword';
 
 jest.mock('axios');
 jest.mock('../../src/components/Header', () => () => <></>);
-jest.mock('../../src/container/Home/HomeContent', () => () => <></>);
+
+const cookies = new Cookies();
 
 beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            replace: jest.fn()
+            assign: jest.fn(),
+            href: "http://localhost:3456/test"
         }
     });
-    global.alert = jest.fn();
     axios.get = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
-    axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
 });
 
 afterEach(() => {
@@ -27,12 +28,16 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-describe("Home Page Tests", () => {
-    test('should render home page correctly', () => {
+describe("Google Tests", () => {
+    test('should not redirects to login page if loginToken cookie not exists', () => {
+        cookies.remove('loginToken');
+
         render(
             <BrowserRouter>
-                <HomePage />
+                <ResetPassword />
             </BrowserRouter>
         );
+
+        expect(window.location.pathname).not.toEqual('/');
     });
 });
