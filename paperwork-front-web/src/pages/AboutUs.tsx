@@ -5,6 +5,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward, MdEmail } from "react-icons/md";
 import { IoMoonSharp } from "react-icons/io5";
 import { TbBeta } from "react-icons/tb";
+import axios from "axios";
 
 import Navbar from "../components/Navbar";
 
@@ -16,8 +17,17 @@ function AboutUsPage() {
     const [name, setName] = useState("");
     const [text, setText] = useState("");
 
+    const api = process.env.REACT_APP_BASE_URL;
+
     function submitForm() {
-        console.log("Form submitted");
+        axios.post(`${api}/`)
+        .then(() => {
+            alert("The email has been sent.");
+        })
+        .catch((err) => {
+            console.log(err);
+            alert("An error has occured. The service couldn't send the request.");
+        })
     }
 
     return (
