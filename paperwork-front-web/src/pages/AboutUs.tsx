@@ -20,7 +20,14 @@ function AboutUsPage() {
     const api = process.env.REACT_APP_BASE_URL;
 
     function submitForm() {
-        axios.post(`${api}/`)
+        axios.get(`${api}/contact/sendEmail`,
+        {
+            params: {
+                    email: email,
+                    description: text,
+                    name: name
+            }
+        })
         .then(() => {
             alert("The email has been sent.");
         })
