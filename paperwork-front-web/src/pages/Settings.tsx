@@ -51,7 +51,7 @@ const SettingsPage = () => {
                     setLanguage(res.data.language);
                     setAge(res.data.age);
                     setEmail(res.data.email);
-                    setAddress(res.data.adress);
+                    setAddress(res.data.address);
                     setPhonenumber(res.data.number_phone);
                     setProfilePicture(res.data.profile_picture);
                 }).catch(err => {
@@ -59,8 +59,6 @@ const SettingsPage = () => {
                 });
         }
     })
-
-    
 
     const handleChangeVariable = (event: any) => {
         setVariableToChange(event);
@@ -130,9 +128,11 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "language") {
+            const languageSelect = document.getElementById('Language-Select') as HTMLSelectElement;
+            const languageValue = languageSelect.value;
             axios.post(`${api}/user/modifyDatas`, {
                 token: cookiesInfo.loginToken,
-                language: language,
+                language: languageValue,
             }).then(res => {
                 console.log(res.data);
                 alert("Language updated!");
@@ -201,7 +201,7 @@ const SettingsPage = () => {
         } else if (variableToChange === "address") {
             axios.post(`${api}/user/modifyDatas`, {
                 token: cookiesInfo.loginToken,
-                adress: address,
+                address: address,
             }).then(res => {
                 console.log(res.data);
                 alert("Address updated!");
@@ -235,7 +235,7 @@ const SettingsPage = () => {
                 }
             });
         } else if (variableToChange === "password") {
-            if (password.length >= 8 && password === verifPassword) {
+            if (password.length >= 4 && password === verifPassword) {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     password: password,
@@ -347,7 +347,10 @@ const SettingsPage = () => {
                     <div className="information-container">
                         <label htmlFor="language">Language</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setLanguage(target.value)} data-testid='input-change-language' className='edit-input' type="text" id="language" name="language" placeholder={ language ? language : "Language..."}></input>
+                            <select onChange={({ target }) => setLanguage(target.value)} defaultValue="English" name="Language-Select" id="Language-Select" data-testid="select" className='edit-select' placeholder='English'>
+                                <option data-testid="select-option" value="english">English</option>
+                                <option data-testid="select-option" value="french">Français</option>
+                            </select>
                             <button type="button" className='edit-btn' aria-label='button-change-language' onClick={() => handleChangeVariable("language")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>

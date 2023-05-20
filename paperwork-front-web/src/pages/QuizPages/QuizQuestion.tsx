@@ -26,8 +26,20 @@ const QuizQuestion = () => {
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState();
     const [questions, setQuestions] = useState([{}]);
 
+    // User informations
+    const [language, setLanguage] = useState("");
+
     useEffect(() => {
-        axios.get(`${api}/processQuestions/get`, { params: { title: processSelected } })
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
+        .then(res => {
+            setLanguage(res.data.language);
+        }).catch(err => {
+            console.log(err)
+        });
+
+        console.log("processSelected = " + processSelected);
+
+        axios.get(`${api}/processQuestions/get`, { params: { title: processSelected, language: language } })
         .then(res => {
             console.log(res.data.questions);
             setCurrentId(res.data.questions[nextStep - 1].step_id);
@@ -36,7 +48,7 @@ const QuizQuestion = () => {
         }).catch(err => {
             console.log(err)
         });
-    }, [nextStep, processSelected, api])
+    }, [nextStep, processSelected, api, cookiesInfo.loginToken, language])
 
     function handleClick(currentQuestionAnswer: string) {
         // console.log("process_title = " + processSelected);

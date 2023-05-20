@@ -41,7 +41,7 @@ const ProfilePage = () => {
                     setLanguage(res.data.language);
                     setAge(res.data.age);
                     setEmail(res.data.email);
-                    setAddress(res.data.adress);
+                    setAddress(res.data.address);
                     setPhonenumber(res.data.number_phone);
                     setProfilePicture(res.data.profile_picture);
                 }).catch(err => {
@@ -116,7 +116,7 @@ const ProfilePage = () => {
                                     item.pourcentage ?
                                         <button className='Process-Btn' data-testid='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.process_title}>
                                             <div className='process-progress' key={item.userProcess.id}>
-                                                <div className='progress-name'>{item.userProcess.process_title}</div>
+                                                <div className='progress-name'>{item.userProcess.title}</div>
                                                 <div className='progress-bar'>
                                                     <div className='progress-bar-bg'></div>
                                                     <div className='progress-bar-front' style={{ width: item.pourcentage + '%' }}></div>
