@@ -4,7 +4,7 @@ import { render, cleanup } from '@testing-library/react';
 
 import axios from 'axios';
 
-import Google from '../../src/pages/Google';
+import Facebook from '../../src/pages/Facebook';
 
 jest.mock('axios');
 jest.mock('react-router-dom', () => ({
@@ -36,7 +36,7 @@ describe("Google Tests", () => {
 
         render(
             <BrowserRouter>
-                <Google />
+                <Facebook />
             </BrowserRouter>
         );
 
@@ -49,7 +49,7 @@ describe("Google Tests", () => {
 
         render(
             <BrowserRouter>
-                <Google />
+                <Facebook />
             </BrowserRouter>
         );
 
