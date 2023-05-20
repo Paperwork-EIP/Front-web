@@ -21,20 +21,20 @@ function AboutUsPage() {
 
     function submitForm() {
         axios.get(`${api}/contact/sendEmail`,
-        {
-            params: {
-                    email: email,
-                    description: text,
-                    name: name
-            }
-        })
-        .then(() => {
-            alert("The email has been sent.");
-        })
-        .catch((err) => {
-            console.log(err);
-            alert("An error has occured. The service couldn't send the request.");
-        })
+            {
+                params: {
+                    name: name,
+                    content: text,
+                    email: name
+                }
+            })
+            .then(() => {
+                alert("The email has been sent.");
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("An error has occured. The service couldn't send the request.");
+            })
     }
 
     return (
