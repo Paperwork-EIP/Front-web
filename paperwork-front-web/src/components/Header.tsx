@@ -68,7 +68,7 @@ function Header() {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    })
+    }, [isOpen])
 
     return (
         <div className={colorMode === 'light' ? "Header Day-mode" : "Header Night-mode"}>

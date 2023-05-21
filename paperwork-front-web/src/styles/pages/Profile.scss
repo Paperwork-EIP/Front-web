@@ -1,11 +1,9 @@
 .Profile {
-    background-color: rgb(240, 240, 240);
-    color: black;
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px 3% 10px 3%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-height: calc(100vh - 55px);
 
     .modify-profile-btn {
         width: 175px;
@@ -37,8 +35,6 @@
         .section-container {
             display: flex;
             flex-direction: column;
-            background-color: white;
-            border: 0.1rem solid white;
             border-radius: 8px;
         }
 
@@ -54,14 +50,12 @@
                 margin-top: 4px;
                 font-size: 1.2em;
                 letter-spacing: 0.06em;
-                color: black;
             }
 
             .Avatar {
                 width: 25%;
                 height: auto;
                 border-radius: 50%;
-                border: 0.1rem solid white;
             }
 
             .section-username {
@@ -99,7 +93,6 @@
                 font-family: 'Roboto Slab', serif;
                 font-size: 1.5em;
                 letter-spacing: 0.08em;
-                color: #FC6976;
                 text-transform: uppercase;
             }
 
@@ -117,7 +110,6 @@
                 .secondary-label {
                     display: flex;
                     width: 40%;
-                    color: #FC6976;
                     text-transform: capitalize;
                     justify-content: left;
                 }
@@ -133,7 +125,6 @@
 
             hr {
                 width: 100%;
-                border: 1px solid black;
                 margin-top: auto;
                 margin-bottom: auto;
             }
@@ -141,7 +132,6 @@
     }
 
     .process-container {
-        background-color: white;
         display: flex;
         flex-direction: column;
         margin: 0 3% 0 3%;
@@ -160,7 +150,6 @@
 
             :hover {
                 border-radius: 8px;
-                background-color: rgb(252, 252, 252);
             }
 
             .process-progress {
@@ -187,7 +176,6 @@
                         position: absolute;
                         width: 100%;
                         height: 100%;
-                        background-color: rgb(240, 240, 240);
                         border-radius: 14px;
                     }
 
@@ -195,7 +183,6 @@
                         position: absolute;
                         width: 5%;
                         height: 100%;
-                        background-color: #FC6976;
                         border-radius: 14px;
                     }
                 }
@@ -246,6 +233,162 @@
                         margin-top: 0.5rem;
                         width: 100%;
                     }
+                }
+            }
+        }
+    }
+}
+
+.Profile-light {
+    --text-color: black;
+    --secondary-color: #FC6976;
+    --background-page: rgb(240, 240, 240);
+    --background-box: white;
+    --process-button-hover: rgb(252, 252, 252);
+    --progress-bar-bg: rgb(240, 240, 240);
+    --border-color: white;
+
+    background-color: var(--background-page);
+    color: var(--text-color);
+
+    .informations-container {
+        .section-container {
+            background-color: var(--background-box);
+            border: 0.1rem solid var(--border-color);
+        }
+
+        .main-container {
+            @extend .section-container;
+
+            .text-style-main-container {
+                color: var(--text-color);
+            }
+
+            .Avatar {
+                border: 0.1rem solid var(--border-color);
+            }
+
+            .section-username {
+                @extend .text-style-main-container;
+            }
+
+            .section-fullname {
+                @extend .text-style-main-container;
+            }
+        }
+        
+        .secondary-container {
+            @extend .section-container;
+
+            .heading {
+                color: var(--secondary-color);
+            }
+
+            .secondary-row {
+                .secondary-label {
+                    color: var(--secondary-color);
+                }
+            }
+
+            hr {
+                border: 1px solid var(--text-color);
+            }
+        }
+    }
+
+    .process-container {
+        background-color: var(--background-box);
+
+        :hover {
+            background-color: var(--process-button-hover);
+        }
+
+        .process-progress {
+            .progress-bar {
+                .progress-bar-bg {
+                    background-color: var(--progress-bar-bg);
+                }
+
+                .progress-bar-front {
+                    background-color: var(--secondary-color);
+                }
+            }
+        }
+    }
+}
+
+.Profile-dark {
+    --text-color: white;
+    --secondary-color: #FC6976;
+    --background-page: rgb(16, 20, 28);
+    --background-box: rgb(26, 32, 44);
+    --process-button-hover: rgb(35, 43, 59);
+    --progress-bar-bg: rgb(16, 20, 28);
+    --border-color: rgb(26, 32, 44);
+
+    background-color: var(--background-page);
+    color: var(--text-color);
+
+    .informations-container {
+        .section-container {
+            background-color: var(--background-box);
+            border: 0.1rem solid var(--border-color);
+        }
+
+        .main-container {
+            @extend .section-container;
+
+            .text-style-main-container {
+                color: var(--text-color);
+            }
+
+            .Avatar {
+                border: 0.1rem solid var(--border-color);
+            }
+
+            .section-username {
+                @extend .text-style-main-container;
+            }
+
+            .section-fullname {
+                @extend .text-style-main-container;
+            }
+        }
+        
+        .secondary-container {
+            @extend .section-container;
+
+            .heading {
+                color: var(--secondary-color);
+            }
+
+            .secondary-row {
+                .secondary-label {
+                    color: var(--secondary-color);
+                }
+            }
+
+            hr {
+                border: 1px solid var(--text-color);
+            }
+        }
+    }
+
+    .process-container {
+        background-color: var(--background-box);
+
+        :hover {
+            background-color: var(--process-button-hover);
+        }
+
+        .process-progress {
+            .progress-bar {
+                .progress-bar-bg {
+                    background-color: var(--progress-bar-bg);
+                }
+
+                .progress-bar-front {
+                    background-color: var(--secondary-color);
                 }
             }
         }

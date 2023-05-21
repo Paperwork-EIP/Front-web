@@ -33,6 +33,7 @@ const QuizPage = () => {
     const [language, setLanguage] = useState("");
 
 
+    // Translation
     const translation = getTranslation(language, "quiz");
 
 
@@ -56,7 +57,6 @@ const QuizPage = () => {
                         value: i
                     });
                 }
-                // console.log(procedures);
                 setPosts(procedures);
             }).catch(err => {
                 console.log(err)
@@ -67,7 +67,6 @@ const QuizPage = () => {
         const quizSelect = document.getElementById('Quiz-Select') as HTMLSelectElement;
         if (quizSelect) {
             const selectedValue = quizSelect.value;
-            //console.log(selectedValue);
             window.location.href = `/quiz/${selectedValue}/0`;
         }
     }                     
@@ -78,7 +77,7 @@ const QuizPage = () => {
 
             <div className='Page-Title'>{translation.title}</div>
             <div className='Quiz'>
-                <div className='Question-Style'>What type of procedure do you want to complete ?</div>
+                <div className='Question-Style'>{translation.question}</div>
                 <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
                     {
                         posts.map((post: any) => {
@@ -88,7 +87,7 @@ const QuizPage = () => {
                         })
                     }
                 </select>
-                <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>Submit<AiOutlineSend className='Submit-icon' /></button>
+                <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>{translation.submit}<AiOutlineSend className='Submit-icon' /></button>
             </div>
         </>
     );
