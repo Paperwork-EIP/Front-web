@@ -13,6 +13,9 @@ import "../../styles/pages/Quiz.scss";
 // Translation Import
 import { getTranslation } from '../Translation';
 
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const QuizQuestion = () => {
 
     const cookies = new Cookies();
@@ -37,6 +40,9 @@ const QuizQuestion = () => {
 
     // Translation
     const translation = getTranslation(language, "quiz");
+
+    // Color mode
+    const { colorMode } = useColorMode();
 
     useEffect(() => {
         axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
@@ -119,12 +125,14 @@ const QuizQuestion = () => {
         <>
             <Header/>
 
-            <div className='Page-Title'>{title}</div>
-            <div className='Quiz'>
-                <div className='Question-Style'>{currentQuestionAnswer!}</div>
-                <div className='QuizQuestionBtn'>
-                    <button type="button" className='No-btn' onClick={() => handleClick('false')}>{translation.no}</button>
-                    <button type="button" className='Yes-btn' onClick={() => handleClick('true')}>{translation.yes}</button>
+            <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
+                <div className='Page-Title'>{title}</div>
+                <div className='Quiz-container'>
+                    <div className='Question-Style'>{currentQuestionAnswer!}</div>
+                    <div className='QuizQuestionBtn'>
+                        <button type="button" className='No-btn' onClick={() => handleClick('false')}>{translation.no}</button>
+                        <button type="button" className='Yes-btn' onClick={() => handleClick('true')}>{translation.yes}</button>
+                    </div>
                 </div>
             </div>
         </>

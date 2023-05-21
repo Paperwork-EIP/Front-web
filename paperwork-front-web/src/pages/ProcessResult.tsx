@@ -24,7 +24,7 @@ const ProcessResult = () => {
     const api = process.env.REACT_APP_BASE_URL;
     const cookies = new Cookies();
     const [stepsAnswer, setStepsAnswer] = useState([]);
-    const [stockedTitle, setStockedTitle] = useState("");
+    const [title, setTitle] = useState("");
 
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
@@ -57,7 +57,7 @@ const ProcessResult = () => {
                 .then(res => {
                     console.log(res.data);
                     setStepsAnswer(res.data.response);
-                    setStockedTitle(res.data.stocked_title);
+                    setTitle(res.data.title);
                     stepsAnswer?.map((item: any) => {
                         if (item.is_done === true) {
                             document.getElementById(item.step_id)?.setAttribute("checked", "checked");
@@ -104,7 +104,7 @@ const ProcessResult = () => {
             <div className={colorMode === "light" ? "ProcessResult ProcessResult-light" : "ProcessResult ProcessResult-dark"}>
                 <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16} />{ translation.startNewProcess }</a>
                 <div className='ProcessResult-Requires'>
-                    <div className='ProcessResult-Title'>{ translation.resultProcess }"{ stockedTitle }":</div>
+                    <div className='ProcessResult-Title'>{ translation.resultProcess }"{ title }":</div>
                     <div className='ProcessResult-Checkbox-Container'>
                         <>
                             {

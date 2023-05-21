@@ -1,19 +1,9 @@
 .Settings {
-    // Body color
-    --background-color: white;
-    color: black;
-
-    background-color: var(--background-color);
     font-family: Arial, Helvetica, sans-serif;
-    margin: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 3%;
-    border-radius: 8px;
-    -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-    box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
-    border: 0.1rem solid white;
 
     .heading-image {
         display: flex;
@@ -43,23 +33,15 @@
             input {
                 width: 100%;
                 padding: 12px;
-                border: 1px solid #ccc;
                 border-radius: 4px;
                 resize: vertical;
-                background-color: white;
             }
 
             select {
                 width: 100%;
                 padding: 12px;
-                border: 1px solid #ccc;
                 border-radius: 4px;
                 resize: vertical;
-                background-color: white;
-            }
-
-            ::placeholder {
-                color: #888;
             }
 
             .passwordInput {
@@ -88,24 +70,16 @@
 
                 .edit-btn {
                     position: absolute;
-                    background-color: #FC6976;
                     height: 100%;
                     top: 0;
                     right: 0;
                     width: 50px;;
                     border-radius: 4px;
-                    border: 1px solid #ccc;
 
                     .edit-icon {
-                        color: white;
                         font-size: 1.2rem;
                         width: 100%;
                     }
-                }
-
-                .edit-btn:hover {
-                    background-color: #ff4a5a;
-                    border: 1px solid #ccc;
                 }
             }
 
@@ -113,9 +87,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 position: relative;
-                background-color: #FC6976;
                 border: none;
-                color: white;
                 padding: 15px 32px;
                 text-align: center;
                 text-decoration: none;
@@ -123,7 +95,6 @@
                 border-radius: 4px;
     
                 .edit-password-icon {
-                    color: white;
                     font-size: 1.2rem;
                     margin-left: 5px;
                 }
@@ -133,9 +104,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 position: relative;
-                background-color: #FC6976;
                 border: none;
-                color: white;
                 padding: 15px 32px;
                 text-align: center;
                 text-decoration: none;
@@ -143,14 +112,12 @@
                 border-radius: 4px;
     
                 .delete-account-icon {
-                    color: white;
                     font-size: 1.2rem;
                     margin-left: 5px;
                 }
             }
             
             .errorPassword {
-                color: #9b9b9b;
                 font-size: 0.8rem;
                 font-weight: bold;
             }
@@ -161,9 +128,6 @@
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
-                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
-                border: 0.1rem solid white;
                 
                 .Avatar {
                     position: relative;
@@ -177,7 +141,6 @@
                     top: 0;
                     left: 0;
                     border-radius: 50%;
-                    background-color: rgba(0, 0, 0, 0.4);
                     padding: 20px;
                 }
             }
@@ -195,7 +158,6 @@
         font-family: 'Roboto Slab', serif;
         font-size: 1.5em;
         letter-spacing: 0.08em;
-        color: #FC6976;
         text-transform: uppercase;
     }
 
@@ -203,7 +165,6 @@
         display: block;
         width: 80%;
         height: 2px;
-        background-color: #FC6976;
     }
 
     .modal-background {
@@ -216,7 +177,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1000;
 
         .modal-container {
@@ -229,46 +189,25 @@
             left: 15%;
             width: 70%;
             height: 70%;
-            background-color: rgb(226, 253, 248);
             z-index: 1000;
             
             /* width */
             ::-webkit-scrollbar {
                 width: 10px;
             }
-            
-            /* Track */
-            ::-webkit-scrollbar-track {
-                background: #f1f1f1;
-            }
-            
-            /* Handle */
-            ::-webkit-scrollbar-thumb {
-                background: #888;
-            }
-            
-            /* Handle on hover */
-            ::-webkit-scrollbar-thumb:hover {
-                background: #555;
-            }
 
             .modal-content {
                 width: calc(100% - 40px);
                 height: calc(100% - 40px);
                 padding: 5%;
-                background-color: white;
                 font-size: 1.5em;
                 letter-spacing: 0.06em;
-                color: #FC6976;
-                -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-                box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
                 overflow-y: auto;
 
                 .divider span {
                     display: block;
                     width: 100%;
                     height: 2px;
-                    background-color: #FC6976;
                 }
                 
                 .modal-button-container {
@@ -279,22 +218,11 @@
                     height: 80%;
 
                     .modal-btn {
-                        color: white;
                         width: 25%;
                         height: auto;
                         padding: 10px;
                         margin-top: 10px;
                         border-radius: 4px;
-                        -webkit-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-                        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-                    }
-
-                    .modal-cancel-btn {
-                        background-color: #FC6976;
-                    }
-
-                    .modal-continue-btn {
-                        background-color: #29C9B3;
                     }
                 }
 
@@ -313,7 +241,6 @@
                         
                         :hover {
                             cursor: pointer;
-                            border: 1px solid black;
                             border-radius: 50%;
                         }
                     }
@@ -325,13 +252,9 @@
                         width: 100%;
 
                         .modal-avatar-cancel-btn {
-                            color: white;
                             padding: 10px;
                             margin-top: 10px;
                             border-radius: 4px;
-                            -webkit-box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-                            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-                            background-color: #FC6976;
                         }
                     }
                 }
@@ -348,6 +271,335 @@
                         .modal-btn {
                             width: 80%;
                             padding: 2px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+// LIGHT THEME
+.Settings-light {
+    // Body color
+    --background-color: rgb(240, 240, 240);
+    --secondary-color: #FC6976;
+    --label-color: black;
+    --background-box: white;
+    --border-color: #ccc;
+    --continue-btn: #29C9B3;
+    --modal-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    --container-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --edit-btn-bg: #ff4a5a;
+    --error-pwd-color: #9b9b9b;
+    --modif-img-bg: rgba(0, 0, 0, 0.4);
+    --modal-container-bg: rgb(206, 206, 206);
+    --track: #f1f1f1;
+    --track-thumb: #888;
+    --track-thumb-hover: #555;
+
+    color: var(--label-color);
+    background-color: var(--background-color);
+
+    .section-container {
+        .information-container {
+            input {
+                border: 1px solid var(--border-color);
+                background-color: var(--background-box);
+            }
+
+            select {
+                border: 1px solid var(--border-color);
+                background-color: var(--background-box);
+            }
+
+            ::placeholder {
+                color: var(--track-thumb-hover);
+            }
+
+            .input-container {
+                .edit-btn {
+                    background-color: var(--secondary-color);
+                    border: 1px solid var(--border-color);
+
+                    .edit-icon {
+                        color: var(--background-box);
+                    }
+                }
+
+                .edit-btn:hover {
+                    background-color: var(--edit-btn-bg);
+                    border: 1px solid var(--border-color);
+                }
+            }
+
+            .edit-password-btn {
+                background-color: var(--secondary-color);
+                color: var(--background-box);
+    
+                .edit-password-icon {
+                    color: var(--background-box);
+                }
+            }
+
+            .delete-account-btn {
+                background-color: var(--secondary-color);
+                color: var(--background-box);
+    
+                .delete-account-icon {
+                    color: var(--background-box);
+                }
+            }
+            
+            .errorPassword {
+                color: var(--error-pwd-color);
+            }
+
+            .avatar-container {
+                -webkit-box-shadow: var(--container-shadow);
+                box-shadow: var(--container-shadow);
+                border: 0.1rem solid var(--background-box);
+
+                .ModifImg {
+                    background-color: var(--modif-img-bg);
+                }
+            }
+        }
+    }
+
+    .heading {
+        color: var(--secondary-color);
+    }
+
+    .divider span {
+        background-color: var(--secondary-color);
+    }
+
+    .modal-background {
+        background-color: var(--modal-bg);
+
+        .modal-container {
+            background-color: var(--modal-container-bg);
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: var(--track)
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: var(--track-thumb)
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--track-thumb-hover)
+            }
+
+            .modal-content {
+                background-color: var(--background-box);
+                color: var(--secondary-color);
+                -webkit-box-shadow: var(--container-shadow);
+                box-shadow: var(--container-shadow);
+
+                .divider span {
+                    background-color: var(--secondary-color);
+                }
+                
+                .modal-button-container {
+                    .modal-btn {
+                        color: var(--background-box);
+                        -webkit-box-shadow: var(--modal-shadow);
+                        box-shadow: var(--modal-shadow);
+                    }
+
+                    .modal-cancel-btn {
+                        background-color: var(--secondary-color);
+                    }
+
+                    .modal-continue-btn {
+                        background-color: var(--continue-btn)
+                    }
+                }
+
+                .modal-avatar-container {
+                    .modal-avatar-button {
+                        :hover {
+                            border: 1px solid var(--label-color);
+                        }
+                    }
+
+                    .modal-avatar-cancel-btn-container {
+                        .modal-avatar-cancel-btn {
+                            color: var(--background-box);
+                            -webkit-box-shadow: var(--modal-shadow);
+                            box-shadow: var(--modal-shadow);
+                            background-color: var(--secondary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+// DARK THEME
+.Settings-dark {
+    // Body color
+    --background-color: rgb(15, 15, 15);
+    --secondary-color: #FC6976;
+    --label-color: white;
+    --background-box: rgb(26, 32, 44);
+    --button-color: white;
+    --border-color: rgb(51, 51, 51);
+    --continue-btn: #29C9B3;
+    --modal-bg: rgba(122, 122, 122, 0.5);
+    --edit-btn-bg: #ff4a5a;
+    --error-pwd-color: rgb(170, 170, 170);
+    --modif-img-bg: rgba(0, 0, 0, 0.4);
+    --modal-container-bg: rgb(16, 20, 28);
+    --track: rgb(14, 14, 14);
+    --track-thumb: rgb(119, 119, 119);
+    --track-thumb-hover: rgb(170, 170, 170);
+
+    color: var(--label-color);
+    background-color: var(--background-color);
+
+    .section-container {
+        .information-container {
+            input {
+                border: 1px solid var(--border-color);
+                background-color: var(--background-box);
+            }
+
+            select {
+                border: 1px solid var(--border-color);
+                background-color: var(--background-box);
+            }
+
+            ::placeholder {
+                color: var(--track-thumb-hover);
+            }
+
+            .input-container {
+                .edit-btn {
+                    background-color: var(--secondary-color);
+                    border: 1px solid var(--border-color);
+
+                    .edit-icon {
+                        color: var(--button-color);
+                    }
+                }
+
+                .edit-btn:hover {
+                    background-color: var(--edit-btn-bg);
+                    border: 1px solid var(--border-color);
+                }
+            }
+
+            .edit-password-btn {
+                background-color: var(--secondary-color);
+                color: var(--button-color);
+    
+                .edit-password-icon {
+                    color: var(--button-color);
+                }
+            }
+
+            .delete-account-btn {
+                background-color: var(--secondary-color);
+                color: var(--button-color);
+    
+                .delete-account-icon {
+                    color: var(--button-color);
+                }
+            }
+            
+            .errorPassword {
+                color: var(--error-pwd-color);
+            }
+
+            .avatar-container {
+                border: 0.1rem solid var(--button-color);
+
+                .ModifImg {
+                    background-color: var(--modif-img-bg);
+                }
+            }
+        }
+    }
+
+    .heading {
+        color: var(--secondary-color);
+    }
+
+    .divider span {
+        background-color: var(--secondary-color);
+    }
+
+    .modal-background {
+        background-color: var(--modal-bg);
+
+        .modal-container {
+            background-color: var(--modal-container-bg);
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: var(--track)
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: var(--track-thumb)
+            }
+
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--track-thumb-hover)
+            }
+
+            .modal-content {
+                background-color: var(--background-box);
+                color: var(--secondary-color);
+
+                .divider span {
+                    background-color: var(--secondary-color);
+                }
+                
+                .modal-button-container {
+                    .modal-btn {
+                        color: var(--button-color);
+                    }
+
+                    .modal-cancel-btn {
+                        background-color: var(--secondary-color);
+                        color: var(--button-color);
+                    }
+
+                    .modal-continue-btn {
+                        background-color: var(--continue-btn);
+                        color: var(--button-color);
+                    }
+                }
+
+                .modal-avatar-container {
+                    .modal-avatar-button {
+                        :hover {
+                            border: 1px solid var(--label-color);
+                        }
+                    }
+
+                    .modal-avatar-cancel-btn-container {
+                        .modal-avatar-cancel-btn {
+                            color: var(--button-color);
+                            background-color: var(--secondary-color);
                         }
                     }
                 }

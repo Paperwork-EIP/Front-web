@@ -7,7 +7,9 @@ import axios from 'axios';
 
 // Translation Import
 import { getTranslation } from './Translation';
-import { trace } from 'console';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
 
 const cookies = new Cookies();
 
@@ -36,6 +38,9 @@ const SettingsPage = () => {
 
     // Translation
     const translation = getTranslation(language, "settings");
+
+    // Color mode
+    const { colorMode } = useColorMode();
 
     // Eye Password
     const [showEyePwd, setShowEyePwd] = React.useState(false);
@@ -353,7 +358,7 @@ const SettingsPage = () => {
     return (
         <>
             <Header/>
-            <div className="Settings">
+            <div className={colorMode === "light" ? "Settings Settings-light" : "Settings Settings-dark"}>
                 <div className='heading-image'>
                     <img src="assets/settings-page/OnlinePageBro.svg" alt="OnlinePageBro" />
                 </div>

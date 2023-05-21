@@ -16,6 +16,9 @@ import { AiOutlineSend } from 'react-icons/ai';
 // Translation Import
 import { getTranslation } from '../Translation';
 
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const QuizPage = () => {
 
     const cookies = new Cookies();
@@ -35,6 +38,9 @@ const QuizPage = () => {
 
     // Translation
     const translation = getTranslation(language, "quiz");
+
+    // Color mode
+    const { colorMode } = useColorMode();
 
 
     useEffect(() => {
@@ -75,19 +81,21 @@ const QuizPage = () => {
         <>
             <Header/>
 
-            <div className='Page-Title'>{translation.title}</div>
-            <div className='Quiz'>
-                <div className='Question-Style'>{translation.question}</div>
-                <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
-                    {
-                        posts.map((post: any) => {
-                            return (
-                                <option data-testid="select-option" value={post.stocked_title}>{post.label}</option>
-                            )
-                        })
-                    }
-                </select>
-                <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>{translation.submit}<AiOutlineSend className='Submit-icon' /></button>
+            <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
+                <div className="Page-Title">{translation.title}</div>
+                <div className='Quiz-container'>
+                    <div className='Question-Style'>{translation.question}</div>
+                    <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
+                        {
+                            posts.map((post: any) => {
+                                return (
+                                    <option data-testid="select-option" value={post.stocked_title}>{post.label}</option>
+                                )
+                            })
+                        }
+                    </select>
+                    <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>{translation.submit}<AiOutlineSend className='Submit-icon' /></button>
+                </div>
             </div>
         </>
     );

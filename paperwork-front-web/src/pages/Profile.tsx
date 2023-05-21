@@ -5,11 +5,11 @@ import "../styles/pages/Profile.scss";
 import { FaCog } from 'react-icons/fa';
 import axios from 'axios';
 
-// Color mode
-import { useColorMode } from '@chakra-ui/react';
-
 // Translation Import
 import { getTranslation } from './Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
 
 const cookies = new Cookies();
 
