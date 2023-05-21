@@ -27,7 +27,7 @@ function AboutUsPage() {
                 params: {
                     name: name,
                     content: text,
-                    email: name
+                    email: email
                 }
             })
             .then(() => {
