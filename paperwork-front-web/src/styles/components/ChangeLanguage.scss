@@ -1,0 +1,32 @@
+.languages {
+    --text-color: #ececec !important;
+
+    position: relative;
+    z-index: 10;
+    padding: 5px 10px;
+
+    .buttons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .button {
+            border: none;
+            background-color: transparent;
+            border-bottom: 3px solid transparent;
+            transition: 300ms;
+
+            .text-button {
+                font-size: 0.8em;
+                letter-spacing: 2px;
+                color: var(--text-color);
+                position: relative;
+            }
+        }
+
+        .button:hover {
+            border-color: #00B3FF;
+        }
+    }
+}

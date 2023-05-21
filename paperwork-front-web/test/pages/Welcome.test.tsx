@@ -15,23 +15,9 @@ afterEach(() => {
 
 describe('Welcome Page Tests', () => {
     it('should render the page correctly', () => {
-        const { getByText, getAllByText, getByTestId } = render(<Router><WelcomePage /></Router>);
+        const { getByTestId } = render(<Router><WelcomePage /></Router>);
 
-        expect(getAllByText('Paperwork').length).not.toEqual(0);
-        expect(getByText('A tool to help you for the most annoying task.')).toBeInTheDocument();
         expect(getByTestId('Header-description-button')).toBeInTheDocument();
-
-        expect(getByText('What is Paperwork ?')).toBeInTheDocument();
-        expect(getByText('An app to help you for your administrative tasks')).toBeInTheDocument();
-
-        expect(getByText('Tired of paperwork ?')).toBeInTheDocument();
-
-        expect(getByText('A quiz to save time')).toBeInTheDocument();
-        expect(getByText('Thanks to our quiz, you will know exactly the steps to follow for the desired procedure.')).toBeInTheDocument();
-
-        expect(getByText('Stay alerted to remind you your unfinshed tasks')).toBeInTheDocument();
-        expect(getByText("Your progress is saved for each step you start and receive notifications directly in the mobile application to inform you of your steps to be completed and your next appointments.")).toBeInTheDocument();
-
         expect(getByTestId("Footer-title")).toBeInTheDocument()
         expect(getByTestId("Footer-infos")).toBeInTheDocument()
     });

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
 
 import Navbar from "../components/Navbar";
 
@@ -8,6 +9,7 @@ import "../styles/pages/Welcome.scss";
 
 function WelcomePage() {
     const cookies = new Cookies();
+    const { t } = useTranslation();
 
     function redirectToHome() {
         if (cookies.get('loginToken')) {
@@ -24,38 +26,37 @@ function WelcomePage() {
             <Navbar />
             <div className="Header-container">
                 <div className="Header-description">
-                    <h3 className="Header-description-title">Paperwork</h3>
+                    <h3 className="Header-description-title">
+                        {t('welcome.header_title')}
+                    </h3>
                     <p className="Header-description-text">
-                        A tool to help you for the most annoying task.
+                        {t('welcome.header_description')}
                     </p>
                     <Link to="/login">
-                        <button
-                            className="Header-description-button"
-                            data-testid="Header-description-button"
-                        >
-                            Get Started
+                        <button className="Header-description-button" data-testid="Header-description-button">
+                            {t('welcome.header_start_button')}
                         </button>
                     </Link>
                 </div>
             </div>
             <div className="Welcome-container">
                 <div className="Welcome-title">
-                    <h1>What is Paperwork ?</h1>
+                    <h1>{t('welcome.container_title')}</h1>
                 </div>
                 <div className="Welcome-description">
-                    <p>An app to help you for your administrative tasks</p>
+                    <p>{t('welcome.container_description')}</p>
                     <div className="Welcome-description-cards">
                         <div className="Welcome-description-card">
                             <img src="/assets/welcome-page/icon-1.png" alt="icnon-1" />
-                            <span>Web and Mobile platform !</span>
+                            <span>{t('welcome.container_description_card_1')}</span>
                         </div>
                         <div className="Welcome-description-card">
                             <img src="/assets/welcome-page/icon-2.png" alt="icnon-2" />
-                            <span>A guide for your administrative procedures in France.</span>
+                            <span>{t('welcome.container_description_card_2')}</span>
                         </div>
                         <div className="Welcome-description-card">
                             <img src="/assets/welcome-page/icon-3.png" alt="icnon-3" />
-                            <span>Help to be ready for administrative appointments.</span>
+                            <span>{t('welcome.container_description_card_3')}</span>
                         </div>
                     </div>
                 </div>
@@ -68,23 +69,18 @@ function WelcomePage() {
                             />
                         </div>
                         <div className="Welcome-section-left">
-                            <h4>Tired of paperwork ?</h4>
+                            <h4>{t('welcome.section_1_title')}</h4>
                             <p>
-                                Tired of administrative paperwork ? Here is{" "}
-                                <strong>PAPERWORK</strong>, an application that guides step by
-                                step in your procedures. the objective of this application is to
-                                simplify administrative procedures by providing an intuitive and
-                                accessible platform for users.
+                                {t('welcome.section_1_text_1')}<strong>PAPERWORK</strong>{t('welcome.section_1_text_2')}
                             </p>
                         </div>
                     </section>
                     <div className="Welcome-separator"></div>
                     <section className="Welcome-section">
                         <div className="Welcome-section-right">
-                            <h4>A quiz to save time</h4>
+                            <h4>{t('welcome.section_2_title')}</h4>
                             <p>
-                                Thanks to our quiz, you will know exactly the steps to follow
-                                for the desired procedure.
+                                {t('welcome.section_2_text')}
                             </p>
                         </div>
                         <div className="Welcome-section-left">
@@ -103,22 +99,20 @@ function WelcomePage() {
                             />
                         </div>
                         <div className="Welcome-section-left">
-                            <h4>Stay alerted to remind you your unfinshed tasks</h4>
+                            <h4>{t('welcome.section_3_title')}</h4>
                             <p>
-                                Your progress is saved for each step you start and receive
-                                notifications directly in the mobile application to inform you
-                                of your steps to be completed and your next appointments.
+                                {t('welcome.section_3_text')}
                             </p>
                         </div>
                     </section>
                 </div>
                 <div className="Welcome-download">
                     <h2 className="Welcome-download-title">
-                        Download our Android/IOS application to get more flexibility !
+                        {t('welcome.download_title')}
                     </h2>
                     <div className="Welcome-download-links">
                         <a className="Welcome-download-link" href="files/paperwork.apk" download="paperwork.apk">
-                            Download
+                            {t('welcome.download_button_text')}
                         </a>
                     </div>
                 </div>
@@ -128,22 +122,22 @@ function WelcomePage() {
                     <div className="Footer-content">
                         <div className="Footer-title" data-testid="Footer-title">
                             <img src="logo.png" alt="logo-paperwork" />
-                            <h1>Paperwork</h1>
+                            <h1>{t('welcome.footer_title')}</h1>
                         </div>
                         <div className="Footer-infos" data-testid="Footer-infos">
                             <div className="Footer-info">
                                 <Link to="/aboutus">
-                                    <button data-testid="Footer-about-link">About Us</button>
+                                    <button data-testid="Footer-about-link">{t('welcome.footer_aboutus')}</button>
                                 </Link>
                             </div>
                             <div className="Footer-info">
                                 <Link to="/register">
-                                    <button data-testid="Footer-register-link">Register</button>
+                                    <button data-testid="Footer-register-link">{t('welcome.footer_register')}</button>
                                 </Link>
                             </div>
                             <div className="Footer-info">
                                 <Link to="/login">
-                                    <button data-testid="Footer-login-link">Login</button>
+                                    <button data-testid="Footer-login-link">{t('welcome.footer_login')}</button>
                                 </Link>
                             </div>
                         </div>

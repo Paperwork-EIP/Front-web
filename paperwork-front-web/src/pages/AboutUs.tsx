@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { FaLinkedin } from "react-icons/fa";
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward, MdEmail } from "react-icons/md";
+import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
 import { IoMoonSharp } from "react-icons/io5";
-import { TbBeta } from "react-icons/tb";
+import { TbBeta } from "react-icons/tb"
+import { useTranslation } from 'react-i18next';
 import axios from "axios";
 
 import Navbar from "../components/Navbar";
@@ -18,6 +19,7 @@ function AboutUsPage() {
     const [text, setText] = useState("");
 
     const api = process.env.REACT_APP_BASE_URL;
+    const { t } = useTranslation();
 
     function submitForm() {
         axios.get(`${api}/contact/sendEmail`,
@@ -29,11 +31,11 @@ function AboutUsPage() {
                 }
             })
             .then(() => {
-                alert("The email has been sent.");
+                alert(t('aboutus.email_sent'));
             })
             .catch((err) => {
                 console.log(err);
-                alert("An error has occured. The service couldn't send the request.");
+                alert(t('aboutus.error'));
             })
     }
 
@@ -42,7 +44,7 @@ function AboutUsPage() {
             <Navbar />
             <div className="AboutUs-container">
                 <div className="AboutUs-team">
-                    <h1 className="AboutUs-title">Team of 7 developers</h1>
+                    <h1 className="AboutUs-title">{t('aboutus.title')}</h1>
                     <div className="AboutUs-contacts">
                         <section className="AboutUs-card">
                             <div className="AboutUs-card-picture-container">
@@ -55,7 +57,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Fullstack developer</p>
+                                <p>{t('aboutus.job_1')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -69,7 +71,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Fullstack developer</p>
+                                <p>{t('aboutus.job_2')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -83,7 +85,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Frontend developer</p>
+                                <p>{t('aboutus.job_3')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -97,7 +99,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Frontend developer</p>
+                                <p>{t('aboutus.job_4')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -111,7 +113,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Mobile developer</p>
+                                <p>{t('aboutus.job_5')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -125,7 +127,7 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Devops/Mobile developer</p>
+                                <p>{t('aboutus.job_6')}</p>
                             </div>
                         </section>
                         <section className="AboutUs-card">
@@ -139,95 +141,95 @@ function AboutUsPage() {
                                     </a>
                                     <FaLinkedin />
                                 </h1>
-                                <p>Backend developer</p>
+                                <p>{t('aboutus.job_7')}</p>
                             </div>
                         </section>
                     </div>
                 </div>
                 <div className="AboutUs-timeline">
-                    <h1 className="AboutUs-timeline-h1">Timeline of the project</h1>
+                    <h1 className="AboutUs-timeline-h1">{t('aboutus.timeline_title')}</h1>
                     <VerticalTimeline>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid #808080' }}
-                            date="September - October 2021"
+                            date={t('aboutus.date_1').toString()}
                             iconStyle={{ background: '#808080', color: '#fff' }}
                             icon={<IoMoonSharp />}
                         >
-                            <p className="vertical-timeline-element-title">Moonshot</p>
-                            <p className="vertical-timeline-element-subtitle">Paperwork's Idealization.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_1_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_1_text')}</p>
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid #AA6C39' }}
-                            date="December 2021"
+                            date={t('aboutus.date_2').toString()}
                             iconStyle={{ background: '#AA6C39', color: '#fff' }}
                             icon={<MdOutlineModelTraining />}
                         >
-                            <p className="vertical-timeline-element-title">Forward</p>
-                            <p className="vertical-timeline-element-subtitle">Creation of the first prototype.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_2_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_2_text')}</p>
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid #FFBD19' }}
-                            date="April - May 2022"
+                            date={t('aboutus.date_3').toString()}
                             iconStyle={{ background: '#FFBD19', color: '#fff' }}
                             icon={<MdRocketLaunch />}
                         >
-                            <p className="vertical-timeline-element-title">TEST & LEARN</p>
-                            <p className="vertical-timeline-element-subtitle">Implementation of the continuous integration and deployment process.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_3_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_3_text')}</p>
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid red' }}
-                            date="June - October 2022"
+                            date={t('aboutus.date_4').toString()}
                             iconStyle={{ background: 'red', color: '#fff' }}
                             icon={<MdManageAccounts />}
                         >
-                            <p className="vertical-timeline-element-title">MANAGEMENT & PROCESS</p>
-                            <p className="vertical-timeline-element-subtitle">Implementation of the production environment and definition of weekly meetings.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_4_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_4_text')}</p>
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid #8B008B' }}
-                            date="November 2022 - January 2023"
+                            date={t('aboutus.date_5').toString()}
                             iconStyle={{ background: '#8B008B', color: '#fff' }}
                             icon={<MdFastForward />}
                         >
-                            <p className="vertical-timeline-element-title">Fast forward</p>
-                            <p className="vertical-timeline-element-subtitle">Projection on the beta version.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_5_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_5_text')}</p>
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             className="vertical-timeline-element--work"
                             contentStyle={{ borderTop: '6px solid #4B0076' }}
-                            date="February - May 2023"
+                            date={t('aboutus.date_6').toString()}
                             iconStyle={{ background: '#4B0076', color: '#fff' }}
                             icon={<TbBeta />}
                         >
-                            <p className="vertical-timeline-element-title">BETA & GROWTH HACKING</p>
-                            <p className="vertical-timeline-element-subtitle">Implementation of the beta plan.</p>
+                            <p className="vertical-timeline-element-title">{t('aboutus.timeline_6_title')}</p>
+                            <p className="vertical-timeline-element-subtitle">{t('aboutus.timeline_6_text')}</p>
                         </VerticalTimelineElement>
                     </VerticalTimeline>
                 </div>
                 <div className="AboutUs-footer">
-                    <h1>Contact us</h1>
+                    <h1>{t('aboutus.contact_form_title')}</h1>
                     <div className="AboutUs-contact-form">
                         <form id="contact">
                             <fieldset>
-                                <input placeholder="Name" type="text" data-testid="name" value={name} onChange={(e) => setName(e.target.value)} required />
+                                <input placeholder={t('aboutus.contact_form_name').toString()} type="text" data-testid="name" value={name} onChange={(e) => setName(e.target.value)} required />
                             </fieldset>
                             <fieldset>
-                                <input placeholder="Email Address" type="email" data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <input placeholder={t('aboutus.contact_form_email').toString()} type="email" data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                             </fieldset>
                             <fieldset>
-                                <textarea placeholder="Type your message here...." data-testid="text" value={text} onChange={(e) => setText(e.target.value)} required></textarea>
+                                <textarea placeholder={t('aboutus.contact_form_text').toString()} data-testid="text" value={text} onChange={(e) => setText(e.target.value)} required></textarea>
                             </fieldset>
                             <fieldset>
-                                <button type="button" aria-label="button-send" onClick={submitForm}>Send</button>
+                                <button type="button" aria-label="button-send" onClick={submitForm}>{t('aboutus.contact_button')}</button>
                             </fieldset>
                         </form>
                     </div>
-                    <p>You can send us an email with this address</p>
+                    <p>{t('aboutus.contact_email')}</p>
                     <a href="mailto:paperwork_2024@labeip.epitech.eu">paperwork_2024@labeip.epitech.eu</a>
                     <div className="separator"></div>
                 </div>
