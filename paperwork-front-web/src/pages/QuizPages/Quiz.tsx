@@ -22,9 +22,6 @@ import { useColorMode } from '@chakra-ui/react';
 const QuizPage = () => {
 
     const cookies = new Cookies();
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
     const cookiesInfo = cookies.get('loginToken');
 
     const api = process.env.REACT_APP_BASE_URL;
@@ -44,6 +41,10 @@ const QuizPage = () => {
 
 
     useEffect(() => {
+        if (!cookies.get('loginToken')) {
+            window.location.assign('/');
+        }
+
         axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
         .then(res => {
             setLanguage(res.data.language);
@@ -82,9 +83,9 @@ const QuizPage = () => {
             <Header/>
 
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
-                <div className="Page-Title">{translation.title}</div>
+                <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
                 <div className='Quiz-container'>
-                    <div className='Question-Style'>{translation.question}</div>
+                    <div className='Question-Style' data-testid="quiz-question">{translation.question}</div>
                     <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
                         {
                             posts.map((post: any) => {

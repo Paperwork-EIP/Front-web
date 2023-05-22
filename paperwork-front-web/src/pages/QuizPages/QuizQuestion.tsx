@@ -99,7 +99,7 @@ const QuizQuestion = () => {
             }
 
             const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
-
+            console.log("post = ", post);
             if (update === false)
             {
                 axios.post(`${api}/userProcess/add`, post)

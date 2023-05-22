@@ -318,7 +318,7 @@ const SettingsPage = () => {
             token: cookiesInfo.loginToken,
         }}).then(res => {
             console.log(res.data);
-            alert(translation.alertAccountDeleted);
+            alert(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
         }).catch(err => {
@@ -404,7 +404,7 @@ const SettingsPage = () => {
                     <div className="information-container">
                         <label htmlFor="language">{ translation.language }</label>
                         <div className='input-container'>
-                            <select onChange={({ target }) => setLanguage(target.value)} value={ language } name="Language-Select" id="Language-Select" data-testid="select" className='edit-select' placeholder={ language }>
+                            <select onChange={({ target }) => setLanguage(target.value)} value={ language } name="Language-Select" id="Language-Select" data-testid="select-change-language" className='edit-select' placeholder={ language }>
                                 <option data-testid="select-option" value="english">English</option>
                                 <option data-testid="select-option" value="français">Français</option>
                             </select>

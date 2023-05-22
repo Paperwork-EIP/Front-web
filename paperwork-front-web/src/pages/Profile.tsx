@@ -64,8 +64,7 @@ const ProfilePage = () => {
                     console.log(err)
                 });
         }
-    }, [api, cookiesInfo.loginToken])
-
+    }, [api]);
 
     return (
         <>
@@ -130,7 +129,7 @@ const ProfilePage = () => {
                                                 </div>
                                             </div>
                                         </button>
-                                        : null
+                                        : <div className='no-process'>{ translation.noProcess }</div>
                                 )
                             })
                         }
