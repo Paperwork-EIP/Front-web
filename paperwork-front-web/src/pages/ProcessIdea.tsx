@@ -56,7 +56,7 @@ function ProcessIdea() {
             title: title,
             description: description,
             content: content,
-            user_token: cookieList.token
+            user_token: cookieList.loginToken
         }).catch(err => {
           console.log(err);
         })
