@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import Cookies from 'universal-cookie';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import "../styles/ResetPassword.scss";
 import axios from "axios";

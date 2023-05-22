@@ -6,7 +6,7 @@ import { FaFacebook, FaGoogle } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
-import { useDisclosure, useColorModeValue } from '@chakra-ui/react';
+import { useDisclosure } from '@chakra-ui/react';
 import Modal from 'react-modal';
 import Navbar from '../components/Navbar';
 
