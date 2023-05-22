@@ -3,8 +3,11 @@ import Cookies from 'universal-cookie';
 import axios from "axios";
 
 import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FiSend } from 'react-icons/fi';
+import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
-
+import { useDisclosure } from '@chakra-ui/react';
+import Modal from 'react-modal';
 import Navbar from '../components/Navbar';
 
 import "../styles/pages/Login.scss";
@@ -15,7 +18,8 @@ const LoginPage = () => {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
+    
     const cookies = new Cookies();
 
     function handleSubmit() {
@@ -34,6 +38,17 @@ const LoginPage = () => {
             window.location.replace('/home');
         }).catch(() => {
             alert("Email or password is incorrect.");
+        })
+    };
+
+    function handleForgotPassword() {
+        axios.get(
+        `${api}/user/sendResetPasswordEmail?email=${email}`,
+        ).then(res => {
+            alert("Email sent successfully!");
+        }).catch(err => {
+            alert("Failure to send the verification email");
+            console.log(err);
         })
     };
 
@@ -79,6 +94,18 @@ const LoginPage = () => {
                             <input type="password" className="Login-form-field" placeholder="Password" name="password" id='password' data-testid="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <label htmlFor="password" className="Login-form-label">Password</label>
                         </div>
+                        <button className='Login-forgot-password-button' onClick={onOpenModal}>Forgot Password</button>
+                        <Modal className='Login-modal' style={{content:{background: "rgba(45,45,45,1)"}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
+                            <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
+                                <RxCrossCircled/>
+                            </button>
+                            <div className='Login-title-top'>Forgot Password ?</div>
+                            <div className='Login-title'>Confirm the mailbox where you want us to send you your new password</div>
+                            <div className='Login-box-email'>
+                            <input type="email" className="Login-email-input" placeholder="Email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30}/></button>
+                            </div>
+                        </Modal>
                         <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
                             Login
                         </button>
