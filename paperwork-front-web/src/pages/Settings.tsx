@@ -368,8 +368,8 @@ const SettingsPage = () => {
                 <div className='section-container'>
                     <div className="information-container">
                         <div className="avatar-container">
-                            <img src={profilePicture === null ? "assets/avatar/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
-                            <button aria-label='button-change-avatar' onClick={() => setAvatarModal(!avatarModal) }><img src="assets/avatar/PictureModif.png" alt="PictureModif" className="ModifImg"></img></button>
+                            <img src={profilePicture === null ? "/assets/avatar/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
+                            <button aria-label='button-change-avatar' onClick={() => setAvatarModal(!avatarModal) }><img src="/assets/avatar/PictureModif.png" alt="PictureModif" className="ModifImg"></img></button>
                         </div>
                     </div>
 
@@ -526,14 +526,14 @@ const SettingsPage = () => {
                                     <h1 className="modal-title">{ translation.avatarModalTxt }</h1>
                                     <div className="divider"> <span></span></div>
                                     <div className="modal-avatar-container">
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar01.png") }><img src="assets/avatar/Avatar01.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar02.png") }><img src="assets/avatar/Avatar02.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar03.png") }><img src="assets/avatar/Avatar03.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar04.png") }><img src="assets/avatar/Avatar04.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar05.png") }><img src="assets/avatar/Avatar05.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar06.png") }><img src="assets/avatar/Avatar06.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar07.png") }><img src="assets/avatar/Avatar07.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("assets/avatar/Avatar08.png") }><img src="assets/avatar/Avatar08.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar01.png") }><img src="/assets/avatar/Avatar01.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar02.png") }><img src="/assets/avatar/Avatar02.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar03.png") }><img src="/assets/avatar/Avatar03.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar04.png") }><img src="/assets/avatar/Avatar04.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar05.png") }><img src="/assets/avatar/Avatar05.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar06.png") }><img src="/assets/avatar/Avatar06.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar07.png") }><img src="/assets/avatar/Avatar07.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar08.png") }><img src="/assets/avatar/Avatar08.png" alt="Avatar" className="Avatar"></img></button>
                                         <div className="modal-avatar-cancel-btn-container">
                                             <button type="button" className="modal-avatar-cancel-btn" aria-label='button-change-avatar-close' onClick={() => setAvatarModal(false)}>{ translation.cancelBtn }</button>
                                         </div>
