@@ -99,6 +99,13 @@ const translations: Translations = {
       alertUpdate: "Updated successfully!",
       startNewProcess: "Start a new process",
       resultProcess: "Result of the process for ",
+    },
+    header: {
+      home: "Home",
+      profile: "Profile",
+      calendar: "Calendar",
+      help: "Help",
+      logout: "Logout",
     }
   },
   français: {
@@ -189,6 +196,13 @@ const translations: Translations = {
       alertUpdate: "Mis à jour avec succès !",
       startNewProcess: "Commencer un nouveau processus",
       resultProcess: "Résultat du processus pour ",
+    },
+    header: {
+      home: "Accueil",
+      profile: "Profil",
+      calendar: "Calendrier",
+      help: "Aide",
+      logout: "Déconnexion",
     }
   }
 };
