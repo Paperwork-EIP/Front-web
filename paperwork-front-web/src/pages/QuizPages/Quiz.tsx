@@ -22,7 +22,11 @@ import { useColorMode } from '@chakra-ui/react';
 const QuizPage = () => {
 
     const cookies = new Cookies();
+
     const cookiesInfo = cookies.get('loginToken');
+    if (!cookies.get('loginToken')) {
+        window.location.assign('/');
+    }
 
     const api = process.env.REACT_APP_BASE_URL;
 
@@ -41,10 +45,6 @@ const QuizPage = () => {
 
 
     useEffect(() => {
-        if (!cookies.get('loginToken')) {
-            window.location.assign('/');
-        }
-
         axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
         .then(res => {
             setLanguage(res.data.language);

@@ -19,10 +19,11 @@ import { useColorMode } from '@chakra-ui/react';
 const QuizQuestion = () => {
 
     const cookies = new Cookies();
+
+    const cookiesInfo = cookies.get('loginToken');
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-    const cookiesInfo = cookies.get('loginToken');
 
     var { processSelected } = useParams();
     var { step } = useParams();
@@ -36,7 +37,6 @@ const QuizQuestion = () => {
 
     // User informations
     const [language, setLanguage] = useState("");
-
 
     // Translation
     const translation = getTranslation(language, "quiz");
@@ -99,7 +99,6 @@ const QuizQuestion = () => {
             }
 
             const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
-            console.log("post = ", post);
             if (update === false)
             {
                 axios.post(`${api}/userProcess/add`, post)
@@ -130,8 +129,8 @@ const QuizQuestion = () => {
                 <div className='Quiz-container'>
                     <div className='Question-Style'>{currentQuestionAnswer!}</div>
                     <div className='QuizQuestionBtn'>
-                        <button type="button" className='No-btn' onClick={() => handleClick('false')}>{translation.no}</button>
-                        <button type="button" className='Yes-btn' onClick={() => handleClick('true')}>{translation.yes}</button>
+                        <button type="button" className='No-btn' data-testid="btn-no" onClick={() => handleClick('false')}>{translation.no}</button>
+                        <button type="button" className='Yes-btn' data-testid="btn-yes" onClick={() => handleClick('true')}>{translation.yes}</button>
                     </div>
                 </div>
             </div>

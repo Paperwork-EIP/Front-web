@@ -10,6 +10,8 @@ import Profile from '../../src/pages/Profile';
 jest.mock('axios');
 jest.mock('../../src/components/Header', () => () => <></>);
 
+const cookies = new Cookies();
+
 beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
@@ -19,6 +21,7 @@ beforeEach(() => {
         }
     });
     global.alert = jest.fn();
+    cookies.set('loginToken', { token: 'token123' });
     axios.get = jest.fn().mockImplementation(() => Promise.resolve());
     axios.post = jest.fn().mockImplementation(() => Promise.resolve());
 });
@@ -30,7 +33,6 @@ afterEach(() => {
 
 describe('Profile Tests', () => {
   test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
-    const cookies = new Cookies();
     const location = window.location;
     cookies.remove('loginToken');
 
@@ -60,9 +62,6 @@ describe('Profile Tests', () => {
     expect(linkElement).toHaveAttribute('href', '/settings');
   });
   test('Axios.get used in the use effect to have user\'s datas.', () => {
-    const cookies = new Cookies();
-    cookies.set('loginToken', { token: 'token123' });
-
     render(
         <BrowserRouter>
             <Profile />
@@ -73,8 +72,6 @@ describe('Profile Tests', () => {
     expect(axios.get).toHaveBeenCalled();
   });
   test('Should display user\'s datas', async () => {
-    const cookies = new Cookies();
-    cookies.set('loginToken', { token: 'token123' });
     const fakeUser =
     {
       email: "testEmail",
@@ -116,8 +113,6 @@ describe('Profile Tests', () => {
     });
   });
   test('Should display a button when userProcessInfo not null.', async () => {
-    const cookies = new Cookies();
-    cookies.set('loginToken', { token: 'token123' });
     const fakeProcess = [
       {
         pourcentage: 33,

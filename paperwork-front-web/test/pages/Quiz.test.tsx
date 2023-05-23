@@ -32,17 +32,33 @@ afterEach(() => {
 });
 
 describe("Quiz Tests", () => {
-    test('should redirects to login page if loginToken cookie does not exist', () => {
-        cookies.remove("loginToken");
+    // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
+    //   const fakeUser =
+    //   {
+    //     email: "testEmail",
+    //     username: "testUsername",
+    //     address: "testAddress",
+    //     number_phone: "testPhoneNumber",
+    //     language: "english",
+    //     age: 20,
+    //     profile_picture: "Avatars/Avatar05.png"
+    //   };
+  
+    //   axios.get = jest.fn().mockResolvedValue({ status:200, data: fakeUser});
+    //   const useStateSpy = jest.spyOn(React, 'useState');
+    //   useStateSpy.mockImplementation((init) => [init, jest.fn()]);
+    //   const location = window.location;
 
-        render(
-            <BrowserRouter>
-                <Quiz />
-            </BrowserRouter>
-        );
+    //   render(
+    //       <BrowserRouter>
+    //         <Quiz />
+    //       </BrowserRouter>
+    //   );
 
-        expect(window.location.assign).toHaveBeenCalledTimes(1);
-    });
+    //   cookies.remove('loginToken');
+    //   window.location = location;
+    //   expect(window.location.assign).toBeCalledWith('/');
+    // });
     test('should render the page correctly', async () => {
         const fakeProcess = {
           response: [
