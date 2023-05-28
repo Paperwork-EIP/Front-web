@@ -106,6 +106,23 @@ const translations: Translations = {
       calendar: "Calendar",
       help: "Help",
       logout: "Logout",
+    },
+    processIdea: {
+      title: "Title",
+      helperTitle: "Title of the document.",
+      errorTitle: "Title is required.",
+      description: "Description",
+      helperDescription: "Short description of the document.",
+      errorDescription: "Description is required.",
+      content: "Content",
+      helperContent: "Description of the document.",
+      errorContent: "Content is required.",
+      cancel: "Cancel",
+      submit: "Submit",
+      close: "Close",
+      continue: "Continue",
+      cancelMessage: "Are you sure you want to cancel the process idea?",
+      submitMessage: "Are you sure you want to submit the process idea?"
     }
   },
   français: {
@@ -203,7 +220,24 @@ const translations: Translations = {
       calendar: "Calendrier",
       help: "Aide",
       logout: "Déconnexion",
-    }
+    },
+    processIdea: {
+      title: "Titre",
+      helperTitle: "Titre du document.",
+      errorTitle: "Le titre est requis.",
+      description: "Description",
+      helperDescription: "Courte description du document.",
+      errorDescription: "La description est requise.",
+      content: "Contenu",
+      helperContent: "Description du document.",
+      errorContent: "Le contenu est requis.",
+      cancel: "Annuler",
+      submit: "Soumettre",
+      close: "Fermer",
+      continue: "Continuer",
+      cancelMessage: "Êtes-vous sûr(e) de vouloir annuler l'idée de procédure ?",
+      submitMessage: "Êtes-vous sûr(e) de vouloir soumettre l'idée de procédure ?"
+      }
   }
 };
 
