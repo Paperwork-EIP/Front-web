@@ -50,9 +50,9 @@ const LoginPage = () => {
         axios.get(
         `${api}/user/sendResetPasswordEmail?email=${email}`,
         ).then(res => {
-            alert("Email sent successfully!");
+            alert(t('login.emailSent'));
         }).catch(err => {
-            alert("Failure to send the verification email");
+            alert(t('login.emailFail'));
             console.log(err);
         })
     };
@@ -108,7 +108,7 @@ const LoginPage = () => {
                             <div className='Login-title-top'>{t('login.forgotPasswordTitleTop')}</div>
                             <div className='Login-title'>{t('login.forgotPasswordTitle')}</div>
                             <div className='Login-box-email'>
-                            <input type="email" className="Login-email-input" placeholder="Email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
+                            <input type="email" className="Login-email-input" placeholder={t('login.email') || ''} defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
                                 <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30}/></button>
                             </div>
                         </Modal>

@@ -43,7 +43,9 @@ const resources = {
                 error: "Email or password is incorrect.",
                 forgotPassword: "Forgot Password",
                 forgotPasswordTitleTop: "Forgot Password ?",
-                forgotPasswordTitle: "Confirm the mailbox where you want us to send you your new password"
+                forgotPasswordTitle: "Confirm the mailbox where you want us to send you your new password",
+                emailSent: "Email sent successfully!",
+                emailFail: "Failure to send the verification email"
             },
             register: {
                 title: "Register",
@@ -98,6 +100,16 @@ const resources = {
                 link_2: "Login",
                 link_3: "Register",
                 link_4: "About Us"
+            },
+            resetPassword:{
+                resetPasswordSuccess: "Password reset successfully!",
+                resetPasswordFail: "Failure to reset your password",
+                divPasswords: "Password and Confirm Password are not identicals",
+                titleTop: "Need a new password ?",
+                title: "Set your new password for your Paperwork account",
+                passwordInput: "New Password",
+                confirmPasswordInput: "Confirm New Password",
+                validate: "Validate",
             }
         }
     },
@@ -142,7 +154,9 @@ const resources = {
                 error: "L'email ou le mot de passe est incorrect.",
                 forgotPassword: "Mot de passe oublié",
                 forgotPasswordTitleTop: "Mot de passe oublié ?",
-                forgotPasswordTitle: "Confirmez l'adresse e-mail à laquelle vous souhaitez que nous vous envoyions votre nouveau mot de passe"
+                forgotPasswordTitle: "Confirmez l'adresse e-mail à laquelle vous souhaitez que nous vous envoyions votre nouveau mot de passe",
+                emailSent: "Email envoyé avec succès!",
+                emailFail: "Echec de l'envoi de l'email de vérification"
             },
             register: {
                 title: "Inscription",
@@ -200,7 +214,17 @@ const resources = {
                 link_2: "Connexion",
                 link_3: "Inscription",
                 link_4: "À propos de nous"
-            }
+            },
+            resetPassword:{
+                resetPasswordSuccess: "Réinitialisation du mot de passe réussie !",
+                resetPasswordFail: "Échec de la réinitialisation de votre mot de passe",
+                divPasswords: "Le mot de passe et la confirmation du mot de passe ne sont pas identiques",
+                titleTop: "Besoin d'un nouveau mot de passe ?",
+                title: "Définissez votre nouveau mot de passe pour votre compte Paperwork",
+                passwordInput: "Nouveau mot de passe",
+                confirmPasswordInput: "Confirmer le nouveau mot de passe",
+                validate: "Valider",
+                }
         }
     }
 };
