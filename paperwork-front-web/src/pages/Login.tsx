@@ -99,18 +99,20 @@ const LoginPage = () => {
                             <input type="password" className="Login-form-field" placeholder="Password" name="password" id='password' data-testid="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                             <label htmlFor="password" className="Login-form-label">{t('login.password')}</label>
                         </div>
-                        <button className='Login-forgot-password-button' onClick={onOpenModal}>Forgot Password</button>
+                        <button className='Login-forgot-password-button' onClick={onOpenModal}>{t('login.forgotPassword')}</button>
+                        
                         <Modal className='Login-modal' style={{content:{background: "rgba(45,45,45,1)"}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
                             <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
                                 <RxCrossCircled/>
                             </button>
-                            <div className='Login-title-top'>Forgot Password ?</div>
-                            <div className='Login-title'>Confirm the mailbox where you want us to send you your new password</div>
+                            <div className='Login-title-top'>{t('login.forgotPasswordTitleTop')}</div>
+                            <div className='Login-title'>{t('login.forgotPasswordTitle')}</div>
                             <div className='Login-box-email'>
                             <input type="email" className="Login-email-input" placeholder="Email" defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
                                 <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30}/></button>
                             </div>
                         </Modal>
+
                         <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
                             {t('login.button')}
                         </button>

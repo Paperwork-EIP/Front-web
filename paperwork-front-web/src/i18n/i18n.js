@@ -40,7 +40,10 @@ const resources = {
                 no_account_click: "Click here !",
                 text_1: "Welcome back !",
                 text_2: "You can sign in with your existing account",
-                error: "Email or password is incorrect."
+                error: "Email or password is incorrect.",
+                forgotPassword: "Forgot Password",
+                forgotPasswordTitleTop: "Forgot Password ?",
+                forgotPasswordTitle: "Confirm the mailbox where you want us to send you your new password"
             },
             register: {
                 title: "Register",
@@ -136,7 +139,10 @@ const resources = {
                 no_account_click: "Cliquez ici !",
                 text_1: "Bienvenue de retour !",
                 text_2: "Vous pouvez vous connecter avec votre compte existant.",
-                error: "L'email ou le mot de passe est incorrect."
+                error: "L'email ou le mot de passe est incorrect.",
+                forgotPassword: "Mot de passe oublié",
+                forgotPasswordTitleTop: "Mot de passe oublié ?",
+                forgotPasswordTitle: "Confirmez l'adresse e-mail à laquelle vous souhaitez que nous vous envoyions votre nouveau mot de passe"
             },
             register: {
                 title: "Inscription",
