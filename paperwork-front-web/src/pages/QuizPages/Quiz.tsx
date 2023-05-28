@@ -13,42 +13,67 @@ import "../../styles/pages/Quiz.scss";
 // Icon Import
 import { AiOutlineSend } from 'react-icons/ai';
 
+// Translation Import
+import { getTranslation } from '../Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const QuizPage = () => {
 
     const cookies = new Cookies();
+
+    const cookiesInfo = cookies.get('loginToken');
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
-    const email = cookies.get('loginToken');
-    // console.log(email);
+
+    const api = process.env.REACT_APP_BASE_URL;
 
     const [posts, setPosts] = useState([{}]);
 
+
+    // User informations
+    const [language, setLanguage] = useState("");
+
+
+    // Translation
+    const translation = getTranslation(language, "quiz");
+
+    // Color mode
+    const { colorMode } = useColorMode();
+
+
     useEffect(() => {
-      axios.get(`${process.env.REACT_APP_BASE_URL}/process/getAll`)
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
         .then(res => {
-            var procedures = [];
-            // console.log(res.data);
-            for (var i = 0; i < res.data.response.length; i++)
-            {
-                procedures.push({
-                    label: res.data.response[i]['title'],
-                    source: res.data.response[i]['source'],
-                    value: i
-                });
-            }
-            // console.log(procedures);
-            setPosts(procedures);
+            setLanguage(res.data.language);
         }).catch(err => {
             console.log(err)
         });
-    }, [])
+
+        axios.get(`${api}/process/getAll`, { params: { language: language } })
+            .then(res => {
+                var procedures = [];
+                console.log(res.data);
+                for (var i = 0; i < res.data.response.length; i++)
+                {
+                    procedures.push({
+                        label: res.data.response[i]['title'],
+                        stocked_title: res.data.response[i]['stocked_title'],
+                        value: i
+                    });
+                }
+                setPosts(procedures);
+            }).catch(err => {
+                console.log(err)
+            });
+        }, [language, api, cookiesInfo.loginToken])
 
     const handleSubmit = () => {
         const quizSelect = document.getElementById('Quiz-Select') as HTMLSelectElement;
         if (quizSelect) {
             const selectedValue = quizSelect.value;
-            //console.log(selectedValue);
             window.location.href = `/quiz/${selectedValue}/0`;
         }
     }                     
@@ -57,19 +82,21 @@ const QuizPage = () => {
         <>
             <Header/>
 
-            <div className='Page-Title'>New Process Quiz</div>
-            <div className='Quiz'>
-                <div className='Question-Style'>What type of procedure do you want to complete ?</div>
-                <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
-                    {
-                        posts.map((post: any) => {
-                            return (
-                                <option data-testid="select-option" value={post.label}>{post.label}</option>
-                            )
-                        })
-                    }
-                </select>
-                <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>Submit<AiOutlineSend className='Submit-icon' /></button>
+            <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
+                <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
+                <div className='Quiz-container'>
+                    <div className='Question-Style' data-testid="quiz-question">{translation.question}</div>
+                    <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
+                        {
+                            posts.map((post: any) => {
+                                return (
+                                    <option data-testid="select-option" value={post.stocked_title}>{post.label}</option>
+                                )
+                            })
+                        }
+                    </select>
+                    <button data-testid="submit-button" type="button" className='Submit-btn' onClick={() => handleSubmit()}>{translation.submit}<AiOutlineSend className='Submit-icon' /></button>
+                </div>
             </div>
         </>
     );

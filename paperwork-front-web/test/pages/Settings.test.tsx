@@ -100,7 +100,7 @@ describe("Settings Tests", () => {
         const username_input = fireEvent.change(getByTestId(/input-change-username/), { target: { value: 'username' } });
         const name_input = fireEvent.change(getByTestId(/input-change-name/), { target: { value: 'name' } });
         const firstname_input = fireEvent.change(getByTestId(/input-change-firstname/), { target: { value: 'firstname' } });
-        const language_input = fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+        const language_select = fireEvent.change(getByTestId(/select-change-language/), { target: { value: 'french' } });
         const age_input = fireEvent.change(getByTestId(/input-change-age/), { target: { value: 5 } });
         const email_input = fireEvent.change(getByTestId(/input-change-email/), { target: { value: 'email' } });
         const address_input = fireEvent.change(getByTestId(/input-change-address/), { target: { value: 'address' } });
@@ -124,7 +124,7 @@ describe("Settings Tests", () => {
         expect(username_input).toBeTruthy();
         expect(name_input).toBeTruthy();
         expect(firstname_input).toBeTruthy();
-        expect(language_input).toBeTruthy();
+        expect(language_select).toBeTruthy();
         expect(age_input).toBeTruthy();
         expect(email_input).toBeTruthy();
         expect(address_input).toBeTruthy();
@@ -192,8 +192,8 @@ describe("Settings Tests", () => {
 
         fireEvent.click(getByLabelText(/button-change-username/i));
 
-        expect(cancel_button).toBeTruthy();
-        expect(continue_button).not.toBeTruthy();
+        expect(cancel_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('should click on delete modal', () => {
@@ -243,7 +243,7 @@ describe("Settings Tests", () => {
         const continue_button = fireEvent.click(getByLabelText(/button-change-continue/i));
 
         expect(axios.post).toHaveBeenCalled();
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
     });
     test('should get an error 400 from axios get for delete account', () => {
         axios.get = jest.fn(() => Promise.reject({ response: { status: 400 } }));
@@ -378,7 +378,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('username : should get an error 404 from axios post when submit', () => {
@@ -397,7 +397,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('username : should get an error 409 from axios post when submit', () => {
@@ -416,7 +416,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('username : should get an error 500 from axios post when submit', () => {
@@ -435,7 +435,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('name : should change the name when submit', () => {
@@ -470,7 +470,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('name : should get an error 404 from axios post when submit', () => {
@@ -489,7 +489,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('name : should get an error 500 from axios post when submit', () => {
@@ -508,7 +508,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('firstname : should change the firstname when submit', () => {
@@ -543,7 +543,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('firstname : should get an error 404 from axios post when submit', () => {
@@ -562,7 +562,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('firstname : should get an error 500 from axios post when submit', () => {
@@ -581,7 +581,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('language : should change the language when submit', () => {
@@ -591,7 +591,7 @@ describe("Settings Tests", () => {
             </BrowserRouter>
         );
 
-        fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+        fireEvent.change(getByTestId(/select-change-language/), { target: { value: 'french' } });
         fireEvent.click(getByLabelText(/button-change-language/i));
 
         const button = getByLabelText(/button-change-continue/i);
@@ -609,14 +609,14 @@ describe("Settings Tests", () => {
             </BrowserRouter>
         );
 
-        fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+        fireEvent.change(getByTestId(/select-change-language/), { target: { value: 'french' } });
         fireEvent.click(getByLabelText(/button-change-language/i));
 
         const button = getByLabelText(/button-change-continue/i);
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('language : should get an error 404 from axios post when submit', () => {
@@ -628,33 +628,35 @@ describe("Settings Tests", () => {
             </BrowserRouter>
         );
 
-        fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+        fireEvent.change(getByTestId(/select-change-language/), { target: { value: 'french' } });
         fireEvent.click(getByLabelText(/button-change-language/i));
 
         const button = getByLabelText(/button-change-continue/i);
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
-    test('language : should get an error 500 from axios post when submit', () => {
-        axios.post = jest.fn(() => Promise.reject({ response: { status: 500 }, data: { test: "test" } }));
-
-        const { getByLabelText, getByTestId } = render(
-            <BrowserRouter>
-                <Settings />
-            </BrowserRouter>
+    test('language: should get an error 500 from axios post when submit', () => {
+        axios.post = jest.fn(() =>
+          Promise.reject({ response: { status: 500 }, data: { test: 'test' } })
         );
-
-        fireEvent.change(getByTestId(/input-change-language/), { target: { value: 'language' } });
+      
+        const { getByLabelText, getByTestId } = render(
+          <BrowserRouter>
+            <Settings />
+          </BrowserRouter>
+        );
+      
+        const select = getByTestId(/select-change-language/);
+        fireEvent.change(select, { target: { value: 'language' } });
         fireEvent.click(getByLabelText(/button-change-language/i));
-
+      
         const button = getByLabelText(/button-change-continue/i);
         expect(button).toBeInTheDocument();
-        const continue_button = fireEvent.click(button);
-
-        expect(continue_button).not.toBeTruthy();
+        fireEvent.click(button);
+      
         expect(axios.post).toBeCalledTimes(1);
     });
     test('age : should not send request if age anormal', () => {
@@ -705,7 +707,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('age : should get an error 404 from axios post when submit', () => {
@@ -724,7 +726,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('age : should get an error 500 from axios post when submit', () => {
@@ -743,7 +745,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('email : should get an error 400 from axios post when submit', () => {
@@ -762,7 +764,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('email : should get an error 404 from axios post when submit', () => {
@@ -781,7 +783,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('email : should get an error 409 from axios post when submit', () => {
@@ -800,7 +802,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('email : should get an error 500 from axios post when submit', () => {
@@ -819,7 +821,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('address : should get an error 400 from axios post when submit', () => {
@@ -838,7 +840,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('address : should get an error 404 from axios post when submit', () => {
@@ -857,7 +859,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('address : should get an error 500 from axios post when submit', () => {
@@ -876,7 +878,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('phone : should get an error 400 from axios post when submit', () => {
@@ -895,7 +897,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('phone : should get an error 404 from axios post when submit', () => {
@@ -914,7 +916,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('phone : should get an error 500 from axios post when submit', () => {
@@ -933,7 +935,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('pswd : should get an alert if password and confirm password not match', () => {
@@ -966,7 +968,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
     test('pswd : should get an error 404 from axios post when submit', () => {
@@ -986,9 +988,10 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
+
     test('pswd : should get an error 500 from axios post when submit', () => {
         axios.post = jest.fn(() => Promise.reject({ response: { status: 500 }, data: { test: "test" } }));
 
@@ -1006,7 +1009,7 @@ describe("Settings Tests", () => {
         expect(button).toBeInTheDocument();
         const continue_button = fireEvent.click(button);
 
-        expect(continue_button).not.toBeTruthy();
+        expect(continue_button).toBeTruthy();
         expect(axios.post).toBeCalledTimes(1);
     });
 });

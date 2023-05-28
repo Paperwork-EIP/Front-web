@@ -63,14 +63,14 @@ describe("Process Result Tests", () => {
     test('should get data', async () => {
         const useStateSpy = jest.spyOn(React, 'useState');
         useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-        const { getByTestId } = render(
-            <BrowserRouter>
-                <ProcessResult />
-            </BrowserRouter>
+        const { container } = render(
+          <BrowserRouter>
+            <ProcessResult />
+          </BrowserRouter>
         );
 
         await waitFor(() => {
-            const checkbox = getByTestId(1);
+            const checkbox = container.querySelector('input[type="checkbox"]')!;
 
             const click = fireEvent.click(checkbox);
 
@@ -95,21 +95,20 @@ describe("Process Result Tests", () => {
         axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
         const useStateSpy = jest.spyOn(React, 'useState');
         useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-        const { getByTestId } = render(
-            <BrowserRouter>
-                <ProcessResult />
-            </BrowserRouter>
+        const { container } = render(
+          <BrowserRouter>
+            <ProcessResult />
+          </BrowserRouter>
         );
-
+      
         await waitFor(() => {
-            const checkbox = getByTestId(1);
-
-            fireEvent.click(checkbox);
-
-            expect(axios.post).toHaveBeenCalledTimes(1);
-            expect(useStateSpy).toHaveBeenCalled();
-            expect(checkbox).toBeInTheDocument();
-        })
-
-    });
+          const checkbox = container.querySelector('input[type="checkbox"]')!;
+      
+          fireEvent.click(checkbox);
+      
+          expect(axios.post).toHaveBeenCalledTimes(1);
+          expect(useStateSpy).toHaveBeenCalled();
+          expect(checkbox).toBeInTheDocument();
+        });
+      });
 });

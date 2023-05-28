@@ -5,6 +5,12 @@ import "../styles/pages/Settings.scss";
 import { AiFillEye, AiFillEyeInvisible, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
 
+// Translation Import
+import { getTranslation } from './Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const cookies = new Cookies();
 
 const SettingsPage = () => {
@@ -29,6 +35,13 @@ const SettingsPage = () => {
     const [password, setPassword] = useState("");
     const [verifPassword, setVerifPassword] = useState("");
 
+
+    // Translation
+    const translation = getTranslation(language, "settings");
+
+    // Color mode
+    const { colorMode } = useColorMode();
+
     // Eye Password
     const [showEyePwd, setShowEyePwd] = React.useState(false);
     const handleClickEyePwd = () => setShowEyePwd(!showEyePwd);
@@ -45,22 +58,22 @@ const SettingsPage = () => {
         if (cookiesInfo) {
             axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
                 .then(res => {
+                    console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
                     setFirstname(res.data.firstname);
                     setLanguage(res.data.language);
                     setAge(res.data.age);
                     setEmail(res.data.email);
-                    setAddress(res.data.adress);
+                    setAddress(res.data.address);
                     setPhonenumber(res.data.number_phone);
                     setProfilePicture(res.data.profile_picture);
                 }).catch(err => {
                     console.log(err)
-                });
+                }
+            );
         }
-    })
-
-    
+    }, []);
 
     const handleChangeVariable = (event: any) => {
         setVariableToChange(event);
@@ -68,193 +81,233 @@ const SettingsPage = () => {
     }
 
     const handleCloseModal = (event: any) => {
+        event.preventDefault();
         setShowModal(!showModal);
     }
 
     const handleSubmit = (event: any) => {
-        event.preventDefault();
         if (variableToChange === "username") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                username: username,
-            }).then(res => {
-                console.log(res.data);
-                alert("Username updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 409) {
-                    alert("Username already used.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "name") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                name: name,
-            }).then(res => {
-                console.log(res.data);
-                alert("Name updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "firstname") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                firstname: firstname,
-            }).then(res => {
-                console.log(res.data);
-                alert("Firstname updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter email.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "language") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                language: language,
-            }).then(res => {
-                console.log(res.data);
-                alert("Language updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "age") {
-            if (Number(age) < 1 || Number(age) > 200) {
-                alert("Age must be between 1 and 200.");
+            if (username === null) {
+                alert(translation.alertEmptyUsername);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
-                    age: age,
+                    username: username,
                 }).then(res => {
                     console.log(res.data);
-                    alert("Age updated!");
+                    alert(translation.alertUpdateUsername);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert("Missing parameter token.");
+                        alert(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert("User not found.");
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 409) {
+                        alert(translation.alertUsernameAlreadyUsed);
                     } else if (err.response.status === 500) {
-                        alert("System error. You should put a number.");
+                        alert(translation.alertSystemError);
                     }
                 });
             }
-        } else if (variableToChange === "email") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                new_email: email,
-            }).then(res => {
-                console.log(res.data);
-                alert("Email updated!");
-                // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
-                if (cookiesInfo.email !== email) {
-                    cookies.remove('loginToken', { path: '/' });
-                    cookies.set('loginToken', { token: cookiesInfo.token, email: email }, {
-                        path:'/',
-                        secure:true,
-                        sameSite:'none'
-                    });
-                }
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 409) {
-                    alert("Email already used.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "address") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                adress: address,
-            }).then(res => {
-                console.log(res.data);
-                alert("Address updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "phonenumber") {
-            axios.post(`${api}/user/modifyDatas`, {
-                token: cookiesInfo.loginToken,
-                number_phone: phonenumber,
-            }).then(res => {
-                console.log(res.data);
-                alert("Phonenumber updated!");
-                window.location.reload();
-            }).catch(err => {
-                console.log(err)
-                if (err.response.status === 400) {
-                    alert("Missing parameter token.");
-                } else if (err.response.status === 404) {
-                    alert("User not found.");
-                } else if (err.response.status === 500) {
-                    alert("System error.");
-                }
-            });
-        } else if (variableToChange === "password") {
-            if (password.length >= 8 && password === verifPassword) {
+        } else if (variableToChange === "name") {
+            if (name === null) {
+                alert(translation.alertEmptyName);
+            } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
-                    password: password,
+                    name: name,
                 }).then(res => {
                     console.log(res.data);
-                    alert("Password updated!");
+                    alert(translation.alertUpdateName);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert("Missing parameter token.");
+                        alert(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert("User not found.");
+                        alert(translation.alertUserNotFound);
                     } else if (err.response.status === 500) {
-                        alert("System error.");
+                        alert(translation.alertSystemError);
                     }
                 });
+            }
+        } else if (variableToChange === "firstname") {
+            if (firstname === null) {
+                alert(translation.alertEmptyFirstname);
             } else {
-                alert("Passwords does not match.");
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    firstname: firstname,
+                }).then(res => {
+                    console.log(res.data);
+                    alert(translation.alertUpdateFirstname);
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert(translation.alertMissingEmail);
+                    } else if (err.response.status === 404) {
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 500) {
+                        alert(translation.alertSystemError);
+                    }
+                });
+            }
+        } else if (variableToChange === "language") {
+            if (language === null) {
+                alert(translation.alertEmptyLanguage);
+            } else {
+                const languageSelect = document.getElementById('Language-Select') as HTMLSelectElement;
+                const languageValue = languageSelect.value;
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    language: languageValue,
+                }).then(res => {
+                    console.log(res.data);
+                    alert(translation.alertUpdateLanguage);
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert(translation.alertMissingToken);
+                    } else if (err.response.status === 404) {
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 500) {
+                        alert(translation.alertSystemError);
+                    }
+                });
+            }
+        } else if (variableToChange === "age") {
+            if (age === null) {
+                alert(translation.alertEmptyAge);
+            } else {
+                console.log("age");
+                console.log(age);
+                if (Number(age) < 1 || Number(age) > 200) {
+                    alert(translation.alertAgeRange);
+                } else {
+                    axios.post(`${api}/user/modifyDatas`, {
+                        token: cookiesInfo.loginToken,
+                        age: age,
+                    }).then(res => {
+                        console.log(res.data);
+                        alert(translation.alertUpdateAge);
+                        window.location.reload();
+                    }).catch(err => {
+                        console.log(err)
+                        if (err.response.status === 400) {
+                            alert(translation.alertMissingToken);
+                        } else if (err.response.status === 404) {
+                            alert(translation.alertUserNotFound);
+                        } else if (err.response.status === 500) {
+                            alert(translation.alertSystemErrorPutNumber);
+                        }
+                    });
+                }
+            }
+        } else if (variableToChange === "email") {
+            if (email === null) {
+                alert(translation.alertEmptyEmail);
+            } else {
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    new_email: email,
+                }).then(res => {
+                    console.log(res.data);
+                    alert(translation.alertUpdateEmail);
+                    // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
+                    if (cookiesInfo.email !== email) {
+                        cookies.remove('loginToken', { path: '/' });
+                        // cookies.set('loginToken', { token: cookiesInfo.token, email: email }, {
+                        //     path:'/',
+                        //     secure:true,
+                        //     sameSite:'none'
+                        // });
+                    }
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert(translation.alertMissingToken);
+                    } else if (err.response.status === 404) {
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 409) {
+                        alert(translation.alertEmailAlreadyUsed);
+                    } else if (err.response.status === 500) {
+                        alert(translation.alertSystemError);
+                    }
+                });
+            }
+        } else if (variableToChange === "address") {
+            if (address === null) {
+                alert(translation.alertEmptyAddress);
+            } else {
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    address: address,
+                }).then(res => {
+                    console.log(res.data);
+                    alert(translation.alertUpdateAddress);
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert(translation.alertMissingToken);
+                    } else if (err.response.status === 404) {
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 500) {
+                        alert(translation.alertSystemError);
+                    }
+                });
+            }
+        } else if (variableToChange === "phonenumber") {
+            if (phonenumber === null) {
+                alert(translation.alertEmptyPhonenumber);
+            } else {
+                axios.post(`${api}/user/modifyDatas`, {
+                    token: cookiesInfo.loginToken,
+                    number_phone: phonenumber,
+                }).then(res => {
+                    console.log(res.data);
+                    alert(translation.alertUpdatePhonenumber);
+                    window.location.reload();
+                }).catch(err => {
+                    console.log(err)
+                    if (err.response.status === 400) {
+                        alert(translation.alertMissingToken);
+                    } else if (err.response.status === 404) {
+                        alert(translation.alertUserNotFound);
+                    } else if (err.response.status === 500) {
+                        alert(translation.alertSystemError);
+                    }
+                });
+            }
+        } else if (variableToChange === "password") {
+            if (password === null) {
+                alert(translation.alertEmptyPassword);
+            } else {
+                if (password.length >= 4 && password === verifPassword) {
+                    axios.post(`${api}/user/modifyDatas`, {
+                        token: cookiesInfo.loginToken,
+                        password: password,
+                    }).then(res => {
+                        console.log(res.data);
+                        alert(translation.alertUpdatePassword);
+                        window.location.reload();
+                    }).catch(err => {
+                        console.log(err)
+                        if (err.response.status === 400) {
+                            alert(translation.alertMissingToken);
+                        } else if (err.response.status === 404) {
+                            alert(translation.alertUserNotFound);
+                        } else if (err.response.status === 500) {
+                            alert(translation.alertSystemError);
+                        }
+                    });
+                } else {
+                    alert(translation.alertPasswordNotMatch);
+                }
             }
         }
         setShowModal(!showModal);
@@ -265,17 +318,17 @@ const SettingsPage = () => {
             token: cookiesInfo.loginToken,
         }}).then(res => {
             console.log(res.data);
-            alert("Account deleted!");
+            alert(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
         }).catch(err => {
             console.log(err)
             if (err.response.status === 400) {
-                alert("Missing parameter token.");
+                alert(translation.alertMissingToken);
             } else if (err.response.status === 404) {
-                alert("User not found.");
+                alert(translation.alertUserNotFound);
             } else if (err.response.status === 500) {
-                alert("System error.");
+                alert(translation.alertSystemError);
             }
         });
         setDeleteModal(!deleteModal);
@@ -287,16 +340,16 @@ const SettingsPage = () => {
             profile_picture: newAvatar,
         }).then(res => {
             console.log(res.data);
-            alert("Avatar updated!");
+            alert(translation.alertAvatarUpdated);
             window.location.reload();
         }).catch(err => {
             console.log(err)
             if (err.response.status === 400) {
-                alert("Missing parameter token.");
+                alert(translation.alertMissingToken);
             } else if (err.response.status === 404) {
-                alert("User not found.");
+                alert(translation.alertUserNotFound);
             } else if (err.response.status === 500) {
-                alert("System error.");
+                alert(translation.alertSystemError);
             }
         });
         setAvatarModal(!avatarModal);
@@ -305,63 +358,70 @@ const SettingsPage = () => {
     return (
         <>
             <Header/>
-            <div className="Settings">
+            <div className={colorMode === "light" ? "Settings Settings-light" : "Settings Settings-dark"}>
                 <div className='heading-image'>
                     <img src="assets/settings-page/OnlinePageBro.svg" alt="OnlinePageBro" />
                 </div>
-                <h1 className="heading">Profile</h1>
+                <h1 className="heading">{ translation.heading1 }</h1>
                 <div className="divider"> <span></span></div>
 
                 <div className='section-container'>
                     <div className="information-container">
                         <div className="avatar-container">
-                            <img src={profilePicture === null ? "Avatars/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
-                            <button aria-label='button-change-avatar' onClick={() => setAvatarModal(!avatarModal) }><img src="Avatars/PictureModif.png" alt="PictureModif" className="ModifImg"></img></button>
+                            <img src={profilePicture === null ? "/assets/avatar/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar"></img>
+                            <button aria-label='button-change-avatar' onClick={() => setAvatarModal(!avatarModal) }><img src="/assets/avatar/PictureModif.png" alt="PictureModif" className="ModifImg"></img></button>
                         </div>
                     </div>
 
                     <div className="information-container">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">{ translation.username }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setUsername(target.value)} data-testid='input-change-username' className='edit-input' type="text" id="username" name="username" placeholder={ username ? username : "Username..."}></input>
+                            <input onChange={({ target }) => setUsername(target.value)} data-testid='input-change-username' className='edit-input' type="text" id="username" name="username" placeholder={ username ? username : translation.usernamePlaceholder }></input>
                             <button type="button" className='edit-btn' aria-label='button-change-username' onClick={() => handleChangeVariable("username")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
 
                     <div className="information-container">
-                        <label htmlFor="name">Name</label>
+                        <label htmlFor="name">{ translation.name }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setName(target.value)} data-testid='input-change-name' className='edit-input' type="text" id="name" name="name" placeholder={ name ? name : "Name..."}></input>
+                            <input onChange={(event) => {
+                                setName(event.target.value);
+                                console.log("target.target.value = " + event.target.value);
+                                console.log("name = " + name);
+                                }} data-testid='input-change-name' className='edit-input' type="text" id="name" name="name" placeholder={ name ? name : translation.namePlaceholder}></input>
                             <button type="button" className='edit-btn' aria-label='button-change-name' onClick={() => handleChangeVariable("name")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
-                    
+
                     <div className="information-container">
-                        <label htmlFor="firstname">Firstname</label>
+                        <label htmlFor="firstname">{ translation.firstname }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setFirstname(target.value)} data-testid='input-change-firstname' className='edit-input' type="text" id="firstname" name="firstname" placeholder={ firstname ? firstname : "Firstname..."}></input>
+                            <input onChange={({ target }) => setFirstname(target.value)} data-testid='input-change-firstname' className='edit-input' type="text" id="firstname" name="firstname" placeholder={ firstname ? firstname : translation.firstnamePlaceholder}></input>
                             <button type="button" className='edit-btn' aria-label='button-change-firstname' onClick={() => handleChangeVariable("firstname")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
 
                     <div className="information-container">
-                        <label htmlFor="language">Language</label>
+                        <label htmlFor="language">{ translation.language }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setLanguage(target.value)} data-testid='input-change-language' className='edit-input' type="text" id="language" name="language" placeholder={ language ? language : "Language..."}></input>
+                            <select onChange={({ target }) => setLanguage(target.value)} value={ language } name="Language-Select" id="Language-Select" data-testid="select-change-language" className='edit-select' placeholder={ language }>
+                                <option data-testid="select-option" value="english">English</option>
+                                <option data-testid="select-option" value="français">Français</option>
+                            </select>
                             <button type="button" className='edit-btn' aria-label='button-change-language' onClick={() => handleChangeVariable("language")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
                     
                     <div className="information-container">
-                        <label htmlFor="age">Age</label>
+                        <label htmlFor="age">{ translation.age }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setAge(target.value)} data-testid='input-change-age' className='edit-input' type="number" id="age" name="age" min="1" max="200" placeholder={ age ? age : "Age..."}></input>
+                            <input onChange={({ target }) => setAge(target.value)} data-testid='input-change-age' className='edit-input' type="number" id="age" name="age" min="1" max="200" placeholder={ age ? age : translation.agePlaceholder}></input>
                             <button type="button" className='edit-btn' aria-label='button-change-age' onClick={() => handleChangeVariable("age")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
                 </div>
 
-                <h1 className="heading">Personal informations</h1>
+                <h1 className="heading">{ translation.heading2 }</h1>
                 <div className="divider"> <span></span></div>
 
                 <div className='section-container'>
@@ -374,53 +434,53 @@ const SettingsPage = () => {
                     </div>
                     
                     <div className="information-container">
-                        <label htmlFor="address">Address</label>
+                        <label htmlFor="address">{ translation.address }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setAddress(target.value)} data-testid='input-change-address' className='edit-input' type="text" id="address" name="address" placeholder={ address ? address : "Address..."}></input>
+                            <input onChange={({ target }) => setAddress(target.value)} data-testid='input-change-address' className='edit-input' type="text" id="address" name="address" placeholder={ address ? address : translation.addressPlaceholder}></input>
                             <button type="button" className='edit-btn' aria-label='button-change-address' onClick={() => handleChangeVariable("address")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
                     
                     <div className="information-container">
-                        <label htmlFor="phonenumber">Phone number</label>
+                        <label htmlFor="phonenumber">{ translation.phonenumber }</label>
                         <div className='input-container'>
-                            <input onChange={({ target }) => setPhonenumber(target.value)} data-testid='input-change-phone' className='edit-input' type="tel" id="phonenumber" name="phonenumber" placeholder={ phonenumber ? phonenumber : "Phone number..."}></input>
+                            <input onChange={({ target }) => setPhonenumber(target.value)} data-testid='input-change-phone' className='edit-input' type="tel" id="phonenumber" name="phonenumber" placeholder={ phonenumber ? phonenumber : translation.phonenumberPlaceholder}></input>
                             <button type="button" className='edit-btn' aria-label='button-change-phone' onClick={() => handleChangeVariable("phonenumber")}><AiOutlineEdit className='edit-icon' /></button>
                         </div>
                     </div>
                 </div>
 
-                <h1 className="heading">Security</h1>
+                <h1 className="heading">{ translation.heading3 }</h1>
                 <div className="divider"> <span></span></div>
 
                 <div className='section-container'>
                     <div className="information-container">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password">{ translation.password }</label>
                         <div className="passwordInput">
                             <input onChange={({ target }) => setPassword(target.value)} data-testid='input-change-pswd' type={showEyePwd ? 'text' : 'password'} id="password" name="password" placeholder="**********"></input>
                             <button type="button" aria-label='button-change-show1' onClick={handleClickEyePwd}>{showEyePwd ? <AiFillEye className='passwordInputEye' size={20} /> : <AiFillEyeInvisible className='passwordInputEye' size={20} />}</button>
                         </div>
-                        <label htmlFor="errorPassword" className='errorPassword'>The password must contain at least 8 characters.</label>
+                        <label htmlFor="errorPassword" className='errorPassword'>{ translation.errorPassword }</label>
                     </div>
                     
                     <div className="information-container">
-                        <label htmlFor="verifPassword">Verif password</label>
+                        <label htmlFor="verifPassword">{ translation.verifPassword }</label>
                         <div className="passwordInput">
                             <input onChange={({ target }) => setVerifPassword(target.value)} data-testid='input-change-cpswd' type={showEyeVerifPwd ? 'text' : 'password'} id="verifPassword" name="verifPassword" placeholder="**********"></input>
                             <button type="button"aria-label='button-change-show2' onClick={handleClickVerifEyePwd}>{showEyeVerifPwd ? <AiFillEye className='passwordInputEye' size={20} /> : <AiFillEyeInvisible className='passwordInputEye' size={20} />}</button>
                         </div>
                     </div>
                     <div className="information-container">
-                        <button type="button" className='edit-password-btn' aria-label='button-change-password' onClick={() => handleChangeVariable("password")}>Edit password<AiOutlineEdit className='edit-password-icon' /></button>
+                        <button type="button" className='edit-password-btn' aria-label='button-change-password' onClick={() => handleChangeVariable("password")}>{ translation.editPassword }<AiOutlineEdit className='edit-password-icon' /></button>
                     </div>
                 </div>
 
-                <h1 className="heading">Delete Account</h1>
+                <h1 className="heading">{ translation.deleteAccount }</h1>
                 <div className="divider"> <span></span></div>
 
                 <div className='section-container'>
                     <div className="information-container">
-                        <button type="button" className='delete-account-btn' aria-label='button-change-delete' onClick={() => setDeleteModal(true)}>Delete Account<AiOutlineDelete className='delete-account-icon' /></button>
+                        <button type="button" className='delete-account-btn' aria-label='button-change-delete' onClick={() => setDeleteModal(true)}>{ translation.deleteAccount }<AiOutlineDelete className='delete-account-icon' /></button>
                     </div>
                 </div>
 
@@ -429,11 +489,11 @@ const SettingsPage = () => {
                         <div id="changeVariableModal" className="modal-background">
                             <div className="modal-container">
                                 <div className="modal-content">
-                                    <h1 className="modal-title">Are you sure you want to change your {variableToChange}?</h1>
+                                    <h1 className="modal-title">{translation.changeModalQst + getVariableToChange(variableToChange, translation)}?</h1>
                                     <div className="divider"> <span></span></div>
                                     <div className="modal-button-container">
-                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label='button-change-cancel' onClick={handleCloseModal}>Cancel</button>
-                                        <button type="button" className="modal-btn modal-continue-btn" aria-label='button-change-continue' onClick={handleSubmit}>Continue</button>
+                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label='button-change-cancel' onClick={handleCloseModal}>{ translation.cancelBtn }</button>
+                                        <button type="button" className="modal-btn modal-continue-btn" aria-label='button-change-continue' onClick={handleSubmit}>{ translation.continueBtn }</button>
                                     </div>
                                 </div>
                             </div>
@@ -446,11 +506,11 @@ const SettingsPage = () => {
                         <div id="changeVariableModal" className="modal-background">
                             <div className="modal-container">
                                 <div className="modal-content">
-                                    <h1 className="modal-title">Are you sure you want to delete your account ?</h1>
+                                    <h1 className="modal-title">{ translation.deleteModalQst }</h1>
                                     <div className="divider"> <span></span></div>
                                     <div className="modal-button-container">
-                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label='button-delete-cancel' onClick={() => setDeleteModal(false)}>Cancel</button>
-                                        <button type="button" className="modal-btn modal-continue-btn" aria-label='button-delete-continue' onClick={handleDeleteAccount}>Continue</button>
+                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label='button-delete-cancel' onClick={() => setDeleteModal(false)}>{ translation.cancelBtn }</button>
+                                        <button type="button" className="modal-btn modal-continue-btn" aria-label='button-delete-continue' onClick={handleDeleteAccount}>{ translation.continueBtn }</button>
                                     </div>
                                 </div>
                             </div>
@@ -463,19 +523,19 @@ const SettingsPage = () => {
                         <div id="changeVariableModal" className="modal-background">
                             <div className="modal-container">
                                 <div className="modal-content">
-                                    <h1 className="modal-title">Click to choose a new avatar :</h1>
+                                    <h1 className="modal-title">{ translation.avatarModalTxt }</h1>
                                     <div className="divider"> <span></span></div>
                                     <div className="modal-avatar-container">
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar01.png") }><img src="Avatars/Avatar01.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar02.png") }><img src="Avatars/Avatar02.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar03.png") }><img src="Avatars/Avatar03.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar04.png") }><img src="Avatars/Avatar04.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar05.png") }><img src="Avatars/Avatar05.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar06.png") }><img src="Avatars/Avatar06.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar07.png") }><img src="Avatars/Avatar07.png" alt="Avatar" className="Avatar"></img></button>
-                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("Avatars/Avatar08.png") }><img src="Avatars/Avatar08.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar01.png") }><img src="/assets/avatar/Avatar01.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar02.png") }><img src="/assets/avatar/Avatar02.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar03.png") }><img src="/assets/avatar/Avatar03.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar04.png") }><img src="/assets/avatar/Avatar04.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar05.png") }><img src="/assets/avatar/Avatar05.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar06.png") }><img src="/assets/avatar/Avatar06.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar07.png") }><img src="/assets/avatar/Avatar07.png" alt="Avatar" className="Avatar"></img></button>
+                                        <button type="button" className='modal-avatar-button' aria-label='button-change-avatar-option' onClick={ () => handleSetNewAvatar("/assets/avatar/Avatar08.png") }><img src="/assets/avatar/Avatar08.png" alt="Avatar" className="Avatar"></img></button>
                                         <div className="modal-avatar-cancel-btn-container">
-                                            <button type="button" className="modal-avatar-cancel-btn" aria-label='button-change-avatar-close' onClick={() => setAvatarModal(false)}>Cancel</button>
+                                            <button type="button" className="modal-avatar-cancel-btn" aria-label='button-change-avatar-close' onClick={() => setAvatarModal(false)}>{ translation.cancelBtn }</button>
                                         </div>
                                     </div>
                                 </div>
@@ -486,6 +546,31 @@ const SettingsPage = () => {
             </div>
         </>
     );
+}
+
+function getVariableToChange(variableToChange: string, translation: any) {
+    switch (variableToChange) {
+        case "username":
+            return translation.username.toLowerCase();
+        case "name":
+            return translation.name.toLowerCase();
+        case "firstname":
+            return translation.firstname.toLowerCase();
+        case "language":
+            return translation.language.toLowerCase();
+        case "age":
+            return translation.age.toLowerCase();
+        case "email":
+            return "email";
+        case "address":
+            return translation.address.toLowerCase();
+        case "phonenumber":
+            return translation.phonenumber.toLowerCase();
+        case "password":
+            return translation.password.toLowerCase();
+        default:
+            return "";
+    }
 }
 
 export default SettingsPage;
