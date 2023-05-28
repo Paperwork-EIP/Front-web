@@ -53,7 +53,7 @@ function EmailSentPage() {
                         </a>
                     </div>
                     <button className='EmailSent-receive-again' data-testid="send-email-again" onClick={handleSubmit}>
-                        I didn't receive it
+                        I didn't received it
                     </button>
                 </div>
                 <div className='EmailSent-container-left'>
