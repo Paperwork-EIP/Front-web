@@ -101,7 +101,7 @@ const resources = {
                 link_3: "Register",
                 link_4: "About Us"
             },
-            resetPassword:{
+            resetPassword: {
                 resetPasswordSuccess: "Password reset successfully!",
                 resetPasswordFail: "Failure to reset your password",
                 divPasswords: "Password and Confirm Password are not identicals",
@@ -110,6 +110,24 @@ const resources = {
                 passwordInput: "New Password",
                 confirmPasswordInput: "Confirm New Password",
                 validate: "Validate",
+            },
+            emailSent: {
+                titleTop: "An email has been sent !",
+                title: "Please check out your mailbox",
+                receiveAgain: "I didn't received it",
+                emailSent: "Email sent successfully!",
+                emailFail: "Failure to send the verification email",
+            },
+            verifyEmail: {
+                icon: "It's all good !",
+                verified: "Your email has been verified",
+                titleTop: "Start your journey on Paperwork",
+                home: "Home",
+                profile: "Profile",
+                calendar: "Calendar",
+                help: "Help",
+                newProcess: "New Process",
+                processIdea: "Process Idea",
             }
         }
     },
@@ -224,7 +242,25 @@ const resources = {
                 passwordInput: "Nouveau mot de passe",
                 confirmPasswordInput: "Confirmer le nouveau mot de passe",
                 validate: "Valider",
-                }
+            },
+            emailSent: {
+                titleTop: "Un e-mail a été envoyé !",
+                title: "Veuillez vérifier votre boîte mail",
+                receiveAgain: "Je n'ai pas reçu d'e-mail",
+                emailSent: "E-mail envoyé avec succès !",
+                emailFail: "Échec de l'envoi de l'e-mail de vérification",
+            },
+            verifyEmail: {
+                icon: "Tout est en ordre !",
+                verified: "Votre e-mail a été vérifié",
+                titleTop: "Commencez votre aventure sur Paperwork",
+                home: "Accueil",
+                profile: "Profil",
+                calendar: "Calendrier",
+                help: "Aide",
+                newProcess: "Nouvelle Procédure",
+                processIdea: "Idée de Procédure",
+            }
         }
     }
 };
