@@ -123,7 +123,19 @@ const translations: Translations = {
       continue: "Continue",
       cancelMessage: "Are you sure you want to cancel the process idea?",
       submitMessage: "Are you sure you want to submit the process idea?"
-    }
+    },
+    helpPage: {
+      question1: "How to update personal information?",
+      answer1: "To update your personal information, go to the Profile page by clicking on the image below.\nFrom this page, you can:\n- Update your profile picture by entering the image link of your choice in the 'Profile picture link' field,\n- Modify your username using the 'Username' field,\n- Update your shared email address using the 'Email' field,\n- Finally, change your password by entering the new password twice.",
+      question2: "How to add a process?",
+      answer2: "To add new processes, go to the Quiz page by clicking on the image below.\nFrom this page, you can choose a process from the available options.\nOnce you have selected a process, you will need to answer questions about your progress in the process (possession of necessary documents, eligibility for process advancement, etc.).\nOnce the question phase is completed, you will be redirected to a page that compiles all the information about the ongoing process, and you can add events related to it in the calendar if necessary.",
+      question3: "How to add an event to the calendar?",
+      answer3: "To add events related to processes, go to the Calendar page by clicking on the image below.\nFrom the calendar, you can view existing events and add new ones.\nTo do this, simply click on the date on which you want to add an event.\nThen click on the 'Add an Event' button. You will need to provide the time of the event, the process associated with the event from the list of ongoing processes, and finally the step of the process. Finally, click on 'Submit' once all the details are filled in to create the event.",
+      question4: "How to delete or modify an event in the calendar?",
+      answer4: "To modify or delete events related to processes, go to the Calendar page by clicking on the image below.\nFrom the calendar, you can view existing events and modify or delete them.\nTo do this, simply click on the date for which you want to modify the event.\nThen click on the 'Edit/Delete an Event' button. For modification, you will need to enter the new time or step you want to assign to your event and click the 'Submit' button to save the changes. Alternatively, you can directly click the 'Delete Event' button to delete the event.",
+      question5: "I can't find the process I need in the list of available processes. What should I do?",
+      answer5: "If you can't find the process you want to launch in the available processes list, you have the option to let us know through the Process Idea page by clicking on the image below.\nProvide the title, description, and content of the desired process, press the 'Submit' button, and we will receive your request. You can also contact us via the contact button at the bottom of this page by sending an email to paperwork_2024@labeip.epitech.eu.",
+      }
   },
   français: {
     quiz: {
@@ -237,6 +249,18 @@ const translations: Translations = {
       continue: "Continuer",
       cancelMessage: "Êtes-vous sûr(e) de vouloir annuler l'idée de procédure ?",
       submitMessage: "Êtes-vous sûr(e) de vouloir soumettre l'idée de procédure ?"
+      },
+      helpPage: {
+        question1: "Comment modifier ses informations personnelles ?",
+        answer1: "Afin de modifier ses informations personnelles, rendez-vous sur la page Profile en cliquant sur l'image ci-dessous.\nDepuis cette page, vous pouvez:\n- Modifier votre photo de profil en entrant le lien de l'image de votre choix dans le champs 'Profile picture link',\n- Modifier votre nom d'utilisateur via le champ 'Username',\n- Modifier votre adresse email partagée via le champ 'Email',\n- Et enfin modifier votre mot de passe en entrant deux fois le même nouveau mot de passe.",
+        question2: "Comment ajouter une procédure ?",
+        answer2: "Afin d'ajouter de nouvelles procédures, rendez-vous sur la page Quiz en cliquant sur l'image ci-dessous.\nDepuis cette page, vous pourrez choisir une procédure parmi toutes celles existantes.\n Une fois la procédure trouvée vous devrez répondre à des questions sur votre avancement dans celle-ci (possession des documents nécéssaires, élégibilité à l'avaancée de la procédure, etc...).\n Une fois la phase de questions terminée, vous serez redirigés vers une page compilant toutes les informations sur la procédure en cours, et vous pourrez ajouter des évènements liés à celle-ci dans le calendrier si nécéssaire.",
+        question3: "Comment ajouter un évènement au calendrier ?",
+        answer3: "Afin d'ajouter des évènements liés aux procédures, rendez-vous sur la page Calendar en cliquant sur l'image ci-dessous.\n Depuis le calendrier, vous pourrez voir les différents évènements déjà intanciés mais aussi en ajouter.\nPour ce faire, il vous suffit de cliquer sur la date à laquelle vous souhaitez ajouter un évènement.\n Cliquez ensuite sur le bouton 'Add an Event'. Il vous faudra par la suite renseigner l'heure à laquelle votre évènement a lieu ainsi que la procédure liée à l'évènement parmi la liste de procédures en cours et enfin l'étape de celle-ci. Cliquez enfin sur 'Submit' une fois tous les éléments rensignés afin de créer l'évènement.",
+        question4: "Comment supprimer ou modifier un évènement au calendrier ?",
+        answer4: "Afin de modifier ou de supprimer des évènements liés aux procédures, rendez-vous sur la page Calendar en cliquant sur l'image ci-dessous.\n Depuis le calendrier, vous pourrez voir les différents évènements déjà intanciés mais aussi les modifier ou les supprimer.\nPour ce faire, il vous suffit de cliquer sur la date pour laquelle vous souhaitez modifier l'évènement.\n Cliquez ensuite sur le bouton 'Edit/Delete an Event'. Il vous faudra par la suite, pour le modifier renseigner la nouvelle heure ou la nouvelle étape que vous souhaitez attribuer à votre évènement puis cliquer sur le bouton 'Submit' pour le modifier, ou alors cliquer directement sur le bouton 'Delete Event' pour le supprimer.",
+        question5: "Je ne trouve pas la procédure dont j'ai besoin dans la liste des procédures disponibles ?",
+        answer5: "Dans le cas où une procédure que vous voulez lancer n'est pas disponible sur notre site, vous avez la possibilité de nous le faire savoir via la page Process Idea en cliquant sur l'image ci-dessous.\n Renseignez alors le titre, la description et le contenu de la procédure voulue, appuyez sur le bouton 'Submit' et nous recevrons votre demande. Vous pouvez aussi nous contacter via le bouton de contact en bas de cette page en nous envoyant un mail à paperwork_2024@labeip.epitech.eu.",
       }
   }
 };
