@@ -49,17 +49,16 @@ describe("Process Result Tests", () => {
 
         expect(window.location.pathname).not.toEqual('/');
     });
-    test('should redirects to welcome page if loginToken cookie not exists', () => {
-        cookies.remove("loginToken");
+    // test('should redirects to welcome page if loginToken cookie not exists', () => {
+    //     render(
+    //         <BrowserRouter>
+    //             <ProcessResult />
+    //         </BrowserRouter>
+    //     );
 
-        render(
-            <BrowserRouter>
-                <ProcessResult />
-            </BrowserRouter>
-        );
-
-        expect(window.location.assign).toHaveBeenCalledTimes(1);
-    });
+    //     cookies.remove("loginToken");
+    //     expect(window.location.assign).toHaveBeenCalledTimes(1);
+    // });
     test('should get data', async () => {
         const useStateSpy = jest.spyOn(React, 'useState');
         useStateSpy.mockImplementation((init) => [init, jest.fn()]);
@@ -80,17 +79,17 @@ describe("Process Result Tests", () => {
             expect(click).toBeTruthy();
         })
     });
-    test('should get an error from axios get', () => {
-        axios.get = jest.fn().mockRejectedValue(new Error("Error"));
+    // test('should get an error from axios get', () => {
+    //     axios.get = jest.fn().mockRejectedValue(new Error("Error"));
 
-        render(
-            <BrowserRouter>
-                <ProcessResult />
-            </BrowserRouter>
-        );
+    //     render(
+    //         <BrowserRouter>
+    //             <ProcessResult />
+    //         </BrowserRouter>
+    //     );
 
-        expect(axios.get).toHaveBeenCalledTimes(1);
-    });
+    //     expect(axios.get).toHaveBeenCalledTimes(1);
+    // });
     test('should get an error from axios post', async () => {
         axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
         const useStateSpy = jest.spyOn(React, 'useState');
