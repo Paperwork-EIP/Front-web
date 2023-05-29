@@ -28,7 +28,6 @@ function ProcessIdea() {
     useEffect(() => {
         axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
         .then(res => {
-            console.log(res.data.language);
             setLanguage(res.data.language);
         }).catch(err => {
             console.log(err)

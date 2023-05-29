@@ -19,6 +19,7 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import "../../styles/HomeContent.css";
 import { Link } from "react-router-dom";
+import { getTranslation } from '../../pages/Translation';
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -48,6 +49,8 @@ const Bg = () => {
   const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
   const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
   const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
+  const [language, setLanguage] = useState("");
+  const translation = getTranslation(language, "home");
 
   useEffect(() => {
       axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
@@ -57,6 +60,7 @@ const Bg = () => {
           rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
       }
       setRDV(rdvTmp);
+      setLanguage(res.data.language);
       }).catch(err => {
         console.log(err);
       })
@@ -68,9 +72,9 @@ const Bg = () => {
       var userProcessTmp = [];
       for (var j = 0; j < res.data.response.length; j++) {
         if (res.data.response[j]['pourcentage'] != null)
-          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: res.data.response[j]['pourcentage']});
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].title, percentage: res.data.response[j]['pourcentage']});
         else
-          userProcessTmp.push({process: res.data.response[j]['userProcess'].process_title, percentage: 0});;
+          userProcessTmp.push({process: res.data.response[j]['userProcess'].title, percentage: 0});;
       }
       setUserProcessInfo(userProcessTmp);
 
@@ -116,7 +120,7 @@ const Bg = () => {
             </Th>
             <Th isNumeric>
             <Button onClick={handleClickAsc} aria-label="click-asc">
-            { activeAsc ? "Ascending" : "Descending"}
+            { activeAsc ? translation.ascending : translation.descending}
             </Button>
             </Th>
           </Tr>
@@ -169,7 +173,7 @@ const Bg = () => {
     
     <Link to="/quiz">
       <button className='home-content-start-process-button' aria-label="submit_button">
-        New Process
+        {translation.newProcessButton}
       </button>
     </Link>
     </div>
@@ -182,11 +186,11 @@ const Bg = () => {
       <>
       
       <div className="home-content-box-calendar-icons-box">
-        <div className="home-content-calendar-text"> Calendar </div>
+        <div className="home-content-calendar-text"> {translation.calendar} </div>
         <CircleIcon className="home-content-box-calendar-icon" color="pink.400" mt={'3px'}/>
-        <div className="home-content-calendar-icon-text"> Applied </div>
+        <div className="home-content-calendar-icon-text"> {translation.applied} </div>
         <CircleIcon className="home-content-box-calendar-icon" color="green" mt={'23px'}/>
-        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> Left </div>
+        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> {translation.left} </div>
       </div>
       
       <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
@@ -196,13 +200,11 @@ const Bg = () => {
             index += 3;
             if (index <= rdv.length) {
               return (
-                //<Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px'></Box>
                 <div className="home-content-box-rendez-vous" style={{backgroundColor: adaptedColor}}>
                   <div className="home-content-rendez-vous-date-text" style={{color: adaptedTextColor}}> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </div>
                   <div className="home-content-rendez-vous-process-name-text" style={{color: adaptedTextColor}}> {rdv[index]} </div>
                   <div className="home-content-rendez-vous-process-description-text" style={{color: adaptedTextColor}}> {rdv[index + 1]} </div>
                 </div>
-                //</Box>
               )
             } else
               return ('')
@@ -212,9 +214,9 @@ const Bg = () => {
       </>
       :
       <>
-      <div className="home-content-calendar-text"> Calendar </div>
-      <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
-      <div className="home-content-nothing-text"> Nothing to Show</div>
+      <div className="home-content-calendar-text"> {translation.calendar} </div>
+      <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}} ></div>
+      <div className="home-content-nothing-text"> {translation.nothing} </div>
       </>
     } </div>
       </>

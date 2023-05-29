@@ -18,7 +18,7 @@ function VerifyEmailPage() {
     useEffect(() => {
         axios.get(`${api}/user/verifyEmail?token=${url.searchParams.get('token')}`)
             .then(async res => {
-                cookies.set('loginToken', { loginToken: res.data.jwt }, {
+                cookies.set('loginToken', { loginToken: url.searchParams.get('token')}, {
                     path: '/',
                     secure: true,
                     sameSite: 'none'

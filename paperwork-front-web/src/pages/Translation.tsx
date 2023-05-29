@@ -135,7 +135,31 @@ const translations: Translations = {
       answer4: "To modify or delete events related to processes, go to the Calendar page by clicking on the image below.\nFrom the calendar, you can view existing events and modify or delete them.\nTo do this, simply click on the date for which you want to modify the event.\nThen click on the 'Edit/Delete an Event' button. For modification, you will need to enter the new time or step you want to assign to your event and click the 'Submit' button to save the changes. Alternatively, you can directly click the 'Delete Event' button to delete the event.",
       question5: "I can't find the process I need in the list of available processes. What should I do?",
       answer5: "If you can't find the process you want to launch in the available processes list, you have the option to let us know through the Process Idea page by clicking on the image below.\nProvide the title, description, and content of the desired process, press the 'Submit' button, and we will receive your request. You can also contact us via the contact button at the bottom of this page by sending an email to paperwork_2024@labeip.epitech.eu.",
-      }
+    },
+    home: {
+      ascending: "Ascending",
+      descending: "Descending",
+      newProcessButton: "New Process",
+      calendar: "Calendar",
+      applied: "Applied",
+      left: "Left",
+      nothing: "Nothing to Show"
+    },
+    calendar: {
+      calendarLocation:"en-GB",
+      calendar: "Calendar",
+      addEvent: "Add an Event",
+      dailyEvent: "Daily Events",
+      editDeleteEvent: "Edit/Delete an Event",
+      create: "Create",
+      close: "Close",
+      submit: "Submit",
+      selectTheProcess: "Select the Process",
+      selectTheStep: "Select the Step",
+      nothingPlanned: "Nothing Planned",
+      editDelete: "Edit/Delete",
+      deleteEvent: "Delete Event",
+    }
   },
   français: {
     quiz: {
@@ -261,7 +285,31 @@ const translations: Translations = {
         answer4: "Afin de modifier ou de supprimer des évènements liés aux procédures, rendez-vous sur la page Calendar en cliquant sur l'image ci-dessous.\n Depuis le calendrier, vous pourrez voir les différents évènements déjà intanciés mais aussi les modifier ou les supprimer.\nPour ce faire, il vous suffit de cliquer sur la date pour laquelle vous souhaitez modifier l'évènement.\n Cliquez ensuite sur le bouton 'Edit/Delete an Event'. Il vous faudra par la suite, pour le modifier renseigner la nouvelle heure ou la nouvelle étape que vous souhaitez attribuer à votre évènement puis cliquer sur le bouton 'Submit' pour le modifier, ou alors cliquer directement sur le bouton 'Delete Event' pour le supprimer.",
         question5: "Je ne trouve pas la procédure dont j'ai besoin dans la liste des procédures disponibles ?",
         answer5: "Dans le cas où une procédure que vous voulez lancer n'est pas disponible sur notre site, vous avez la possibilité de nous le faire savoir via la page Process Idea en cliquant sur l'image ci-dessous.\n Renseignez alors le titre, la description et le contenu de la procédure voulue, appuyez sur le bouton 'Submit' et nous recevrons votre demande. Vous pouvez aussi nous contacter via le bouton de contact en bas de cette page en nous envoyant un mail à paperwork_2024@labeip.epitech.eu.",
-      }
+      },
+      home: {
+        ascending: "Croissant",
+        descending: "Décroissant",
+        newProcessButton: "Nouvelle Procédure",
+        calendar: "Calendrier",
+        applied: "Passé",
+        left: "Restant",
+        nothing: "Rien à afficher"
+      },
+      calendar: {
+        calendarLocation: "fr-FR",
+        calendar: "Calendrier",
+        addEvent: "Ajouter un évènement",
+        dailyEvent: "Évènements quotidiens",
+        editDeleteEvent: "Modifier/Supprimer un évènement",
+        create: "Créer",
+        close: "Fermer",
+        submit: "Valider",
+        selectTheProcess: "Sélectionner la Procédure",
+        selectTheStep: "Sélectionner l'Étape",
+        nothingPlanned: "Rien de prévu",
+        editDelete: "Modifier/Supprimer",
+        deleteEvent: "Supprimer l'évènement",
+        }
   }
 };
 
