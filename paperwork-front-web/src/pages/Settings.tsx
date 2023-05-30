@@ -87,7 +87,8 @@ const SettingsPage = () => {
 
     const handleSubmit = (event: any) => {
         if (variableToChange === "username") {
-            if (username === null) {
+            const usernameInput = document.getElementById('username') as HTMLInputElement;
+            if (usernameInput.value === undefined || usernameInput.value === null || usernameInput.value === "") {
                 alert(translation.alertEmptyUsername);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -111,7 +112,8 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "name") {
-            if (name === null) {
+            const nameInput = document.getElementById('name') as HTMLInputElement;
+            if (nameInput.value === undefined || nameInput.value === null || nameInput.value === "") {
                 alert(translation.alertEmptyName);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -133,7 +135,8 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "firstname") {
-            if (firstname === null) {
+            const firstnameInput = document.getElementById('firstname') as HTMLInputElement;
+            if (firstnameInput.value === undefined || firstnameInput.value === null || firstnameInput.value === "") {
                 alert(translation.alertEmptyFirstname);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -155,31 +158,28 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "language") {
-            if (language === null) {
-                alert(translation.alertEmptyLanguage);
-            } else {
-                const languageSelect = document.getElementById('Language-Select') as HTMLSelectElement;
-                const languageValue = languageSelect.value;
-                axios.post(`${api}/user/modifyDatas`, {
-                    token: cookiesInfo.loginToken,
-                    language: languageValue,
-                }).then(res => {
-                    console.log(res.data);
-                    alert(translation.alertUpdateLanguage);
-                    window.location.reload();
-                }).catch(err => {
-                    console.log(err)
-                    if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
-                    } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
-                    } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
-                    }
-                });
-            }
+            const languageSelect = document.getElementById('Language-Select') as HTMLSelectElement;
+            const languageValue = languageSelect.value;
+            axios.post(`${api}/user/modifyDatas`, {
+                token: cookiesInfo.loginToken,
+                language: languageValue,
+            }).then(res => {
+                console.log(res.data);
+                alert(translation.alertUpdateLanguage);
+                window.location.reload();
+            }).catch(err => {
+                console.log(err)
+                if (err.response.status === 400) {
+                    alert(translation.alertMissingToken);
+                } else if (err.response.status === 404) {
+                    alert(translation.alertUserNotFound);
+                } else if (err.response.status === 500) {
+                    alert(translation.alertSystemError);
+                }
+            });
         } else if (variableToChange === "age") {
-            if (age === null) {
+            const ageInput = document.getElementById('age') as HTMLInputElement;
+            if (ageInput.value === undefined || ageInput.value === null || ageInput.value === "") {
                 alert(translation.alertEmptyAge);
             } else {
                 console.log("age");
@@ -207,7 +207,8 @@ const SettingsPage = () => {
                 }
             }
         } else if (variableToChange === "email") {
-            if (email === null) {
+            const emailInput = document.getElementById('email') as HTMLInputElement;
+            if (emailInput.value === undefined || emailInput.value === null || emailInput.value === "") {
                 alert(translation.alertEmptyEmail);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -240,7 +241,8 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "address") {
-            if (address === null) {
+            const addressInput = document.getElementById('address') as HTMLInputElement;
+            if (addressInput.value === undefined || addressInput.value === null || addressInput.value === "") {
                 alert(translation.alertEmptyAddress);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -262,7 +264,8 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "phonenumber") {
-            if (phonenumber === null) {
+            const phonenumberInput = document.getElementById('phonenumber') as HTMLInputElement;
+            if (phonenumberInput.value === undefined || phonenumberInput.value === null || phonenumberInput.value === "") {
                 alert(translation.alertEmptyPhonenumber);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
@@ -284,7 +287,8 @@ const SettingsPage = () => {
                 });
             }
         } else if (variableToChange === "password") {
-            if (password === null) {
+            const passwordInput = document.getElementById('password') as HTMLInputElement;
+            if (passwordInput.value === undefined || passwordInput.value === null || passwordInput.value === "") {
                 alert(translation.alertEmptyPassword);
             } else {
                 if (password.length >= 4 && password === verifPassword) {
@@ -548,7 +552,7 @@ const SettingsPage = () => {
     );
 }
 
-function getVariableToChange(variableToChange: string, translation: any) {
+export function getVariableToChange(variableToChange: string, translation: any) {
     switch (variableToChange) {
         case "username":
             return translation.username.toLowerCase();
