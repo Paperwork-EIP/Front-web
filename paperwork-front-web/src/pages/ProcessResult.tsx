@@ -12,6 +12,13 @@ import "../styles/pages/ProcessResult.scss";
 
 // Icons Import
 import { FaLessThan } from "react-icons/fa";
+import { BsLink } from "react-icons/bs";
+
+// Translation Import
+import { getTranslation } from './Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
 
 // Translation Import
 import { getTranslation } from './Translation';
@@ -46,7 +53,6 @@ const ProcessResult = () => {
     useEffect(() => {
         axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
         .then(res => {
-            console.log(res.data.language);
             setLanguage(res.data.language);
         }).catch(err => {
             console.log(err)
@@ -55,7 +61,6 @@ const ProcessResult = () => {
         if (cookiesInfo) {
             axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log(res.data);
                     setStepsAnswer(res.data.response);
                     setTitle(res.data.title);
                     stepsAnswer?.map((item: any) => {
@@ -110,9 +115,10 @@ const ProcessResult = () => {
                             {
                                 stepsAnswer?.map((item: any) => {
                                     return (
-                                        <div>
+                                        <div className='ProcessResult-output'>
                                             <input className='ProcessResult-Checkbox' type="checkbox" data-testid={item.step_id} id={item.step_id} onClick={() => handleCheckboxClick(item.step_id, item.is_done)}></input>
-                                            <label htmlFor={item.step_id}> : {item.description}</label>
+                                            <label htmlFor={item.step_id}> : {item.description} </label>
+                                            <a href={item.source} target='_blank'><BsLink /></a>
                                         </div>
                                     )
                                 })
