@@ -6,28 +6,24 @@ import { TbBrandYahoo } from 'react-icons/tb';
 import { RiMailSendLine } from 'react-icons/ri';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
 
 function EmailSentPage() {
 
     const cookies = new Cookies();
     const api = process.env.REACT_APP_BASE_URL;
     const cookieList = cookies.get('loginToken');
+    const { t } = useTranslation();
 
     async function handleSubmit() {
         await axios.get(`${api}/user/sendVerificationEmail?token=${cookieList.loginToken}`
         ).then(res => {
-            alert("Email sent successfully!");
+            alert(t('emailSent.emailSent'));
         }).catch(err => {
-            alert("Failure to send the verification email");
+            alert(t('emailSent.emailFail'));
             console.log(err);
         })
     }
-
-    useEffect(() => {
-        if (!cookies.get('loginToken')) {
-            window.location.assign('/');
-        }
-    });
 
     return (
         <>
@@ -36,8 +32,8 @@ function EmailSentPage() {
             <div className='EmailSent-container'>
                 <div className='EmailSent-container-right'>
                     <RiMailSendLine size={50}/>
-                    <div className='EmailSent-title-top'>An email has been sent !</div>
-                    <div className='EmailSent-title'>Please check out your mailbox</div>
+                    <div className='EmailSent-title-top'>{t('emailSent.titleTop')}</div>
+                    <div className='EmailSent-title'>{t('emailSent.title')}</div>
                     <div className='EmailSent-connections'>
                         <a className='EmailSent-button-api' href="https://mail.google.com/mail/u/0/#inbox">
                             <SiGmail />
@@ -53,7 +49,7 @@ function EmailSentPage() {
                         </a>
                     </div>
                     <button className='EmailSent-receive-again' data-testid="send-email-again" onClick={handleSubmit}>
-                        I didn't receive it
+                        {t('emailSent.receiveAgain')}
                     </button>
                 </div>
                 <div className='EmailSent-container-left'>

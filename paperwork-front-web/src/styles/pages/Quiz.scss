@@ -1,109 +1,100 @@
-.Page-Title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 6rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
 .Quiz {
-    // Body color
-    --background-color: white;
-    color: black;
-
-    background-color: var(--background-color);
     font-family: Arial, Helvetica, sans-serif;
-    margin: 1rem 9rem 9rem 9rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 3%;
-    border-radius: 8px;
-    -webkit-box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2); 
-    box-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
-    border: 0.1rem solid white;
+    padding: 6%;
+    height: calc(100vh - 55px);
 
-    .Question-Style {
+    .Page-Title {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         font-weight: bold;
-        font-size: 1.8rem;
+        font-size: 1.2rem;
     }
 
-    .Quiz-Select {
-        width: 300px;
-        max-width: 100%;
-        color: black;
-        border: 1.5px solid #E8E8E8;
-        font-family: Arial, Helvetica, sans-serif;
-        line-height: 1.125em;
-        border-radius: 5px;
-        height: 50px;
-        overflow-y: auto;
-        padding-left: 0.5em;
-        margin-top: 3.5em;
-        color: grey;
-        overflow:hidden; 
-        white-space:nowrap; 
-        text-overflow:ellipsis;
-
-        option {
-            overflow-y: scroll;
-            color: black;
-        }
-    }
-
-    .Submit-btn {
+    .Quiz-container {
         display: flex;
-        flex-wrap: wrap;
-        position: relative;
-        background-color: #29C9B3;
-        border: none;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 4px;
-        margin-top: 3.5em;
-
-        .Submit-icon {
-            color: white;
-            font-size: 1.3rem;
-            margin-left: 5px;
-        }
-    }
-
-    .QuizQuestionBtn {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        padding-top: 3em;
-        padding-bottom: 5em;
+        padding: 3%;
+        margin: 3%;
+        border-radius: 8px;
 
-        @mixin Btn-Style {
+        .Question-Style {
+            font-weight: bold;
+            font-size: 1.8rem;
+        }
+
+        .Quiz-Select {
+            width: 300px;
+            max-width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.125em;
+            border-radius: 5px;
+            height: 50px;
+            overflow-y: auto;
+            padding-left: 0.5em;
+            margin-top: 3.5em;
+            overflow:hidden; 
+            white-space:nowrap; 
+            text-overflow:ellipsis;
+
+            option {
+                overflow-y: scroll;
+            }
+        }
+
+        .Submit-btn {
             display: flex;
             flex-wrap: wrap;
             position: relative;
             border: none;
-            color: white;
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             font-size: 16px;
             border-radius: 4px;
             margin-top: 3.5em;
-        }
-        .No-btn {
-            @include Btn-Style;
-            background-color: #FC6976;
+
+            .Submit-icon {
+                font-size: 1.3rem;
+                margin-left: 5px;
+            }
         }
 
-        .Yes-btn {
-            @include Btn-Style;
-            background-color: #29C9B3;
+        .QuizQuestionBtn {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+            padding-top: 3em;
+            padding-bottom: 5em;
+
+            @mixin Btn-Style {
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                border: none;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 4px;
+                margin-top: 3.5em;
+            }
+            .No-btn {
+                @include Btn-Style;
+            }
+
+            .Yes-btn {
+                @include Btn-Style;
+            }
         }
     }
 }
@@ -112,5 +103,127 @@
     .Quiz {
         margin: 1rem 1rem 1rem 1rem;
         padding: 3%;
+    }
+}
+
+
+
+
+// LIGHT THEME
+.Quiz-light {
+    // Body color
+    --background-color: rgb(240, 240, 240);
+    --text-color: black;
+    --background-box: white;
+    --no-btn: #FC6976;
+    --yes-btn: #29C9B3;
+    --border-color: #E8E8E8;
+    --quiz-color: grey;
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    .Page-Title {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .Quiz-container {
+        background-color: var(--background-box);
+        .Quiz-Select {
+            border: 1.5px solid var(--border-color);
+            color: var(--quiz-color);
+
+            option {
+                color: var(--text-color);
+            }
+        }
+
+        .Submit-btn {
+            background-color: var(--yes-btn);
+            color: var(--background-box);
+
+            .Submit-icon {
+                color: var(--background-box);
+            }
+        }
+
+        .QuizQuestionBtn {
+            @mixin Btn-Style {
+                color: var(--background-box);
+            }
+            .No-btn {
+                @include Btn-Style;
+                background-color: var(--no-btn);
+            }
+
+            .Yes-btn {
+                @include Btn-Style;
+                background-color: var(--yes-btn);
+            }
+        }
+    }
+}
+
+
+
+
+// DARK THEME
+.Quiz-dark {
+    // Body color
+    --background-color: rgb(16, 20, 28);
+    --text-color: white;
+    --background-box: rgb(26, 32, 44);
+    --no-btn: #FC6976;
+    --yes-btn: #29C9B3;
+    --border-color: #E8E8E8;
+    --quiz-color: rgb(170, 170, 170);
+
+    color: var(--text-color);
+    background-color: var(--background-color);
+
+    .Page-Title {
+        background-color: var(--background-color);
+        color: var(--text-color);
+    }
+
+    .Quiz-container {
+        background-color: var(--background-box);
+        .Quiz-Select {
+            border: 1.5px solid var(--border-color);
+            color: var(--quiz-color);
+            background-color: var(--background-color);
+
+            option {
+                color: var(--text-color);
+            }
+        }
+
+        .Submit-btn {
+            background-color: var(--yes-btn);
+            color: var(--text-color);
+
+            .Submit-icon {
+                color: var(--text-color);
+            }
+        }
+
+        .QuizQuestionBtn {
+            @mixin Btn-Style {
+                color: var(--background-box);
+            }
+
+            .No-btn {
+                @include Btn-Style;
+                background-color: var(--no-btn);
+                color: var(--text-color);
+            }
+
+            .Yes-btn {
+                @include Btn-Style;
+                background-color: var(--yes-btn);
+                color: var(--text-color);
+            }
+        }
     }
 }

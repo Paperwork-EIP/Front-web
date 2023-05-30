@@ -13,11 +13,18 @@ import "../styles/pages/ProcessResult.scss";
 // Icons Import
 import { FaLessThan } from "react-icons/fa";
 
+// Translation Import
+import { getTranslation } from './Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const ProcessResult = () => {
 
     const api = process.env.REACT_APP_BASE_URL;
     const cookies = new Cookies();
     const [stepsAnswer, setStepsAnswer] = useState([]);
+    const [title, setTitle] = useState("");
 
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
@@ -26,28 +33,48 @@ const ProcessResult = () => {
 
     var { processSelected } = useParams();
 
+    // User informations
+    const [language, setLanguage] = useState("");
+
+
+    // Translation
+    const translation = getTranslation(language, "processResult");
+
+    // Color mode
+    const { colorMode } = useColorMode();
+
     useEffect(() => {
+        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
+        .then(res => {
+            console.log(res.data.language);
+            setLanguage(res.data.language);
+        }).catch(err => {
+            console.log(err)
+        });
+
         if (cookiesInfo) {
             axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log(res.data.response);
-                    setStepsAnswer(res.data.response.sort((a: { id: number; }, b: { id: number; }) => a.id - b.id));
+                    console.log(res.data);
+                    setStepsAnswer(res.data.response);
+                    setTitle(res.data.title);
                     stepsAnswer?.map((item: any) => {
                         if (item.is_done === true) {
-                            document.getElementById(item.id)?.setAttribute("checked", "checked");
+                            document.getElementById(item.step_id)?.setAttribute("checked", "checked");
                         }
                     });
                 }).catch(err => {
                     console.log(err);
-                });
+                }
+            );
         }
-    });
+    }, [cookiesInfo, processSelected, api, stepsAnswer]);
 
-    const handleCheckboxClick = (id: any, is_done: any) => {
+    const handleCheckboxClick = (step_id: any, is_done: any) => {
         var newStepsAnswer = [];
         newStepsAnswer = stepsAnswer;
         newStepsAnswer?.map((item: any) => {
-            if (item.id === id) {
+            if (item.step_id === step_id) {
                 item.is_done = !is_done;
             }
         })
@@ -55,16 +82,16 @@ const ProcessResult = () => {
         newStepsAnswer = stepsAnswer.map((item: any) => {
             return {
                 step_id: item.step_id,
-                is_done: item.is_done
+                response: item.is_done
             }
         })
         axios.post(`${api}/userProcess/update`, {
             user_token: cookiesInfo.loginToken,
             process_title: processSelected,
-            step: newStepsAnswer
+            questions: newStepsAnswer
         }).then(res => {
             console.log(res.data.response);
-            alert("Updated successfully!");
+            alert(translation.alertUpdate);
         }).catch(err => {
             console.log(err)
         })
@@ -74,18 +101,18 @@ const ProcessResult = () => {
         <>
             <Header />
 
-            <div className='ProcessResult'>
-                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16} />Start a new process</a>
+            <div className={colorMode === "light" ? "ProcessResult ProcessResult-light" : "ProcessResult ProcessResult-dark"}>
+                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16} />{ translation.startNewProcess }</a>
                 <div className='ProcessResult-Requires'>
-                    <div className='ProcessResult-Title'>Result of the process for “{processSelected}”:</div>
+                    <div className='ProcessResult-Title'>{ translation.resultProcess }"{ title }":</div>
                     <div className='ProcessResult-Checkbox-Container'>
                         <>
                             {
                                 stepsAnswer?.map((item: any) => {
                                     return (
                                         <div>
-                                            <input className='ProcessResult-Checkbox' type="checkbox" data-testid={item.id} id={item.id} onClick={() => handleCheckboxClick(item.id, item.is_done)}></input>
-                                            <label htmlFor={item.id}> : {item.step_description}</label>
+                                            <input className='ProcessResult-Checkbox' type="checkbox" data-testid={item.step_id} id={item.step_id} onClick={() => handleCheckboxClick(item.step_id, item.is_done)}></input>
+                                            <label htmlFor={item.step_id}> : {item.description}</label>
                                         </div>
                                     )
                                 })

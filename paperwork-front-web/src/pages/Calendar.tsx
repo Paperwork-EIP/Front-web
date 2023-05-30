@@ -3,10 +3,11 @@ import Header from '../components/Header';
 import Select from 'react-select';
 import React, { useState, useRef, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import "../styles/Calendar.css";
+import "../styles/Calendar.scss";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import Modal from 'react-modal';
+import { getTranslation } from './Translation';
 
 const CalendarPage = () => {
 
@@ -14,6 +15,13 @@ const CalendarPage = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
+
+    const customStyles = {
+        option: (provided: any, state: any) => ({
+          ...provided,
+          color: 'black', // Définit la couleur du texte des options sur noir
+        }),
+      };
     
     const cookieList = cookies.get('loginToken')
     const api = process.env.REACT_APP_BASE_URL;
@@ -39,6 +47,8 @@ const CalendarPage = () => {
                            date.toDateString()?.split(" ")[1] === "Jul" ? "07" : date.toDateString()?.split(" ")[1] === "Aug" ? "08" : date.toDateString()?.split(" ")[1] === "Sep" ? "09" :
                            date.toDateString()?.split(" ")[1] === "Oct" ? "10" : date.toDateString()?.split(" ")[1] === "Nov" ? "11" : date.toDateString()?.split(" ")[1] === "Dec" ? "12" : "Not Set";
     const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
+    const [language, setLanguage] = useState("");
+    const translation = getTranslation(language, "calendar");
 
     const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setNewDate(e.target.value);
@@ -80,34 +90,16 @@ const CalendarPage = () => {
         })
     }
 
-    useEffect(() => {
-      axios.get(`${api}/process/getAll`)
-        .then(res => {
-            var procedures = [];
-            for (var i = 0; i < res.data.response.length; i++)
-            {
-                procedures.push({
-                    label: res.data.response[i]['title'],
-                    source: res.data.response[i]['source'],
-                    value: i
-                });
-            }
-            setPosts(procedures);
-        }).catch(err => {
-            console.log(err)
-        });
-    })
-
     const handleProcessSelected = (e: React.SetStateAction<any>) => {
-        axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_token=${cookieList.token}`)
+        axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_token=${cookieList.loginToken}`)
         .then(res => {
             var steps = [];
             for (var i = 0; i < res.data.response.length; i++)
             {
                 steps.push({
-                    label: res.data.response[i]['step_title'],
+                    label: res.data.response[i]['title'],
                     step_id: res.data.response[i]['step_id'],
-                    user_process_id: res.data.response[i]['user_process_id'],
+                    user_process_id: res.data['id'],
                     value: i
                 });
             }
@@ -125,22 +117,43 @@ const CalendarPage = () => {
 
     useEffect(() => {
         if (cookieList) {
-            axios.get(`${api}/calendar/getAll?token=${cookieList.token}`)
+            axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
             .then(res => {
-            var rdvTmp = [];
-            for (var i = 0; i < res.data.appoinment.length; i++) {
-                rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['process_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
-            }
-            setRDV(rdvTmp);
-            }).catch(err => {
-            console.log(err);
-            })
+                axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
+                    .then(res => {
+                        var rdvTmp = [];
+                        for (var i = 0; i < res.data.appoinment.length; i++) {
+                            rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['stocked_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
+                        }
+                        setRDV(rdvTmp);
+                    }).catch(err => {
+                    console.log(err);
+                    })
+            setLanguage(res.data.language);
+            axios.get(`${api}/process/getAll?language=${res.data.language}`)
+                .then(res => {
+                    var procedures = [];
+                    for (var i = 0; i < res.data.response.length; i++)
+                    {
+                        procedures.push({
+                            label: res.data.response[i]['stocked_title'],
+                            source: res.data.response[i]['source'],
+                            value: i
+                        });
+                    }
+                    setPosts(procedures);
+                }).catch(err => {
+                    console.log(err)
+                });
+            
+        }).catch(err => {
+            console.log(err)
+        }); 
         }
-    })
-    
+    })  
+
     const submitNewEvent = () => {
         isNewDateError.current = newDate === '';
-
         postsStep?.map((item: any) => {
             return (
                 item['label'] === stepSelected ?  
@@ -164,15 +177,15 @@ const CalendarPage = () => {
             indexMod++;
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_token=${cookieList.token}`)
+                axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_token=${cookieList.loginToken}`)
                 .then(res => {
                     var steps = [];
                     for (var i = 0; i < res.data.response.length; i++)
                     {
                         steps.push({
-                            label: res.data.response[i]['step_title'],
+                            label: res.data.response[i]['title'],
                             step_id: res.data.response[i]['step_id'],
-                            user_process_id: res.data.response[i]['user_process_id'],
+                            user_process_id: res.data['id'],
                             value: i
                         });
                     }
@@ -188,11 +201,8 @@ const CalendarPage = () => {
     }
 
     const submitModEvent = () => {
-        
         isModDateError.current = modDate === '';
         replaceEvent();
-        console.log(stepEdit)
-
         postsStepEdit?.map((item: any) => {
             return (
                 item['label'] === stepEdit ?  
@@ -223,28 +233,33 @@ const CalendarPage = () => {
 
     const adaptedColor = useColorModeValue("rgba(255,255,255,1)", "rgba(45,45,55,1)");
 
+    function editButtonOnClickEvent(e: React.SetStateAction<any>) {
+        onOpenDeleteModal();
+        handleProcessEdit(e);
+    }
+
     return (
         <>
             <Header/>
             <div className="calendar-main-box">
-                <div className="calendar-main-text" style={{marginBottom:'20px'}}> Calendar </div>
-                <Calendar className='react-calendar-main-component' locale="en-GB" onChange={setDate} value={date}/>
+                <div className="calendar-main-text" style={{marginBottom:'20px'}}> {translation.calendar} </div>
+                <Calendar className='react-calendar-main-component' locale={translation.calendarLocation} onChange={setDate} value={date}/>
             </div>
             <div className="calendar-main-box-buttons">
                 <button className='calendar-main-button' style={{left: "32%"}} aria-label="add_an_event_button" onClick={onOpenAddModal}>
-                    Add an Event
+                    {translation.addEvent} 
                 </button>
                 <button className='calendar-main-button' style={{left: "45%"}} aria-label="daily_event_button" onClick={onOpenDailyModal}>
-                    Daily Events
+                    {translation.dailyEvent} 
                 </button>
                 {
                 isEvent === 0 ?
                     <button className='calendar-main-button-disable' disabled aria-label="delete_edit_event_button" onClick={onOpenDeleteModal}>
-                        Edit/Delete an Event
+                        {translation.editDeleteEvent}
                     </button>
                     :
-                    <button className='calendar-main-button' style={{left: "58%"}} aria-label="delete_edit_event_button" onClick={onOpenDeleteModal}>
-                        Edit/Delete an Event
+                    <button className='calendar-main-button' style={{left: "58%"}} aria-label="delete_edit_event_button" onClick={editButtonOnClickEvent}>
+                        {translation.editDeleteEvent}
                     </button>
                 }
             </div>
@@ -252,12 +267,12 @@ const CalendarPage = () => {
             <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenAddModal} onRequestClose={onCloseAddModal}>
                 <div className='calendar-modal-date'>{date.toDateString()}</div>
                 <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
-                <div className='calendar-modal-text'>Create</div>
+                <div className='calendar-modal-text'> {translation.create} </div>
                 <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseAddModal}>
-                    Close
+                    {translation.close}
                 </button>
                 <button className='calendar-submit-button' aria-label="add_submit_button" onClick={submitNewEvent}>
-                    Submit
+                    {translation.submit}
                 </button>
                 <Center p={'10px'}>
                             <Flex width={'200px'} justifyContent={'space-between'}>
@@ -268,9 +283,10 @@ const CalendarPage = () => {
                         <div style={{width: '200px', fontSize: 13}}>
                             <Select
                             className='calendar-add-select'
-                            placeholder={'Select the Process'}
+                            placeholder={translation.selectTheProcess}
                             options={posts}
                             onChange={handleProcessSelected}
+                            styles={customStyles}
                             /> 
                         </div>                        
                         </Center>
@@ -280,17 +296,19 @@ const CalendarPage = () => {
                         <div style={{width: '200px', fontSize: 13}}>
                             <Select
                             className='calendar-add-select'
-                            placeholder={'Select the Step'}
+                            placeholder={translation.selectTheStep}
                             options={postsStep}
                             onChange={handleStepSelected}
+                            styles={customStyles}
                             /> 
                         </div>
                         :
                         <div style={{width: '200px', fontSize: 13}}>
                             <Select
                             className='calendar-add-select'
-                            placeholder={'Select the Step'}
+                            placeholder={translation.selectTheStep}
                             options={undefined}
+                            styles={customStyles}
                             /> 
                         </div>
                         }
@@ -300,13 +318,13 @@ const CalendarPage = () => {
             <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenDailyModal} onRequestClose={onCloseDailyModal}>
                 <div className='calendar-modal-date'>{date.toDateString()}</div>
                 <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
-                <div className='calendar-modal-text'>Daily Event</div>
+                <div className='calendar-modal-text'>{translation.dailyEvent}</div>
                 <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseDailyModal}>
-                    Close
+                    {translation.close}
                 </button>
                 {
                     isEvent === 0 ?
-                        <div className='calendar-modal-text' style={{paddingTop: "12%", textAlign: "center"}}> Nothing Planned </div>
+                        <div className='calendar-modal-text' style={{paddingTop: "12%", textAlign: "center"}}> {translation.nothingPlanned} </div>
 
                     :
                         <div className='calendar-event-list'>
@@ -331,12 +349,12 @@ const CalendarPage = () => {
             <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenDeleteModal} onRequestClose={onCloseDeleteModal}>
                 <div className='calendar-modal-date'>{date.toDateString()}</div>
                 <div className='calendar-modal-line' style={{backgroundColor: "rgba(228,228,228,1)"}}></div>
-                <div className='calendar-modal-text'>Edit/Delete</div>
+                <div className='calendar-modal-text'>{translation.editDelete}</div>
                 <button className='calendar-close-button' aria-label="add_close_button" onClick={onCloseDeleteModal}>
-                    Close
+                    {translation.close}
                 </button>
                 <button className='calendar-submit-button' aria-label="add_submit_button" onClick={submitModEvent}>
-                    Submit
+                    {translation.submit}
                 </button>
                 {
                     <div className='calendar-event-list'>
@@ -360,17 +378,19 @@ const CalendarPage = () => {
                                 <div style={{width: '200px', fontSize: 13}}>
                                     <Select
                                     className='calendar-edit-select'
-                                    placeholder={'Select the Step'}
+                                    placeholder={translation.selectTheStep}
                                     options={postsStepEdit}
                                     onChange={handleProcessEdit}
+                                    styles={customStyles}
                                     /> 
                                 </div>
                                 :
                                 <div style={{width: '200px', fontSize: 13}}>
                                     <Select
                                     className='calendar-edit-select'
-                                    placeholder={'Select the Step'}
+                                    placeholder={translation.selectTheStep}
                                     defaultValue={"Show List"}
+                                    styles={customStyles}
                                     /> 
                                 </div>
                                 }
@@ -381,7 +401,7 @@ const CalendarPage = () => {
                                     bgColor="#FC6976"
                                     color="white"
                                     onClick={deleteEvent}>
-                                        Delete Event
+                                        {translation.deleteEvent}
                                     </Button>
                                 </Center>                   
                             </Box>

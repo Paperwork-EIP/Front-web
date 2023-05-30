@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
+import { getTranslation } from '../pages/Translation';
+
 import "../styles/components/Header.scss";
 
 function Header() {
@@ -17,6 +19,8 @@ function Header() {
     const [name, setName] = useState('Username');
     const [email, setEmail] = useState('email@example.com');
     const [avatar, setAvatar] = useState('/assets/header/empty-profile-picture.jpg');
+    const [language, setLanguage] = useState("");
+    const translation = getTranslation(language, "header");
 
     function checkAvatar(url: string) {
         if (url) {
@@ -48,9 +52,9 @@ function Header() {
                 params: { token: cookiesInfo.loginToken }
             })
                 .then(res => {
-                    console.log(res);
                     setName(res.data.username);
                     setEmail(res.data.email);
+                    setLanguage(res.data.language);
                     checkAvatar(res.data.profile_picture);
                 })
                 .catch(err => {
@@ -68,7 +72,7 @@ function Header() {
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    })
+    }, [isOpen])
 
     return (
         <div className={colorMode === 'light' ? "Header Day-mode" : "Header Night-mode"}>
@@ -98,23 +102,23 @@ function Header() {
                                     <div className="Header-separator"></div>
                                     <Link to='/home' data-testid="link-home" className="Header-modal-link">
                                         <MdHome />
-                                        <span>Home</span>
+                                        <span>{ translation.home }</span>
                                     </Link>
                                     <Link to='/profile' data-testid="link-profile" className="Header-modal-link">
                                         <MdPerson />
-                                        <span>Profile</span>
+                                        <span>{ translation.profile }</span>
                                     </Link>
                                     <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
                                         <MdCalendarMonth />
-                                        <span>Calendar</span>
+                                        <span>{ translation.calendar }</span>
                                     </Link>
                                     <Link to='/help' data-testid="link-help" className="Header-modal-link">
                                         <MdHelpOutline />
-                                        <span>Help</span>
+                                        <span>{ translation.help }</span>
                                     </Link>
                                     <button className="Header-modal-link" aria-label='button-logout' onClick={logout}>
                                         <MdLogout />
-                                        <span>Logout</span>
+                                        <span>{ translation.logout }</span>
                                     </button>
                                 </div>
                             </div>
