@@ -201,9 +201,6 @@ const CalendarPage = () => {
     }
 
     const submitModEvent = () => {
-        
-        console.log(stepEdit);
-        
         isModDateError.current = modDate === '';
         replaceEvent();
         postsStepEdit?.map((item: any) => {
@@ -236,6 +233,11 @@ const CalendarPage = () => {
 
     const adaptedColor = useColorModeValue("rgba(255,255,255,1)", "rgba(45,45,55,1)");
 
+    function editButtonOnClickEvent(e: React.SetStateAction<any>) {
+        onOpenDeleteModal();
+        handleProcessEdit(e);
+    }
+
     return (
         <>
             <Header/>
@@ -256,7 +258,7 @@ const CalendarPage = () => {
                         {translation.editDeleteEvent}
                     </button>
                     :
-                    <button className='calendar-main-button' style={{left: "58%"}} aria-label="delete_edit_event_button" onClick={onOpenDeleteModal}>
+                    <button className='calendar-main-button' style={{left: "58%"}} aria-label="delete_edit_event_button" onClick={editButtonOnClickEvent}>
                         {translation.editDeleteEvent}
                     </button>
                 }

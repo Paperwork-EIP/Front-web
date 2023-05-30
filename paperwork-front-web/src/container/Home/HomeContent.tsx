@@ -53,6 +53,12 @@ const Bg = () => {
   const translation = getTranslation(language, "home");
 
   useEffect(() => {
+    axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
+                .then(res => {
+                    setLanguage(res.data.language);
+                }).catch(err => {
+                    console.log(err)
+                });
       axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
       .then(res => {
       var rdvTmp =  [];
@@ -60,7 +66,6 @@ const Bg = () => {
           rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
       }
       setRDV(rdvTmp);
-      setLanguage(res.data.language);
       }).catch(err => {
         console.log(err);
       })

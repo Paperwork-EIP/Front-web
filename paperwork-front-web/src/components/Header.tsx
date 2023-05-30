@@ -52,7 +52,6 @@ function Header() {
                 params: { token: cookiesInfo.loginToken }
             })
                 .then(res => {
-                    console.log(res);
                     setName(res.data.username);
                     setEmail(res.data.email);
                     setLanguage(res.data.language);
