@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import "../styles/ResetPassword.scss";
 import axios from "axios";
+import { useTranslation } from 'react-i18next';
 
 function ResetPasswordPage() {
     
@@ -13,15 +14,16 @@ function ResetPasswordPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const { t } = useTranslation();
 
     function handleSubmit() {
         axios.get(
-            `${api}/user/resetPassword??token=${url.searchParams.get('token')}?password=${password}`,
+            `${api}/user/resetPassword?token=${url.searchParams.get('token')}&password=${password}`,
             ).then(res => {
-                alert("Password reset successfully!");
+                alert(t('resetPassword.resetPasswordSuccess'));
                 window.location.replace('/login');
             }).catch(err => {
-                alert("Failure to reset your password");
+                alert(t('resetPassword.resetPasswordFail'));
                 console.log(err);
             })
     };
@@ -39,7 +41,7 @@ function ResetPasswordPage() {
     });
 
     function errorSubmit() {
-        alert("Password and Confirm Password are not identicals")
+        alert(t('resetPassword.divPasswords'))
     };
 
 
@@ -49,14 +51,14 @@ function ResetPasswordPage() {
             <div className="ResetPassword">
             <div className='ResetPassword-container'>
                 <div className='ResetPassword-container-right'>
-                <div className='ResetPassword-title-top'>Need a new password ?</div>
-                    <div className='ResetPassword-title'>Set your new password for your Paperwork account</div>
+                <div className='ResetPassword-title-top'>{t('resetPassword.titleTop')}</div>
+                    <div className='ResetPassword-title'>{t('resetPassword.title')}</div>
                     <div className='ResetPassword-box-password'>
                     <div className="ResetPassword-password-input-wrapper">
                         <input
                             type={showPassword ? "text" : "password"}
                             className="ResetPassword-password-input"
-                            placeholder="New Password"
+                            placeholder={t('resetPassword.passwordInput') || ''}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -69,7 +71,7 @@ function ResetPasswordPage() {
                         <input
                             type={showConfirmPassword ? "text" : "password"}
                             className="ResetPassword-password-input"
-                            placeholder="Confirm New Password"
+                            placeholder={t('resetPassword.confirmPasswordInput') || ''}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
@@ -79,14 +81,14 @@ function ResetPasswordPage() {
                         </span>
                     </div>
                     <button className={buttonDisabled ? 'ResetPassword-submit-button disabled' : 'ResetPassword-submit-button'} type='submit' aria-label='button-resetpassword' onClick={password === confirmPassword ? handleSubmit : errorSubmit} disabled={buttonDisabled}>
-                        Validate
+                        {t('resetPassword.validate')}
                     </button>
                 </div>
                 </div>
                 
                 <div className='ResetPassword-container-left'>
                     <div className="ResetPassword-images">
-                        <img className="image1" src="assets/resetpassword-page/BgResetPassword.png" />
+                        <img className="image1" src="assets/resetpassword-page/BgResetPassword.png" alt="ResetPassword_background_image"/>
                         <img className="image2" src="assets/resetpassword-page/ResetPassword-bro.svg" alt="ResetPassword_bro_image" />
                     </div>
                 </div>

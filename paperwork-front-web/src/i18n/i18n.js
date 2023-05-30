@@ -40,7 +40,12 @@ const resources = {
                 no_account_click: "Click here !",
                 text_1: "Welcome back !",
                 text_2: "You can sign in with your existing account",
-                error: "Email or password is incorrect."
+                error: "Email or password is incorrect.",
+                forgotPassword: "Forgot Password",
+                forgotPasswordTitleTop: "Forgot Password ?",
+                forgotPasswordTitle: "Confirm the mailbox where you want us to send you your new password",
+                emailSent: "Email sent successfully!",
+                emailFail: "Failure to send the verification email"
             },
             register: {
                 title: "Register",
@@ -95,6 +100,34 @@ const resources = {
                 link_2: "Login",
                 link_3: "Register",
                 link_4: "About Us"
+            },
+            resetPassword: {
+                resetPasswordSuccess: "Password reset successfully!",
+                resetPasswordFail: "Failure to reset your password",
+                divPasswords: "Password and Confirm Password are not identicals",
+                titleTop: "Need a new password ?",
+                title: "Set your new password for your Paperwork account",
+                passwordInput: "New Password",
+                confirmPasswordInput: "Confirm New Password",
+                validate: "Validate",
+            },
+            emailSent: {
+                titleTop: "An email has been sent !",
+                title: "Please check out your mailbox",
+                receiveAgain: "I didn't received it",
+                emailSent: "Email sent successfully!",
+                emailFail: "Failure to send the verification email",
+            },
+            verifyEmail: {
+                icon: "It's all good !",
+                verified: "Your email has been verified",
+                titleTop: "Start your journey on Paperwork",
+                home: "Home",
+                profile: "Profile",
+                calendar: "Calendar",
+                help: "Help",
+                newProcess: "New Process",
+                processIdea: "Process Idea",
             }
         }
     },
@@ -136,7 +169,12 @@ const resources = {
                 no_account_click: "Cliquez ici !",
                 text_1: "Bienvenue de retour !",
                 text_2: "Vous pouvez vous connecter avec votre compte existant.",
-                error: "L'email ou le mot de passe est incorrect."
+                error: "L'email ou le mot de passe est incorrect.",
+                forgotPassword: "Mot de passe oublié",
+                forgotPasswordTitleTop: "Mot de passe oublié ?",
+                forgotPasswordTitle: "Confirmez l'adresse e-mail à laquelle vous souhaitez que nous vous envoyions votre nouveau mot de passe",
+                emailSent: "Email envoyé avec succès!",
+                emailFail: "Echec de l'envoi de l'email de vérification"
             },
             register: {
                 title: "Inscription",
@@ -194,6 +232,34 @@ const resources = {
                 link_2: "Connexion",
                 link_3: "Inscription",
                 link_4: "À propos de nous"
+            },
+            resetPassword:{
+                resetPasswordSuccess: "Réinitialisation du mot de passe réussie !",
+                resetPasswordFail: "Échec de la réinitialisation de votre mot de passe",
+                divPasswords: "Le mot de passe et la confirmation du mot de passe ne sont pas identiques",
+                titleTop: "Besoin d'un nouveau mot de passe ?",
+                title: "Définissez votre nouveau mot de passe pour votre compte Paperwork",
+                passwordInput: "Nouveau mot de passe",
+                confirmPasswordInput: "Confirmer le nouveau mot de passe",
+                validate: "Valider",
+            },
+            emailSent: {
+                titleTop: "Un e-mail a été envoyé !",
+                title: "Veuillez vérifier votre boîte mail",
+                receiveAgain: "Je n'ai pas reçu d'e-mail",
+                emailSent: "E-mail envoyé avec succès !",
+                emailFail: "Échec de l'envoi de l'e-mail de vérification",
+            },
+            verifyEmail: {
+                icon: "Tout est en ordre !",
+                verified: "Votre e-mail a été vérifié",
+                titleTop: "Commencez votre aventure sur Paperwork",
+                home: "Accueil",
+                profile: "Profil",
+                calendar: "Calendrier",
+                help: "Aide",
+                newProcess: "Nouvelle Procédure",
+                processIdea: "Idée de Procédure",
             }
         }
     }
