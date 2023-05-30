@@ -7,10 +7,9 @@
     min-height: calc(100vh - 55px);
 
     .ProcessResult-output {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 3px;
+        gap: 0 3px;
+        display: inline-flex;
+        align-items: baseline;
     }
 
     .StartNewProcess-Btn {
@@ -53,6 +52,9 @@
 
     .ProcessResult-Checkbox-Container {
         padding: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
 
         .ProcessResult-Checkbox {
             :checked, :after {
