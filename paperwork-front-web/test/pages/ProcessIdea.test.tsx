@@ -31,14 +31,14 @@ afterEach(() => {
 
 describe("Process Idea Tests", () => {
     test('should not redirects to login page if loginToken cookie not exists', () => {
-        cookies.remove('loginToken');
+        
 
         render(
             <BrowserRouter>
                 <ProcessIdea />
             </BrowserRouter>
         );
-
+        cookies.remove('loginToken');
         expect(window.location.pathname).not.toEqual('/');
     });
     test('submits the form with valid data when submit button is clicked', () => {
