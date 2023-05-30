@@ -20,6 +20,12 @@ import { getTranslation } from './Translation';
 // Color mode
 import { useColorMode } from '@chakra-ui/react';
 
+// Translation Import
+import { getTranslation } from './Translation';
+
+// Color mode
+import { useColorMode } from '@chakra-ui/react';
+
 const ProcessResult = () => {
 
     const api = process.env.REACT_APP_BASE_URL;
