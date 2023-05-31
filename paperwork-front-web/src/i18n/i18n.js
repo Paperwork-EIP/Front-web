@@ -72,6 +72,8 @@ const resources = {
                 job_7: "Backend developer",
                 date_1: "September - October 2021",
                 timeline_title: "Project timeline",
+                timeline_1_title: "Moonshot",
+                timeline_1_text: "Idealization of Paperwork.",
                 timeline_2_title: "Forward",
                 timeline_2_text: "Creation of the first prototype.",
                 date_2: "December 2021",
