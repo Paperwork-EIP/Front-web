@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 // Utils Import
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import { toast } from 'react-toastify';
 
 // Pages Import
 import Header from '../components/Header';
@@ -90,7 +91,7 @@ const ProcessResult = () => {
             questions: newStepsAnswer
         }).then(res => {
             console.log(res.data.response);
-            alert(translation.alertUpdate);
+            toast.info(translation.alertUpdate);
         }).catch(err => {
             console.log(err)
         })

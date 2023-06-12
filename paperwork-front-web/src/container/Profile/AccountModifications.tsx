@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Center, Input, InputGroup, InputRightElement, Button, Avatar, Text, Box, Grid, GridItem, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, useDisclosure } from '@chakra-ui/react';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { toast } from 'react-toastify';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 
@@ -60,7 +61,7 @@ const AccountModifications = () => {
                 ...(password.length > 0 ? { password: password } : {}) } })
             .then(res => {
                 console.log(res.data);
-                alert("Account modified");
+                toast.success("Account modified");
                 // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
                 if (cookiesInfo.email !== emailAdress) {
                     cookies.remove('loginToken', { path: '/' });
@@ -73,10 +74,10 @@ const AccountModifications = () => {
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
-                alert("Error during the modification of the account");
+                toast.error("Error during the modification of the account");
             });
         } else {
-            alert("Password and verification password are not the same");
+            toast.warning("Password and verification password are not the same");
         }
     };
     
