@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import "../styles/pages/Settings.scss";
 import { AiFillEye, AiFillEyeInvisible, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 // Translation Import
 import { getTranslation } from './Translation';
@@ -89,71 +90,71 @@ const SettingsPage = () => {
         if (variableToChange === "username") {
             const usernameInput = document.getElementById('username') as HTMLInputElement;
             if (usernameInput.value === undefined || usernameInput.value === null || usernameInput.value === "") {
-                alert(translation.alertEmptyUsername);
+                toast.error(translation.alertEmptyUsername);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     username: username,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdateUsername);
+                    toast.error(translation.alertUpdateUsername);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
+                        toast.error(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 409) {
-                        alert(translation.alertUsernameAlreadyUsed);
+                        toast.error(translation.alertUsernameAlreadyUsed);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
         } else if (variableToChange === "name") {
             const nameInput = document.getElementById('name') as HTMLInputElement;
             if (nameInput.value === undefined || nameInput.value === null || nameInput.value === "") {
-                alert(translation.alertEmptyName);
+                toast.error(translation.alertEmptyName);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     name: name,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdateName);
+                    toast.error(translation.alertUpdateName);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
+                        toast.error(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
         } else if (variableToChange === "firstname") {
             const firstnameInput = document.getElementById('firstname') as HTMLInputElement;
             if (firstnameInput.value === undefined || firstnameInput.value === null || firstnameInput.value === "") {
-                alert(translation.alertEmptyFirstname);
+                toast.error(translation.alertEmptyFirstname);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     firstname: firstname,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdateFirstname);
+                    toast.error(translation.alertUpdateFirstname);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingEmail);
+                        toast.error(translation.alertMissingEmail);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
@@ -165,43 +166,43 @@ const SettingsPage = () => {
                 language: languageValue,
             }).then(res => {
                 console.log(res.data);
-                alert(translation.alertUpdateLanguage);
+                toast.error(translation.alertUpdateLanguage);
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
                 if (err.response.status === 400) {
-                    alert(translation.alertMissingToken);
+                    toast.error(translation.alertMissingToken);
                 } else if (err.response.status === 404) {
-                    alert(translation.alertUserNotFound);
+                    toast.error(translation.alertUserNotFound);
                 } else if (err.response.status === 500) {
-                    alert(translation.alertSystemError);
+                    toast.error(translation.alertSystemError);
                 }
             });
         } else if (variableToChange === "age") {
             const ageInput = document.getElementById('age') as HTMLInputElement;
             if (ageInput.value === undefined || ageInput.value === null || ageInput.value === "") {
-                alert(translation.alertEmptyAge);
+                toast.error(translation.alertEmptyAge);
             } else {
                 console.log("age");
                 console.log(age);
                 if (Number(age) < 1 || Number(age) > 200) {
-                    alert(translation.alertAgeRange);
+                    toast.error(translation.alertAgeRange);
                 } else {
                     axios.post(`${api}/user/modifyDatas`, {
                         token: cookiesInfo.loginToken,
                         age: age,
                     }).then(res => {
                         console.log(res.data);
-                        alert(translation.alertUpdateAge);
+                        toast.error(translation.alertUpdateAge);
                         window.location.reload();
                     }).catch(err => {
                         console.log(err)
                         if (err.response.status === 400) {
-                            alert(translation.alertMissingToken);
+                            toast.error(translation.alertMissingToken);
                         } else if (err.response.status === 404) {
-                            alert(translation.alertUserNotFound);
+                            toast.error(translation.alertUserNotFound);
                         } else if (err.response.status === 500) {
-                            alert(translation.alertSystemErrorPutNumber);
+                            toast.error(translation.alertSystemErrorPutNumber);
                         }
                     });
                 }
@@ -209,14 +210,14 @@ const SettingsPage = () => {
         } else if (variableToChange === "email") {
             const emailInput = document.getElementById('email') as HTMLInputElement;
             if (emailInput.value === undefined || emailInput.value === null || emailInput.value === "") {
-                alert(translation.alertEmptyEmail);
+                toast.error(translation.alertEmptyEmail);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     new_email: email,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdateEmail);
+                    toast.error(translation.alertUpdateEmail);
                     // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
                     if (cookiesInfo.email !== email) {
                         cookies.remove('loginToken', { path: '/' });
@@ -230,66 +231,66 @@ const SettingsPage = () => {
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
+                        toast.error(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 409) {
-                        alert(translation.alertEmailAlreadyUsed);
+                        toast.error(translation.alertEmailAlreadyUsed);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
         } else if (variableToChange === "address") {
             const addressInput = document.getElementById('address') as HTMLInputElement;
             if (addressInput.value === undefined || addressInput.value === null || addressInput.value === "") {
-                alert(translation.alertEmptyAddress);
+                toast.error(translation.alertEmptyAddress);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     address: address,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdateAddress);
+                    toast.error(translation.alertUpdateAddress);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
+                        toast.error(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
         } else if (variableToChange === "phonenumber") {
             const phonenumberInput = document.getElementById('phonenumber') as HTMLInputElement;
             if (phonenumberInput.value === undefined || phonenumberInput.value === null || phonenumberInput.value === "") {
-                alert(translation.alertEmptyPhonenumber);
+                toast.error(translation.alertEmptyPhonenumber);
             } else {
                 axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     number_phone: phonenumber,
                 }).then(res => {
                     console.log(res.data);
-                    alert(translation.alertUpdatePhonenumber);
+                    toast.error(translation.alertUpdatePhonenumber);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
                     if (err.response.status === 400) {
-                        alert(translation.alertMissingToken);
+                        toast.error(translation.alertMissingToken);
                     } else if (err.response.status === 404) {
-                        alert(translation.alertUserNotFound);
+                        toast.error(translation.alertUserNotFound);
                     } else if (err.response.status === 500) {
-                        alert(translation.alertSystemError);
+                        toast.error(translation.alertSystemError);
                     }
                 });
             }
         } else if (variableToChange === "password") {
             const passwordInput = document.getElementById('password') as HTMLInputElement;
             if (passwordInput.value === undefined || passwordInput.value === null || passwordInput.value === "") {
-                alert(translation.alertEmptyPassword);
+                toast.error(translation.alertEmptyPassword);
             } else {
                 if (password.length >= 4 && password === verifPassword) {
                     axios.post(`${api}/user/modifyDatas`, {
@@ -297,20 +298,20 @@ const SettingsPage = () => {
                         password: password,
                     }).then(res => {
                         console.log(res.data);
-                        alert(translation.alertUpdatePassword);
+                        toast.error(translation.alertUpdatePassword);
                         window.location.reload();
                     }).catch(err => {
                         console.log(err)
                         if (err.response.status === 400) {
-                            alert(translation.alertMissingToken);
+                            toast.error(translation.alertMissingToken);
                         } else if (err.response.status === 404) {
-                            alert(translation.alertUserNotFound);
+                            toast.error(translation.alertUserNotFound);
                         } else if (err.response.status === 500) {
-                            alert(translation.alertSystemError);
+                            toast.error(translation.alertSystemError);
                         }
                     });
                 } else {
-                    alert(translation.alertPasswordNotMatch);
+                    toast.error(translation.alertPasswordNotMatch);
                 }
             }
         }
@@ -322,17 +323,17 @@ const SettingsPage = () => {
             token: cookiesInfo.loginToken,
         }}).then(res => {
             console.log(res.data);
-            alert(translation.alertDeleteAccount);
+            toast.error(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
         }).catch(err => {
             console.log(err)
             if (err.response.status === 400) {
-                alert(translation.alertMissingToken);
+                toast.error(translation.alertMissingToken);
             } else if (err.response.status === 404) {
-                alert(translation.alertUserNotFound);
+                toast.error(translation.alertUserNotFound);
             } else if (err.response.status === 500) {
-                alert(translation.alertSystemError);
+                toast.error(translation.alertSystemError);
             }
         });
         setDeleteModal(!deleteModal);
@@ -344,16 +345,16 @@ const SettingsPage = () => {
             profile_picture: newAvatar,
         }).then(res => {
             console.log(res.data);
-            alert(translation.alertAvatarUpdated);
+            toast.error(translation.alertAvatarUpdated);
             window.location.reload();
         }).catch(err => {
             console.log(err)
             if (err.response.status === 400) {
-                alert(translation.alertMissingToken);
+                toast.error(translation.alertMissingToken);
             } else if (err.response.status === 404) {
-                alert(translation.alertUserNotFound);
+                toast.error(translation.alertUserNotFound);
             } else if (err.response.status === 500) {
-                alert(translation.alertSystemError);
+                toast.error(translation.alertSystemError);
             }
         });
         setAvatarModal(!avatarModal);

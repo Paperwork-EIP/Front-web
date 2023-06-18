@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 
@@ -18,7 +19,9 @@ beforeEach(() => {
             assign: jest.fn()
         }
     });
-    global.alert = jest.fn();
+    toast.success = jest.fn();
+    toast.error = jest.fn();
+    toast.warning = jest.fn();
     axios.get = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
 });
 
