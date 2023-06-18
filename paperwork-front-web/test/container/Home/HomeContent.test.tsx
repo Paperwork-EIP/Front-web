@@ -81,7 +81,7 @@ describe("Reset Password Tests", () => {
         );
 
         await waitFor(() => {
-            expect(axios.get).toHaveBeenCalledTimes(2);
+            expect(axios.get).toHaveBeenCalledTimes(3);
         })
     });
     test("should get data", async () => {

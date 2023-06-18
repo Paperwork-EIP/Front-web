@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { render, cleanup, fireEvent, act } from '@testing-library/react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
+import { toast } from 'react-toastify';
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
@@ -53,7 +54,9 @@ beforeEach(() => {
         }
     });
     cookies.set('loginToken', 'test');
-    global.alert = jest.fn();
+    toast.success = jest.fn();
+    toast.error = jest.fn();
+    toast.warning = jest.fn();;
     axios.get = jest.fn().mockResolvedValue(expectedUserData);
     axios.post = jest.fn().mockResolvedValue(expectePostdUserData);
 });
@@ -684,23 +687,23 @@ describe("Settings Tests", () => {
     });
     test('language: should get an error 500 from axios post when submit', () => {
         axios.post = jest.fn(() =>
-          Promise.reject({ response: { status: 500 }, data: { test: 'test' } })
+            Promise.reject({ response: { status: 500 }, data: { test: 'test' } })
         );
-      
+
         const { getByLabelText, getByTestId } = render(
-          <BrowserRouter>
-            <Settings />
-          </BrowserRouter>
+            <BrowserRouter>
+                <Settings />
+            </BrowserRouter>
         );
-      
+
         const select = getByTestId(/select-change-language/);
         fireEvent.change(select, { target: { value: 'language' } });
         fireEvent.click(getByLabelText(/button-change-language/i));
-      
+
         const button = getByLabelText(/button-change-continue/i);
         expect(button).toBeInTheDocument();
         fireEvent.click(button);
-      
+
         expect(axios.post).toBeCalledTimes(1);
     });
     test('age : should get an alert if age is empty', () => {
@@ -1128,16 +1131,16 @@ describe("Settings Tests", () => {
     });
     test("should return the correct variable based on input", () => {
         const translation = {
-          username: "Nom d'utilisateur",
-          name: "Nom",
-          firstname: "Prénom",
-          language: "Langue",
-          age: "Âge",
-          address: "Adresse",
-          phonenumber: "Numéro de téléphone",
-          password: "Mot de passe"
+            username: "Nom d'utilisateur",
+            name: "Nom",
+            firstname: "Prénom",
+            language: "Langue",
+            age: "Âge",
+            address: "Adresse",
+            phonenumber: "Numéro de téléphone",
+            password: "Mot de passe"
         };
-    
+
         expect(getVariableToChange("username", translation)).toBe("nom d'utilisateur");
         expect(getVariableToChange("name", translation)).toBe("nom");
         expect(getVariableToChange("firstname", translation)).toBe("prénom");
@@ -1148,5 +1151,5 @@ describe("Settings Tests", () => {
         expect(getVariableToChange("phonenumber", translation)).toBe("numéro de téléphone");
         expect(getVariableToChange("password", translation)).toBe("mot de passe");
         expect(getVariableToChange("unknown", translation)).toBe("");
-      });
+    });
 });

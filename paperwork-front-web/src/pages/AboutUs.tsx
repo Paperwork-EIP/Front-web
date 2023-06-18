@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { toast } from 'react-toastify';
 import { FaLinkedin } from "react-icons/fa";
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import { MdManageAccounts, MdOutlineModelTraining, MdRocketLaunch, MdFastForward } from "react-icons/md";
@@ -31,11 +32,11 @@ function AboutUsPage() {
                 }
             })
             .then(() => {
-                alert(t('aboutus.email_sent'));
+                toast.success(t('aboutus.email_sent'));
             })
             .catch((err) => {
                 console.log(err);
-                alert(t('aboutus.error'));
+                toast.error(t('aboutus.error'));
             })
     }
 
