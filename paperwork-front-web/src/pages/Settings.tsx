@@ -97,7 +97,7 @@ const SettingsPage = () => {
                     username: username,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdateUsername);
+                    toast.success(translation.alertUpdateUsername);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
@@ -122,7 +122,7 @@ const SettingsPage = () => {
                     name: name,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdateName);
+                    toast.success(translation.alertUpdateName);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
@@ -145,7 +145,7 @@ const SettingsPage = () => {
                     firstname: firstname,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdateFirstname);
+                    toast.success(translation.alertUpdateFirstname);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
@@ -166,7 +166,7 @@ const SettingsPage = () => {
                 language: languageValue,
             }).then(res => {
                 console.log(res.data);
-                toast.error(translation.alertUpdateLanguage);
+                toast.success(translation.alertUpdateLanguage);
                 window.location.reload();
             }).catch(err => {
                 console.log(err)
@@ -193,7 +193,7 @@ const SettingsPage = () => {
                         age: age,
                     }).then(res => {
                         console.log(res.data);
-                        toast.error(translation.alertUpdateAge);
+                        toast.success(translation.alertUpdateAge);
                         window.location.reload();
                     }).catch(err => {
                         console.log(err)
@@ -217,7 +217,7 @@ const SettingsPage = () => {
                     new_email: email,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdateEmail);
+                    toast.success(translation.alertUpdateEmail);
                     // On met à jour le cookie avec les nouvelles infos (gestion du changement d'email)
                     if (cookiesInfo.email !== email) {
                         cookies.remove('loginToken', { path: '/' });
@@ -251,7 +251,7 @@ const SettingsPage = () => {
                     address: address,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdateAddress);
+                    toast.success(translation.alertUpdateAddress);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
@@ -274,7 +274,7 @@ const SettingsPage = () => {
                     number_phone: phonenumber,
                 }).then(res => {
                     console.log(res.data);
-                    toast.error(translation.alertUpdatePhonenumber);
+                    toast.success(translation.alertUpdatePhonenumber);
                     window.location.reload();
                 }).catch(err => {
                     console.log(err)
@@ -298,7 +298,7 @@ const SettingsPage = () => {
                         password: password,
                     }).then(res => {
                         console.log(res.data);
-                        toast.error(translation.alertUpdatePassword);
+                        toast.success(translation.alertUpdatePassword);
                         window.location.reload();
                     }).catch(err => {
                         console.log(err)
@@ -323,7 +323,7 @@ const SettingsPage = () => {
             token: cookiesInfo.loginToken,
         }}).then(res => {
             console.log(res.data);
-            toast.error(translation.alertDeleteAccount);
+            toast.success(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
         }).catch(err => {
@@ -345,7 +345,7 @@ const SettingsPage = () => {
             profile_picture: newAvatar,
         }).then(res => {
             console.log(res.data);
-            toast.error(translation.alertAvatarUpdated);
+            toast.success(translation.alertAvatarUpdated);
             window.location.reload();
         }).catch(err => {
             console.log(err)
