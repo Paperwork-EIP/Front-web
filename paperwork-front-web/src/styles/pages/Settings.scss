@@ -6,7 +6,6 @@
     min-height: calc(100vh - 55px);
 
     .title {
-        color: black;
         font-size: 1.5rem;
         font-weight: bold;
         margin-bottom: 2rem;
@@ -34,11 +33,9 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: white;
             border-radius: 12px;
-            border: 1px solid #ccc;
             width: 22%;
-            height: 160px;
+            height: 240px;
             font-size: 1.2rem;
 
             .choice-divider {
@@ -58,11 +55,6 @@
                     font-size: 1.2rem;
                 }
             }
-
-            .choice-button:hover {
-                background-color: #E0FDF7;
-                border-right: 5px solid #29C9B3;
-            }
         }
 
         .section-container {
@@ -70,9 +62,7 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            background-color: white;
             border-radius: 12px;
-            border: 1px solid #ccc;
             width: 78%;
             margin-left: 3%;
             padding: 25px 3% 25px 3%;
@@ -157,20 +147,6 @@
                     .edit-input {
                         width: calc(100% - 50px);
                     }
-
-                    // .edit-btn {
-                    //     position: absolute;
-                    //     height: 100%;
-                    //     top: 0;
-                    //     right: 0;
-                    //     width: 50px;
-                    //     border-radius: 4px;
-
-                    //     .edit-icon {
-                    //         font-size: 1.2rem;
-                    //         width: 100%;
-                    //     }
-                    // }
                 }
 
                 .delete-account-btn {
@@ -232,10 +208,6 @@
                         background-color: rgba(0, 0, 0, 0.5);
                         transition: .5s ease;
                     }
-                }
-
-                .avatar-container:hover .ModifImg {
-                    background-color: rgba(0, 0, 0, 0.8);
                 }
             }
 
@@ -456,11 +428,28 @@
     --track: #f1f1f1;
     --track-thumb: #888;
     --track-thumb-hover: #555;
+    --border-color: rgb(204, 204, 204);
+    --background-button-color: #E0FDF7;
+    --avatar-hover: rgba(0, 0, 0, 0.8);
 
-    color: var(--label-color);
-    background-color: var(--background-color);
+    .choice-container {
+        background-color: var(--background-box);
+        border: 1px solid var(--border-color);
+
+        .choice-button:hover {
+            background-color: var(--background-button-color);
+            border-right: 5px solid var(--continue-btn)
+        }
+    }
+
+    .title {
+        color: var(--label-color);
+    }
 
     .section-container {
+        background-color: var(--background-box);
+        border: 1px solid var(--border-color);
+
         .errorPassword {
             color: var(--error-pwd-color);
         }
@@ -521,11 +510,17 @@
             .avatar-container {
                 -webkit-box-shadow: var(--container-shadow);
                 box-shadow: var(--container-shadow);
-                border: 0.1rem solid var(--background-box);
+                border: 1px solid var(--background-box);
 
                 .ModifImg {
                     background-color: var(--modif-img-bg);
                 }
+            }
+        }
+
+        .information-container-avatar {
+            .avatar-container:hover .ModifImg {
+                background-color: var(--avatar-hover);
             }
         }
 
@@ -632,6 +627,7 @@
     --button-color: white;
     --border-color: rgb(51, 51, 51);
     --continue-btn: #29C9B3;
+    --continue-btn-hover: #209989;
     --modal-bg: rgba(122, 122, 122, 0.5);
     --edit-btn-bg: #ff4a5a;
     --error-pwd-color: rgb(170, 170, 170);
@@ -640,11 +636,28 @@
     --track: rgb(14, 14, 14);
     --track-thumb: rgb(119, 119, 119);
     --track-thumb-hover: rgb(170, 170, 170);
+    --border-color: rgb(204, 204, 204);
+    --background-button-color: #E0FDF7;
+    --avatar-hover: rgba(0, 0, 0, 0.8);
 
-    color: var(--label-color);
-    background-color: var(--background-color);
+    .choice-container {
+        background-color: var(--background-box);
+        border: 1px solid var(--border-color);
+
+        .choice-button:hover {
+            background-color: var(--continue-btn);
+            border-right: 5px solid var(--background-button-color)
+        }
+    }
+
+    .title {
+        color: var(--label-color);
+    }
 
     .section-container {
+        background-color: var(--background-box);
+        border: 1px solid var(--border-color);
+
         .errorPassword {
             color: var(--error-pwd-color);
         }
@@ -699,11 +712,30 @@
             }
 
             .avatar-container {
-                border: 0.1rem solid var(--button-color);
+                border: 1px solid var(--button-color);
 
                 .ModifImg {
                     background-color: var(--modif-img-bg);
                 }
+            }
+        }
+
+        .information-container-avatar {
+            .avatar-container:hover .ModifImg {
+                background-color: var(--avatar-hover);
+            }
+        }
+
+        .update-btn-container {
+            .update-personal-info-btn {
+                background-color: var(--continue-btn);
+                color: var(--button-color);
+                .update-personal-info-icon {
+                    color: var(--button-color);
+                }
+            }
+            .update-personal-info-btn:hover {
+                background-color: var(--continue-btn-hover);
             }
         }
     }
