@@ -66,14 +66,12 @@ const CalendarPage = () => {
             console.log(item);
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    // axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
-                    // }).then(res => {
-                    //     console.log("ui");
-                    //     //window.location.reload();
-                    // }).catch(err => {
-                    // console.log(err);
-                    // })
-                console.log(item)
+                    axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    }).then(res => {
+                        window.location.reload();
+                    }).catch(err => {
+                        console.log(err);
+                    })
                 : ''
             )
         })
