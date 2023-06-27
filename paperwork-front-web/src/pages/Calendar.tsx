@@ -63,14 +63,17 @@ const CalendarPage = () => {
     const deleteEvent = () => {
         rdv?.map((item: any) => {
             indexDel++;
+            console.log(item);
             return(
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
-                    }).then(res => {
-                        window.location.reload();
-                    }).catch(err => {
-                    console.log(err);
-                    })
+                    // axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    // }).then(res => {
+                    //     console.log("ui");
+                    //     //window.location.reload();
+                    // }).catch(err => {
+                    // console.log(err);
+                    // })
+                console.log(item)
                 : ''
             )
         })
@@ -246,9 +249,16 @@ const CalendarPage = () => {
                 <Calendar className='react-calendar-main-component' locale={translation.calendarLocation} onChange={setDate} value={date}/>
             </div>
             <div className="calendar-main-box-buttons">
+            {
+                isEvent === 0 ?
                 <button className='calendar-main-button' style={{left: "32%"}} aria-label="add_an_event_button" onClick={onOpenAddModal}>
                     {translation.addEvent} 
                 </button>
+                :
+                <button className='calendar-main-button-disable' disabled style={{left: "32%"}} aria-label="add_an_event_button" onClick={onOpenAddModal}>
+                        {translation.addEvent}
+                    </button>
+            }
                 <button className='calendar-main-button' style={{left: "45%"}} aria-label="daily_event_button" onClick={onOpenDailyModal}>
                     {translation.dailyEvent} 
                 </button>
