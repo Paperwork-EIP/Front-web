@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaFacebook } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import Navbar from '../components/Navbar';
 
@@ -35,11 +36,11 @@ const RegisterPage = () => {
                     window.location.replace('/emailSent');
                 })
                 .catch(err => {
-                    alert(t('register.fail'));
+                    toast.error(t('register.fail'));
                     console.log(err);
                 })
         }).catch((err) => {
-            alert(t('register.error'));
+            toast.error(t('register.error'));
             console.log(err);
             return;
         })

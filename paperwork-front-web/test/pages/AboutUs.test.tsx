@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import { mockAllIsIntersecting } from 'react-intersection-observer/test-utils';
 import axios from 'axios';
@@ -10,7 +11,9 @@ jest.mock('../../src/components/Navbar', () => () => <></>);
 
 beforeEach(() => {
     mockAllIsIntersecting(true);
-    global.alert = jest.fn();
+    toast.success = jest.fn();
+    toast.error = jest.fn();
+    toast.warning = jest.fn();
     axios.get = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
 });
 

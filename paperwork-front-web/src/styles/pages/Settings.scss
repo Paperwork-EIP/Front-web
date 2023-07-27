@@ -2,8 +2,15 @@
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding: 3%;
+    min-height: calc(100vh - 55px);
+
+    .title {
+        color: black;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
 
     .heading-image {
         display: flex;
@@ -17,78 +24,82 @@
         }
     }
 
-    .section-container {
+    .settings-container {
         display: flex;
-        flex-wrap: wrap;
+        flex-direction: row;
+        width: 100%;
 
-        .information-container {
-            width: 50%;
-            padding: 12px;
-            
-            label {
-                padding: 12px 12px 0 0;
-                display: inline-block;
-            }
-            
-            input {
-                width: 100%;
-                padding: 12px;
-                border-radius: 4px;
-                resize: vertical;
-            }
+        .choice-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            width: 22%;
+            height: 160px;
+            font-size: 1.2rem;
 
-            select {
-                width: 100%;
-                padding: 12px;
-                border-radius: 4px;
-                resize: vertical;
+            .choice-divider {
+                height: 8px;
             }
 
-            .passwordInput {
-                position: relative;
-            }
-
-            .passwordInputEye {
-                position: absolute;
-                top: 28%;
-                right: 3%;
-                cursor: pointer;
-            }
-            
-            .input-container {
+            .choice-button {
                 display: flex;
-                flex-wrap: wrap;
-                position: relative;
+                justify-content: flex-start;
+                align-items: center;
+                padding-left: 8%;
+                width: 100%;
+                height: 60px;
 
-                .edit-select {
-                    width: calc(100% - 50px);
+                .choice-icon {
+                    margin-right: 8px;
+                    font-size: 1.2rem;
                 }
+            }
 
-                .edit-input {
-                    width: calc(100% - 50px);
-                }
+            .choice-button:hover {
+                background-color: #E0FDF7;
+                border-right: 5px solid #29C9B3;
+            }
+        }
 
-                .edit-btn {
-                    position: absolute;
-                    height: 100%;
-                    top: 0;
-                    right: 0;
-                    width: 50px;;
-                    border-radius: 4px;
+        .section-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            width: 78%;
+            margin-left: 3%;
+            padding: 25px 3% 25px 3%;
 
-                    .edit-icon {
-                        font-size: 1.2rem;
-                        width: 100%;
-                    }
-                }
+            .section-title {
+                width: 100%;
+                padding-top: 20px;
+                font-size: 1.5rem;
+                font-weight: bold;
+                margin-bottom: 2rem;
+            }
+                
+            .errorPassword {
+                width: 100%;
+                padding-left: 10px;
+                font-size: 0.8rem;
+                font-weight: bold;
             }
 
             .edit-password-btn {
                 display: flex;
-                flex-wrap: wrap;
                 position: relative;
+                justify-content: center;
+                align-items: center;
                 border: none;
                 padding: 15px 32px;
+                margin-top: 30px;
                 text-align: center;
                 text-decoration: none;
                 font-size: 16px;
@@ -100,54 +111,191 @@
                 }
             }
 
-            .delete-account-btn {
-                display: flex;
-                flex-wrap: wrap;
-                position: relative;
-                border: none;
-                padding: 15px 32px;
-                text-align: center;
-                text-decoration: none;
-                font-size: 16px;
-                border-radius: 4px;
-    
-                .delete-account-icon {
-                    font-size: 1.2rem;
-                    margin-left: 5px;
+            .information-container {
+                width: 50%;
+                padding: 12px;
+                
+                label {
+                    padding: 12px 12px 0 0;
+                    display: inline-block;
                 }
-            }
-            
-            .errorPassword {
-                font-size: 0.8rem;
-                font-weight: bold;
+                
+                input {
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 4px;
+                    resize: vertical;
+                }
+
+                select {
+                    width: 100%;
+                    padding: 12px;
+                    border-radius: 4px;
+                    resize: vertical;
+                }
+
+                .passwordInput {
+                    position: relative;
+                }
+
+                .passwordInputEye {
+                    position: absolute;
+                    top: 28%;
+                    right: 3%;
+                    cursor: pointer;
+                }
+                
+                .input-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    position: relative;
+
+                    .edit-select {
+                        width: calc(100% - 50px);
+                    }
+
+                    .edit-input {
+                        width: calc(100% - 50px);
+                    }
+
+                    // .edit-btn {
+                    //     position: absolute;
+                    //     height: 100%;
+                    //     top: 0;
+                    //     right: 0;
+                    //     width: 50px;
+                    //     border-radius: 4px;
+
+                    //     .edit-icon {
+                    //         font-size: 1.2rem;
+                    //         width: 100%;
+                    //     }
+                    // }
+                }
+
+                .delete-account-btn {
+                    display: flex;
+                    flex-wrap: wrap;
+                    position: relative;
+                    border: none;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    border-radius: 4px;
+        
+                    .delete-account-icon {
+                        font-size: 1.2rem;
+                        margin-left: 5px;
+                    }
+                }
             }
 
-            .avatar-container {
-                position: relative;
-                vertical-align: middle;
-                width: 100px;
-                height: 100px;
-                border-radius: 50%;
+            @media (max-width: 768px) {
                 
-                .Avatar {
-                    position: relative;
-                    top: 0;
-                    left: 0;
-                    border-radius: 50%;
+                    
+                .information-container {
+                    width: 100%;
                 }
-                
-                .ModifImg {
+            }
+
+            .information-container-avatar {
+                @extend .information-container;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 250px;
+                margin: 0 10% 80px 10%;
+
+                .avatar-container {
                     position: absolute;
-                    top: 0;
-                    left: 0;
+                    vertical-align: middle;
+                    width: 250px;
+                    height: 250px;
+                    margin-top: 80px;
                     border-radius: 50%;
-                    padding: 20px;
+
+                    .Avatar {
+                        position: relative;
+                        top: 0;
+                        left: 0;
+                        border-radius: 50%;
+                    }
+                    
+                    .ModifImg {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        border-radius: 50%;
+                        padding: 20px;
+                        background-color: rgba(0, 0, 0, 0.5);
+                        transition: .5s ease;
+                    }
+                }
+
+                .avatar-container:hover .ModifImg {
+                    background-color: rgba(0, 0, 0, 0.8);
+                }
+            }
+
+            .update-btn-container {
+                @extend .information-container;
+                width: 100%;
+
+                .update-personal-info-btn {
+                    display: flex;
+                    flex-wrap: wrap;
+                    position: relative;
+                    border: none;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    border-radius: 4px;
+        
+                    .update-personal-info-icon {
+                        font-size: 1.2rem;
+                        margin-top: 2px;
+                        margin-left: 5px;
+                    }
                 }
             }
         }
+    }
 
-        @media (max-width: 768px) {
-            .information-container {
+    @media (max-width: 1500px) {
+        .settings-container {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .choice-container {
+                width: 40%;
+                .choice-button {
+                    justify-content: center;
+                    padding-left: 0;
+                }
+            }
+            .section-container {
+                margin-left: 0;
+                margin-top: 20px;
+                width: 100%;
+            }
+        }
+    }
+    
+    @media (max-width: 1000px) {
+        .settings-container {
+            .choice-container {
+                width: 60%;
+            }
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .settings-container {
+            .choice-container {
                 width: 100%;
             }
         }
@@ -203,6 +351,11 @@
                 font-size: 1.5em;
                 letter-spacing: 0.06em;
                 overflow-y: auto;
+
+                .newParamTxt {
+                    color: black;
+                    font-size: 0.8em;
+                }
 
                 .divider span {
                     display: block;
@@ -287,10 +440,12 @@
     // Body color
     --background-color: rgb(240, 240, 240);
     --secondary-color: #FC6976;
+    --secondary-color-hover: #cf555f;
     --label-color: black;
     --background-box: white;
     --border-color: #ccc;
     --continue-btn: #29C9B3;
+    --continue-btn-hover: #209989;
     --modal-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     --container-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
     --modal-bg: rgba(0, 0, 0, 0.5);
@@ -306,6 +461,23 @@
     background-color: var(--background-color);
 
     .section-container {
+        .errorPassword {
+            color: var(--error-pwd-color);
+        }
+
+        .edit-password-btn {
+            background-color: var(--secondary-color);
+            color: var(--background-box);
+
+            .edit-password-icon {
+                color: var(--background-box);
+            }
+        }
+
+        .edit-password-btn:hover {
+            background-color: var(--secondary-color-hover);
+        }
+
         .information-container {
             input {
                 border: 1px solid var(--border-color);
@@ -337,15 +509,6 @@
                 }
             }
 
-            .edit-password-btn {
-                background-color: var(--secondary-color);
-                color: var(--background-box);
-    
-                .edit-password-icon {
-                    color: var(--background-box);
-                }
-            }
-
             .delete-account-btn {
                 background-color: var(--secondary-color);
                 color: var(--background-box);
@@ -353,10 +516,6 @@
                 .delete-account-icon {
                     color: var(--background-box);
                 }
-            }
-            
-            .errorPassword {
-                color: var(--error-pwd-color);
             }
 
             .avatar-container {
@@ -367,6 +526,19 @@
                 .ModifImg {
                     background-color: var(--modif-img-bg);
                 }
+            }
+        }
+
+        .update-btn-container {
+            .update-personal-info-btn {
+                background-color: var(--continue-btn);
+                color: var(--background-box);
+                .update-personal-info-icon {
+                    color: var(--background-box);
+                }
+            }
+            .update-personal-info-btn:hover {
+                background-color: var(--continue-btn-hover);
             }
         }
     }
@@ -473,6 +645,19 @@
     background-color: var(--background-color);
 
     .section-container {
+        .errorPassword {
+            color: var(--error-pwd-color);
+        }
+
+        .edit-password-btn {
+            background-color: var(--secondary-color);
+            color: var(--button-color);
+
+            .edit-password-icon {
+                color: var(--button-color);
+            }
+        }
+
         .information-container {
             input {
                 border: 1px solid var(--border-color);
@@ -504,15 +689,6 @@
                 }
             }
 
-            .edit-password-btn {
-                background-color: var(--secondary-color);
-                color: var(--button-color);
-    
-                .edit-password-icon {
-                    color: var(--button-color);
-                }
-            }
-
             .delete-account-btn {
                 background-color: var(--secondary-color);
                 color: var(--button-color);
@@ -520,10 +696,6 @@
                 .delete-account-icon {
                     color: var(--button-color);
                 }
-            }
-            
-            .errorPassword {
-                color: var(--error-pwd-color);
             }
 
             .avatar-container {

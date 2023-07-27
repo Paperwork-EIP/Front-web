@@ -4,6 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import "../styles/ResetPassword.scss";
 import axios from "axios";
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 function ResetPasswordPage() {
     
@@ -20,10 +21,10 @@ function ResetPasswordPage() {
         axios.get(
             `${api}/user/resetPassword?token=${url.searchParams.get('token')}&password=${password}`,
             ).then(res => {
-                alert(t('resetPassword.resetPasswordSuccess'));
+                toast.success(t('resetPassword.resetPasswordSuccess'));
                 window.location.replace('/login');
             }).catch(err => {
-                alert(t('resetPassword.resetPasswordFail'));
+                toast.error(t('resetPassword.resetPasswordFail'));
                 console.log(err);
             })
     };
@@ -41,7 +42,7 @@ function ResetPasswordPage() {
     });
 
     function errorSubmit() {
-        alert(t('resetPassword.divPasswords'))
+        toast.warning(t('resetPassword.divPasswords'))
     };
 
 

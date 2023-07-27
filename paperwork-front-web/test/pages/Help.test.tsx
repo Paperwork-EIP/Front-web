@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
-import { render, cleanup, act, getByLabelText } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { render, cleanup } from '@testing-library/react';
 import { fireEvent, waitFor } from '@testing-library/react';
+import { toast } from 'react-toastify';
 
 import Cookies from 'universal-cookie';
 import axios from 'axios';
@@ -19,7 +20,9 @@ beforeEach(() => {
             replace: jest.fn().mockImplementation(() => Promise.resolve())
         }
     });
-    global.alert = jest.fn();
+    toast.success = jest.fn();
+    toast.error = jest.fn();
+    toast.warning = jest.fn();;
     axios.get = jest.fn().mockImplementation(() => Promise.resolve());
     axios.post = jest.fn().mockImplementation(() => Promise.resolve());
 });
@@ -30,44 +33,44 @@ afterEach(() => {
 });
 
 describe('Help Tests', () => {
-  // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
-  //   const cookies = new Cookies();
-  //   const location = window.location;
-  //   cookies.remove('loginToken');
+    // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
+    //   const cookies = new Cookies();
+    //   const location = window.location;
+    //   cookies.remove('loginToken');
 
-  //   render(
-  //       <BrowserRouter>
-  //           <Help />
-  //       </BrowserRouter>
-  //   );
+    //   render(
+    //       <BrowserRouter>
+    //           <Help />
+    //       </BrowserRouter>
+    //   );
 
-  //   window.location = location;
+    //   window.location = location;
 
-  //   expect(window.location.assign).toBeCalledWith('/');
-  // });  
-  it('should toggle FAQ', async() => {
-    const cookies = new Cookies();
-    cookies.set('loginToken', { token: 'token123' });
-    const useStateSpy = jest.spyOn(React, 'useState');
-    useStateSpy.mockImplementation((init) => [init, jest.fn()]);
+    //   expect(window.location.assign).toBeCalledWith('/');
+    // });  
+    it('should toggle FAQ', async () => {
+        const cookies = new Cookies();
+        cookies.set('loginToken', { token: 'token123' });
+        const useStateSpy = jest.spyOn(React, 'useState');
+        useStateSpy.mockImplementation((init) => [init, jest.fn()]);
 
-    const { getAllByTestId } = render(
-    <BrowserRouter>
-        <Help />
-    </BrowserRouter>
-    );
-    
-    const faqButtons = getAllByTestId('faq-button');
-    expect(faqButtons).toHaveLength(5);
+        const { getAllByTestId } = render(
+            <BrowserRouter>
+                <Help />
+            </BrowserRouter>
+        );
 
-    fireEvent.click(faqButtons[0]);
+        const faqButtons = getAllByTestId('faq-button');
+        expect(faqButtons).toHaveLength(5);
 
-    await waitFor(() => {
-      expect(useStateSpy).toHaveBeenCalled();
+        fireEvent.click(faqButtons[0]);
 
-      fireEvent.click(faqButtons[0]);
+        await waitFor(() => {
+            expect(useStateSpy).toHaveBeenCalled();
 
-      expect(useStateSpy).toHaveBeenCalled();
+            fireEvent.click(faqButtons[0]);
+
+            expect(useStateSpy).toHaveBeenCalled();
+        });
     });
-  });
 });

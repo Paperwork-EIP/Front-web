@@ -8,6 +8,7 @@ import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 import { useDisclosure } from '@chakra-ui/react';
 import Modal from 'react-modal';
@@ -42,7 +43,7 @@ const LoginPage = () => {
             });
             window.location.replace('/home');
         }).catch(() => {
-            alert(t('login.error'));
+            toast.error(t('login.error'));
         })
     };
 
@@ -50,9 +51,9 @@ const LoginPage = () => {
         axios.get(
         `${api}/user/sendResetPasswordEmail?email=${email}`,
         ).then(res => {
-            alert(t('login.emailSent'));
+            toast.success(t('login.emailSent'));
         }).catch(err => {
-            alert(t('login.emailFail'));
+            toast.warning(t('login.emailFail'));
             console.log(err);
         })
     };

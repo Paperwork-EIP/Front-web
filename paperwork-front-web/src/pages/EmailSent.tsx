@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import "../styles/EmailSent.scss";
 import { SiIonos, SiGmail, SiMicrosoftoutlook } from 'react-icons/si';
@@ -7,6 +7,7 @@ import { RiMailSendLine } from 'react-icons/ri';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 function EmailSentPage() {
 
@@ -18,9 +19,9 @@ function EmailSentPage() {
     async function handleSubmit() {
         await axios.get(`${api}/user/sendVerificationEmail?token=${cookieList.loginToken}`
         ).then(res => {
-            alert(t('emailSent.emailSent'));
+            toast.success(t('emailSent.emailSent'));
         }).catch(err => {
-            alert(t('emailSent.emailFail'));
+            toast.error(t('emailSent.emailFail'));
             console.log(err);
         })
     }
