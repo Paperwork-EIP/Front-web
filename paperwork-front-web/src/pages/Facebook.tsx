@@ -14,7 +14,7 @@ const FacebookPage = () => {
         window.location.assign("/");
     } else {
     axios.get(`${api}/oauth/facebook/?code=${code}`).then(res => {
-        cookies.set('loginToken', { token: res.data.jwt, email: res.data.email }, {
+        cookies.set('loginToken', { loginToken: res.data.jwt, email: res.data.email }, {
             path:'/',
             secure:true,
             sameSite:'none'
