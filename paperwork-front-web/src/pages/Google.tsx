@@ -15,7 +15,7 @@ const GooglePage = () => {
     } else {
         axios.get(`${api}/oauth/google/login?code=${code}`).then(res => {
             console.log(res);
-            cookies.set('loginToken', { token: res.data.jwt, email: res.data.email }, {
+            cookies.set('loginToken', { loginToken: res.data.jwt, email: res.data.email }, {
                 path:'/',
                 secure:true,
                 sameSite:'none'
