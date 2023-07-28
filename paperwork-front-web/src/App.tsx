@@ -15,6 +15,7 @@ import ProcessResult from './pages/ProcessResult';
 import ProcessIdea from './pages/ProcessIdea';
 import CalendarPage from './pages/Calendar';
 import HelpPage from './pages/Help';
+import LexiconPage from './pages/Lexicon';
 import ResetPasswordPage from './pages/ResetPassword';
 import VerifyEmailPage from './pages/VerifyEmail';
 import EmailSentPage from './pages/EmailSent';
@@ -43,6 +44,7 @@ const App = () => {
                     <Route path="/profile" element={<ProfilePage />} />
                     <Route path="/calendar" element={<CalendarPage />} />
                     <Route path="/help" element={<HelpPage />} />
+                    <Route path="/lexicon" element={<LexiconPage />} />
                     <Route path="/resetPassword" element={<ResetPasswordPage />} />
                     <Route path="/verifyEmail" element={<VerifyEmailPage />} />
                     <Route path="/emailSent" element={<EmailSentPage />} />

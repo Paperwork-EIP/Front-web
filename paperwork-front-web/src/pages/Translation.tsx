@@ -132,6 +132,8 @@ const translations: Translations = {
       submitMessage: "Are you sure you want to submit the process idea?"
     },
     helpPage: {
+      textLexicon: "Need a term to be explained ?",
+      buttonLexicon: "Click Here !",
       question1: "How to update personal information?",
       answer1: "To update your personal information, go to the Profile page by clicking on the image below.\nFrom this page, you can:\n- Update your profile picture by entering the image link of your choice in the 'Profile picture link' field,\n- Modify your username using the 'Username' field,\n- Update your shared email address using the 'Email' field,\n- Finally, change your password by entering the new password twice.",
       question2: "How to add a process?",
@@ -142,15 +144,38 @@ const translations: Translations = {
       answer4: "To modify or delete events related to processes, go to the Calendar page by clicking on the image below.\nFrom the calendar, you can view existing events and modify or delete them.\nTo do this, simply click on the date for which you want to modify the event.\nThen click on the 'Edit/Delete an Event' button. For modification, you will need to enter the new time or step you want to assign to your event and click the 'Submit' button to save the changes. Alternatively, you can directly click the 'Delete Event' button to delete the event.",
       question5: "I can't find the process I need in the list of available processes. What should I do?",
       answer5: "If you can't find the process you want to launch in the available processes list, you have the option to let us know through the Process Idea page by clicking on the image below.\nProvide the title, description, and content of the desired process, press the 'Submit' button, and we will receive your request. You can also contact us via the contact button at the bottom of this page by sending an email to paperwork_2024@labeip.epitech.eu.",
+      question6: "How can I modify my personal information?",
+      answer6: "To modify your personal information, go to the Settings page, where you can:\n- Choose a profile picture,\n- Modify your name,\n- Modify your surname,\n- Modify your age,\n- Modify the application language,\n- Modify your email address,\n- Modify your postal address,\n- Modify your phone number,\n- And finally, modify your password.",
+      question7: "What should I do if I don't understand one of the technical terms used on the website?",
+      answer7: "The Lexicon page, which lists the definitions of technical terms, is available by clicking on the image below!"
+    },
+    lexiconPage: {
+      textHelp: "Question about the features of Paperwork ?",
+      buttonHelp: "Click Here !",
+      question1: "Vital Card",
+      answer1: "Health insurance policies typically cover a wide range of medical expenses, such as hospitalization, surgical procedures, prescription drugs, laboratory tests, and doctor visits. Some policies may also cover specialized treatments such as dental, vision, or mental health care.",
+      question2: "Passport",
+      answer2: "A passport is a travel document that is issued by a government to its citizens for the purpose of international travel. It is an official proof of identity and citizenship that allows the passport holder to enter and exit foreign countries, and to request assistance and protection from their government while abroad.",
+      question3: "Visa",
+      answer3: "A visa is an official document or endorsement placed in a passport that allows the passport holder to enter, stay, or exit a foreign country for a specific period of time and for a specific purpose. The purpose of a visa is to regulate and control the entry and stay of foreign visitors in a country.",
+      question4: "Proof of Residence",
+      answer4: "A proof of address is a document that verifies where you live. It is often required as a form of identification when you need to open a bank account, apply for credit, or get a government-issued ID card. A proof of address can take many forms, but it typically includes your name, your address, and a date.",
     },
     home: {
+      title: "Your Paperwork Space",
       ascending: "Ascending",
       descending: "Descending",
       newProcessButton: "New Process",
       calendar: "Calendar",
       applied: "Applied",
       left: "Left",
-      nothing: "Nothing to Show"
+      nothing: "Nothing to Show",
+      process: "Process",
+      events: "Events",
+      needHelp: "Need Help ?",
+      help: "Help",
+      lexicon: "Lexicon",
+      today: "Today",
     },
     calendar: {
       calendarLocation:"en-GB",
@@ -166,6 +191,10 @@ const translations: Translations = {
       nothingPlanned: "Nothing Planned",
       editDelete: "Edit/Delete",
       deleteEvent: "Delete Event",
+      events: "Events",
+      applied: "Applied",
+      left: "Left",
+      today: "Today",
     }
   },
   français: {
@@ -289,7 +318,9 @@ const translations: Translations = {
       submitMessage: "Êtes-vous sûr(e) de vouloir soumettre l'idée de procédure ?"
       },
       helpPage: {
-        question1: "Comment modifier ses informations personnelles ?",
+        textLexicon: "Besoin d'avoir la signification d'un terme ?",
+        buttonLexicon: "Cliquez ici !",
+        question1: "Comment voir ses informations personnelles ?",
         answer1: "Afin de modifier ses informations personnelles, rendez-vous sur la page Profile en cliquant sur l'image ci-dessous.\nDepuis cette page, vous pouvez:\n- Modifier votre photo de profil en entrant le lien de l'image de votre choix dans le champs 'Profile picture link',\n- Modifier votre nom d'utilisateur via le champ 'Username',\n- Modifier votre adresse email partagée via le champ 'Email',\n- Et enfin modifier votre mot de passe en entrant deux fois le même nouveau mot de passe.",
         question2: "Comment ajouter une procédure ?",
         answer2: "Afin d'ajouter de nouvelles procédures, rendez-vous sur la page Quiz en cliquant sur l'image ci-dessous.\nDepuis cette page, vous pourrez choisir une procédure parmi toutes celles existantes.\n Une fois la procédure trouvée vous devrez répondre à des questions sur votre avancement dans celle-ci (possession des documents nécéssaires, élégibilité à l'avaancée de la procédure, etc...).\n Une fois la phase de questions terminée, vous serez redirigés vers une page compilant toutes les informations sur la procédure en cours, et vous pourrez ajouter des évènements liés à celle-ci dans le calendrier si nécéssaire.",
@@ -299,16 +330,39 @@ const translations: Translations = {
         answer4: "Afin de modifier ou de supprimer des évènements liés aux procédures, rendez-vous sur la page Calendar en cliquant sur l'image ci-dessous.\n Depuis le calendrier, vous pourrez voir les différents évènements déjà intanciés mais aussi les modifier ou les supprimer.\nPour ce faire, il vous suffit de cliquer sur la date pour laquelle vous souhaitez modifier l'évènement.\n Cliquez ensuite sur le bouton 'Edit/Delete an Event'. Il vous faudra par la suite, pour le modifier renseigner la nouvelle heure ou la nouvelle étape que vous souhaitez attribuer à votre évènement puis cliquer sur le bouton 'Submit' pour le modifier, ou alors cliquer directement sur le bouton 'Delete Event' pour le supprimer.",
         question5: "Je ne trouve pas la procédure dont j'ai besoin dans la liste des procédures disponibles ?",
         answer5: "Dans le cas où une procédure que vous voulez lancer n'est pas disponible sur notre site, vous avez la possibilité de nous le faire savoir via la page Process Idea en cliquant sur l'image ci-dessous.\n Renseignez alors le titre, la description et le contenu de la procédure voulue, appuyez sur le bouton 'Submit' et nous recevrons votre demande. Vous pouvez aussi nous contacter via le bouton de contact en bas de cette page en nous envoyant un mail à paperwork_2024@labeip.epitech.eu.",
+        question6: "Comment modifier mes informations personnelles ?",
+        answer6: "Pour modifier vos informations personnelles, rendez-vous dans la page Settings, ici vous pourrez:\n- Choisir une photo de profile,\n- Modifier votre nom,\n- Modifier votre prénom,\n- Modifier votre âge,\n- Modifier le langage de l'application,\n- Modifier votre adresse email,\n- Modifier votre adresse postale,\n- Modifier votre numéro de téléphone,\n- Et enfin modifier votre mot de passe.",
+        question7: "Comment faire si je ne comprends pas un des mot technique utilisé dans le site ?",
+        answer7: "La page Lexicon listant les définition des mots techniques est disponible en cliquant sur l'image ci-dessous !"
+      },
+      lexiconPage: {
+        textHelp: "Une question sur les fonctionnalités de Paperwork ?",
+        buttonHelp: "Cliquez ici !",
+        question1: "Carte Vitale",
+        answer1: "L'assurance maladie couvre généralement un large éventail de dépenses médicales, telles que l'hospitalisation, les interventions chirurgicales, les médicaments sur ordonnance, les tests de laboratoire et les visites médicales. Certaines polices peuvent également couvrir des traitements spécialisés tels que les soins dentaires, la vision ou les soins de santé mentale.",
+        question2: "Passeport",
+        answer2: "Un passeport est un document de voyage délivré par un gouvernement à ses citoyens dans le but de voyager à l'étranger. Il constitue une preuve officielle d'identité et de citoyenneté qui permet au titulaire du passeport d'entrer et de sortir des pays étrangers, ainsi que de demander une assistance et une protection de son gouvernement pendant son séjour à l'étranger.",
+        question3: "Visa",
+        answer3: "Un visa est un document officiel ou une mention apposée sur un passeport qui permet au titulaire du passeport d'entrer, de séjourner ou de sortir d'un pays étranger pour une durée et un motif spécifiques. Le but d'un visa est de réguler et de contrôler l'entrée et le séjour des visiteurs étrangers dans un pays.",
+        question4: "Justificatif de domicile",
+        answer4: "Un justificatif de domicile est un document qui vérifie votre adresse de domicile. Il est souvent requis comme une forme d'identification lorsque vous avez besoin d'ouvrir un compte bancaire, de demander du crédit ou d'obtenir une carte d'identité émise par le gouvernement. Un justificatif de domicile peut prendre différentes formes, mais il inclut généralement votre nom, votre adresse et une date.",
       },
       home: {
+        title: "Votre Espace Paperwork",
         ascending: "Croissant",
         descending: "Décroissant",
         newProcessButton: "Nouvelle Procédure",
         calendar: "Calendrier",
-        applied: "Passé",
+        applied: "Terminé",
         left: "Restant",
-        nothing: "Rien à afficher"
-      },
+        nothing: "Rien à Afficher",
+        process: "Procédure",
+        events: "Évènements",
+        needHelp: "Besoin d'aide ?",
+        help: "Aide",
+        lexicon: "Lexique",
+        today: "Aujourd'hui",
+        },
       calendar: {
         calendarLocation: "fr-FR",
         calendar: "Calendrier",
@@ -323,6 +377,10 @@ const translations: Translations = {
         nothingPlanned: "Rien de prévu",
         editDelete: "Modifier/Supprimer",
         deleteEvent: "Supprimer l'évènement",
+        events: "Évènements",
+        applied: "Terminé",
+        left: "Restant",
+        today: "Aujourd'hui",
         }
   }
 };
