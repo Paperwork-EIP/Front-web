@@ -1,15 +1,30 @@
-import { Center, Text, Box, Button, Flex, Input, useDisclosure, useColorModeValue} from '@chakra-ui/react';
+import { Center, Text, Box, Button, Flex, Input, useDisclosure, useColorModeValue, Icon, IconProps, OmitCommonProps} from '@chakra-ui/react';
 import Header from '../components/Header';
 import Select from 'react-select';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, SVGProps } from 'react';
 import Calendar from 'react-calendar';
 import "../styles/Calendar.scss";
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import Modal from 'react-modal';
 import { getTranslation } from './Translation';
+import { BsFillCalendarDateFill, BsHourglassSplit } from 'react-icons/bs';
 
 const CalendarPage = () => {
+
+    const CircleIcon = (
+        prop: JSX.IntrinsicAttributes &
+          OmitCommonProps<SVGProps<SVGSVGElement>, keyof IconProps> &
+          IconProps & { as?: "svg" | undefined }
+      ) => (
+        <Icon viewBox="0 0 100 100" {...prop}>
+          <path
+            margin-left="2px"
+            fill="currentColor"
+            d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+          />
+        </Icon>
+      );
 
     const cookies = new Cookies();
     if (!cookies.get('loginToken')) {
@@ -32,6 +47,8 @@ const CalendarPage = () => {
     var indexMod = 1;
     var indexRep = 1;
     var indexDel = 1;
+    var index = -2;
+    let colorEvent = "";
     const [stepEdit, setStepEdit] = useState();
     const [postsStepEdit, setPostsStepEdit] : any = useState([{}]);
     const [newDate, setNewDate] = useState("");
@@ -39,6 +56,7 @@ const CalendarPage = () => {
     const [postsStep, setPostsStep] : any = useState([{}]);
     const [stepSelected, setStepSelected] = useState();
     const [rdv, setRDV]= useState([[]]);
+    const [rdvEvent, setRDVEvent]= useState([[]]);
     const [modDate, setModDate] = useState("");
     const isNewDateError = useRef(false);
     const isModDateError = useRef(false);
@@ -123,10 +141,13 @@ const CalendarPage = () => {
                 axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
                     .then(res => {
                         var rdvTmp = [];
+                        var rdvEvent= [];
                         for (var i = 0; i < res.data.appoinment.length; i++) {
                             rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['stocked_title'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description'], res.data.appoinment[i]['user_process_id'], res.data.appoinment[i]['step_id']);
+                            rdvEvent.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
                         }
                         setRDV(rdvTmp);
+                        setRDVEvent(rdvEvent);
                     }).catch(err => {
                     console.log(err);
                     })
@@ -271,6 +292,71 @@ const CalendarPage = () => {
                     </button>
                 }
             </div>
+            <div className="calendar-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+    {
+      rdvEvent.length !== 0 ?
+      <>
+      
+      <div className="calendar-content-box-calendar-icons-box">
+        <div className="calendar-content-calendar-text"> {translation.events} </div>
+        <CircleIcon className="calendar-content-box-calendar-icon" color="#FC6976" mt={'-18px'}/>
+        <div className="calendar-content-calendar-icon-text"> {translation.applied} </div>
+        <CircleIcon className="calendar-content-box-calendar-icon" color="#fc9f69" mt={'2px'}/>
+        <div className="calendar-content-calendar-icon-text" style={{marginTop:'20px'}}> {translation.today} </div>
+        <CircleIcon className="calendar-content-box-calendar-icon" color="#29C9B3" mt={'22px'}/>
+        <div className="calendar-content-calendar-icon-text" style={{marginTop:'40px'}}> {translation.left} </div>
+      </div>
+      
+      <div className="calendar-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
+      <div className="calendar-content-box-calendar-in">
+  {rdvEvent?.map((item: any) => {
+    index += 3;
+    if (index <= rdvEvent.length) {
+      if (rdvEvent[index - 1].toString()?.split('T')[0].split('-')[0] + rdvEvent[index - 1].toString()?.split('T')[0].split('-')[1] + rdvEvent[index - 1].toString()?.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]){
+        colorEvent = "#fc9f69";
+      } else if (rdvEvent[index - 1].toString()?.split('T')[0].split('-')[0] + rdvEvent[index - 1].toString()?.split('T')[0].split('-')[1] + rdvEvent[index - 1].toString()?.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+        colorEvent = "#FC6976";
+      } else {
+        colorEvent = "#29C9B3";
+      }
+      return (
+        
+        <div className="calendar-content-box-rendez-vous" style={{ backgroundColor: colorEvent}}>
+        <div className="calendar-content-rendez-vous-date-text" style={{ color: "rgba(255,255,255)" }}>
+          <div className="calendar-content-icon-and-date">
+          <div className="icon-container">
+            <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
+            {rdvEvent[index - 1].toString()?.split('T')[0]}
+            <BsHourglassSplit style={{ marginRight: '3px', marginLeft: "20px", verticalAlign: 'middle' }} />
+            {rdvEvent[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[0] + ':' + rdvEvent[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[1]}
+          </div>
+          </div>
+        </div>
+
+          <div className="calendar-content-rendez-vous-process-name-text" style={{ color: "rgba(255,255,255)" }}>
+            {rdvEvent[index]}
+          </div>
+          <div className="calendar-content-rendez-vous-process-description-text" style={{ color: "rgba(255,255,255)" }}>
+            {rdvEvent[index + 1]}
+          </div>
+        </div>
+      );
+    } else
+      return ('');
+  })}
+    </div>
+      </>
+      :
+      <>
+      <div className="calendar-content-calendar-text"> {translation.calendar} </div>
+      <div className="calendar-content-line-calendar" style={{backgroundColor: adaptedColor}} ></div>
+      <div className="calendar-content-nothing-text"> {translation.nothing} </div>
+      </>
+    } </div>
+
+
+
+
 
             <Modal className='calendar-modal' style={{content:{background: adaptedColor}}} overlayClassName='calendar-modal-overlay' isOpen={isOpenAddModal} onRequestClose={onCloseAddModal}>
                 <div className='calendar-modal-date'>{date.toDateString()}</div>

@@ -155,13 +155,20 @@ const translations: Translations = {
       answer4: "A proof of address is a document that verifies where you live. It is often required as a form of identification when you need to open a bank account, apply for credit, or get a government-issued ID card. A proof of address can take many forms, but it typically includes your name, your address, and a date.",
     },
     home: {
+      title: "Your Paperwork Space",
       ascending: "Ascending",
       descending: "Descending",
       newProcessButton: "New Process",
       calendar: "Calendar",
       applied: "Applied",
       left: "Left",
-      nothing: "Nothing to Show"
+      nothing: "Nothing to Show",
+      process: "Process",
+      events: "Events",
+      needHelp: "Need Help ?",
+      help: "Help",
+      lexicon: "Lexicon",
+      today: "Today",
     },
     calendar: {
       calendarLocation:"en-GB",
@@ -177,6 +184,10 @@ const translations: Translations = {
       nothingPlanned: "Nothing Planned",
       editDelete: "Edit/Delete",
       deleteEvent: "Delete Event",
+      events: "Events",
+      applied: "Applied",
+      left: "Left",
+      today: "Today",
     }
   },
   français: {
@@ -323,14 +334,21 @@ const translations: Translations = {
         answer4: "Un justificatif de domicile est un document qui vérifie votre adresse de domicile. Il est souvent requis comme une forme d'identification lorsque vous avez besoin d'ouvrir un compte bancaire, de demander du crédit ou d'obtenir une carte d'identité émise par le gouvernement. Un justificatif de domicile peut prendre différentes formes, mais il inclut généralement votre nom, votre adresse et une date.",
       },
       home: {
+        title: "Votre Espace Paperwork",
         ascending: "Croissant",
         descending: "Décroissant",
         newProcessButton: "Nouvelle Procédure",
         calendar: "Calendrier",
-        applied: "Passé",
+        applied: "Terminé",
         left: "Restant",
-        nothing: "Rien à afficher"
-      },
+        nothing: "Rien à Afficher",
+        process: "Procédure",
+        events: "Évènements",
+        needHelp: "Besoin d'aide ?",
+        help: "Aide",
+        lexicon: "Lexique",
+        today: "Aujourd'hui",
+        },
       calendar: {
         calendarLocation: "fr-FR",
         calendar: "Calendrier",
@@ -345,6 +363,10 @@ const translations: Translations = {
         nothingPlanned: "Rien de prévu",
         editDelete: "Modifier/Supprimer",
         deleteEvent: "Supprimer l'évènement",
+        events: "Évènements",
+        applied: "Terminé",
+        left: "Restant",
+        today: "Aujourd'hui",
         }
   }
 };

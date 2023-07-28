@@ -108,7 +108,6 @@ const Bg = () => {
 
   const { colorMode } = useColorMode();
   const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
-  const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
 
   const getPercentageClass = (percentage: number) => {
     if (percentage <= 25) return "percentage-low";
@@ -130,9 +129,9 @@ const Bg = () => {
     <div className="home-image">
         <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
       </div>
-      <h1 className="home-title"> Your Paperwork Space </h1>
+      <h1 className="home-title"> {translation.title} </h1>
       <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
-      <div className="home-content-calendar-text"> Process </div>
+      <div className="home-content-calendar-text"> {translation.process} </div>
         <TableContainer>
           <Table variant="simple">
         <Thead>
@@ -209,20 +208,17 @@ const Bg = () => {
 
         
       </div>
-
-
-
     <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
     {
       rdv.length !== 0 ?
       <>
       
       <div className="home-content-box-calendar-icons-box">
-        <div className="home-content-calendar-text"> Events </div>
+        <div className="home-content-calendar-text"> {translation.events} </div>
         <CircleIcon className="home-content-box-calendar-icon" color="#FC6976" mt={'-18px'}/>
         <div className="home-content-calendar-icon-text"> {translation.applied} </div>
         <CircleIcon className="home-content-box-calendar-icon" color="#fc9f69" mt={'2px'}/>
-        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> Aujourd'hui </div>
+        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> {translation.today} </div>
         <CircleIcon className="home-content-box-calendar-icon" color="#29C9B3" mt={'22px'}/>
         <div className="home-content-calendar-icon-text" style={{marginTop:'40px'}}> {translation.left} </div>
       </div>
@@ -281,17 +277,17 @@ const Bg = () => {
     
     
       <div className="home-content-box-help-base" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)"), marginBottom:"5%", display: "flex", flexDirection: "column", alignItems: "center"}}>
-          <div className="home-content-help-text"> Need Help ? </div>
+          <div className="home-content-help-text"> {translation.needHelp} </div>
             <div className="home-content-box-help-wrapper" style={{display: "flex", justifyContent: "space-between", width: "100%", marginBottom: "5%"}}>
                 <div className="home-content-box-help" style={{ backgroundColor: adaptedColor, width: "45%", zIndex: 2, marginTop: "3%", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center", transition: "transform 0.3s ease", cursor: "pointer", justifyContent: "center"}}>
                     <Link to="/help">
-                        <div className="home-content-help-help-text"> Help </div>
+                        <div className="home-content-help-help-text"> {translation.help} </div>
                         <img className="home-help-image" src="assets/help-page/FAQs-bro.png" alt="Help_page_clickable_image" />
                     </Link>
                 </div>
                 <div className="home-content-box-lexicon" style={{ backgroundColor: adaptedColor, width: "45%", zIndex: 2, marginTop: "3%", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center", transition: "transform 0.3s ease", cursor: "pointer", justifyContent: "center"}}>
                     <Link to="/lexicon">
-                        <div className="home-content-help-lexicon-text"> Lexicon </div>
+                        <div className="home-content-help-lexicon-text"> {translation.lexicon} </div>
                         <img className="home-help-image" src="assets/lexicon-page/Lexicon-icon.png" alt="Lexicon_page_clickable_image" />
                     </Link>
               </div>
