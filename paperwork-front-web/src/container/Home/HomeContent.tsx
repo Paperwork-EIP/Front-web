@@ -212,7 +212,7 @@ const Bg = () => {
 
 
 
-    <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)"), marginBottom:"5%"}}>
+    <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
     {
       rdv.length !== 0 ?
       <>
@@ -278,7 +278,26 @@ const Bg = () => {
       <div className="home-content-nothing-text"> {translation.nothing} </div>
       </>
     } </div>
-    </div>
+    
+    
+      <div className="home-content-box-help-base" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)"), marginBottom:"5%", display: "flex", flexDirection: "column", alignItems: "center"}}>
+          <div className="home-content-help-text"> Need Help ? </div>
+            <div className="home-content-box-help-wrapper" style={{display: "flex", justifyContent: "space-between", width: "100%", marginBottom: "5%"}}>
+                <div className="home-content-box-help" style={{ backgroundColor: adaptedColor, width: "45%", zIndex: 2, marginTop: "3%", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center", transition: "transform 0.3s ease", cursor: "pointer", justifyContent: "center"}}>
+                    <Link to="/help">
+                        <div className="home-content-help-help-text"> Help </div>
+                        <img className="home-help-image" src="assets/help-page/FAQs-bro.png" alt="Help_page_clickable_image" />
+                    </Link>
+                </div>
+                <div className="home-content-box-lexicon" style={{ backgroundColor: adaptedColor, width: "45%", zIndex: 2, marginTop: "3%", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", display: "flex", flexDirection: "column", alignItems: "center", transition: "transform 0.3s ease", cursor: "pointer", justifyContent: "center"}}>
+                    <Link to="/lexicon">
+                        <div className="home-content-help-lexicon-text"> Lexicon </div>
+                        <img className="home-help-image" src="assets/lexicon-page/Lexicon-icon.png" alt="Lexicon_page_clickable_image" />
+                    </Link>
+              </div>
+          </div>
+      </div>
+    </div>    
       </>
   );
 };

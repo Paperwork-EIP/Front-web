@@ -294,7 +294,119 @@
             background-color: #1A9A88;
           }
         }
-      }    
+      }
+      
+    .home-content-box-help-base {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 5%;
+        padding-bottom: 10px; 
+        animation-name: slideInFromLeft;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+    }
+    
+    .home-content-help-text {
+        font-weight:500;
+        font-size: 200%;
+        margin-bottom: 5%;
+        font-weight: bold;
+        padding-left: 1%;
+        float: left;
+    }
+
+    .home-content-box-help {
+        width: 45%;
+        z-index: 2;
+        margin-top: 3%;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        justify-content: center;
+
+        &:hover {
+            transform: scale(1.03);
+        }
+    }
+
+    .home-content-box-lexicon {
+        width: 45%;
+        z-index: 2;
+        margin-top: 3%;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        justify-content: center;
+
+        &:hover {
+            transform: scale(1.03);
+        }
+    }
+    
+    .home-content-box-help-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+
+    .home-content-help-help-text {
+        font-weight:500;
+        font-size: 200%;
+        margin-bottom: 5%;
+        font-weight: bold;
+        padding-left: 1%;
+        float: left;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .home-content-help-lexicon-text {
+        font-weight:500;
+        font-size: 200%;
+        margin-bottom: 5%;
+        font-weight: bold;
+        padding-left: 1%;
+        float: left;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    .home-help-image {
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .home-help-image:hover {opacity: 0.6}
 }
 
 @keyframes slideInFromLeft {
