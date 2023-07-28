@@ -6,7 +6,11 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: url('../../public/background.png')
+        background: url('../../public/background.png');
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .home-image {
@@ -18,13 +22,29 @@
         margin-right: auto;
         width: 35%;
     }
+
+    .home-title {
+        letter-spacing: 2px;
+        word-spacing: 2px;
+        font-size: 6vh;
+        font-weight: 700;
+        text-align: center;
+        background: linear-gradient(-10deg, #29c9b3, #bb00bb);
+        background-size: 110%;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
     
     .home-content-main-box-dark {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: url('../../public/dark-background.png')
+        background: url('../../public/dark-background.png');
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
     .home-content-box-percentages {
@@ -128,6 +148,7 @@
     .home-content-calendar-text {
         font-weight:500;
         font-size: 200%;
+        margin-bottom: 5%;
         font-weight: bold;
         padding-left: 1%;
         float: left;
@@ -147,16 +168,20 @@
         font-weight:500;
         font-size: 100%;
         right: 30px;
+        top: 0px;
         position: absolute;
     }
     
     .home-content-box-calendar-in {
-        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
         max-height: 87%;
         border-radius: 5px;
         height: auto;
         overflow-y: auto;
-    }
+      }
     
     .home-content-line-calendar {
         width: 100%;
@@ -169,11 +194,42 @@
         text-align: center;
         font-size: 150%;
     }
+
+    .home-calendar-button {
+        background-color: #29C9B3;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        align-self: center;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+  
+        &:hover {
+          background-color: #1A9A88;
+        }
+
+        @media (max-width: 900px) {
+            position: relative;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            bottom: 0;
+            transform: translateX(0);
+          }
+    }
     
     .home-content-box-rendez-vous {
         width: 70%;
         z-index: 2;
-        margin: 10px;
+        margin-top: 3%;
         padding: 20px;
         border-radius: 8px;
         background-color: #fff;
@@ -184,6 +240,7 @@
         justify-content: center;
         transition: transform 0.3s ease;
         cursor: pointer;
+        justify-content: center;
     
         &:hover {
           transform: scale(1.03);
@@ -195,6 +252,8 @@
           text-align: center;
           color: #555;
           margin-bottom: 10px;
+          display: flex;
+            align-items: center;
         }
     
         .home-content-rendez-vous-process-name-text {
@@ -203,6 +262,8 @@
           text-align: center;
           color: #222;
           margin-bottom: 8px;
+          display: flex;
+        align-items: center;
         }
     
         .home-content-rendez-vous-process-description-text {
@@ -210,6 +271,11 @@
           text-align: center;
           color: #777;
         }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+          }
     
         .home-content-rendez-vous-button {
           background-color: #29C9B3;

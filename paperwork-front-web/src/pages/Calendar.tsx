@@ -19,7 +19,7 @@ const CalendarPage = () => {
     const customStyles = {
         option: (provided: any, state: any) => ({
           ...provided,
-          color: 'black', // Définit la couleur du texte des options sur noir
+          color: 'black',
         }),
       };
     

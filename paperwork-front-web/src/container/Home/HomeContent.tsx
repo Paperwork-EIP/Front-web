@@ -52,6 +52,13 @@ const Bg = () => {
   const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
   const [language, setLanguage] = useState("");
   const translation = getTranslation(language, "home");
+  const [date, setDate] = useState(new Date());
+  const selectedMonth =  date.toDateString()?.split(" ")[1] === "Jan" ? "01" : date.toDateString()?.split(" ")[1] === "Feb" ? "02" : date.toDateString()?.split(" ")[1] === "Mar" ? "03" :
+                           date.toDateString()?.split(" ")[1] === "Apr" ? "04" : date.toDateString()?.split(" ")[1] === "May" ? "05" : date.toDateString()?.split(" ")[1] === "Jun" ? "06" :
+                           date.toDateString()?.split(" ")[1] === "Jul" ? "07" : date.toDateString()?.split(" ")[1] === "Aug" ? "08" : date.toDateString()?.split(" ")[1] === "Sep" ? "09" :
+                           date.toDateString()?.split(" ")[1] === "Oct" ? "10" : date.toDateString()?.split(" ")[1] === "Nov" ? "11" : date.toDateString()?.split(" ")[1] === "Dec" ? "12" : "Not Set";
+  const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
+  let colorEvent = "";
 
   useEffect(() => {
     axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
@@ -123,7 +130,9 @@ const Bg = () => {
     <div className="home-image">
         <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
       </div>
+      <h1 className="home-title"> Your Paperwork Space </h1>
       <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
+      <div className="home-content-calendar-text"> Process </div>
         <TableContainer>
           <Table variant="simple">
         <Thead>
@@ -203,17 +212,19 @@ const Bg = () => {
 
 
 
-    <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+    <div className="home-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)"), marginBottom:"5%"}}>
     {
       rdv.length !== 0 ?
       <>
       
       <div className="home-content-box-calendar-icons-box">
-        <div className="home-content-calendar-text"> {translation.calendar} </div>
-        <CircleIcon className="home-content-box-calendar-icon" color="pink.400" mt={'3px'}/>
+        <div className="home-content-calendar-text"> Events </div>
+        <CircleIcon className="home-content-box-calendar-icon" color="#FC6976" mt={'-18px'}/>
         <div className="home-content-calendar-icon-text"> {translation.applied} </div>
-        <CircleIcon className="home-content-box-calendar-icon" color="green" mt={'23px'}/>
-        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> {translation.left} </div>
+        <CircleIcon className="home-content-box-calendar-icon" color="#fc9f69" mt={'2px'}/>
+        <div className="home-content-calendar-icon-text" style={{marginTop:'20px'}}> Aujourd'hui </div>
+        <CircleIcon className="home-content-box-calendar-icon" color="#29C9B3" mt={'22px'}/>
+        <div className="home-content-calendar-icon-text" style={{marginTop:'40px'}}> {translation.left} </div>
       </div>
       
       <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
@@ -221,17 +232,31 @@ const Bg = () => {
   {rdv?.map((item: any) => {
     index += 3;
     if (index <= rdv.length) {
+      if (rdv[index - 1].toString()?.split('T')[0].split('-')[0] + rdv[index - 1].toString()?.split('T')[0].split('-')[1] + rdv[index - 1].toString()?.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]){
+        colorEvent = "#fc9f69";
+      } else if (rdv[index - 1].toString()?.split('T')[0].split('-')[0] + rdv[index - 1].toString()?.split('T')[0].split('-')[1] + rdv[index - 1].toString()?.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+        colorEvent = "#FC6976";
+      } else {
+        colorEvent = "#29C9B3";
+      }
       return (
-        <div className="home-content-box-rendez-vous" style={{ backgroundColor: adaptedColor }}>
-          <div className="home-content-rendez-vous-date-text" style={{ color: adaptedTextColor }}>
+        
+        <div className="home-content-box-rendez-vous" style={{ backgroundColor: colorEvent}}>
+        <div className="home-content-rendez-vous-date-text" style={{ color: "rgba(255,255,255)" }}>
+          <div className="home-content-icon-and-date">
+          <div className="icon-container">
             <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
-            {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]}
-            <BsHourglassSplit style={{ marginLeft: '5px', verticalAlign: 'middle' }} />
+            {rdv[index - 1].toString()?.split('T')[0]}
+            <BsHourglassSplit style={{ marginRight: '3px', marginLeft: "20px", verticalAlign: 'middle' }} />
+            {rdv[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[0] + ':' + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[1]}
           </div>
-          <div className="home-content-rendez-vous-process-name-text" style={{ color: adaptedTextColor }}>
+          </div>
+        </div>
+
+          <div className="home-content-rendez-vous-process-name-text" style={{ color: "rgba(255,255,255)" }}>
             {rdv[index]}
           </div>
-          <div className="home-content-rendez-vous-process-description-text" style={{ color: adaptedTextColor }}>
+          <div className="home-content-rendez-vous-process-description-text" style={{ color: "rgba(255,255,255)" }}>
             {rdv[index + 1]}
           </div>
         </div>
@@ -239,8 +264,12 @@ const Bg = () => {
     } else
       return ('');
   })}
-</div>
-
+    </div>
+    <Link to="/calendar">
+      <button className='home-calendar-button' aria-label="submit_button">
+        {translation.calendar}
+      </button>
+    </Link>
       </>
       :
       <>
