@@ -1,0 +1,250 @@
+.Home {
+    min-height: 100vh;
+
+    .home-content-main-box-light {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: url('../../public/background.png')
+    }
+
+    .home-image {
+        width: 700px;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 35%;
+    }
+    
+    .home-content-main-box-dark {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: url('../../public/dark-background.png')
+    }
+    
+    .home-content-box-percentages {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-top: 30px;
+        position: relative;
+        padding-bottom: 7%;
+        animation-name: slideInFromLeft;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+    
+        .percentage-value {
+          position: relative;
+          display: inline-block;
+          font-size: 24px;
+          font-weight: bold;
+          padding: 10px 20px;
+          border-radius: 20px;
+          overflow: hidden;
+            &.percentage-low {
+                color: #FC6976;
+                border: 2px solid #FC6976;
+              }
+        
+              &.percentage-medium {
+                color: #fc9f69;
+                border: 2px solid #fc9f69;
+              }
+        
+              &.percentage-high {
+                color: #29c9c6;
+                border: 2px solid #29c9c6;
+              }
+        
+              &.percentage-very-high {
+                color: #29C9B3;
+                border: 2px solid #29C9B3;
+              }
+
+            }
+            .home-content-start-process-button {
+                background-color: #29C9B3;
+                color: white;
+                padding: 8px 20px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-weight: 500;
+                text-transform: uppercase;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                margin-top: 20px;
+                align-self: center;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+          
+                &:hover {
+                  background-color: #1A9A88;
+                }
+
+                @media (max-width: 900px) {
+                    position: relative;
+                    width: 100%;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    bottom: 0;
+                    transform: translateX(0);
+                  }
+            }
+    }
+    
+    .home-content-box-calendar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-top: 30px;
+        position: relative;
+        padding-bottom: 7%;
+        animation-name: slideInFromRight;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
+    }
+    
+    .home-content-calendar-text {
+        font-weight:500;
+        font-size: 200%;
+        font-weight: bold;
+        padding-left: 1%;
+        float: left;
+    }
+    
+    .home-content-box-calendar-icons-box {
+        height: 12.5%;
+    }
+    
+    .home-content-box-calendar-icon {
+        float: left;
+        right: 10px;
+        position: absolute;
+    }
+    
+    .home-content-calendar-icon-text {
+        font-weight:500;
+        font-size: 100%;
+        right: 30px;
+        position: absolute;
+    }
+    
+    .home-content-box-calendar-in {
+        width: 100%;
+        max-height: 87%;
+        border-radius: 5px;
+        height: auto;
+        overflow-y: auto;
+    }
+    
+    .home-content-line-calendar {
+        width: 100%;
+        height: 0.5%;
+    }
+    
+    .home-content-nothing-text {
+        font-weight:500;
+        padding-top: 10%;
+        text-align: center;
+        font-size: 150%;
+    }
+    
+    .home-content-box-rendez-vous {
+        width: 70%;
+        z-index: 2;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+    
+        &:hover {
+          transform: scale(1.03);
+        }
+    
+        .home-content-rendez-vous-date-text {
+          font-size: 14px;
+          font-weight: 500;
+          text-align: center;
+          color: #555;
+          margin-bottom: 10px;
+        }
+    
+        .home-content-rendez-vous-process-name-text {
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
+          color: #222;
+          margin-bottom: 8px;
+        }
+    
+        .home-content-rendez-vous-process-description-text {
+          font-size: 14px;
+          text-align: center;
+          color: #777;
+        }
+    
+        .home-content-rendez-vous-button {
+          background-color: #29C9B3;
+          color: white;
+          padding: 8px 20px;
+          border-radius: 5px;
+          font-size: 14px;
+          font-weight: 500;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          margin-top: 15px;
+          align-self: center;
+    
+          &:hover {
+            background-color: #1A9A88;
+          }
+        }
+      }    
+}
+
+@keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+}

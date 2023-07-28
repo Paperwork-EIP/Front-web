@@ -17,9 +17,10 @@ import { SVGProps, } from "react";
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import "../../styles/HomeContent.css";
+import "../../styles/HomeContent.scss";
 import { Link } from "react-router-dom";
 import { getTranslation } from '../../pages/Translation';
+import { BsFillCalendarDateFill, BsHourglassSplit } from "react-icons/bs"
 
 const CircleIcon = (
   prop: JSX.IntrinsicAttributes &
@@ -102,9 +103,16 @@ const Bg = () => {
   const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
   const adaptedTextColor = useColorModeValue("rgba(0,0,0,1)", "rgba(255,255,255,1)");
 
+  const getPercentageClass = (percentage: number) => {
+    if (percentage <= 25) return "percentage-low";
+    else if (percentage <= 50) return "percentage-medium";
+    else if (percentage <= 75) return "percentage-high";
+    else return "percentage-very-high";
+  };
+
   return (
     <>
-
+    <div className="Home">
     {colorMode === "light" ?
     <div className="home-content-main-box-light">
     </div>
@@ -112,10 +120,12 @@ const Bg = () => {
     <div className="home-content-main-box-dark">
     </div>
     }
-    
-    <div className="home-content-box-percentages" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
-    <TableContainer>
-      <Table variant="simple">
+    <div className="home-image">
+        <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
+      </div>
+      <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
+        <TableContainer>
+          <Table variant="simple">
         <Thead>
           <Tr>
             <Th>
@@ -125,63 +135,71 @@ const Bg = () => {
             </Th>
             <Th isNumeric>
             <Button onClick={handleClickAsc} aria-label="click-asc">
-            { activeAsc ? translation.ascending : translation.descending}
+            { activeAsc ? translation.descending : translation.ascending}
             </Button>
             </Th>
           </Tr>
         </Thead>
         <Tbody>
-        {
-          activePriority === true ?
-          activeAsc ?
-          ascendingArray?.map((item: any) => {
-              return (
-                <Tr>
-                  <Td key="{itemAscProcess}">{item.process}</Td>
-                  <Td key="{itemAscPercent}" isNumeric>{item.percentage}</Td>
-                </Tr>
-              );
-            })
-          :
-          descendingArray?.map((item: any) => {
-              return (
-                <Tr>
-                  <Td key="{itemDscProcess}">{item.process}</Td>
-                  <Td key="{itemDscPercent}" isNumeric>{item.percentage}</Td>
-                </Tr>
-              );
-            })
-          :
-          activeAlp ?
-          alphabeticArray?.map((item: any) => {
-              return (
-                <Tr>
-                  <Td key="{itemAlpProcess}">{item.process}</Td>
-                  <Td key="{itemAlpPercent}" isNumeric>{item.percentage}</Td>
-                </Tr>
-              );
-            })
-          :
-          invertArray?.map((item: any) => {
-              return (
-                <Tr>
-                  <Td key="{itemInvProcess}">{item.process}</Td>
-                  <Td key="{itemInvPercent}" isNumeric>{item.percentage}</Td>
-                </Tr>
-              );
-          })
-        }
-        </Tbody>
-      </Table>
-    </TableContainer>
-    
-    
-    <Link to="/quiz">
-      <button className='home-content-start-process-button' aria-label="submit_button">
-        {translation.newProcessButton}
-      </button>
-    </Link>
-    </div>
+              {
+                activePriority === true ?
+                  activeAsc ?
+                    ascendingArray?.map((item: any) => {
+                      return (
+                        <Tr>
+                          <Td key="{itemAscProcess}">{item.process}</Td>
+                          <Td key="{itemAscPercent}" isNumeric>
+                            <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                          </Td>
+                        </Tr>
+                      );
+                    })
+                    :
+                    descendingArray?.map((item: any) => {
+                      return (
+                        <Tr>
+                          <Td key="{itemDscProcess}">{item.process}</Td>
+                          <Td key="{itemDscPercent}" isNumeric>
+                            <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                          </Td>
+                        </Tr>
+                      );
+                    })
+                  :
+                  activeAlp ?
+                    alphabeticArray?.map((item: any) => {
+                      return (
+                        <Tr>
+                          <Td key="{itemAlpProcess}">{item.process}</Td>
+                          <Td key="{itemAlpPercent}" isNumeric>
+                            <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                          </Td>
+                        </Tr>
+                      );
+                    })
+                    :
+                    invertArray?.map((item: any) => {
+                      return (
+                        <Tr>
+                          <Td key="{itemInvProcess}">{item.process}</Td>
+                          <Td key="{itemInvPercent}" isNumeric>
+                            <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                          </Td>
+                        </Tr>
+                      );
+                    })
+              }
+              <Link to="/quiz">
+          <button className='home-content-start-process-button' aria-label="submit_button">
+            {translation.newProcessButton}
+          </button>
+        </Link>
+            </Tbody>
+          </Table>
+        </TableContainer>
+
+        
+      </div>
 
 
 
@@ -200,22 +218,29 @@ const Bg = () => {
       
       <div className="home-content-line-calendar" style={{backgroundColor: adaptedColor}}></div>
       <div className="home-content-box-calendar-in">
-      {
-        rdv?.map((item: any) => {
-            index += 3;
-            if (index <= rdv.length) {
-              return (
-                <div className="home-content-box-rendez-vous" style={{backgroundColor: adaptedColor}}>
-                  <div className="home-content-rendez-vous-date-text" style={{color: adaptedTextColor}}> {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]} </div>
-                  <div className="home-content-rendez-vous-process-name-text" style={{color: adaptedTextColor}}> {rdv[index]} </div>
-                  <div className="home-content-rendez-vous-process-description-text" style={{color: adaptedTextColor}}> {rdv[index + 1]} </div>
-                </div>
-              )
-            } else
-              return ('')
-        })
-      }
-      </div>
+  {rdv?.map((item: any) => {
+    index += 3;
+    if (index <= rdv.length) {
+      return (
+        <div className="home-content-box-rendez-vous" style={{ backgroundColor: adaptedColor }}>
+          <div className="home-content-rendez-vous-date-text" style={{ color: adaptedTextColor }}>
+            <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
+            {rdv[index - 1].toString()?.split('T')[0] + " > " + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0]}
+            <BsHourglassSplit style={{ marginLeft: '5px', verticalAlign: 'middle' }} />
+          </div>
+          <div className="home-content-rendez-vous-process-name-text" style={{ color: adaptedTextColor }}>
+            {rdv[index]}
+          </div>
+          <div className="home-content-rendez-vous-process-description-text" style={{ color: adaptedTextColor }}>
+            {rdv[index + 1]}
+          </div>
+        </div>
+      );
+    } else
+      return ('');
+  })}
+</div>
+
       </>
       :
       <>
@@ -224,6 +249,7 @@ const Bg = () => {
       <div className="home-content-nothing-text"> {translation.nothing} </div>
       </>
     } </div>
+    </div>
       </>
   );
 };
