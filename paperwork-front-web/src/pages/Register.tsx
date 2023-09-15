@@ -14,6 +14,7 @@ import "../styles/pages/Register.scss";
 const RegisterPage = () => {
 
     const api = process.env.REACT_APP_BASE_URL;
+    const url = new URL(window.location.href);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -36,12 +37,18 @@ const RegisterPage = () => {
                     window.location.replace('/emailSent');
                 })
                 .catch(err => {
-                    toast.error(t('register.fail'));
-                    console.log(err);
+                    cookies.set('loginToken', { loginToken: url.searchParams.get('token')}, {
+                        path: '/',
+                        secure: true,
+                        sameSite: 'none'
+                    })
                 })
         }).catch((err) => {
-            toast.error(t('register.error'));
-            console.log(err);
+            cookies.set('loginToken', { loginToken: url.searchParams.get('token')}, {
+                path: '/',
+                secure: true,
+                sameSite: 'none'
+            })
             return;
         })
     };
