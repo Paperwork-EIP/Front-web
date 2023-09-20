@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-import Help from '../../src/pages/Help';
+import Lexicon from '../../src/pages/Lexicon';
 
 jest.mock('axios');
 jest.mock('../../src/components/Header', () => () => <></>);
@@ -32,7 +32,7 @@ afterEach(() => {
     jest.restoreAllMocks();
 });
 
-describe('Help Tests', () => {
+describe('Lexicon Tests', () => {
     // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
     //   const cookies = new Cookies();
     //   const location = window.location;
@@ -40,7 +40,7 @@ describe('Help Tests', () => {
 
     //   render(
     //       <BrowserRouter>
-    //           <Help />
+    //           <Lexicon />
     //       </BrowserRouter>
     //   );
 
@@ -56,12 +56,12 @@ describe('Help Tests', () => {
 
         const { getAllByTestId } = render(
             <BrowserRouter>
-                <Help />
+                <Lexicon />
             </BrowserRouter>
         );
 
         const faqButtons = getAllByTestId('faq-button');
-        expect(faqButtons).toHaveLength(7);
+        expect(faqButtons).toHaveLength(4);
 
         fireEvent.click(faqButtons[0]);
 
