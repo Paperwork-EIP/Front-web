@@ -467,7 +467,7 @@ const SettingsPage = () => {
                             <button
                                 type="button"
                                 className="update-personal-info-btn"
-                                aria-label="update-personal-info-btn"
+                                aria-label="update-password-btn"
                                 onClick={() => handleChangePassword()}
                                 >
                                 {translation.editPassword}
