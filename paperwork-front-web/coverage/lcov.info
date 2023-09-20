@@ -1,5 +1,5 @@
 TN:
-SF:src/App.tsx
+SF:src\App.tsx
 FN:32,(anonymous_0)
 FNF:1
 FNH:1
@@ -12,7 +12,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/ChangeLanguage.tsx
+SF:src\components\ChangeLanguage.tsx
 FN:6,ChangeLanguage
 FN:9,changeLanguageHandler
 FN:16,(anonymous_2)
@@ -34,7 +34,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/components/Header.tsx
+SF:src\components\Header.tsx
 FN:12,Header
 FN:25,checkAvatar
 FN:30,handleClickOutside
@@ -116,7 +116,7 @@ BRF:20
 BRH:13
 end_of_record
 TN:
-SF:src/components/Navbar.tsx
+SF:src\components\Navbar.tsx
 FN:9,Navbar
 FN:13,(anonymous_1)
 FN:14,(anonymous_2)
@@ -146,7 +146,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/container/Home/HomeContent.tsx
+SF:src\container\Home\HomeContent.tsx
 FN:25,(anonymous_0)
 FN:39,(anonymous_1)
 FN:49,(anonymous_2)
@@ -323,7 +323,7 @@ BRF:56
 BRH:28
 end_of_record
 TN:
-SF:src/container/Profile/CalendarButton.tsx
+SF:src\container\Profile\CalendarButton.tsx
 FN:6,CalendarButton
 FNF:1
 FNH:1
@@ -335,7 +335,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/container/Profile/ProcessBar.tsx
+SF:src\container\Profile\ProcessBar.tsx
 FN:8,(anonymous_0)
 FN:17,(anonymous_1)
 FN:19,(anonymous_2)
@@ -368,7 +368,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:src/pages/AboutUs.tsx
+SF:src\pages\AboutUs.tsx
 FN:17,AboutUsPage
 FN:25,submitForm
 FN:34,(anonymous_2)
@@ -404,7 +404,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/pages/Calendar.tsx
+SF:src\pages\Calendar.tsx
 FN:13,(anonymous_0)
 FN:15,(anonymous_1)
 FN:35,(anonymous_2)
@@ -683,7 +683,7 @@ BRF:62
 BRH:24
 end_of_record
 TN:
-SF:src/pages/EmailSent.tsx
+SF:src\pages\EmailSent.tsx
 FN:12,EmailSentPage
 FN:19,handleSubmit
 FN:21,(anonymous_2)
@@ -709,7 +709,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/pages/Error.tsx
+SF:src\pages\Error.tsx
 FN:8,(anonymous_0)
 FNF:1
 FNH:1
@@ -722,7 +722,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/pages/Facebook.tsx
+SF:src\pages\Facebook.tsx
 FN:8,(anonymous_0)
 FN:16,(anonymous_1)
 FNF:2
@@ -749,7 +749,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/pages/Google.tsx
+SF:src\pages\Google.tsx
 FN:8,(anonymous_0)
 FN:16,(anonymous_1)
 FNF:2
@@ -777,7 +777,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/pages/Help.tsx
+SF:src\pages\Help.tsx
 FN:20,HelpPage
 FN:34,(anonymous_1)
 FN:36,(anonymous_2)
@@ -849,7 +849,7 @@ BRF:12
 BRH:7
 end_of_record
 TN:
-SF:src/pages/Home.tsx
+SF:src\pages\Home.tsx
 FN:6,HomePage
 FNF:1
 FNH:1
@@ -861,7 +861,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/pages/Lexicon.tsx
+SF:src\pages\Lexicon.tsx
 FN:19,LexiconPage
 FN:32,(anonymous_1)
 FN:34,(anonymous_2)
@@ -933,7 +933,7 @@ BRF:12
 BRH:7
 end_of_record
 TN:
-SF:src/pages/Login.tsx
+SF:src\pages\Login.tsx
 FN:20,(anonymous_0)
 FN:31,handleSubmit
 FN:38,(anonymous_2)
@@ -1017,7 +1017,7 @@ BRF:12
 BRH:11
 end_of_record
 TN:
-SF:src/pages/ProcessIdea.tsx
+SF:src\pages\ProcessIdea.tsx
 FN:10,ProcessIdea
 FN:28,(anonymous_1)
 FN:30,(anonymous_2)
@@ -1096,7 +1096,7 @@ BRF:8
 BRH:5
 end_of_record
 TN:
-SF:src/pages/ProcessResult.tsx
+SF:src\pages\ProcessResult.tsx
 FN:24,(anonymous_0)
 FN:48,(anonymous_1)
 FN:50,(anonymous_2)
@@ -1183,7 +1183,7 @@ BRF:10
 BRH:6
 end_of_record
 TN:
-SF:src/pages/Profile.tsx
+SF:src\pages\Profile.tsx
 FN:16,(anonymous_0)
 FN:40,(anonymous_1)
 FN:46,(anonymous_2)
@@ -1274,7 +1274,7 @@ BRF:28
 BRH:17
 end_of_record
 TN:
-SF:src/pages/Register.tsx
+SF:src\pages\Register.tsx
 FN:14,(anonymous_0)
 FN:27,handleSubmit
 FN:34,(anonymous_2)
@@ -1294,8 +1294,8 @@ FN:103,(anonymous_15)
 FN:107,(anonymous_16)
 FN:114,(anonymous_17)
 FNF:18
-FNH:1
-FNDA:49,(anonymous_0)
+FNH:0
+FNDA:0,(anonymous_0)
 FNDA:0,handleSubmit
 FNDA:0,(anonymous_2)
 FNDA:0,(anonymous_3)
@@ -1313,9 +1313,9 @@ FNDA:0,(anonymous_14)
 FNDA:0,(anonymous_15)
 FNDA:0,(anonymous_16)
 FNDA:0,(anonymous_17)
-DA:14,2
-DA:16,49
-DA:17,49
+DA:14,1
+DA:16,0
+DA:17,0
 DA:18,0
 DA:19,0
 DA:20,0
@@ -1349,7 +1349,7 @@ DA:103,0
 DA:107,0
 DA:114,0
 LF:35
-LH:3
+LH:1
 BRDA:60,0,0,0
 BRDA:60,0,1,0
 BRDA:86,1,0,0
@@ -1360,7 +1360,7 @@ BRF:6
 BRH:0
 end_of_record
 TN:
-SF:src/pages/ResetPassword.tsx
+SF:src\pages\ResetPassword.tsx
 FN:9,ResetPasswordPage
 FN:20,handleSubmit
 FN:23,(anonymous_2)
@@ -1435,7 +1435,7 @@ BRF:20
 BRH:10
 end_of_record
 TN:
-SF:src/pages/Settings.tsx
+SF:src\pages\Settings.tsx
 FN:23,(anonymous_0)
 FN:65,(anonymous_1)
 FN:67,(anonymous_2)
@@ -1818,7 +1818,7 @@ BRF:112
 BRH:76
 end_of_record
 TN:
-SF:src/pages/Translation.tsx
+SF:src\pages\Translation.tsx
 FN:388,getTranslation
 FNF:1
 FNH:1
@@ -1834,7 +1834,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/pages/VerifyEmail.tsx
+SF:src\pages\VerifyEmail.tsx
 FN:11,VerifyEmailPage
 FN:18,(anonymous_1)
 FN:20,(anonymous_2)
@@ -1860,7 +1860,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src/pages/Welcome.tsx
+SF:src\pages\Welcome.tsx
 FN:10,WelcomePage
 FN:14,redirectToHome
 FN:20,(anonymous_2)
@@ -1884,7 +1884,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:src/pages/QuizPages/Quiz.tsx
+SF:src\pages\QuizPages\Quiz.tsx
 FN:22,(anonymous_0)
 FN:47,(anonymous_1)
 FN:49,(anonymous_2)
@@ -1946,7 +1946,7 @@ BRF:6
 BRH:3
 end_of_record
 TN:
-SF:src/pages/QuizPages/QuizQuestion.tsx
+SF:src\pages\QuizPages\QuizQuestion.tsx
 FN:19,(anonymous_0)
 FN:47,(anonymous_1)
 FN:49,(anonymous_2)
