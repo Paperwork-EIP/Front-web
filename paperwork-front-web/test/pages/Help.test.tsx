@@ -61,7 +61,7 @@ describe('Help Tests', () => {
         );
 
         const faqButtons = getAllByTestId('faq-button');
-        expect(faqButtons).toHaveLength(5);
+        expect(faqButtons).toHaveLength(7);
 
         fireEvent.click(faqButtons[0]);
 
