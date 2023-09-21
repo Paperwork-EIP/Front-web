@@ -19,6 +19,18 @@ function ChangeLanguage() {
                 <button className="button" data-testid="button-en" onClick={() => changeLanguageHandler("en")}>
                     <span className="text-button">{t('button.en')}</span>
                 </button>
+                <button className="button" data-testid="button-de" onClick={() => changeLanguageHandler("de")}>
+                    <span className="text-button">{t('button.de')}</span>
+                </button>
+                <button className="button" data-testid="button-kr" onClick={() => changeLanguageHandler("kr")}>
+                    <span className="text-button">{t('button.kr')}</span>
+                </button>
+                <button className="button" data-testid="button-id" onClick={() => changeLanguageHandler("id")}>
+                    <span className="text-button">{t('button.id')}</span>
+                </button>
+                <button className="button" data-testid="button-es" onClick={() => changeLanguageHandler("es")}>
+                    <span className="text-button">{t('button.es')}</span>
+                </button>
             </div>
         </div>
     )

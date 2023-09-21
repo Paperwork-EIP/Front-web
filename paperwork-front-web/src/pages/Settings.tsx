@@ -343,6 +343,18 @@ const SettingsPage = () => {
                                     <option data-testid="select-option" value="français">
                                     Français
                                     </option>
+                                    <option data-testid="select-option" value="deutsch">
+                                    Deutsch
+                                    </option>
+                                    <option data-testid="select-option" value="korean">
+                                    Korean
+                                    </option>
+                                    <option data-testid="select-option" value="indonesia">
+                                    Indonesia
+                                    </option>
+                                    <option data-testid="select-option" value="espanol">
+                                    Espanol
+                                    </option>
                                 </select>
                             </div>
                         </div>
