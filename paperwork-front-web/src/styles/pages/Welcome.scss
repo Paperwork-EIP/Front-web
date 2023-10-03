@@ -133,13 +133,13 @@
                     gap: 2.5vh;
                     
                     img {
-                        height: 25vh;
+                        height: clamp(100px, 20vw, 200px);
                         width: auto;
                     }
 
                     span {
                         font-weight: 600;
-                        font-size: 1.2em;
+                        font-size: clamp(1.2em, 2vw, 1.4em);
                         text-align: center;
                         color:#000000 !important;
                         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;

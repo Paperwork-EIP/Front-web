@@ -27,18 +27,20 @@ function Navbar() {
                 <img className='Navbar-logo' src="logo.png" alt="logo-paperwork" />
             </h2>
             <nav className="Navbar-nav">
-                <Link to="/" className="Navbar-link-active" data-testid="Navbar-link-1">
-                {t('navbar.link_1')}
-                </Link>
-                <Link to="/login" className="Navbar-link-active" data-testid="Navbar-link-2">
-                {t('navbar.link_2')}
-                </Link>
-                <Link to="/register" className="Navbar-link-active" data-testid="Navbar-link-3">
-                {t('navbar.link_3')}
-                </Link>
-                <Link to="/aboutus" className="Navbar-link-active" data-testid="Navbar-link-4">
-                {t('navbar.link_4')}
-                </Link>
+                <div>
+                    <Link to="/" className="Navbar-link" data-testid="Navbar-link-1">
+                        {t('navbar.link_1')}
+                    </Link>
+                    <Link to="/login" className="Navbar-link-active" data-testid="Navbar-link-2">
+                        {t('navbar.link_2')}
+                    </Link>
+                    <Link to="/register" className="Navbar-link-active" data-testid="Navbar-link-3">
+                        {t('navbar.link_3')}
+                    </Link>
+                    <Link to="/aboutus" className="Navbar-link-active" data-testid="Navbar-link-4">
+                        {t('navbar.link_4')}
+                    </Link>
+                </div>
                 <ChangeLanguage />
             </nav>
         </header>
