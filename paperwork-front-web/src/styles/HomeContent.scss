@@ -294,7 +294,6 @@
     margin-top: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
     animation-name: slideInFromLeft;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
@@ -321,6 +320,10 @@
     transition: transform 0.3s ease;
     cursor: pointer;
 
+    &:hover {
+      transform: translateY(-5px);
+    }
+
     a {
       height: 100%;
       width: 100%;
@@ -328,10 +331,6 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
-      &:hover {
-        transform: scale(1.03);
-      }
     }
   }
 
@@ -360,10 +359,6 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .home-help-image:hover {
-    opacity: 0.6
   }
 }
 
