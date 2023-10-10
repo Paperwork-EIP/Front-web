@@ -37,14 +37,14 @@ const RegisterPage = () => {
                     window.location.replace('/emailSent');
                 })
                 .catch(err => {
-                    cookies.set('loginToken', { loginToken: url.searchParams.get('token')}, {
+                    cookies.set('loginToken', { loginToken: url.searchParams.get('token') }, {
                         path: '/',
                         secure: true,
                         sameSite: 'none'
                     })
                 })
         }).catch((err) => {
-            cookies.set('loginToken', { loginToken: url.searchParams.get('token')}, {
+            cookies.set('loginToken', { loginToken: url.searchParams.get('token') }, {
                 path: '/',
                 secure: true,
                 sameSite: 'none'
@@ -92,7 +92,7 @@ const RegisterPage = () => {
         <div className="Register">
             <Navbar />
             <div className='Register-container'>
-                <div className='Register-container-right'>
+                <div className='Register-wrapper'>
                     <h1 className='Register-title'>{t('register.title')}</h1>
                     <div className='Register-form'>
                         <div className="Register-form-group field">
@@ -111,10 +111,10 @@ const RegisterPage = () => {
                             <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' data-testid="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                             <label htmlFor="confirmPassword" className="Register-form-label">{t('register.confirm_password')}</label>
                         </div>
-                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={() => { handleSubmit() }} disabled={buttonDisabled}>
-                            {t('register.button')}
-                        </button>
                     </div>
+                    <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={() => { handleSubmit() }} disabled={buttonDisabled}>
+                        {t('register.button')}
+                    </button>
                     <div className='Register-connections'>
                         <button className='Register-button-api' data-testid="google-link" onClick={googleConnect}>
                             <FaGoogle />
@@ -125,18 +125,11 @@ const RegisterPage = () => {
                     </div>
                     <div className='Register-redirection-to-login'>
                         <span>
-                        {t('register.yes_account')}
+                            {t('register.yes_account')}
                         </span>
                         <span className='Register-link'>
                             <Link to='/login' data-testid="link-login">{t('register.yes_account_click')}</Link>
                         </span>
-                    </div>
-                </div>
-                <div className='Register-container-left'>
-                    <img src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-c-08_1-ksh6mza3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=f584d8501c27c5f649bc2cfce50705c0" alt="background-Register-screen" />
-                    <div className='Register-on-image-text'>
-                        <h1>{t('register.text_1')}</h1>
-                        <h3>{t('register.text_2')}</h3>
                     </div>
                 </div>
             </div>

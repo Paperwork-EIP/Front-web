@@ -27,59 +27,50 @@ $gray: #9b9b9b;
     justify-content: center;
 
     .Register-container {
-        height: 70%;
-        width: 60%;
+        height: 100%;
+        width: 100%;
         display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: center;
-        background-color: #373737;
-        border-radius: 5px;
+    }
 
-        .Register-container-right {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .Register-container-left {
-            height: 100%;
-            width: 60%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-
-            .Register-on-image-text {
-                position: absolute;
-                padding: 4em;
-
-                h1 {
-                    font-weight: bold;
-                    font-size: 2rem;
-                    letter-spacing: 3px;
-                }
-
-                h3 {
-                    margin-top: 1em;
-                    font-size: 1.4rem;
-                    letter-spacing: 2px;
-                    word-spacing: 1px;
-                }
-            }
-
-            img {
-                height: 100%;
-                width: auto;
-            }
-        }
+    .Register-wrapper {
+        height: 70%;
+        width: 60%;
+        max-width: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 10px;
+        background-color: rgba(18, 18, 18, 0.457);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
 
         .Register-title {
             font-size: 2rem;
             font-weight: bold;
+        }
+
+        .Register-submit-button {
+            border: solid 2px #e2e2e2;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 1.1rem;
+            margin-top: 3vh;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .disabled {
+            border-color: #fc5e6d;
+        }
+
+        .Register-submit-button:hover {
+            background-color: #FDE0E6;
+            color: black;
+            border-color: transparent;
         }
 
         .Register-form {
@@ -89,29 +80,11 @@ $gray: #9b9b9b;
             align-items: center;
             justify-content: center;
 
-            .Register-submit-button {
-                border: solid 2px #e2e2e2;
-                border-radius: 5px;
-                padding: 10px 15px;
-                font-size: 1.1rem;
-                margin-top: 3vh;
-                transition: all 0.3s ease-in-out;
-            }
-
-            .disabled {
-                border-color: #fc5e6d;
-            }
-
-            .Register-submit-button:hover {
-                background-color: #FDE0E6;
-                color: black;
-                border-color: transparent;
-            }
-
             .Register-form-group {
                 position: relative;
                 padding: 15px 0 0;
                 width: 60%;
+                max-width: 400px;
             }
 
             .Register-form-field {
@@ -174,9 +147,7 @@ $gray: #9b9b9b;
         }
 
         .Register-connections {
-            width: 30%;
-            max-width: 500px;
-            padding: 4vh 0;
+            width: clamp(200px, 30%, 500px);
             display: flex;
             align-items: center;
             justify-content: space-evenly;
@@ -196,8 +167,8 @@ $gray: #9b9b9b;
         }
 
         .Register-redirection-to-login {
-            text-align: center;
             padding: 0 10px;
+            text-align: center;
 
             .Register-link {
                 a {
@@ -229,16 +200,9 @@ $gray: #9b9b9b;
 }
 
 @media (max-width: 1200px) {
-    .Register {
-        background: #373737 !important;
-    }
-
-    .Register-container-right {
-        width: 100% !important;
-    }
-
-    .Register-container-left {
-        display: none !important;
+    .Register-wrapper {
+        width: 80% !important;
+        padding: 30px 25px !important;
     }
 
     .Register-form-group {
