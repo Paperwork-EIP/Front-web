@@ -24,7 +24,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { isOpen: isOpenModal, onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
-    
+
     const cookies = new Cookies();
     const { t } = useTranslation();
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
 
     function handleForgotPassword() {
         axios.get(
-        `${api}/user/sendResetPasswordEmail?email=${email}`,
+            `${api}/user/sendResetPasswordEmail?email=${email}`,
         ).then(res => {
             toast.success(t('login.emailSent'));
         }).catch(err => {
@@ -89,7 +89,7 @@ const LoginPage = () => {
         <div className="Login">
             <Navbar />
             <div className='Login-container'>
-                <div className='Login-container-right'>
+                <div className='Login-wrapper'>
                     <h1 className='Login-title'>{t('login.title')}</h1>
                     <div className='Login-form'>
                         <div className="Login-form-group field">
@@ -101,23 +101,22 @@ const LoginPage = () => {
                             <label htmlFor="password" className="Login-form-label">{t('login.password')}</label>
                         </div>
                         <button className='Login-forgot-password-button' onClick={onOpenModal}>{t('login.forgotPassword')}</button>
-                        
-                        <Modal className='Login-modal' style={{content:{background: "rgba(45,45,45,1)"}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
+
+                        <Modal className='Login-modal' style={{ content: { background: "rgba(45,45,45,1)" } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
                             <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
-                                <RxCrossCircled/>
+                                <RxCrossCircled />
                             </button>
                             <div className='Login-title-top'>{t('login.forgotPasswordTitleTop')}</div>
                             <div className='Login-title'>{t('login.forgotPasswordTitle')}</div>
                             <div className='Login-box-email'>
-                            <input type="email" className="Login-email-input" placeholder={t('login.email') || ''} defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
-                                <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30}/></button>
+                                <input type="email" className="Login-email-input" placeholder={t('login.email') || ''} defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30} /></button>
                             </div>
                         </Modal>
-
-                        <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
-                            {t('login.button')}
-                        </button>
                     </div>
+                    <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
+                        {t('login.button')}
+                    </button>
                     <div className='Login-connections'>
                         <button className='Login-button-api' data-testid="google-link" onClick={googleConnect}>
                             <FaGoogle />
@@ -133,13 +132,6 @@ const LoginPage = () => {
                         <span className='Login-link'>
                             <Link to='/register' data-testid="link-register">{t('login.no_account_click')}</Link>
                         </span>
-                    </div>
-                </div>
-                <div className='Login-container-left'>
-                    <img src="https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-c-08_1-ksh6mza3.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=f584d8501c27c5f649bc2cfce50705c0" alt="background-login-screen" />
-                    <div className='Login-on-image-text'>
-                        <h1>{t('login.text_1')}</h1>
-                        <h3>{t('login.text_2')}</h3>
                     </div>
                 </div>
             </div>
