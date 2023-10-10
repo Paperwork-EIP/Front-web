@@ -107,7 +107,7 @@ const Bg = () => {
   }
 
   const { colorMode } = useColorMode();
-  const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
+  const adaptedColor = useColorModeValue("#f2f2f2", "rgba(45,45,55,1)");
 
   const getPercentageClass = (percentage: number) => {
     if (percentage <= 25) return "percentage-low";
@@ -133,7 +133,7 @@ const Bg = () => {
               <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
             </div>
             <h1 className="home-title"> {translation.title} </h1>
-            <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
+            <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("#f2f2f2", "rgba(228,228,228,0.20)") }}>
               <div className="home-content-help-text"> {translation.process} </div>
               <TableContainer>
                 <Table variant="simple">
@@ -210,7 +210,7 @@ const Bg = () => {
                 </button>
               </Link>
             </div>
-            <div className="home-content-box-help-base" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
+            <div className="home-content-box-help-base" style={{ backgroundColor: useColorModeValue("#f2f2f2", "rgba(228,228,228,0.20)") }}>
               <div className="home-content-help-text"> {translation.needHelp} </div>
               <div className="home-content-box-help-wrapper">
                 <div className="home-content-box-help" style={{ backgroundColor: adaptedColor }}>
@@ -229,7 +229,7 @@ const Bg = () => {
             </div>
           </div>
 
-          <div className="home-content-box-calendar" style={{ backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)") }}>
+          <div className="home-content-box-calendar" style={{ backgroundColor: useColorModeValue("#f2f2f2", "rgba(228,228,228,0.20)") }}>
             {
               rdv.length !== 0 ?
                 <>
@@ -257,7 +257,7 @@ const Bg = () => {
                         return (
 
                           <div className="home-content-box-rendez-vous" style={{ backgroundColor: colorEvent }}>
-                            <div className="home-content-rendez-vous-date-text" style={{ color: "rgba(255,255,255)" }}>
+                            <div className="home-content-rendez-vous-date-text" style={{ color: "#f2f2f2" }}>
                               <div className="home-content-icon-and-date">
                                 <div className="icon-container">
                                   <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
@@ -268,10 +268,10 @@ const Bg = () => {
                               </div>
                             </div>
 
-                            <div className="home-content-rendez-vous-process-name-text" style={{ color: "rgba(255,255,255)" }}>
+                            <div className="home-content-rendez-vous-process-name-text" style={{ color: "#f2f2f2" }}>
                               {rdv[index]}
                             </div>
-                            <div className="home-content-rendez-vous-process-description-text" style={{ color: "rgba(255,255,255)" }}>
+                            <div className="home-content-rendez-vous-process-description-text" style={{ color: "#f2f2f2" }}>
                               {rdv[index + 1]}
                             </div>
                           </div>
