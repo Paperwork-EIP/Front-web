@@ -77,7 +77,7 @@ const Bg = () => {
       }).catch(err => {
         console.log(err);
       })
-  }, [rdv])
+  }, [rdv, userProcessInfo])
 
   useEffect(() => {
     axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.loginToken}`)
@@ -94,7 +94,7 @@ const Bg = () => {
       }).catch(err => {
         console.log(err)
       });
-  }, [rdv])
+  }, [rdv, userProcessInfo])
 
   const handleClickAsc = () => {
     setActiveAsc(!activeAsc);
@@ -256,8 +256,8 @@ const Bg = () => {
                         }
                         return (
 
-                          <div className="home-content-box-rendez-vous" style={{ backgroundColor: colorEvent }}>
-                            <div className="home-content-rendez-vous-date-text" style={{ color: "#f2f2f2" }}>
+                          <div className="home-content-box-rendez-vous" style={{ borderColor: colorEvent }}>
+                            <div className="home-content-rendez-vous-date-text">
                               <div className="home-content-icon-and-date">
                                 <div className="icon-container">
                                   <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
@@ -268,10 +268,10 @@ const Bg = () => {
                               </div>
                             </div>
 
-                            <div className="home-content-rendez-vous-process-name-text" style={{ color: "#f2f2f2" }}>
+                            <div className="home-content-rendez-vous-process-name-text">
                               {rdv[index]}
                             </div>
-                            <div className="home-content-rendez-vous-process-description-text" style={{ color: "#f2f2f2" }}>
+                            <div className="home-content-rendez-vous-process-description-text">
                               {rdv[index + 1]}
                             </div>
                           </div>
