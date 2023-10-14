@@ -13,6 +13,7 @@ $gray: #9b9b9b;
     --header-gradient-color-7: #23d5ab;
 
     height: 100vh;
+    min-height: 600px;
     background: linear-gradient(-90deg,
             var(--header-gradient-color-1),
             var(--header-gradient-color-2),
@@ -28,16 +29,19 @@ $gray: #9b9b9b;
 
     .Register-container {
         height: 100%;
+        min-height: 700px;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 80px;
     }
 
     .Register-wrapper {
         height: 70%;
         width: 60%;
         max-width: 600px;
+        gap: 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
