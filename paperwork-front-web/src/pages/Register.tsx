@@ -33,19 +33,25 @@ const RegisterPage = () => {
                 password: password
             }
         ).then(async response => {
-            await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`)
-                .then(() => {
-                    cookies.set('loginToken', { loginToken: url.searchParams.get('token') }, {
-                        path: '/',
-                        secure: true,
-                        sameSite: 'none'
-                    });
-                    window.location.replace('/home');
-                })
-                .catch(err => {
-                    console.error(err);
-                    toast.error(t('register.error'));
-                })
+            // await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`)
+            //     .then(() => {
+            //         cookies.set('loginToken', { loginToken: url.searchParams.get('token') }, {
+            //             path: '/',
+            //             secure: true,
+            //             sameSite: 'none'
+            //         });
+            //         window.location.replace('/sentEmail');
+            //     })
+            //     .catch(err => {
+            //         console.error(err);
+            //         toast.error(t('register.error'));
+            //     })
+            cookies.set('loginToken', { loginToken: response.data.jwt }, {
+                path: '/',
+                secure: true,
+                sameSite: 'none'
+            });
+            window.location.replace('/home');
         }).catch((err) => {
             console.error(err);
             toast.error(t('register.error'));
