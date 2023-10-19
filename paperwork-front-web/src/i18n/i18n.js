@@ -62,7 +62,7 @@ const resources = {
                 yes_account_click: "Click here !",
                 text_1: "Join us !",
                 text_2: "Create your account with an email address or by Google/Facebook",
-                fail: "Fail to send the verification email",
+                fail: "Fail to register the account. Please try again later.",
                 error: "Email, username or password is incorrect."
             },
             aboutus: {
@@ -198,7 +198,7 @@ const resources = {
                 yes_account_click: "Cliquez ici !",
                 text_1: "Rejoignez-nous !",
                 text_2: "Créez votre compte avec une adresse email ou via Google/Facebook.",
-                fail: "Échec de l'envoi de l'email de vérification",
+                fail: "Échec de l'inscription du compte. Veuillez réessayer plus tard.",
                 error: "L'email, le nom d'utilisateur ou le mot de passe est incorrect."
             },
             aboutus: {
@@ -285,7 +285,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "Büroarbeit",
+                header_title: "Paperwork",
                 header_description: "Ein Werkzeug, um Ihnen bei der lästigsten Aufgabe zu helfen.",
                 header_start_button: "Los geht's",
                 container_title: "Was ist Büroarbeit?",
@@ -421,7 +421,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "서류 작업",
+                header_title: "Paperwork",
                 header_description: "가장 지루한 작업을 돕는 도구입니다.",
                 header_start_button: "시작",
                 container_title: "서류 작업이란?",
@@ -558,7 +558,7 @@ const resources = {
                 es: "Espanol"
             },
             "welcome": {
-                "header_title": "Pekerjaan Kantoran",
+                "header_title": "Paperwork",
                 "header_description": "Sebuah alat untuk membantu Anda dalam tugas yang paling menjengkelkan.",
                 "header_start_button": "Mulai",
                 "container_title": "Apa itu Pekerjaan Kantoran ?",
@@ -694,7 +694,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "Documentación",
+                header_title: "Paperwork",
                 header_description: "Una herramienta para ayudarte con la tarea más molesta.",
                 header_start_button: "Empezar",
                 container_title: "¿Qué es Documentación?",

@@ -292,11 +292,12 @@ const CalendarPage = () => {
                     </button>
                 }
             </div>
-            <div className="calendar-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+            {/* <div className="calendar-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}> */}
     {
       rdvEvent.length !== 0 ?
       <>
       
+      <div className="calendar-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
       <div className="calendar-content-box-calendar-icons-box">
         <div className="calendar-content-calendar-text"> {translation.events} </div>
         <CircleIcon className="calendar-content-box-calendar-icon" color="#FC6976" mt={'-18px'}/>
@@ -345,14 +346,19 @@ const CalendarPage = () => {
       return ('');
   })}
     </div>
+    </div>
       </>
       :
-      <>
-      <div className="calendar-content-calendar-text"> {translation.calendar} </div>
-      <div className="calendar-content-line-calendar" style={{backgroundColor: adaptedColor}} ></div>
-      <div className="calendar-content-nothing-text"> {translation.nothing} </div>
-      </>
-    } </div>
+      null
+    //   <>
+    //   <div className="calendar-content-box-calendar" style={{backgroundColor: useColorModeValue("rgba(255,255,255,0.75)", "rgba(228,228,228,0.20)")}}>
+    //   <div className="calendar-content-calendar-text"> {translation.calendar} </div>
+    //   <div className="calendar-content-line-calendar" style={{backgroundColor: adaptedColor}} ></div>
+    //   <div className="calendar-content-nothing-text"> {translation.nothing} </div>
+    //   </div>
+    //   </>
+    } 
+    {/* </div> */}
 
 
 

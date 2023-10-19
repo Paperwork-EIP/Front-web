@@ -64,7 +64,7 @@ const ProfilePage = () => {
                     console.log(err)
                 });
         }
-    }, [api]);
+    }, [username, name, firstname, language, age, email, address, phonenumber, profilePicture, userProcessInfo]);
 
     return (
         <>

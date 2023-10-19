@@ -40,15 +40,17 @@ function Header() {
 
     function logout() {
         cookies.remove('loginToken');
-        window.location.reload();
+        if (!cookies.get('loginToken')) {
+            window.location.replace('/');
+        }
     }
 
-    function getData() {
+    async function getData() {
         if (!cookies.get('loginToken')) {
             window.location.replace('/');
         }
         else {
-            axios.get(`${api}/user/getbytoken`, {
+            await axios.get(`${api}/user/getbytoken`, {
                 params: { token: cookiesInfo.loginToken }
             })
                 .then(res => {
