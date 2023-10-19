@@ -36,13 +36,12 @@ const CircleIcon = (
   </Icon>
 );
 
-const Bg = () => {
+function Bg() {
   const cookies = new Cookies();
   const cookieList = cookies.get('loginToken');
   const api = process.env.REACT_APP_BASE_URL;
-  var index = -2;
-  const [rdv, setRDV] = useState([[]]);
-  const [userProcessInfo, setUserProcessInfo]: any = useState([{}]);
+  const [rdv, setRDV]: any = useState([]);
+  const [userProcessInfo, setUserProcessInfo]: any = useState([]);
   const [activeAsc, setActiveAsc] = useState(false);
   const [activeAlp, setActiveAlp] = useState(false);
   const [activePriority, setActivePriority] = useState(false);
@@ -60,41 +59,82 @@ const Bg = () => {
   const comparativeDate = date.toDateString()?.split(" ")[3] + "-" + selectedMonth + "-" + date.toDateString()?.split(" ")[2];
   let colorEvent = "";
 
-  useEffect(() => {
-    axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
-      .then(res => {
-        setLanguage(res.data.language);
-      }).catch(err => {
-        console.log(err)
-      });
-    axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
-      .then(res => {
-        var rdvTmp = [];
-        for (var i = 0; i < res.data.appoinment.length; i++) {
-          rdvTmp.push(res.data.appoinment[i]['date'], res.data.appoinment[i]['step_title'], res.data.appoinment[i]['step_description']);
-        }
-        setRDV(rdvTmp);
-      }).catch(err => {
-        console.log(err);
-      })
-  }, [rdv, userProcessInfo])
+  async function getUserDatasByToken() {
+    try {
+      await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
+        .then(res => {
+          setLanguage(res.data.language);
+        }).catch(err => {
+          console.log(err)
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getCalendarDatas() {
+    try {
+      axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
+        .then(res => {
+          var rdvTmp = [];
+          for (var i = 0; i < res.data.appoinment.length; i++) {
+            rdvTmp.push(
+              {
+                key: i,
+                date: res.data.appoinment[i]['date'],
+                process_title: res.data.appoinment[i]['process_title'],
+                step_title: res.data.appoinment[i]['step_title'],
+                step_description: res.data.appoinment[i]['step_description']
+              }
+            );
+          }
+          setRDV(rdvTmp);
+        }).catch(err => {
+          console.log(err);
+        })
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getUserProcessData() {
+    try {
+      await axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.loginToken}`)
+        .then(res => {
+          var userProcessTmp = [];
+          for (var j = 0; j < res.data.response.length; j++) {
+            if (res.data.response[j]['pourcentage'] != null)
+              userProcessTmp.push(
+                {
+                  key: j,
+                  process: res.data.response[j]['userProcess'].title,
+                  percentage: res.data.response[j]['pourcentage']
+                }
+              );
+            else
+              userProcessTmp.push(
+                {
+                  key: j,
+                  process: res.data.response[j]['userProcess'].title,
+                  percentage: 0
+                }
+              );
+          }
+          setUserProcessInfo(userProcessTmp);
+
+        }).catch(err => {
+          console.error(err)
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.loginToken}`)
-      .then(res => {
-        var userProcessTmp = [];
-        for (var j = 0; j < res.data.response.length; j++) {
-          if (res.data.response[j]['pourcentage'] != null)
-            userProcessTmp.push({ process: res.data.response[j]['userProcess'].title, percentage: res.data.response[j]['pourcentage'] });
-          else
-            userProcessTmp.push({ process: res.data.response[j]['userProcess'].title, percentage: 0 });;
-        }
-        setUserProcessInfo(userProcessTmp);
-
-      }).catch(err => {
-        console.log(err)
-      });
-  }, [rdv, userProcessInfo])
+    getUserDatasByToken();
+    getCalendarDatas();
+    getUserProcessData();
+  }, [])
 
   const handleClickAsc = () => {
     setActiveAsc(!activeAsc);
@@ -155,9 +195,9 @@ const Bg = () => {
                     {
                       activePriority === true ?
                         activeAsc ?
-                          ascendingArray?.map((item: any) => {
+                          ascendingArray?.map((item: any, index: any) => {
                             return (
-                              <Tr>
+                              <Tr key={index.toString() + item.process}>
                                 <Td key="{itemAscProcess}">{item.process}</Td>
                                 <Td key="{itemAscPercent}" isNumeric>
                                   <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
@@ -166,9 +206,9 @@ const Bg = () => {
                             );
                           })
                           :
-                          descendingArray?.map((item: any) => {
+                          descendingArray?.map((item: any, index: any) => {
                             return (
-                              <Tr>
+                              <Tr key={index.toString() + item.process}>
                                 <Td key="{itemDscProcess}">{item.process}</Td>
                                 <Td key="{itemDscPercent}" isNumeric>
                                   <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
@@ -178,9 +218,9 @@ const Bg = () => {
                           })
                         :
                         activeAlp ?
-                          alphabeticArray?.map((item: any) => {
+                          alphabeticArray?.map((item: any, index: any) => {
                             return (
-                              <Tr>
+                              <Tr key={index.toString() + item.process}>
                                 <Td key="{itemAlpProcess}">{item.process}</Td>
                                 <Td key="{itemAlpPercent}" isNumeric>
                                   <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
@@ -189,9 +229,9 @@ const Bg = () => {
                             );
                           })
                           :
-                          invertArray?.map((item: any) => {
+                          invertArray?.map((item: any, index: any) => {
                             return (
-                              <Tr>
+                              <Tr key={index + item.process}>
                                 <Td key="{itemInvProcess}">{item.process}</Td>
                                 <Td key="{itemInvPercent}" isNumeric>
                                   <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
@@ -244,41 +284,38 @@ const Bg = () => {
                   </div>
 
                   <div className="home-content-box-calendar-in">
-                    {rdv?.map((item: any) => {
-                      index += 3;
-                      if (index <= rdv.length) {
-                        if (rdv[index - 1].toString()?.split('T')[0].split('-')[0] + rdv[index - 1].toString()?.split('T')[0].split('-')[1] + rdv[index - 1].toString()?.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                    {
+                      rdv.map((item: any) => {
+                        if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
                           colorEvent = "#fc9f69";
-                        } else if (rdv[index - 1].toString()?.split('T')[0].split('-')[0] + rdv[index - 1].toString()?.split('T')[0].split('-')[1] + rdv[index - 1].toString()?.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                        } else if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
                           colorEvent = "#FC6976";
                         } else {
                           colorEvent = "#29C9B3";
                         }
-                        return (
 
-                          <div className="home-content-box-rendez-vous" style={{ borderColor: colorEvent }}>
+                        return (
+                          <div className="home-content-box-rendez-vous" style={{ borderColor: colorEvent }} key={item.key}>
                             <div className="home-content-rendez-vous-date-text">
                               <div className="home-content-icon-and-date">
                                 <div className="icon-container">
                                   <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
-                                  {rdv[index - 1].toString()?.split('T')[0]}
+                                  {item.date?.split('T')[0]}
                                   <BsHourglassSplit style={{ marginRight: '3px', marginLeft: "20px", verticalAlign: 'middle' }} />
-                                  {rdv[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[0] + ':' + rdv[index - 1].toString()?.split('T')[1]?.split('.')[0].split(':')[1]}
+                                  {item.date?.split('T')[1]?.split('.')[0].split(':')[0] + ':' + item.date?.split('T')[1]?.split('.')[0].split(':')[1]}
                                 </div>
                               </div>
                             </div>
-
                             <div className="home-content-rendez-vous-process-name-text">
-                              {rdv[index]}
+                              {item.process_title} - {item.step_title}
                             </div>
                             <div className="home-content-rendez-vous-process-description-text">
-                              {rdv[index + 1]}
+                              {item.step_description}
                             </div>
                           </div>
                         );
-                      } else
-                        return ('');
-                    })}
+                      })
+                    }
                   </div>
                   <Link to="/calendar">
                     <button className='home-calendar-button' aria-label="submit_button">
