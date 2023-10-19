@@ -285,7 +285,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "Büroarbeit",
+                header_title: "Paperwork",
                 header_description: "Ein Werkzeug, um Ihnen bei der lästigsten Aufgabe zu helfen.",
                 header_start_button: "Los geht's",
                 container_title: "Was ist Büroarbeit?",
@@ -421,7 +421,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "서류 작업",
+                header_title: "Paperwork",
                 header_description: "가장 지루한 작업을 돕는 도구입니다.",
                 header_start_button: "시작",
                 container_title: "서류 작업이란?",
@@ -558,7 +558,7 @@ const resources = {
                 es: "Espanol"
             },
             "welcome": {
-                "header_title": "Pekerjaan Kantoran",
+                "header_title": "Paperwork",
                 "header_description": "Sebuah alat untuk membantu Anda dalam tugas yang paling menjengkelkan.",
                 "header_start_button": "Mulai",
                 "container_title": "Apa itu Pekerjaan Kantoran ?",
@@ -694,7 +694,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "Documentación",
+                header_title: "Paperwork",
                 header_description: "Una herramienta para ayudarte con la tarea más molesta.",
                 header_start_button: "Empezar",
                 container_title: "¿Qué es Documentación?",
