@@ -62,7 +62,7 @@ const resources = {
                 yes_account_click: "Click here !",
                 text_1: "Join us !",
                 text_2: "Create your account with an email address or by Google/Facebook",
-                fail: "Fail to send the verification email",
+                fail: "Fail to register the account. Please try again later.",
                 error: "Email, username or password is incorrect."
             },
             aboutus: {
@@ -198,7 +198,7 @@ const resources = {
                 yes_account_click: "Cliquez ici !",
                 text_1: "Rejoignez-nous !",
                 text_2: "Créez votre compte avec une adresse email ou via Google/Facebook.",
-                fail: "Échec de l'envoi de l'email de vérification",
+                fail: "Échec de l'inscription du compte. Veuillez réessayer plus tard.",
                 error: "L'email, le nom d'utilisateur ou le mot de passe est incorrect."
             },
             aboutus: {
