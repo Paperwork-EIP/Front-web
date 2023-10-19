@@ -1,23 +1,27 @@
 .react-calendar {
-    width: 1500px;
-    max-width: 100%;
-    border: 1.5px solid #FC6976;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.125em;
-    border-radius: 5px;
+  width: 1500px;
+  max-width: 100%;
+  border: 1.5px solid #FC6976;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  border-radius: 5px;
 }
+
 .react-calendar--doubleView {
   width: 700px;
   border-radius: 8px;
 }
+
 .react-calendar--doubleView .react-calendar__viewContainer {
   display: flex;
   margin: -0.5em;
 }
-.react-calendar--doubleView .react-calendar__viewContainer > * {
+
+.react-calendar--doubleView .react-calendar__viewContainer>* {
   width: 50%;
   margin: 0.5em;
 }
+
 .react-calendar,
 .react-calendar *,
 .react-calendar *:before,
@@ -26,18 +30,22 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .react-calendar button {
   margin: 0;
   border: 0;
   outline: none;
 }
+
 .react-calendar button:enabled:hover {
   cursor: pointer;
 }
+
 .react-calendar__navigation {
   height: 44px;
   margin-bottom: 4em;
 }
+
 .react-calendar__navigation button {
   min-width: 44px;
   width: 20%;
@@ -53,9 +61,11 @@
 .react-calendar__navigation button:enabled:focus {
   background-color: #0f1a25;
 }
+
 .react-calendar__navigation button[disabled] {
   background-color: #FC6976;
 }
+
 .react-calendar__month-view__weekdays {
   text-align: center;
   text-transform: uppercase;
@@ -64,12 +74,15 @@
   background-color: #FC6976;
   font-size: 0.75em;
 }
+
 .react-calendar__month-view__weekdays__weekday {
   padding: 0.5em;
 }
+
 .react-calendar__month-view__weekNumbers {
   font-weight: bold;
 }
+
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
   display: flex;
   align-items: center;
@@ -77,59 +90,72 @@
   font-size: 0.75em;
   padding: calc(0.75em / 0.75) calc(0.5em / 0.75);
 }
+
 .react-calendar__month-view__days__day--weekend {
   color: #FC6976
 }
+
 .react-calendar__month-view__days__day--neighboringMonth {
   color: #BDBDBD;
 }
+
 .react-calendar__year-view .react-calendar__tile,
 .react-calendar__decade-view .react-calendar__tile,
 .react-calendar__century-view .react-calendar__tile {
   padding: 2em 0.5em;
 }
+
 .react-calendar__tile {
   max-width: 100%;
   text-align: center;
   padding: 0.75em 0.5em;
   background: none;
 }
+
 .react-calendar__tile:disabled {
   background-color: #000000;
 }
+
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background-color: #e6e6e6;
   border-radius: 5px;
 }
+
 .react-calendar__tile--now {
   background: #29C9B3;
   border-radius: 5px;
 }
+
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
   background: #e6e6e6;
   border-radius: 5px;
 }
+
 .react-calendar__tile--hasActive {
   background: #FC6976;
   border-radius: 5px;
 }
+
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
   background: #e6e6e6;
   border-radius: 5px;
 }
+
 .react-calendar__tile--active {
   background: #FC6976;
   color: white;
   border-radius: 5px;
 }
+
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background: #FC6976;
   border-radius: 5px;
 }
+
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
   border-radius: 5px;
@@ -141,7 +167,7 @@
 }
 
 .calendar-main-text {
-  font-weight:500;
+  font-weight: 500;
   text-align: center;
   font-size: 150%;
   font-weight: bold;
@@ -154,7 +180,7 @@
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 20px;
-  
+
   .react-calendar-main-component {
     margin-top: 10px;
   }
@@ -165,6 +191,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   .calendar-main-button {
     padding: 0.4%;
     background-color: #29C9B3;
@@ -176,11 +203,11 @@
     position: absolute;
     font-weight: bold;
   }
-  
+
   .calendar-main-button:hover {
     background-color: #E0FDF7;
   }
-  
+
   .calendar-main-button-disable {
     padding: 0.4%;
     background-color: #29C9B3;
@@ -194,10 +221,10 @@
     position: absolute;
     font-weight: bold;
   }
-  
+
   .calendar-main-button-disable:hover {
     cursor: not-allowed;
-  }  
+  }
 }
 
 .calendar-modal {
@@ -218,11 +245,11 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .calendar-modal-date {
-  font-weight:400;
+  font-weight: 400;
   font-size: 70%;
   padding-top: 1%;
   padding-bottom: 1.1%;
@@ -235,7 +262,7 @@
 }
 
 .calendar-modal-text {
-  font-weight:500;
+  font-weight: 500;
   font-size: 140%;
   padding-left: 2%;
   padding-top: 2%;
@@ -306,9 +333,9 @@
 }
 
 .calendar-content-calendar-text {
-  font-weight:500;
+  font-weight: 500;
   font-size: 200%;
-  margin-bottom: 5%;
+  margin-bottom: 10%;
   font-weight: bold;
   padding-left: 1%;
   float: left;
@@ -325,7 +352,7 @@
 }
 
 .calendar-content-calendar-icon-text {
-  font-weight:500;
+  font-weight: 500;
   font-size: 100%;
   right: 30px;
   top: 0px;
@@ -349,7 +376,7 @@
 }
 
 .calendar-content-nothing-text {
-  font-weight:500;
+  font-weight: 500;
   padding-top: 10%;
   text-align: center;
   font-size: 150%;
@@ -371,50 +398,34 @@
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-
-  &:hover {
-    background-color: #1A9A88;
-  }
 }
 
 .calendar-content-box-rendez-vous {
-  width: 70%;
-  z-index: 0;
-  margin-top: 3%;
+  width: calc(100% - 20px);
+  max-width: 500px;
   padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   transition: transform 0.3s ease;
   cursor: pointer;
-  justify-content: center;
 
-  &:hover {
-    transform: scale(1.03);
-  }
-
-  .calendar-content-rendez-vous-date-text {
-    font-size: 14px;
+  .home-content-rendez-vous-date-text {
+    font-size: 16px;
     font-weight: 500;
     text-align: center;
-    color: #555;
-    margin-bottom: 10px;
-    display: flex;
-      align-items: center;
+    margin-bottom: 6px;
   }
 
-  .calendar-content-rendez-vous-process-name-text {
+  .home-content-rendez-vous-process-name-text {
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    color: #222;
-    margin-bottom: 8px;
-    display: flex;
-  align-items: center;
+    margin-bottom: 10px;
   }
 
   .calendar-content-rendez-vous-process-description-text {
@@ -424,9 +435,9 @@
   }
 
   .icon-container {
-      display: flex;
-      align-items: center;
-    }
+    display: flex;
+    align-items: center;
+  }
 
   .calendar-content-rendez-vous-button {
     background-color: #29C9B3;
@@ -447,12 +458,12 @@
   }
 
   @media (max-width: 900px) {
-      position: relative;
-      width: 100%;
-      margin-top: 20px;
-      margin-bottom: 10px;
-      bottom: 0;
-      transform: translateX(0);
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    bottom: 0;
+    transform: translateX(0);
   }
 }
 
@@ -460,6 +471,7 @@
   from {
     transform: translateY(100%);
   }
+
   to {
     transform: translateY(0);
   }
