@@ -74,6 +74,7 @@ function CalendarPage() {
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
     const adaptedColor = useColorModeValue("rgba(255,255,255,1)", "rgba(45,45,55,1)");
+    const textColor = useColorModeValue("rgba(45,45,55,1)", "rgba(255,255,255,1)");
 
     const handleNewDateChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
         setNewDate(e.target.value);
@@ -339,7 +340,7 @@ function CalendarPage() {
                                                 return (
 
                                                     <div className="calendar-content-box-rendez-vous" style={{ borderColor: colorEvent }}>
-                                                        <div className="calendar-content-rendez-vous-date-text" style={{ color: "rgba(255,255,255)" }}>
+                                                        <div className="calendar-content-rendez-vous-date-text" style={{ color: textColor }}>
                                                             <div className="calendar-content-icon-and-date">
                                                                 <div className="icon-container">
                                                                     <BsFillCalendarDateFill style={{ marginRight: '5px', verticalAlign: 'middle' }} />
@@ -350,10 +351,10 @@ function CalendarPage() {
                                                             </div>
                                                         </div>
 
-                                                        <div className="calendar-content-rendez-vous-process-name-text" style={{ color: "rgba(255,255,255)" }}>
+                                                        <div className="calendar-content-rendez-vous-process-name-text" style={{ color: textColor }}>
                                                             {item.process_title} - {item.step_title}
                                                         </div>
-                                                        <div className="calendar-content-rendez-vous-process-description-text" style={{ color: "rgba(255,255,255)" }}>
+                                                        <div className="calendar-content-rendez-vous-process-description-text" style={{ color: textColor }}>
                                                             {item.step_description}
                                                         </div>
                                                     </div>
