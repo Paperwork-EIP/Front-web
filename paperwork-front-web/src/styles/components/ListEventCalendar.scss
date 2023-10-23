@@ -1,0 +1,146 @@
+.list-event-calendar-box-calendar {
+    height: 90%;
+    min-height: 300px;
+    max-height: 1000px;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #cecece;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    padding-bottom: 60px;
+    animation-name: slideInFromRight;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+  }
+
+  .list-event-calendar-calendar-text {
+    font-weight: 500;
+    margin-bottom: 5%;
+    font-weight: bold;
+    padding-left: 1%;
+    float: left;
+    font-size: 20px;
+  }
+
+  .list-event-calendar-box-calendar-icon {
+    float: left;
+    right: 10px;
+    position: absolute;
+  }
+
+  .list-event-calendar-calendar-icon-text {
+    font-weight: 500;
+    font-size: 100%;
+    right: 30px;
+    top: 0px;
+    position: absolute;
+  }
+
+  .list-event-calendar-box-calendar-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    overflow-y: auto;
+  }
+
+  .list-event-calendar-nothing-text {
+    font-weight: 500;
+    padding-top: 10%;
+    text-align: center;
+    font-size: 150%;
+  }
+
+  .home-calendar-button {
+    background-color: #29C9B3;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &:hover {
+      background-color: #1A9A88;
+    }
+  }
+
+  .list-event-calendar-box-rendez-vous {
+    width: calc(100% - 20px);
+    max-width: 500px;
+    z-index: 2;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    .list-event-calendar-rendez-vous-date-text {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .list-event-calendar-rendez-vous-process-name-text {
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .list-event-calendar-rendez-vous-process-description-text {
+      font-size: 12px;
+    }
+
+    .icon-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .list-event-calendar-rendez-vous-button {
+      background-color: #29C9B3;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 15px;
+      align-self: center;
+
+      &:hover {
+        background-color: #1A9A88;
+      }
+    }
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      transform: translateX(100%);
+    }
+  
+    to {
+      transform: translateX(0);
+    }
+  }
