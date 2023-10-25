@@ -23,7 +23,7 @@ $calendar-dark-active-text-color: #FFFFFF;
   align-items: center;
   justify-content: center;
   padding-top: 50px;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 55px);
   background: linear-gradient(to right, transparent 0%, #fc69755e 100%);
 
   .calendar-title {
@@ -31,6 +31,14 @@ $calendar-dark-active-text-color: #FFFFFF;
     text-align: center;
     font-size: 36px;
     font-weight: bold;
+  }
+
+  .calendar-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: clamp(300px, 30%, 500px);
+    height: auto
   }
 
   .calendar-content-light {
@@ -43,7 +51,7 @@ $calendar-dark-active-text-color: #FFFFFF;
     .calendar-wrapper {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       gap: 20px;
     }
@@ -172,7 +180,7 @@ $calendar-dark-active-text-color: #FFFFFF;
     .calendar-wrapper {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       gap: 20px;
     }

@@ -512,6 +512,7 @@ function CalendarPage() {
                 <h1 className="calendar-title">
                     {translation.calendar}
                 </h1>
+                <img className='calendar-image' src="assets/calendar-page/online_calendar_bro.png" alt="calendar_image" />
                 <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
                     {
                         displayCalendar()
