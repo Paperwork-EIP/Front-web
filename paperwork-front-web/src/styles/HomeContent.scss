@@ -3,6 +3,9 @@ $border-color: #b5b5b5;
 .Home {
   min-height: calc(100vh - 55px);
   background: linear-gradient(-40deg, transparent 0%, #e0fdf7c1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .home-content-main-box-light {
     display: flex;
