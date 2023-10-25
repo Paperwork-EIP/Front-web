@@ -38,7 +38,7 @@ function ListEventCalendar(props: Props) {
     };
 
     return (
-        <div className="list-event-calendar-box-calendar" style={{ backgroundColor: useColorModeValue("#f2f2f2", "#222222") }}>
+        <div className="list-event-calendar-box-calendar" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
             {
                 rdv.length !== 0 ?
                     <>

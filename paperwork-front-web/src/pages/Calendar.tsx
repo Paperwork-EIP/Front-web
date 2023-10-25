@@ -53,7 +53,7 @@ function CalendarPage() {
     const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
-    const adaptedColor = useColorModeValue("#ECEFF1", "#3b3b3b");
+    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.25)", "rgba(34, 34, 34, 0.65)");
 
     function handleNewDateChange(e: any) {
         setNewDate(e.target.value);
@@ -506,22 +506,22 @@ function CalendarPage() {
         <>
             <Header />
             {
-                isLoading ? <Loading /> :
-                    <div className='calendar'>
-                        <h1 className="calendar-title">
-                            {translation.calendar}
-                        </h1>
-                        <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
-                            {
-                                displayCalendar()
-                            }
-                            {
-                                displayModals()
-                            }
-                        </div>
-                    </div>
+                isLoading ? <Loading /> : <></>
             }
-
+            <div className='calendar' style={{ backgroundColor: adaptedColor }}>
+                <h1 className="calendar-title">
+                    {translation.calendar}
+                </h1>
+                <img className='calendar-image' src="assets/calendar-page/online_calendar_bro.png" alt="calendar_image" />
+                <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
+                    {
+                        displayCalendar()
+                    }
+                    {
+                        displayModals()
+                    }
+                </div>
+            </div>
         </>
     );
 }
