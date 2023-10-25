@@ -1,12 +1,14 @@
+$border-color: #b5b5b5;
+
 .Home {
-  height: 100%;
+  min-height: calc(100vh - 60px);
+  background: linear-gradient(-40deg, transparent 0%, #e0fdf7c1 100%);
 
   .home-content-main-box-light {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../../public/background.png');
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +48,7 @@
     font-size: 36px;
     font-weight: 700;
     text-align: center;
-    background: linear-gradient(-10deg, #29c9b3, #bb00bb);
+    background: linear-gradient(-10deg, #FC6976, #bb00bb);
     background-size: 110%;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -57,7 +59,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: url('../../public/dark-background.png');
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,8 +75,8 @@
     margin-top: 15px;
     width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 1px solid #cecece;
-    background-color: #fff;
+    backdrop-filter: blur(4px);
+    border: 1px solid $border-color;
     animation-name: slideInFromLeft;
     animation-duration: 0.5s;
     animation-timing-function: ease-in-out;
@@ -110,7 +111,6 @@
 
     .home-content-start-process-button {
       background-color: #29C9B3;
-      color: white;
       padding: 8px 20px;
       border-radius: 5px;
       font-size: 14px;
@@ -146,7 +146,7 @@
     padding: 20px;
     margin-top: 15px;
     border-radius: 10px;
-    border: 1px solid #cecece;
+    border: 1px solid $border-color;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation-name: slideInFromLeft;
     animation-duration: 0.5s;
@@ -162,8 +162,11 @@
 
   .home-content-box-help,
   .home-content-box-lexicon {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 5px 0 rgba(32, 32, 32, 0.355);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     width: clamp(100px, 25%, 400px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 2;
     margin-top: 15px;
     padding: 10px 15px;

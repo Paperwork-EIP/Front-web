@@ -41,7 +41,7 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
 
     const { colorMode } = useColorMode();
-    const adaptedColor = useColorModeValue("#CFD8DC", "#303030");
+    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.25)", "rgba(34, 34, 34, 0.65)");
 
     function handleClickAsc() {
         setActiveAsc(!activeAsc);
@@ -103,7 +103,7 @@ function HomePage() {
                     }
                     setRDV(rdvTmp);
                 }).catch(err => {
-                    console.log(err);
+                    console.error(err);
                 })
         } catch (error) {
             console.error(error);
@@ -139,7 +139,7 @@ function HomePage() {
                     console.error(err)
                 });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
         setIsLoading(false);
     }
@@ -164,116 +164,114 @@ function HomePage() {
                 }
                 <div className="home-container">
                     {
-                        isLoading ? <Loading /> :
-                            <>
-                                <div className="home-wrapper">
-                                    <div className="home-image">
-                                        <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
-                                    </div>
-                                    <h1 className="home-title"> {translation.title} </h1>
-                                    <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("#f2f2f2", "#222222") }}>
-                                        <div className="home-content-help-text"> {translation.process} </div>
-                                        <TableContainer>
-                                            <Table variant="simple">
-                                                <Thead>
-                                                    <Tr>
-                                                        <Th>
-                                                            <Button onClick={handleClickAlp} aria-label="click-alp">
-                                                                {activeAlp ? "Z...A" : "A...Z"}
-                                                            </Button>
-                                                        </Th>
-                                                        <Th isNumeric>
-                                                            <Button onClick={handleClickAsc} aria-label="click-asc">
-                                                                {activeAsc ? translation.descending : translation.ascending}
-                                                            </Button>
-                                                        </Th>
-                                                    </Tr>
-                                                </Thead>
-                                                <Tbody>
-                                                    {
-                                                        activePriority === true ?
-                                                            activeAsc ?
-                                                                ascendingArray?.map((item: any, index: any) => {
-                                                                    return (
-                                                                        <Tr key={index.toString() + item.process}>
-                                                                            <Td key="{itemAscProcess}">{item.process}</Td>
-                                                                            <Td key="{itemAscPercent}" isNumeric>
-                                                                                <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
-                                                                            </Td>
-                                                                        </Tr>
-                                                                    );
-                                                                })
-                                                                :
-                                                                descendingArray?.map((item: any, index: any) => {
-                                                                    return (
-                                                                        <Tr key={index.toString() + item.process}>
-                                                                            <Td key="{itemDscProcess}">{item.process}</Td>
-                                                                            <Td key="{itemDscPercent}" isNumeric>
-                                                                                <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
-                                                                            </Td>
-                                                                        </Tr>
-                                                                    );
-                                                                })
-                                                            :
-                                                            activeAlp ?
-                                                                alphabeticArray?.map((item: any, index: any) => {
-                                                                    return (
-                                                                        <Tr key={index.toString() + item.process}>
-                                                                            <Td key="{itemAlpProcess}">{item.process}</Td>
-                                                                            <Td key="{itemAlpPercent}" isNumeric>
-                                                                                <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
-                                                                            </Td>
-                                                                        </Tr>
-                                                                    );
-                                                                })
-                                                                :
-                                                                invertArray?.map((item: any, index: any) => {
-                                                                    return (
-                                                                        <Tr key={index + item.process}>
-                                                                            <Td key="{itemInvProcess}">{item.process}</Td>
-                                                                            <Td key="{itemInvPercent}" isNumeric>
-                                                                                <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
-                                                                            </Td>
-                                                                        </Tr>
-                                                                    );
-                                                                })
-                                                    }
-
-                                                </Tbody>
-                                            </Table>
-                                        </TableContainer>
-                                        <Link to="/quiz">
-                                            <button className='home-content-start-process-button' aria-label="submit_button">
-                                                {translation.newProcessButton}
-                                            </button>
-                                        </Link>
-                                    </div>
-                                    <div className="home-content-box-help-base" style={{ backgroundColor: useColorModeValue("#f2f2f2", "#222222") }}>
-                                        <div className="home-content-help-text"> {translation.needHelp} </div>
-                                        <div className="home-content-box-help-wrapper">
-                                            <div className="home-content-box-help" style={{ backgroundColor: adaptedColor }}>
-                                                <Link to="/help">
-                                                    <div className="home-content-help-help-text"> {translation.help} </div>
-                                                    <img className="home-help-image" src="assets/help-page/FAQs-bro.png" alt="Help_page_clickable_image" />
-                                                </Link>
-                                            </div>
-                                            <div className="home-content-box-lexicon" style={{ backgroundColor: adaptedColor }}>
-                                                <Link to="/lexicon">
-                                                    <div className="home-content-help-lexicon-text"> {translation.lexicon} </div>
-                                                    <img className="home-help-image" src="assets/lexicon-page/Lexicon-icon.png" alt="Lexicon_page_clickable_image" />
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ListEventCalendar
-                                    activeCalendarButton={true}
-                                    rdv={rdv}
-                                    language={language}
-                                    adaptedColor={adaptedColor}
-                                />
-                            </>
+                        isLoading ? <Loading /> : <></>
                     }
+                    <div className="home-wrapper">
+                        <div className="home-image">
+                            <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
+                        </div>
+                        <h1 className="home-title"> {translation.title} </h1>
+                        <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
+                            <div className="home-content-help-text"> {translation.process} </div>
+                            <TableContainer>
+                                <Table variant="simple">
+                                    <Thead>
+                                        <Tr>
+                                            <Th>
+                                                <Button onClick={handleClickAlp} aria-label="click-alp">
+                                                    {activeAlp ? "Z...A" : "A...Z"}
+                                                </Button>
+                                            </Th>
+                                            <Th isNumeric>
+                                                <Button onClick={handleClickAsc} aria-label="click-asc">
+                                                    {activeAsc ? translation.descending : translation.ascending}
+                                                </Button>
+                                            </Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {
+                                            activePriority === true ?
+                                                activeAsc ?
+                                                    ascendingArray?.map((item: any, index: any) => {
+                                                        return (
+                                                            <Tr key={index.toString() + item.process}>
+                                                                <Td key="{itemAscProcess}">{item.process}</Td>
+                                                                <Td key="{itemAscPercent}" isNumeric>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                </Td>
+                                                            </Tr>
+                                                        );
+                                                    })
+                                                    :
+                                                    descendingArray?.map((item: any, index: any) => {
+                                                        return (
+                                                            <Tr key={index.toString() + item.process}>
+                                                                <Td key="{itemDscProcess}">{item.process}</Td>
+                                                                <Td key="{itemDscPercent}" isNumeric>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                </Td>
+                                                            </Tr>
+                                                        );
+                                                    })
+                                                :
+                                                activeAlp ?
+                                                    alphabeticArray?.map((item: any, index: any) => {
+                                                        return (
+                                                            <Tr key={index.toString() + item.process}>
+                                                                <Td key="{itemAlpProcess}">{item.process}</Td>
+                                                                <Td key="{itemAlpPercent}" isNumeric>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                </Td>
+                                                            </Tr>
+                                                        );
+                                                    })
+                                                    :
+                                                    invertArray?.map((item: any, index: any) => {
+                                                        return (
+                                                            <Tr key={index + item.process}>
+                                                                <Td key="{itemInvProcess}">{item.process}</Td>
+                                                                <Td key="{itemInvPercent}" isNumeric>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                </Td>
+                                                            </Tr>
+                                                        );
+                                                    })
+                                        }
+
+                                    </Tbody>
+                                </Table>
+                            </TableContainer>
+                            <Link to="/quiz">
+                                <button className='home-content-start-process-button' aria-label="submit_button">
+                                    {translation.newProcessButton}
+                                </button>
+                            </Link>
+                        </div>
+                        <div className="home-content-box-help-base" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
+                            <div className="home-content-help-text"> {translation.needHelp} </div>
+                            <div className="home-content-box-help-wrapper">
+                                <div className="home-content-box-help" style={{ backgroundColor: adaptedColor }}>
+                                    <Link to="/help">
+                                        <div className="home-content-help-help-text"> {translation.help} </div>
+                                        <img className="home-help-image" src="assets/help-page/FAQs-bro.png" alt="Help_page_clickable_image" />
+                                    </Link>
+                                </div>
+                                <div className="home-content-box-lexicon" style={{ backgroundColor: adaptedColor }}>
+                                    <Link to="/lexicon">
+                                        <div className="home-content-help-lexicon-text"> {translation.lexicon} </div>
+                                        <img className="home-help-image" src="assets/lexicon-page/Lexicon-icon.png" alt="Lexicon_page_clickable_image" />
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ListEventCalendar
+                        activeCalendarButton={true}
+                        rdv={rdv}
+                        language={language}
+                        adaptedColor={adaptedColor}
+                    />
                 </div>
             </div>
         </>

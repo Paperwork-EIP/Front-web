@@ -68,10 +68,10 @@ const ProfilePage = () => {
                 .then(res => {
                     setUserProcessInfo(res.data.response);
                 }).catch(err => {
-                    console.log(err)
+                    console.error(err)
                 });
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
         setIsLoading(false);
     }
@@ -88,8 +88,9 @@ const ProfilePage = () => {
         <>
             <Header />
             {
-                isLoading ? <Loading /> :
-                    <div className={colorMode === "light" ? "Profile Profile-light" : "Profile Profile-dark"}>
+                isLoading ? <Loading /> : <></>
+            }
+            <div className={colorMode === "light" ? "Profile Profile-light" : "Profile Profile-dark"}>
                         <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />{translation.modify}</a>
                         <div className='informations-container'>
                             <div className='main-container'>
@@ -155,7 +156,6 @@ const ProfilePage = () => {
                             </>
                         </div>
                     </div>
-            }
         </>
     );
 }

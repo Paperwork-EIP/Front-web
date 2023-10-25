@@ -1,19 +1,19 @@
 .Day-mode {
     color: black;
-    background-color: #FFFFFF !important;
+    background-color: #ffffffb1 !important;
 }
 
 .Day-mode-secondary {
-    background-color: #ECEFF1 !important;
+    background-color: #eceff1ad !important;
 }
 
 .Night-mode {
     color: #cecece;
-    background-color: #303030 !important;
+    background-color: #303030c3 !important;
 }
 
 .Night-mode-secondary {
-    background-color: #222222 !important;
+    background-color: #222222da !important;
 }
 
 .Header {
@@ -135,9 +135,10 @@
 
                     .Header-avatar {
                         border-radius: 50%;
-                        height: 35px;
                         margin: 0;
-                        width: auto;
+                        height: auto;
+                        max-width: 35px;
+                        scale: 1.2;
                     }
                 }
 
