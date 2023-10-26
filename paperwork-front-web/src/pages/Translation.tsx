@@ -179,7 +179,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "en-GB",
-      calendar: "Calendar",
+      calendar: "Don't miss your appointments. Schedule them in the calendar !",
       addEvent: "Add an Event",
       dailyEvent: "Daily Events",
       editDeleteEvent: "Edit/Delete an Event",
@@ -366,7 +366,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "fr-FR",
-      calendar: "Calendrier",
+      calendar: "Ne manquez plus vos rendez-vous. Planifiez-les dans le calendrier !",
       addEvent: "Ajouter un évènement",
       dailyEvent: "Évènements quotidiens",
       editDeleteEvent: "Modifier/Supprimer un évènement",
@@ -551,7 +551,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "de-DE",
-      calendar: "Kalender",
+      calendar: "Verpassen Sie keine Termine mehr. Planen Sie sie im Kalender!",
       addEvent: "Ereignis hinzufügen",
       dailyEvent: "Tägliche Ereignisse",
       editDeleteEvent: "Ereignis bearbeiten/löschen",
@@ -736,7 +736,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "ko-KR",
-      calendar: "캘린더",
+      calendar: "약속을 놓치지 마세요. 캘린더에 예약하세요!",
       addEvent: "이벤트 추가",
       dailyEvent: "일일 이벤트",
       editDeleteEvent: "이벤트 수정/삭제",
@@ -921,7 +921,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "id-ID",
-      calendar: "Kalender",
+      calendar: "No te pierdas tus citas. ¡Programa en el calendario!",
       addEvent: "Tambahkan Acara",
       dailyEvent: "Acara Harian",
       editDeleteEvent: "Edit/Hapus Acara",

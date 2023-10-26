@@ -67,4 +67,65 @@ describe("Home Page Tests", () => {
         expect(click1).toBeTruthy();
         expect(click2).toBeTruthy();
     });
+    // test('should display percentage of process', async () => {
+    //     axios.get = jest.fn().mockResolvedValue({
+    //         data: {
+    //             key: 1,
+    //             process: "testProcess",
+    //             percentage: 50
+    //         }
+    //     });
+
+    //     const { getByTestId } = render(
+    //         <BrowserRouter>
+    //             <HomePage />
+    //         </BrowserRouter>
+    //     );
+
+    //     const percent = getByTestId(/percentageValue/i);
+
+    //     await waitFor(() => {
+    //         expect(percent).toBeTruthy();
+    //     });
+    // })
+    // test('should set language', async () => {
+    //     axios.get = jest.fn().mockResolvedValue({
+    //         data: {
+    //             language: "en"
+    //         }
+    //     });
+
+    //     const screen = render(
+    //         <BrowserRouter>
+    //             <HomePage />
+    //         </BrowserRouter>
+    //     );
+
+    //     await waitFor(() => {
+    //         expect(screen).not.toBeNull();
+    //         expect(axios.get).toHaveBeenCalled();
+    //     });
+    // })
+    // test('should get calendar datas', async () => {
+    //     axios.get = jest.fn().mockResolvedValue({
+    //         data: {
+    //             key: 1,
+    //             date: "2021-05-05",
+    //             process_title: "testProcess",
+    //             step_title: "testStep",
+    //             step_description: "testDescription",
+    //         }
+    //     });
+
+    //     const screen = render(
+    //         <BrowserRouter>
+    //             <HomePage />
+    //         </BrowserRouter>
+    //     );
+
+    //     await waitFor(() => {
+    //         expect(screen).not.toBeNull();
+    //         expect(axios.get).toHaveBeenCalled();
+    //     });
+    // })
 });

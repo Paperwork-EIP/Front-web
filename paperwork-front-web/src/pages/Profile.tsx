@@ -136,8 +136,6 @@ const ProfilePage = () => {
                                         <div className='no-process'>{translation.noProcess}</div>
                                         :
                                         userProcessInfo?.map((item: any) => {
-                                            console.log("item");
-                                            console.log(item);
                                             return (
                                                 item.pourcentage ?
                                                     <button className='Process-Btn' data-testid='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.stocked_title}>

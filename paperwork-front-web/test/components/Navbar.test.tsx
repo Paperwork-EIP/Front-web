@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, MemoryRouter as Router } from 'react-router-dom';
-import { render, cleanup, act, fireEvent, getByRole } from '@testing-library/react';
+import { render, cleanup, act, fireEvent } from '@testing-library/react';
 import Navbar from '../../src/components/Navbar';
 
 afterEach(cleanup);
