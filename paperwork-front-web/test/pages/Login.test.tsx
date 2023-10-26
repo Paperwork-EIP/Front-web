@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 
-import Login from '../../src/pages/Login';
+import LoginPage from '../../src/pages/Login';
 
 jest.mock('axios');
 jest.mock('../../src/components/Navbar', () => () => <></>);
@@ -39,7 +39,7 @@ describe('Login Tests', () => {
 
         const { getByLabelText, getByTestId } = render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 
@@ -59,7 +59,7 @@ describe('Login Tests', () => {
 
         const { getByLabelText, getByTestId } = render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 
@@ -72,7 +72,7 @@ describe('Login Tests', () => {
     test('clicking on google connect button calls googleConnect function', () => {
         const { getByTestId } = render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
         const googleButton = getByTestId('google-link');
@@ -83,18 +83,42 @@ describe('Login Tests', () => {
     test('clicking on facebook connect button calls facebookConnect function', () => {
         const { getByTestId } = render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
-        const facebookButton = getByTestId('facebook-link');
+        const googleButton = getByTestId('facebook-link');
 
-        fireEvent.click(facebookButton);
+        fireEvent.click(googleButton);
         expect(axios.get).toHaveBeenCalled();
     });
+    // test('should not login with Google', () => {
+    //     axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
+    //     const { getByTestId } = render(
+    //         <BrowserRouter>
+    //             <LoginPage />
+    //         </BrowserRouter>
+    //     );
+    //     const googleButton = getByTestId('google-link');
+
+    //     fireEvent.click(googleButton);
+    //     expect(axios.get).toHaveBeenCalled();
+    // });
+    // test('should not login with Facebook', () => {
+    //     axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
+    //     const { getByTestId } = render(
+    //         <BrowserRouter>
+    //             <LoginPage />
+    //         </BrowserRouter>
+    //     );
+    //     const googleButton = getByTestId('facebook-link');
+
+    //     fireEvent.click(googleButton);
+    //     expect(axios.get).toHaveBeenCalled();
+    // });
     test('should link to the register page when register button clicked', () => {
         const { getByTestId } = render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 
@@ -107,7 +131,7 @@ describe('Login Tests', () => {
 
         render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 
@@ -121,7 +145,7 @@ describe('Login Tests', () => {
 
         render(
             <BrowserRouter>
-                <Login />
+                <LoginPage />
             </BrowserRouter>
         );
 

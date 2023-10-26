@@ -18,7 +18,7 @@ import FooterNoConnected from '../components/Footer';
 
 import "../styles/pages/Login.scss";
 
-const LoginPage = () => {
+function LoginPage() {
 
     const api = process.env.REACT_APP_BASE_URL;
     const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -29,8 +29,8 @@ const LoginPage = () => {
     const cookies = new Cookies();
     const { t } = useTranslation();
 
-    function handleSubmit() {
-        axios.post(
+    async function handleSubmit() {
+        await axios.post(
             `${api}/user/login`,
             {
                 email: email,
@@ -48,8 +48,8 @@ const LoginPage = () => {
         })
     };
 
-    function handleForgotPassword() {
-        axios.get(
+    async function handleForgotPassword() {
+        await axios.get(
             `${api}/user/sendResetPasswordEmail?email=${email}`,
         ).then(res => {
             toast.success(t('login.emailSent'));
@@ -67,14 +67,14 @@ const LoginPage = () => {
         }
     }
 
-    function googleConnect() {
-        axios.get(`${api}/oauth/google/urlLogin`).then(res => {
+    async function googleConnect() {
+        await axios.get(`${api}/oauth/google/urlLogin`).then(res => {
             window.location.replace(res.data)
         })
     }
 
-    function facebookConnect() {
-        axios.get(`${api}/oauth/facebook/url`).then(res => {
+    async function facebookConnect() {
+        await axios.get(`${api}/oauth/facebook/url`).then(res => {
             window.location.replace(res.data)
         })
     }

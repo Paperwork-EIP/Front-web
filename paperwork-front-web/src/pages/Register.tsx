@@ -12,10 +12,10 @@ import FooterNoConnected from '../components/Footer';
 
 import "../styles/pages/Register.scss";
 
-const RegisterPage = () => {
+function RegisterPage() {
 
     const api = process.env.REACT_APP_BASE_URL;
-    const url = new URL(window.location.href);
+    // const url = new URL(window.location.href);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -69,8 +69,8 @@ const RegisterPage = () => {
         }
     };
 
-    function googleConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`)
+    async function googleConnect() {
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`)
             .then(res => {
                 window.location.replace(res.data)
             }).catch(err => {
@@ -78,8 +78,8 @@ const RegisterPage = () => {
             });
     }
 
-    function facebookConnect() {
-        axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`)
+    async function facebookConnect() {
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`)
             .then(res => {
                 window.location.replace(res.data)
             }).catch(err => {
