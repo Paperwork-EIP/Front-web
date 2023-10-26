@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
 import { toast } from 'react-toastify';
 
 import axios from 'axios';
@@ -9,7 +9,6 @@ import HomePage from '../../src/pages/Home';
 
 jest.mock('axios');
 jest.mock('../../src/components/Header', () => () => <></>);
-jest.mock('../../src/container/Home/HomeContent', () => () => <></>);
 
 beforeEach(() => {
     Object.defineProperty(window, 'location', {
@@ -31,11 +30,41 @@ afterEach(() => {
 });
 
 describe("Home Page Tests", () => {
-    test('should render home page correctly', () => {
+    test('should render the page correctly', async () => {
+        axios.get = jest.fn().mockRejectedValue(new Error("Error"));
+
+        const screen = render(
+            <BrowserRouter>
+                <HomePage />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            expect(screen).not.toBeNull();
+        });
+    });
+    test("should get data", async () => {
         render(
             <BrowserRouter>
                 <HomePage />
             </BrowserRouter>
         );
+
+        await waitFor(() => {
+            expect(axios.get).toHaveBeenCalled;
+        })
+    });
+    test('should handle clicks', async () => {
+        const { getByLabelText } = render(
+            <BrowserRouter>
+                <HomePage />
+            </BrowserRouter>
+        );
+
+        const click1 = fireEvent.click(getByLabelText(/click-alp/i));
+        const click2 = fireEvent.click(getByLabelText(/click-asc/i));
+
+        expect(click1).toBeTruthy();
+        expect(click2).toBeTruthy();
     });
 });

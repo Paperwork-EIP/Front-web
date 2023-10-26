@@ -8,7 +8,7 @@
 header {
     border-bottom: 3px solid transparent;
     display: flex;
-    padding: 15px;
+    padding: 10px;
     align-items: center;
     position: fixed;
     top: 0;
@@ -17,7 +17,10 @@ header {
     transition: 300ms;
 
     .Navbar-nav {
-        margin-right: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
 
         a {
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -29,7 +32,8 @@ header {
             color: whitesmoke;
             text-transform: uppercase;
             border-bottom: 3px solid transparent;
-            padding: 10px 1px;
+            padding: 3px 1px;
+            margin-top: 9px;
             transition: 300ms;
         }
         
@@ -47,7 +51,6 @@ header {
     }
 
     .Navbar-title {
-        flex: 1;
         margin-left: 50px;
         height: 70px;
         transition: 300ms;
@@ -69,6 +72,8 @@ header {
         .Navbar-nav {
             padding: 10px;
             margin: 0;
+            text-align: center;
+            flex-direction: column;
         }
 
         .Navbar-title {

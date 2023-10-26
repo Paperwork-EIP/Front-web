@@ -13,22 +13,41 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('Change Language Component Tests', () => {
-    test('should display languages selection in navbar', () => {
+    test('ChangeLanguage component renders correctly', () => {
         const { getByTestId } = render(
             <BrowserRouter>
                 <ChangeLanguage />
             </BrowserRouter>
         );
 
-        const button_fr = getByTestId("button-fr");
-        const button_en = getByTestId("button-en");
+        const selectElement = getByTestId('language');
+        expect(selectElement).toBeInTheDocument();
 
-        const click_fr = fireEvent.click(button_fr);
-        const click_en = fireEvent.click(button_en);
+        const frOption = getByTestId('button-fr');
+        const enOption = getByTestId('button-en');
+        const deOption = getByTestId('button-de');
+        const krOption = getByTestId('button-kr');
+        const idOption = getByTestId('button-id');
+        const esOption = getByTestId('button-es');
 
-        expect(button_fr).toBeInTheDocument();
-        expect(button_en).toBeInTheDocument();
-        expect(click_fr).toBeTruthy();
-        expect(click_en).toBeTruthy();
+        expect(frOption).toBeInTheDocument();
+        expect(enOption).toBeInTheDocument();
+        expect(deOption).toBeInTheDocument();
+        expect(krOption).toBeInTheDocument();
+        expect(idOption).toBeInTheDocument();
+        expect(esOption).toBeInTheDocument();
+    });
+
+    test('ChangeLanguage component handles language change correctly', () => {
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <ChangeLanguage />
+            </BrowserRouter>
+        );
+
+        const selectElement = getByTestId('language');
+        const event = fireEvent.change(selectElement, { target: { value: 'en' } });
+
+        expect(event).toBeTruthy();
     });
 });
