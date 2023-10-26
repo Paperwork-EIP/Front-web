@@ -198,7 +198,7 @@ function HomePage() {
                                                             <Tr key={index.toString() + item.process}>
                                                                 <Td key="{itemAscProcess}">{item.process}</Td>
                                                                 <Td key="{itemAscPercent}" isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
                                                         );
@@ -209,7 +209,7 @@ function HomePage() {
                                                             <Tr key={index.toString() + item.process}>
                                                                 <Td key="{itemDscProcess}">{item.process}</Td>
                                                                 <Td key="{itemDscPercent}" isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
                                                         );
@@ -221,7 +221,7 @@ function HomePage() {
                                                             <Tr key={index.toString() + item.process}>
                                                                 <Td key="{itemAlpProcess}">{item.process}</Td>
                                                                 <Td key="{itemAlpPercent}" isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
                                                         );
@@ -232,7 +232,7 @@ function HomePage() {
                                                             <Tr key={index + item.process}>
                                                                 <Td key="{itemInvProcess}">{item.process}</Td>
                                                                 <Td key="{itemInvPercent}" isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`}>{item.percentage}%</div>
+                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
                                                         );
