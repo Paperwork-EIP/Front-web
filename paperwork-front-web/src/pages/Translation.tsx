@@ -195,6 +195,7 @@ const translations: Translations = {
       applied: "Applied",
       left: "Left",
       today: "Today",
+      eventModifiedSuccessfully: "Event modified successfully!",
     }
   },
   français: {
@@ -381,6 +382,7 @@ const translations: Translations = {
       applied: "Terminé",
       left: "Restant",
       today: "Aujourd'hui",
+      eventModifiedSuccessfully: "Évènement modifié avec succès !",
     }
   },
   deutsch: {
@@ -565,6 +567,7 @@ const translations: Translations = {
       applied: "Angewendet",
       left: "Übrig",
       today: "Heute",
+      eventModifiedSuccessfully: "Ereignis erfolgreich geändert!",
     }
   },
   한국어로: {
@@ -749,6 +752,7 @@ const translations: Translations = {
       applied: "적용됨",
       left: "남음",
       today: "오늘",
+      eventModifiedSuccessfully: "이벤트가 성공적으로 수정되었습니다!",
     }
   },
   indonesia: {
@@ -933,6 +937,7 @@ const translations: Translations = {
       applied: "Diterapkan",
       left: "Tinggal",
       today: "Hari Ini",
+      eventModifiedSuccessfully: "Acara berhasil diubah!",
     }
   },
   español: {
@@ -1117,6 +1122,7 @@ const translations: Translations = {
       applied: "Aplicado",
       left: "Restante",
       today: "Hoy",
+      eventModifiedSuccessfully: "¡Evento modificado con éxito!",
     }
   }
 };

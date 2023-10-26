@@ -13,6 +13,7 @@ $gray: #9b9b9b;
     --header-gradient-color-7: #23d5ab;
 
     height: 100vh;
+    min-height: 600px;
     background: linear-gradient(30deg,
             var(--header-gradient-color-1),
             var(--header-gradient-color-2),
@@ -27,59 +28,51 @@ $gray: #9b9b9b;
     justify-content: center;
 
     .Login-container {
-        height: 70%;
-        width: 60%;
+        height: 100%;
+        width: 100%;
         display: flex;
-        flex-direction: row;
         align-items: center;
         justify-content: center;
-        background-color: #373737;
-        border-radius: 5px;
+        margin-top: 80px;
+    }
 
-        .Login-container-right {
-            width: 40%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .Login-container-left {
-            height: 100%;
-            width: 60%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-
-            .Login-on-image-text {
-                position: absolute;
-                padding: 2em;
-
-                h1 {
-                    font-weight: bold;
-                    font-size: 2rem;
-                    letter-spacing: 3px;
-                }
-
-                h3 {
-                    margin-top: 1em;
-                    font-size: 1.4rem;
-                    letter-spacing: 2px;
-                    word-spacing: 1px;
-                }
-            }
-
-            img {
-                height: 100%;
-                width: auto;
-            }
-        }
+    .Login-wrapper {
+        height: 70%;
+        width: 60%;
+        max-width: 600px;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 10px;
+        background-color: rgba(18, 18, 18, 0.457);
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+        padding: 50px 35px;
 
         .Login-title {
             font-size: 2rem;
             font-weight: bold;
+        }
+
+        .Login-submit-button {
+            border: solid 2px #e2e2e2;
+            border-radius: 5px;
+            padding: 8px 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .disabled {
+            border-color: #fc5e6d;
+        }
+
+        .Login-submit-button:hover {
+            background-color: #FDE0E6;
+            color: black;
+            border-color: transparent;
         }
 
         .Login-form {
@@ -87,33 +80,13 @@ $gray: #9b9b9b;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-
-
-
-            .Login-submit-button {
-                border: solid 2px #e2e2e2;
-                border-radius: 5px;
-                padding: 10px 15px;
-                font-size: 1.1rem;
-                margin-top: 5vh;
-                transition: all 0.3s ease-in-out;
-            }
-
-            .disabled {
-                border-color: #fc5e6d;
-            }
-
-            .Login-submit-button:hover {
-                background-color: #FDE0E6;
-                color: black;
-                border-color: transparent;
-            }
+            justify-content: space-evenly;
 
             .Login-form-group {
                 position: relative;
                 padding: 15px 0 0;
                 width: 60%;
+                max-width: 400px;
             }
 
             .Login-form-field {
@@ -172,11 +145,11 @@ $gray: #9b9b9b;
             }
 
             .Login-forgot-password-button {
-                margin-top: 2%;
                 position: relative;
                 display: inline-block;
                 text-decoration: none;
                 overflow: hidden;
+                padding-top: 10px;
             }
 
             .Login-forgot-password-button:after {
@@ -191,22 +164,17 @@ $gray: #9b9b9b;
                 transition: transform 0.3s ease-out;
                 transform-origin: right;
             }
-                
+
             .Login-forgot-password-button:hover:after {
                 transform: scaleX(1);
                 transform-origin: left;
             }
-
-
-            
         }
 
         .Login-connections {
-            width: 30%;
-            max-width: 500px;
+            width: clamp(200px, 30%, 500px);
             display: flex;
             align-items: center;
-            padding: 4vh 0;
             justify-content: space-evenly;
 
             .Login-button-api {
@@ -224,6 +192,9 @@ $gray: #9b9b9b;
         }
 
         .Login-redirection-to-register {
+            padding: 0 10px;
+            text-align: center;
+
             .Login-link {
                 a {
                     margin-left: 3px;
@@ -254,15 +225,9 @@ $gray: #9b9b9b;
 }
 
 @media (max-width: 1200px) {
-    .Login {
-        background: #373737 !important;
-    }
-    .Login-container-right {
-        width: 100% !important;
-    }
-
-    .Login-container-left {
-        display: none !important;
+    .Login-wrapper {
+        width: 80% !important;
+        padding: 30px 25px !important;
     }
 
     .Login-form-group {
@@ -287,7 +252,7 @@ $gray: #9b9b9b;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .Login-modal {
@@ -315,11 +280,11 @@ $gray: #9b9b9b;
         background: none;
         border: none;
         cursor: pointer;
-      }
-      
-      .Login-close-button:hover {
+    }
+
+    .Login-close-button:hover {
         color: #fc5e6d;
-      }
+    }
 
     .Login-title-top {
         margin-top: 10%;
@@ -337,6 +302,7 @@ $gray: #9b9b9b;
         display: flex;
         align-items: center;
         justify-content: center;
+
         .Login-title-icons {
             padding-right: 0.5rem;
         }
@@ -369,6 +335,7 @@ $gray: #9b9b9b;
         justify-content: center;
         position: relative;
         margin-bottom: 10%;
+
         .Login-email-input {
             font-family: inherit;
             width: 40%;
