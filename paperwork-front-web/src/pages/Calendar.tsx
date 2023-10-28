@@ -27,13 +27,13 @@ function CalendarPage() {
         }),
     };
 
-    var isEvent = 0;
-    var indexMod = 1;
-    var indexDel = 1;
+    let isEvent = 0;
+    let indexMod = 1;
+    let indexDel = 1;
 
     const cookieList = cookies.get('loginToken')
     const api = process.env.REACT_APP_BASE_URL;
-    const [isLoading, setIsloading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [date, setDate] = useState(new Date());
     const [stepEdit, setStepEdit] = useState();
     const [postsStepEdit, setPostsStepEdit]: any = useState([{}]);
@@ -53,7 +53,7 @@ function CalendarPage() {
     const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
-    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.25)", "rgba(34, 34, 34, 0.65)");
+    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.85)", "rgba(34, 34, 34, 0.85)");
 
     function handleNewDateChange(e: any) {
         setNewDate(e.target.value);
@@ -96,8 +96,8 @@ function CalendarPage() {
     async function handleProcessSelected(e: any) {
         await axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_token=${cookieList.loginToken}`)
             .then(res => {
-                var steps = [];
-                for (var i = 0; i < res.data.response.length; i++) {
+                let steps = [];
+                for (let i = 0; i < res.data.response.length; i++) {
                     steps.push({
                         label: res.data.response[i]['title'],
                         step_id: res.data.response[i]['step_id'],
@@ -130,7 +130,7 @@ function CalendarPage() {
             const rdvTmp = [];
             const tmpListEvents = [];
 
-            for (var i = 0; i < calendarData.appoinment.length; i++) {
+            for (let i = 0; i < calendarData.appoinment.length; i++) {
                 rdvTmp.push(calendarData.appoinment[i]['date'], calendarData.appoinment[i]['stocked_title'], calendarData.appoinment[i]['step_title'], calendarData.appoinment[i]['step_description'], calendarData.appoinment[i]['user_process_id'], calendarData.appoinment[i]['step_id']);
                 tmpListEvents.push(
                     {
@@ -162,7 +162,7 @@ function CalendarPage() {
         } catch (error) {
             console.error(error);
         }
-        setIsloading(false);
+        setIsLoading(false);
     }
 
     function submitNewEvent() {
@@ -174,7 +174,7 @@ function CalendarPage() {
                         date: comparativeDate + ' ' + newDate + ':00',
                         user_process_id: item['user_process_id'],
                         step_id: item['step_id']
-                    }).then(res => {
+                    }).then(() => {
                         window.location.reload();
                     }).catch(err => {
                         console.error(err);
@@ -192,8 +192,8 @@ function CalendarPage() {
                 item.toString()?.split("T")[0] === comparativeDate ?
                     axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_token=${cookieList.loginToken}`)
                         .then(res => {
-                            var steps = [];
-                            for (var i = 0; i < res.data.response.length; i++) {
+                            let steps = [];
+                            for (let i = 0; i < res.data.response.length; i++) {
                                 steps.push({
                                     label: res.data.response[i]['title'],
                                     step_id: res.data.response[i]['step_id'],
@@ -224,7 +224,6 @@ function CalendarPage() {
                 }).then(() => {
                     toast.success(translation.eventModifiedSuccessfully);
                     window.location.reload();
-                    return;
                 }).catch(err => {
                     toast.error(err);
                     console.error(err);
@@ -234,9 +233,9 @@ function CalendarPage() {
     }
 
     rdv?.map((item: any) => {
-        return (
-            item.toString()?.split("T")[0] === comparativeDate ? isEvent += 1 : isEvent += 0
-        )
+        if (item.toString()?.split("T")[0] === comparativeDate) {
+            isEvent++;
+        }
     })
 
     function editButtonOnClickEvent(event: any) {
@@ -247,13 +246,13 @@ function CalendarPage() {
     function displayCalendarButtons() {
         return (
             <div className="calendar-buttons">
-                <button className={isEvent > 0 ? 'calendar-button disabled' : 'calendar-button'} aria-label="add_an_event_button" onClick={onOpenAddModal} disabled={isEvent > 0 ? true : false}>
+                <button className={(isEvent > 0 ? ' disabled' : '') + ' calendar-button'} aria-label="add_an_event_button" onClick={onOpenAddModal} disabled={isEvent > 0 ? true : false}>
                     {translation.addEvent}
                 </button>
                 <button className='calendar-button' aria-label="daily_event_button" onClick={onOpenDailyModal}>
                     {translation.dailyEvent}
                 </button>
-                <button className={isEvent === 0 ? 'calendar-button disabled' : 'calendar-button'} aria-label="delete_edit_event_button" onClick={editButtonOnClickEvent} disabled={isEvent === 0 ? true : false}>
+                <button className={(isEvent === 0 ? ' disabled' : '') + ' calendar-button'} aria-label="delete_edit_event_button" onClick={editButtonOnClickEvent} disabled={isEvent === 0 ? true : false}>
                     {translation.editDeleteEvent}
                 </button>
             </div>
@@ -270,9 +269,9 @@ function CalendarPage() {
                         onClickDay={(value) => {
                             setDate(value);
                             rdv.map((item: any) => {
-                                return (
-                                    item.toString()?.split("T")[0] === comparativeDate ? isEvent++ : isEvent = 0
-                                )
+                                if (item.toString()?.split("T")[0] === comparativeDate) {
+                                    isEvent++;
+                                }
                             })
                         }}
                     />
