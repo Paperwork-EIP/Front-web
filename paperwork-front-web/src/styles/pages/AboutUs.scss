@@ -4,21 +4,26 @@
     color: whitesmoke !important;
 
     .AboutUs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+
         .AboutUs-team {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding-top: clamp(6em, 7vw, 8em);
 
             .AboutUs-title {
                 letter-spacing: 2px;
                 word-spacing: 2px;
-                font-size: 6vh;
+                font-size: clamp(2.5rem, 5vw, 4rem);
                 font-weight: 700;
                 text-align: center;
                 margin-top: 1em;
-                margin-bottom: 1.8em;
+                margin-bottom: 1em;
                 background: linear-gradient(-10deg, #29c9b3, #bb00bb);
                 background-size: 110%;
                 background-clip: text;
@@ -26,21 +31,20 @@
             }
 
             .AboutUs-contacts {
-                width: 90vw;
+                max-width: 1200px;
                 display: flex;
                 flex-direction: row;
-                white-space: nowrap;
-                overflow-x: scroll;
-                padding: 1em 0;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 2rem;
 
                 .AboutUs-card {
-                    width: 100%;
                     max-width: 250px;
                     height: 337px;
-                    margin: 0 1em;
-                    background-color: #454545;
-                    border-radius: 15px;
-                    padding: 1.5em;
+                    background: linear-gradient(10deg, #2d2d2d, #585858, #727272);
+                    border-radius: 5px;
+                    padding: 1.2em;
                     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.541);
 
                     .AboutUs-card-picture-container {
@@ -48,7 +52,7 @@
                         width: 200px;
                         height: 200px;
                         background-color: white;
-                        border-radius: 15px;
+                        border-radius: 5px;
 
                         img {
                             height: auto;
@@ -108,10 +112,10 @@
 
             .AboutUs-timeline-h1 {
                 text-align: center;
-                padding: 20px 0px 20px 0px;
-                font-size: 6vh;
+                padding: 15px 5px;
+                font-size: clamp(2.5rem, 5vw, 4rem);
                 font-weight: 700;
-                margin-bottom: 2em;
+                margin-bottom: 1em;
                 background: linear-gradient(10deg, #bb00bb, #29c9b3);
                 background-size: 100% 120%;
                 background-clip: text;
@@ -137,10 +141,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 2em;
 
             h1 {
-                font-size: 5vh;
+                font-size: clamp(2.5rem, 5vw, 4rem);
                 font-weight: 700;
                 word-spacing: 2px;
                 letter-spacing: 2px;
@@ -176,23 +179,23 @@
                 max-width: 50vw;
 
                 #contact {
-                    padding: 25px;
+                    padding-bottom: 25px;
                 }
-    
+
                 #contact h3 {
                     display: block;
                     font-size: 30px;
                     font-weight: 300;
                     margin-bottom: 10px;
                 }
-    
+
                 #contact h4 {
                     margin: 5px 0 15px;
                     display: block;
                     font-size: 13px;
                     font-weight: 400;
                 }
-    
+
                 fieldset {
                     border: medium none !important;
                     margin: 0 0 10px;
@@ -200,7 +203,7 @@
                     padding: 0;
                     width: 100%;
                 }
-    
+
                 #contact input[type="text"],
                 #contact input[type="email"],
                 #contact input[type="tel"],
@@ -213,7 +216,7 @@
                     margin: 0 0 5px;
                     padding: 10px;
                 }
-    
+
                 #contact input[type="text"]:hover,
                 #contact input[type="email"]:hover,
                 #contact input[type="tel"]:hover,
@@ -222,13 +225,13 @@
                     transition: border-color 0.3s ease-in-out;
                     border: 1px solid #aaa;
                 }
-    
+
                 #contact textarea {
                     height: 100px;
                     max-width: 100%;
                     resize: none;
                 }
-    
+
                 #contact button[type="button"] {
                     cursor: pointer;
                     width: 100%;
@@ -241,22 +244,22 @@
                     font-size: 15px;
                     transition: 0.3s ease-in-out;
                 }
-    
+
                 #contact button[type="button"]:hover {
                     animation: gradientButton 5s ease-in infinite;
                     transition: 0.3s ease-in-out;
                 }
-    
+
                 #contact button[type="button"]:active {
                     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
                 }
-    
+
                 #contact input:focus,
                 #contact textarea:focus {
                     outline: 0;
                     border: 1px solid #aaa;
                 }
-    
+
                 ::-webkit-input-placeholder {
                     color: #888;
                 }
