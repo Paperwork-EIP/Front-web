@@ -7,15 +7,15 @@ import ChangeLanguage from './ChangeLanguage';
 import "../styles/components/Navbar.scss";
 
 function Navbar() {
-    const [isShrunk, setShrunk] = useState("Navbar-not-shrunk");
+    const [isShrunk, setIsShrunk] = useState("Navbar-not-shrunk");
     const { t } = useTranslation();
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 0) {
-                setShrunk("Navbar");
+                setIsShrunk("Navbar");
             } else {
-                setShrunk("Navbar-not-shrunk");
+                setIsShrunk("Navbar-not-shrunk");
             }
         });
         return () => window.removeEventListener("Navbar", () => { });

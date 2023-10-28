@@ -87,10 +87,10 @@ function HomePage() {
 
     async function getCalendarDatas() {
         try {
-            axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
+            await axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
                 .then(res => {
-                    var rdvTmp = [];
-                    for (var i = 0; i < res.data.appoinment.length; i++) {
+                    let rdvTmp = [];
+                    for (let i = 0; i < res.data.appoinment.length; i++) {
                         rdvTmp.push(
                             {
                                 key: i,
@@ -115,8 +115,8 @@ function HomePage() {
         try {
             await axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.loginToken}`)
                 .then(res => {
-                    var userProcessTmp = [];
-                    for (var j = 0; j < res.data.response.length; j++) {
+                    let userProcessTmp = [];
+                    for (let j = 0; j < res.data.response.length; j++) {
                         if (res.data.response[j]['pourcentage'] != null)
                             userProcessTmp.push(
                                 {
@@ -195,7 +195,7 @@ function HomePage() {
                                                 activeAsc ?
                                                     ascendingArray?.map((item: any, index: any) => {
                                                         return (
-                                                            <Tr key={index.toString() + item.process}>
+                                                            <Tr key={index}>
                                                                 <Td key="{itemAscProcess}">{item.process}</Td>
                                                                 <Td key="{itemAscPercent}" isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
@@ -206,7 +206,7 @@ function HomePage() {
                                                     :
                                                     descendingArray?.map((item: any, index: any) => {
                                                         return (
-                                                            <Tr key={index.toString() + item.process}>
+                                                            <Tr key={index}>
                                                                 <Td key="{itemDscProcess}">{item.process}</Td>
                                                                 <Td key="{itemDscPercent}" isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
@@ -218,7 +218,7 @@ function HomePage() {
                                                 activeAlp ?
                                                     alphabeticArray?.map((item: any, index: any) => {
                                                         return (
-                                                            <Tr key={index.toString() + item.process}>
+                                                            <Tr key={index}>
                                                                 <Td key="{itemAlpProcess}">{item.process}</Td>
                                                                 <Td key="{itemAlpPercent}" isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
@@ -229,7 +229,7 @@ function HomePage() {
                                                     :
                                                     invertArray?.map((item: any, index: any) => {
                                                         return (
-                                                            <Tr key={index + item.process}>
+                                                            <Tr key={index}>
                                                                 <Td key="{itemInvProcess}">{item.process}</Td>
                                                                 <Td key="{itemInvPercent}" isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
