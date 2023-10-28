@@ -14,7 +14,18 @@ interface Props {
     activeCalendarButton: boolean;
 }
 
-function ListEventCalendar(props: Props) {
+function CircleIcon(prop: any) {
+    return (
+        <Icon viewBox="0 0 100 100" {...prop}>
+            <path
+                fill="currentColor"
+                d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+            />
+        </Icon>
+    )
+};
+
+function ListEventCalendar(props: Readonly<Props>) {
     let colorEvent = "";
     const date = new Date();
     const comparativeDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -24,18 +35,6 @@ function ListEventCalendar(props: Props) {
 
     const { colorMode } = useColorMode();
     const translation = getTranslation(props.language, "home");
-
-    function CircleIcon(prop: any) {
-        return (
-            <Icon viewBox="0 0 100 100" {...prop}>
-                <path
-                    margin-left="2px"
-                    fill="currentColor"
-                    d="M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
-                />
-            </Icon>
-        )
-    };
 
     return (
         <div className="list-event-calendar-box-calendar" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
