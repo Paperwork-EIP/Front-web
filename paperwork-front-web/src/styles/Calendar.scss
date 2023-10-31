@@ -75,7 +75,7 @@ $calendar-dark-active-text-color: #FFFFFF;
     .calendar-wrapper {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       gap: 20px;
     }
@@ -204,7 +204,7 @@ $calendar-dark-active-text-color: #FFFFFF;
     .calendar-wrapper {
       display: flex;
       flex-direction: row;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
       gap: 20px;
     }
