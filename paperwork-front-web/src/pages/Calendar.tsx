@@ -261,30 +261,22 @@ function CalendarPage() {
 
     function displayCalendar() {
         return (
-            <div className='calendar-wrapper'>
-                <div className="calendar-widget">
-                    <Calendar
-                        locale={translation.calendarLocation}
-                        minDate={new Date()}
-                        onClickDay={(value) => {
-                            setDate(value);
-                            rdv.map((item: any) => {
-                                if (item.toString()?.split("T")[0] === comparativeDate) {
-                                    isEvent++;
-                                }
-                            })
-                        }}
-                    />
-                    {
-                        displayCalendarButtons()
-                    }
-                </div>
-                <ListEventCalendar
-                    activeCalendarButton={false}
-                    language={language}
-                    rdv={listEvents}
-                    adaptedColor={adaptedColor}
+            <div className="calendar-widget">
+                <Calendar
+                    locale={translation.calendarLocation}
+                    minDate={new Date()}
+                    onClickDay={(value) => {
+                        setDate(value);
+                        rdv.map((item: any) => {
+                            if (item.toString()?.split("T")[0] === comparativeDate) {
+                                isEvent++;
+                            }
+                        })
+                    }}
                 />
+                {
+                    displayCalendarButtons()
+                }
             </div>
         )
     }
@@ -508,18 +500,27 @@ function CalendarPage() {
                 isLoading ? <Loading /> : <></>
             }
             <div className='calendar' style={{ backgroundColor: adaptedColor }}>
-                <h1 className="calendar-title">
-                    {translation.calendar}
-                </h1>
-                <img className='calendar-image' src="assets/calendar-page/online_calendar_bro.png" alt="calendar_image" />
-                <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
-                    {
-                        displayCalendar()
-                    }
-                    {
-                        displayModals()
-                    }
+                <div className='calendar-wrapper'>
+                    <h1 className="calendar-title">
+                        {translation.calendar}
+                    </h1>
+                    <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
+                        {
+                            displayCalendar()
+                        }
+                        {
+                            displayModals()
+                        }
+                    </div>
                 </div>
+                <img className='calendar-image' src="assets/calendar-page/online_calendar_bro.png" alt="calendar_image" />
+                <ListEventCalendar
+                    activeCalendarButton={false}
+                    language={language}
+                    rdv={listEvents}
+                    adaptedColor={adaptedColor}
+                    style="calendar-list-widget"
+                />
             </div>
         </>
     );

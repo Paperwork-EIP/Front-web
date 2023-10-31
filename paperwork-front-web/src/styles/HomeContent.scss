@@ -23,6 +23,7 @@ $border-color: #b5b5b5;
   .home-image {
     width: clamp(50px, 30%, 200px);
     height: clamp(50px, 30%, 200px);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
   }
 
   .home-container {

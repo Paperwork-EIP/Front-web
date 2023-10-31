@@ -12,6 +12,7 @@ interface Props {
     adaptedColor: string;
     rdv: any;
     activeCalendarButton: boolean;
+    style?: any;
 }
 
 function CircleIcon(prop: any) {
@@ -30,6 +31,7 @@ function ListEventCalendar(props: Readonly<Props>) {
     const date = new Date();
     const comparativeDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     const rdv = props.rdv;
+    const style = props.style ? props.style : "list-event-calendar-box-calendar";
     const adaptedColor = props.adaptedColor;
     const activeCalendarButton = props.activeCalendarButton;
 
@@ -37,7 +39,7 @@ function ListEventCalendar(props: Readonly<Props>) {
     const translation = getTranslation(props.language, "home");
 
     return (
-        <div className="list-event-calendar-box-calendar" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
+        <div className={style} style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
             {
                 rdv.length !== 0 ?
                     <>
