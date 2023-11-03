@@ -159,7 +159,7 @@ $calendar-dark-active-text-color: #FFFFFF;
                 }
 
                 &--hasActive:enabled:hover,
-                --hasActive:enabled:focus {
+                &--hasActive:enabled:focus {
                     background: $calendar-light-hover-color;
                 }
 
