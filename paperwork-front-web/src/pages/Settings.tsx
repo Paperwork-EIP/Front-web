@@ -270,12 +270,12 @@ const SettingsPage = () => {
                         <div className="information-container-avatar">
                             <div className="avatar-container">
                             <img
-                                src={profilePicture === null ? "/assets/avatar/NoAvatar.png" : profilePicture}
+                                src={profilePicture === null ? "/assets/avatar/no_avatar.png" : profilePicture}
                                 alt="Avatar"
                                 className="Avatar"
                             />
                             <button aria-label="button-change-avatar" onClick={() => setAvatarModal(!avatarModal)}>
-                                <img src="/assets/avatar/PictureModif.png" alt="PictureModif" className="ModifImg" />
+                                <img src="/assets/avatar/picture_modif.png" alt="PictureModif" className="ModifImg" />
                             </button>
                             </div>
                         </div>
