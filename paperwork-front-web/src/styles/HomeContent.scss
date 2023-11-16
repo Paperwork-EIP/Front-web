@@ -15,8 +15,8 @@ $border-color: #b5b5b5;
   justify-content: center;
 
   .home-image {
-    width: clamp(50px, 30%, 200px);
-    height: clamp(50px, 30%, 200px);
+    width: clamp(50px, 40%, 250px);
+    height: clamp(50px, 40%, 250px);
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
   }
 
@@ -48,10 +48,6 @@ $border-color: #b5b5b5;
     font-size: 36px;
     font-weight: 700;
     text-align: center;
-    background: linear-gradient(-10deg, #FC6976, #bb00bb);
-    background-size: 110%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
 
   .home-content-box-percentages {
@@ -71,6 +67,7 @@ $border-color: #b5b5b5;
     animation-timing-function: ease-in-out;
 
     .percentage-value {
+      width: 60px;
       text-align: center;
       font-weight: bold;
       padding: 8px 0;
@@ -99,19 +96,20 @@ $border-color: #b5b5b5;
     }
 
     .home-content-start-process-button {
-      background-color: #29C9B3;
+      background: linear-gradient(-10deg, #FC6976, #29C9B3);
+      background-size: 200% 200%;
       padding: 8px 20px;
       border-radius: 5px;
       font-size: 14px;
       font-weight: 500;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background-color 0.3s ease;
+      transition: background-position 0.3s ease;
       margin-top: 20px;
       align-self: center;
 
       &:hover {
-        background-color: #1A9A88;
+        background-position: right center;
       }
 
       @media (max-width: 900px) {

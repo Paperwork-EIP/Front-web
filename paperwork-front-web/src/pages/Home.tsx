@@ -167,20 +167,6 @@ function HomePage() {
                             <div className="home-content-help-text"> {translation.process} </div>
                             <TableContainer>
                                 <Table variant="simple">
-                                    <Thead>
-                                        <Tr>
-                                            <Th className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
-                                                <Button onClick={handleClickAlp} aria-label="click-alp">
-                                                    {activeAlp ? "Z...A" : "A...Z"}
-                                                </Button>
-                                            </Th>
-                                            <Th isNumeric className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
-                                                <Button onClick={handleClickAsc} aria-label="click-asc">
-                                                    {activeAsc ? translation.descending : translation.ascending}
-                                                </Button>
-                                            </Th>
-                                        </Tr>
-                                    </Thead>
                                     <Tbody>
                                         {
                                             activePriority === true ?

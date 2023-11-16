@@ -58,22 +58,23 @@
 }
 
 .home-calendar-button {
-    background-color: #29C9B3;
+    background: linear-gradient(90deg, #FC6976, #29C9B3);
+    background-size: 200% 200%;
     padding: 8px 20px;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-position 0.3s ease;
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
 
     &:hover {
-        background-color: #1A9A88;
-    }
+        background-position: right center;
+      }
 }
 
 .list-event-calendar-box-rendez-vous {
