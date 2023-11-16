@@ -1,24 +1,18 @@
 $border-color: #b5b5b5;
 
+.home-content-main-box-dark {
+  background-color: #303030;
+}
+
+.home-content-main-box-light {
+  background-color: #f5f5f5;
+}
+
 .Home {
   min-height: calc(100vh - 55px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(-40deg, transparent 0%, #29C9B3 100%);
-  background-size: 400% 400%;
-  animation: backgroundAnimation 30s ease infinite;
-
-  .home-content-main-box-light {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
 
   .home-image {
     width: clamp(50px, 30%, 200px);
@@ -58,17 +52,6 @@ $border-color: #b5b5b5;
     background-size: 110%;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  .home-content-main-box-dark {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .home-content-box-percentages {
@@ -222,6 +205,14 @@ $border-color: #b5b5b5;
     display: block;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .table-border-light {
+    border-color: #a1a1a194;
+  }
+  
+  .table-border-dark {
+    border-color: #5f5f5fa6;
   }
 }
 

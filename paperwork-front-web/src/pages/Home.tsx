@@ -153,15 +153,7 @@ function HomePage() {
     return (
         <>
             <Header />
-            <div className="Home">
-                {
-                    colorMode === "light" ?
-                        <div className="home-content-main-box-light">
-                        </div>
-                        :
-                        <div className="home-content-main-box-dark">
-                        </div>
-                }
+            <div className={colorMode === "light" ? "Home home-content-main-box-light" : "Home home-content-main-box-dark"}>
                 <div className="home-container">
                     {
                         isLoading ? <Loading /> : <></>
@@ -177,12 +169,12 @@ function HomePage() {
                                 <Table variant="simple">
                                     <Thead>
                                         <Tr>
-                                            <Th>
+                                            <Th className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
                                                 <Button onClick={handleClickAlp} aria-label="click-alp">
                                                     {activeAlp ? "Z...A" : "A...Z"}
                                                 </Button>
                                             </Th>
-                                            <Th isNumeric>
+                                            <Th isNumeric className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
                                                 <Button onClick={handleClickAsc} aria-label="click-asc">
                                                     {activeAsc ? translation.descending : translation.ascending}
                                                 </Button>
@@ -196,8 +188,8 @@ function HomePage() {
                                                     ascendingArray?.map((item: any, index: any) => {
                                                         return (
                                                             <Tr key={index}>
-                                                                <Td key="{itemAscProcess}">{item.process}</Td>
-                                                                <Td key="{itemAscPercent}" isNumeric>
+                                                                <Td key="{itemAscProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
+                                                                <Td key="{itemAscPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
@@ -207,8 +199,8 @@ function HomePage() {
                                                     descendingArray?.map((item: any, index: any) => {
                                                         return (
                                                             <Tr key={index}>
-                                                                <Td key="{itemDscProcess}">{item.process}</Td>
-                                                                <Td key="{itemDscPercent}" isNumeric>
+                                                                <Td key="{itemDscProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
+                                                                <Td key="{itemDscPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
@@ -219,8 +211,8 @@ function HomePage() {
                                                     alphabeticArray?.map((item: any, index: any) => {
                                                         return (
                                                             <Tr key={index}>
-                                                                <Td key="{itemAlpProcess}">{item.process}</Td>
-                                                                <Td key="{itemAlpPercent}" isNumeric>
+                                                                <Td key="{itemAlpProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
+                                                                <Td key="{itemAlpPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
@@ -230,8 +222,8 @@ function HomePage() {
                                                     invertArray?.map((item: any, index: any) => {
                                                         return (
                                                             <Tr key={index}>
-                                                                <Td key="{itemInvProcess}">{item.process}</Td>
-                                                                <Td key="{itemInvPercent}" isNumeric>
+                                                                <Td key="{itemInvProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
+                                                                <Td key="{itemInvPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
                                                                     <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
                                                                 </Td>
                                                             </Tr>
