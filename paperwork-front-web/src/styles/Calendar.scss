@@ -10,7 +10,7 @@ $calendar-light-active-color: $calendar-secondary-color;
 $calendar-light-active-text-color: #FFFFFF;
 
 $calendar-dark-text-color: #CECECE;
-$calendar-dark-background-color: #222222a7;
+$calendar-dark-background-color: #222222e2;
 $calendar-dark-foreground-color: #303030;
 $calendar-dark-hover-color: #3b3b3b;
 $calendar-dark-disabled-color: #303030;
@@ -30,18 +30,14 @@ $calendar-dark-active-text-color: #FFFFFF;
         max-width: 1000px;
         padding: 0 0 20px 0;
         margin: 0 0 10px 0;
-        letter-spacing: 2px;
         word-spacing: 2px;
         font-size: clamp(20px, 5vw, 36px);
-        font-weight: 700;
+        font-weight: 500;
         text-align: center;
-        background: linear-gradient(to right, #FC6976, #29C9B3);
-        background-size: 100% 200%;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
     }
 
     .calendar-image {
+        opacity: 0.6;
         position: absolute;
         bottom: 0;
         left: 0;
