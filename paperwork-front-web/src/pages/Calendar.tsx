@@ -53,7 +53,7 @@ function CalendarPage() {
     const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
-    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.85)", "rgba(34, 34, 34, 0.85)");
+    const adaptedColor = useColorModeValue("#f5f5f5", "#303030");
 
     function handleNewDateChange(e: any) {
         setNewDate(e.target.value);

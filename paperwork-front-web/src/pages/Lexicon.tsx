@@ -91,55 +91,61 @@ function LexiconPage() {
   };
 
   return (
-    <>
+    <div className={colorMode === "light" ? "lexicon-light" : "lexicon-dark"}>
       <Header />
-      { colorMode === "light" ?
-        <><div className='Help-text-button-light'>
-          {translation.textHelp}
-        </div><Link className='Help-button-light' to="/help">{translation.buttonHelp}</Link>
-        </>
-        :
-        <><div className='Help-text-button-dark'>
-          {translation.textHelp}
-        </div><Link className='Help-button-dark' to="/help">{translation.buttonHelp}</Link>
-        </>
+      {
+        colorMode === "light" ?
+          <><div className='Help-text-button-light'>
+            {translation.textHelp}
+          </div><Link className='Help-button-light' to="/help">{translation.buttonHelp}</Link>
+          </>
+          :
+          <><div className='Help-text-button-dark'>
+            {translation.textHelp}
+          </div><Link className='Help-button-dark' to="/help">{translation.buttonHelp}</Link>
+          </>
       }
       <div className="lexicon-image">
         <img src="assets/lexicon-page/Lexicon-icon.png" alt="lexicon_icon_image" />
       </div>
-      { colorMode === "light" ?
-        <div className="faqs">
-          {faqs.map((faq, index) => (
-            <div data-testid="faq-button"
-              className={"faq-light" + (faq.open ? "open" : "")}
-              key={index}
-              onClick={() => toggleFAQ(index)}>
-              <div className="faq-light-question">{faq.question}</div>
-              <div className="faq-light-answer faq-light-answer-divider faq-light-display-linebreak">{faq.answer}</div>
-              <Link to={faq.link}>
-                <img className="faq-light-answer faq-light-screen" src={faq.image} alt={faq.alt} />
-              </Link>
-            </div>
-          ))}
-        </div>
-        :
-        <div className="faqs">
-          {faqs.map((faq, index) => (
-            <div data-testid="faq-button"
-              className={"faq-dark " + (faq.open ? "open" : "")}
-              key={index}
-              onClick={() => toggleFAQ(index)}>
-              <div className="faq-dark-question">{faq.question}</div>
-              <div className="faq-dark-answer faq-dark-answer-divider faq-dark-display-linebreak">{faq.answer}</div>
-              <Link to={faq.link}>
-                <img className="faq-dark-answer faq-dark-screen" src={faq.image} alt={faq.alt} />
-              </Link>
-            </div>
-          ))}
-        </div>
+      {
+        colorMode === "light" ?
+          <div className="faqs">
+            {
+              faqs.map((faq, index) => (
+                <div data-testid="faq-button"
+                  className={"faq-light" + (faq.open ? "open" : "")}
+                  key={index}
+                  onClick={() => toggleFAQ(index)}>
+                  <div className="faq-light-question">{faq.question}</div>
+                  <div className="faq-light-answer faq-light-answer-divider faq-light-display-linebreak">{faq.answer}</div>
+                  <Link to={faq.link}>
+                    <img className="faq-light-answer faq-light-screen" src={faq.image} alt={faq.alt} />
+                  </Link>
+                </div>
+              ))
+            }
+          </div>
+          :
+          <div className="faqs">
+            {
+              faqs.map((faq, index) => (
+                <div data-testid="faq-button"
+                  className={"faq-dark " + (faq.open ? "open" : "")}
+                  key={index}
+                  onClick={() => toggleFAQ(index)}>
+                  <div className="faq-dark-question">{faq.question}</div>
+                  <div className="faq-dark-answer faq-dark-answer-divider faq-dark-display-linebreak">{faq.answer}</div>
+                  <Link to={faq.link}>
+                    <img className="faq-dark-answer faq-dark-screen" src={faq.image} alt={faq.alt} />
+                  </Link>
+                </div>
+              ))
+            }
+          </div>
       }
-      </>
-    );
+    </div>
+  );
 }
 
 export default LexiconPage;

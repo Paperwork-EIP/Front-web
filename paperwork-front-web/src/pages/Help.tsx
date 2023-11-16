@@ -5,7 +5,7 @@ import "../styles/Help.scss";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { getTranslation } from './Translation';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, useColorModeValue } from '@chakra-ui/react';
 
 interface FAQ {
   question: string;
@@ -28,6 +28,7 @@ function HelpPage() {
 
   const cookieList = cookies.get('loginToken');
   const { colorMode } = useColorMode();
+  const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.85)", "rgba(34, 34, 34, 0.85)");
   const translation = getTranslation(language, "helpPage");
 
 
@@ -124,59 +125,67 @@ function HelpPage() {
   };
 
   return (
-    <>
+    <div className={colorMode === "light" ? "help-light" : "help-dark"}>
       <Header />
-      { colorMode === "light" ?
-        <><div className='Lexicon-text-button-light'>
-          {translation.textLexicon}
-        </div><Link className='Lexicon-button-light' to="/lexicon">{translation.buttonLexicon}</Link><div className="faq-light-image">
-            <img src="assets/help-page/FAQs-bro.svg" alt="FAQs_bro_image" />
-          </div></>
-        :
-        <><div className='Lexicon-text-button-dark'>
-          {translation.textLexicon}
-        </div><Link className='Lexicon-button-dark' to="/lexicon">{translation.buttonLexicon}</Link><div className="faq-dark-image">
-            <img src="assets/help-page/FAQs-bro.svg" alt="FAQs_bro_image" />
-          </div></>
+      {
+        colorMode === "light" ?
+          <>
+            <div className='Lexicon-text-button-light'>
+              {translation.textLexicon}
+            </div><Link className='Lexicon-button-light' to="/lexicon">{translation.buttonLexicon}</Link><div className="faq-light-image">
+              <img src="assets/help-page/FAQs-bro.svg" alt="FAQs_bro_image" />
+            </div>
+          </>
+          :
+          <>
+            <div className='Lexicon-text-button-dark'>
+              {translation.textLexicon}
+            </div><Link className='Lexicon-button-dark' to="/lexicon">{translation.buttonLexicon}</Link><div className="faq-dark-image">
+              <img src="assets/help-page/FAQs-bro.svg" alt="FAQs_bro_image" />
+            </div>
+          </>
       }
-      { colorMode === "light" ?
-        <div className="faqs-light">
-          {faqs.map((faq, index) => (
-            <div data-testid="faq-button"
-              className={"faq-light " + (faq.open ? "open" : "")}
-              key={index}
-              onClick={() => toggleFAQ(index)}>
-              <div className="faq-light-question">{faq.question}</div>
-              <div className="faq-light-answer faq-light-answer-divider faq-light-display-linebreak">{faq.answer}</div>
-              <Link to={faq.link}>
-                <img className="faq-light-answer faq-light-screen" src={faq.imageLight} alt={faq.alt} />
-              </Link>
-            </div>
-          ))}
-        </div>
-        :
-        <div className="faqs-dark">
-          {faqs.map((faq, index) => (
-            <div data-testid="faq-button"
-              className={"faq-dark " + (faq.open ? "open" : "")}
-              key={index}
-              onClick={() => toggleFAQ(index)}>
-              <div className="faq-dark-question">{faq.question}</div>
-              <div className="faq-dark-answer faq-dark-answer-divider faq-dark-display-linebreak">{faq.answer}</div>
-              <Link to={faq.link}>
-                <img className="faq-dark-answer faq-dark-screen" src={faq.imageDark} alt={faq.alt} />
-              </Link>
-            </div>
-          ))}
-        </div>
-        }
-      <a href="mailto:paperwork_2024@labeip.epitech.eu">
-          <div className="faq-image-contact-us faq-contact-mail" >
-              <img src="assets/help-page/ContactUs-bro.svg" alt="ContactUs_bro_image" />
+      {
+        colorMode === "light" ?
+          <div className="faqs-light">
+            {
+              faqs.map((faq, index) => (
+                <div data-testid="faq-button"
+                  className={"faq-light " + (faq.open ? "open" : "")}
+                  key={index}
+                  onClick={() => toggleFAQ(index)}>
+                  <div className="faq-light-question">{faq.question}</div>
+                  <div className="faq-light-answer faq-light-answer-divider faq-light-display-linebreak">{faq.answer}</div>
+                  <Link to={faq.link}>
+                    <img className="faq-light-answer faq-light-screen" src={faq.imageLight} alt={faq.alt} />
+                  </Link>
+                </div>
+              ))
+            }
           </div>
+          :
+          <div className="faqs-dark">
+            {
+              faqs.map((faq, index) => (
+                <div data-testid="faq-button"
+                  className={"faq-dark " + (faq.open ? "open" : "")}
+                  key={index}
+                  onClick={() => toggleFAQ(index)}>
+                  <div className="faq-dark-question">{faq.question}</div>
+                  <div className="faq-dark-answer faq-dark-answer-divider faq-dark-display-linebreak">{faq.answer}</div>
+                  <Link to={faq.link}>
+                    <img className="faq-dark-answer faq-dark-screen" src={faq.imageDark} alt={faq.alt} />
+                  </Link>
+                </div>
+              ))
+            }
+          </div>
+      }
+      <a href="mailto:paperwork_2024@labeip.epitech.eu">
+        <img src="assets/help-page/ContactUs-bro.svg" className="contact-image" alt="ContactUs_bro_image" />
       </a>
-      </>
-    );
+    </div>
+  );
 }
 
 export default HelpPage;
