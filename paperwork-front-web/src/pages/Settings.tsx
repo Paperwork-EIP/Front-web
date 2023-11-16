@@ -539,28 +539,28 @@ const SettingsPage = () => {
                                     <span></span>
                                 </div>
                                 <div className="modal-avatar-container">
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar01.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar01.png")}>
                                         <img src="/assets/avatar/avatar01.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar02.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar02.png")}>
                                         <img src="/assets/avatar/avatar02.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar03.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar03.png")}>
                                         <img src="/assets/avatar/avatar03.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar04.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar04.png")}>
                                         <img src="/assets/avatar/avatar04.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar05.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
                                         <img src="/assets/avatar/avatar05.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar06.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
                                         <img src="/assets/avatar/avatar06.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar05.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
                                         <img src="/assets/avatar/avatar07.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar06.png")}>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
                                         <img src="/assets/avatar/avatar08.png" alt="Avatar" className="Avatar" />
                                     </button>
                                 </div>
