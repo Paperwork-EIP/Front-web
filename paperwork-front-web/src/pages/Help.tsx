@@ -14,6 +14,7 @@ interface FAQ {
   imageDark: string;
   alt: string;
   link: string;
+  title: string;
   open: boolean;
 }
 
@@ -51,6 +52,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Profile-dark.png",
         alt: "Profile_page_clickable_image",
         link: "/profile",
+        title: "Go to profile page",
         open: false
       },
       {
@@ -60,6 +62,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Quiz-dark.png",
         alt: "Quiz_page_clickable_image",
         link: "/quiz",
+        title: "Go to quiz page",
         open: false
       },
       {
@@ -69,6 +72,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Calendar-create-dark.png",
         alt: "Calendar_addEvent_page_clickable_image",
         link: "/calendar",
+        title: "Go to calendar page",
         open: false
       },
       {
@@ -78,6 +82,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Calendar-delete-dark.png",
         alt: "Calendar_deleteEvent_page_clickable_image",
         link: "/calendar",
+        title: "Go to calendar page",
         open: false
       },
       {
@@ -87,6 +92,7 @@ function HelpPage() {
         imageDark: "assets/help-page/ProcessIdea-dark.png",
         alt: "ProcessIdea_page_clickable_image",
         link: "/processidea",
+        title: "Go to process idea page",
         open: false
       },
       {
@@ -96,6 +102,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Settings-dark.png",
         alt: "Settings_page_clickable_image",
         link: "/settings",
+        title: "Go to settings page",
         open: false
       },
       {
@@ -105,6 +112,7 @@ function HelpPage() {
         imageDark: "assets/help-page/Lexicon-dark.png",
         alt: "Lexicon_page_clickable_image",
         link: "/lexicon",
+        title: "Go to lexicon page",
         open: false
       }
     ]);
@@ -157,7 +165,7 @@ function HelpPage() {
                   <div className="faq-light-question">{faq.question}</div>
                   <div className="faq-light-answer faq-light-answer-divider faq-light-display-linebreak">{faq.answer}</div>
                   <Link to={faq.link}>
-                    <img className="faq-light-answer faq-light-screen" src={faq.imageLight} alt={faq.alt} />
+                    <img className="faq-light-answer faq-light-screen" src={faq.imageLight} alt={faq.alt} title={faq.title} />
                   </Link>
                 </div>
               ))
@@ -182,7 +190,7 @@ function HelpPage() {
           </div>
       }
       <a href="mailto:paperwork_2024@labeip.epitech.eu">
-        <img src="assets/help-page/ContactUs-bro.svg" className="contact-image" alt="ContactUs_bro_image" />
+        <img src="assets/help-page/ContactUs-bro.svg" className="contact-image" alt="ContactUs_bro_image" title='Send an email' />
       </a>
     </div>
   );
