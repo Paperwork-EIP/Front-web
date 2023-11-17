@@ -172,7 +172,7 @@ function HomePage() {
                             </Link>
                         </div>
                         <div className="home-floating-buttons">
-                            <Link to="/quiz">
+                            <Link to="/help">
                                 <button className='home-floating-button' aria-label="submit_button">
                                     <img src="assets/help-page/help_icon.png" alt="Help_page_clickable_image" />
                                     <div className="home-floating-button-modal-description">
@@ -181,7 +181,7 @@ function HomePage() {
                                 </button>
 
                             </Link>
-                            <Link to="/help">
+                            <Link to="/lexicon">
                                 <button className='home-floating-button' aria-label="submit_button">
                                     <img src="assets/lexicon-page/lexicon_icon.png" alt="Lexicon_page_clickable_image" />
                                     <div className="home-floating-button-modal-description">
