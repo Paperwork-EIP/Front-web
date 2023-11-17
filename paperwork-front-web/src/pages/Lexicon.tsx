@@ -114,7 +114,7 @@ function LexiconPage() {
             {
               faqs.map((faq, index) => (
                 <div data-testid="faq-button"
-                  className={"faq-light" + (faq.open ? "open" : "")}
+                  className={"faq-light " + (faq.open ? "open" : "")}
                   key={index}
                   onClick={() => toggleFAQ(index)}>
                   <div className="faq-light-question">{faq.question}</div>
