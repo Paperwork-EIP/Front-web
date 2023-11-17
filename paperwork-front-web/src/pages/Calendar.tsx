@@ -267,6 +267,7 @@ function CalendarPage() {
                     minDate={new Date()}
                     onClickDay={(value) => {
                         setDate(value);
+                        onOpenDailyModal();
                         rdv.map((item: any) => {
                             if (item.toString()?.split("T")[0] === comparativeDate) {
                                 isEvent++;
@@ -408,8 +409,17 @@ function CalendarPage() {
                             {date.toDateString()}
                         </div>
                         <div className='calendar-modal-line'></div>
-                        <div className='calendar-modal-text'>
-                            {translation.editDelete}
+                        <div className='calendar-modal-header'>
+                            <h1 className='calendar-modal-text'>{translation.editDelete}</h1>
+                            <button
+                                // className='calendar-modal-button delete'
+                                className='calendar-modal-button-bin'
+                                aria-label='delete-button'
+                                onClick={() => deleteEvent()}
+                            >
+                                {/* {translation.deleteEvent} */}
+                                <img src="assets/calendar-page/bin.png" alt="delete_image" />
+                            </button>
                         </div>
                     </div>
                     <div className='calendar-modal-content'>
@@ -433,9 +443,9 @@ function CalendarPage() {
                                                         <Input width={'100%'} value={`${item.process_title} - ${item.step_title}`} disabled />
                                                     </Center>
                                                     <Center p={'10px'}>
-                                                        {
-                                                            postsStepEdit.length !== 0 ?
-                                                                <div>
+                                                        <Flex width={'100%'}>
+                                                            {
+                                                                postsStepEdit.length !== 0 ?
                                                                     <Select
                                                                         className='calendar-edit-select'
                                                                         placeholder={translation.selectTheStep}
@@ -443,27 +453,24 @@ function CalendarPage() {
                                                                         onChange={handleProcessEdit}
                                                                         styles={customStyles}
                                                                     />
-                                                                </div>
-                                                                :
-                                                                <div>
+                                                                    :
                                                                     <Select
                                                                         className='calendar-edit-select'
                                                                         placeholder={translation.selectTheStep}
                                                                         defaultValue={"Show List"}
                                                                         styles={customStyles}
                                                                     />
-                                                                </div>
-                                                        }
+                                                            }
+                                                        </Flex>
                                                     </Center>
-                                                    <Center p={'10px'}>
-                                                        <button
-                                                            className='calendar-modal-button delete'
-                                                            aria-label='delete-button'
-                                                            onClick={() => deleteEvent()}
-                                                        >
-                                                            {translation.deleteEvent}
+                                                    <div className='calendar-modal-buttons'>
+                                                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitModEvent}>
+                                                            {translation.submit}
                                                         </button>
-                                                    </Center>
+                                                        <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseDeleteModal}>
+                                                            {translation.close}
+                                                        </button>
+                                                    </div>
                                                 </Box>
                                                 : ''
                                         )
@@ -471,14 +478,6 @@ function CalendarPage() {
                                 }
                             </div>
                         }
-                    </div>
-                    <div className='calendar-modal-buttons'>
-                        <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseDeleteModal}>
-                            {translation.close}
-                        </button>
-                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitModEvent}>
-                            {translation.submit}
-                        </button>
                     </div>
                 </Modal>
             </>
@@ -501,9 +500,7 @@ function CalendarPage() {
             }
             <div className='calendar' style={{ backgroundColor: adaptedColor }}>
                 <div className='calendar-wrapper'>
-                    <h1 className="calendar-title">
-                        {translation.calendar}
-                    </h1>
+                    <h1 className="calendar-title" dangerouslySetInnerHTML={{ __html: translation.calendar }}></h1>
                     <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
                         {
                             displayCalendar()

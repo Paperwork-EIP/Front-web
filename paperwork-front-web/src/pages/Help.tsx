@@ -189,8 +189,8 @@ function HelpPage() {
             }
           </div>
       }
-      <a href="mailto:paperwork_2024@labeip.epitech.eu">
-        <img src="assets/help-page/ContactUs-bro.svg" className="contact-image" alt="ContactUs_bro_image" title='Send an email' />
+      <a href="mailto:paperwork_2024@labeip.epitech.eu" className='contact-button'>
+        <img src="assets/help-page/email.png" className="contact-image" alt="ContactUs_bro_image" title='Send an email' />
       </a>
     </div>
   );

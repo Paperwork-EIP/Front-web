@@ -366,7 +366,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "fr-FR",
-      calendar: "Ne manquez plus vos rendez-vous. Planifiez-les dans le calendrier !",
+      calendar: "Ne manquez plus vos rendez-vous. <br /> Planifiez-les dans le calendrier !",
       addEvent: "Ajouter un évènement",
       dailyEvent: "Évènements quotidiens",
       editDeleteEvent: "Modifier/Supprimer un évènement",
