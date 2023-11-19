@@ -12,7 +12,7 @@ import { getTranslation } from './Translation';
 import Loading from '../components/Loading';
 import ListEventCalendar from '../components/ListEventCalendar';
 
-import "../styles/Calendar.scss";
+import "../styles/pages/Calendar.scss";
 
 function CalendarPage() {
     const cookies = new Cookies();

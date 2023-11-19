@@ -239,19 +239,15 @@
     }
 }
 
-
-
-
-
 // LIGHT THEME
 .Profile-light {
-    --text-color: black;
+    --text-color: #000000;
     --secondary-color: #FC6976;
-    --background-page: rgb(240, 240, 240);
-    --background-box: white;
-    --process-button-hover: rgb(252, 252, 252);
-    --progress-bar-bg: rgb(240, 240, 240);
-    --border-color: white;
+    --background-page: #FFFFFF;
+    --background-box: #ECEFF1;
+    --process-button-hover: #F8F8FA;
+    --progress-bar-bg: #FFFFFF;
+    --border-color: #ECEFF1;
 
     background-color: var(--background-page);
     color: var(--text-color);
@@ -322,19 +318,15 @@
     }
 }
 
-
-
-
-
 // DARK THEME
 .Profile-dark {
-    --text-color: white;
+    --text-color: #CECECE;
     --secondary-color: #FC6976;
-    --background-page: rgb(16, 20, 28);
-    --background-box: rgb(26, 32, 44);
-    --process-button-hover: rgb(35, 43, 59);
-    --progress-bar-bg: rgb(16, 20, 28);
-    --border-color: rgb(26, 32, 44);
+    --background-page: #222222;
+    --background-box: #303030;
+    --process-button-hover: #3b3b3b;
+    --progress-bar-bg: #222222;
+    --border-color: #303030;
 
     background-color: var(--background-page);
     color: var(--text-color);
