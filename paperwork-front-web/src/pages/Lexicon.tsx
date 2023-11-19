@@ -91,7 +91,7 @@ function LexiconPage() {
   };
 
   return (
-    <div className={colorMode === "light" ? "lexicon-light" : "lexicon-dark"}>
+    <div className={colorMode === "light" ? "Lexicon lexicon-light" : "Lexicon lexicon-dark"}>
       <Header />
       {
         colorMode === "light" ?

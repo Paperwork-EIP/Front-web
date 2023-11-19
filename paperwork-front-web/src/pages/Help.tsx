@@ -133,7 +133,7 @@ function HelpPage() {
   };
 
   return (
-    <div className={colorMode === "light" ? "help-light" : "help-dark"}>
+    <div className={colorMode === "light" ? "Help help-light" : "Help help-dark"}>
       <Header />
       {
         colorMode === "light" ?
