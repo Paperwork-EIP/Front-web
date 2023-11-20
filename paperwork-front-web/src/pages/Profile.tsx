@@ -94,7 +94,7 @@ const ProfilePage = () => {
                         <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />{translation.modify}</a>
                         <div className='informations-container'>
                             <div className='main-container'>
-                                <img src={profilePicture === null ? "assets/avatar/NoAvatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
+                                <img src={profilePicture === null ? "assets/avatar/no_avatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
                                 <div data-testid="username" className='section-username'>{username === null ? translation.noUsername : username}</div>
                                 <div className='section-fullname'>
                                     <div className='fn-name'>{name === null ? null : name}</div>

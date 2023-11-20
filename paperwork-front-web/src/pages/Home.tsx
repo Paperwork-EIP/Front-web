@@ -1,15 +1,4 @@
-import {
-    TableContainer,
-    Table,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
-    useColorModeValue,
-    useColorMode,
-    Button,
-} from "@chakra-ui/react";
+import { useColorModeValue, useColorMode } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from 'universal-cookie';
@@ -29,29 +18,12 @@ function HomePage() {
     const api = process.env.REACT_APP_BASE_URL;
     const [rdv, setRDV]: any = useState([]);
     const [userProcessInfo, setUserProcessInfo]: any = useState([]);
-    const [activeAsc, setActiveAsc] = useState(false);
-    const [activeAlp, setActiveAlp] = useState(false);
-    const [activePriority, setActivePriority] = useState(false);
-    const ascendingArray = [...userProcessInfo].sort((a, b) => a.percentage - b.percentage);
-    const descendingArray = [...userProcessInfo].sort((a, b) => b.percentage - a.percentage);
-    const alphabeticArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? 1 : -1);
-    const invertArray = [...userProcessInfo].sort((a, b) => a.process > b.process ? -1 : 1);
     const [language, setLanguage] = useState("");
     const translation = getTranslation(language, "home");
     const [isLoading, setIsLoading] = useState(true);
 
     const { colorMode } = useColorMode();
     const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.25)", "rgba(34, 34, 34, 0.65)");
-
-    function handleClickAsc() {
-        setActiveAsc(!activeAsc);
-        setActivePriority(true);
-    }
-
-    function handleClickAlp() {
-        setActiveAlp(!activeAlp);
-        setActivePriority(false);
-    }
 
     function getPercentageClass(percentage: number) {
         if (percentage <= 25) {
@@ -162,100 +134,61 @@ function HomePage() {
                         <div className="home-image">
                             <img src="assets/home-page/home-logo.svg" alt="home_icon_image" />
                         </div>
-                        <h1 className="home-title"> {translation.title} </h1>
+                        <h1 className="home-title">
+                            {translation.title}
+                        </h1>
                         <div className="home-content-box-percentages" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
-                            <div className="home-content-help-text"> {translation.process} </div>
-                            <TableContainer>
-                                <Table variant="simple">
-                                    <Thead>
-                                        <Tr>
-                                            <Th className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
-                                                <Button onClick={handleClickAlp} aria-label="click-alp">
-                                                    {activeAlp ? "Z...A" : "A...Z"}
-                                                </Button>
-                                            </Th>
-                                            <Th isNumeric className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>
-                                                <Button onClick={handleClickAsc} aria-label="click-asc">
-                                                    {activeAsc ? translation.descending : translation.ascending}
-                                                </Button>
-                                            </Th>
-                                        </Tr>
-                                    </Thead>
-                                    <Tbody>
-                                        {
-                                            activePriority === true ?
-                                                activeAsc ?
-                                                    ascendingArray?.map((item: any, index: any) => {
-                                                        return (
-                                                            <Tr key={index}>
-                                                                <Td key="{itemAscProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
-                                                                <Td key="{itemAscPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
-                                                                </Td>
-                                                            </Tr>
-                                                        );
-                                                    })
-                                                    :
-                                                    descendingArray?.map((item: any, index: any) => {
-                                                        return (
-                                                            <Tr key={index}>
-                                                                <Td key="{itemDscProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
-                                                                <Td key="{itemDscPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
-                                                                </Td>
-                                                            </Tr>
-                                                        );
-                                                    })
-                                                :
-                                                activeAlp ?
-                                                    alphabeticArray?.map((item: any, index: any) => {
-                                                        return (
-                                                            <Tr key={index}>
-                                                                <Td key="{itemAlpProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
-                                                                <Td key="{itemAlpPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
-                                                                </Td>
-                                                            </Tr>
-                                                        );
-                                                    })
-                                                    :
-                                                    invertArray?.map((item: any, index: any) => {
-                                                        return (
-                                                            <Tr key={index}>
-                                                                <Td key="{itemInvProcess}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"}>{item.process}</Td>
-                                                                <Td key="{itemInvPercent}" className={colorMode === "light" ? "table-border-light" : "table-border-dark"} isNumeric>
-                                                                    <div className={`percentage-value ${getPercentageClass(item.percentage)}`} data-testid="percentageValue">{item.percentage}%</div>
-                                                                </Td>
-                                                            </Tr>
-                                                        );
-                                                    })
-                                        }
+                            <h2 className="home-content-percentages-title">
+                                {translation.process}
+                            </h2>
+                            <div className="home-content-item-percentages-container">
+                                {
+                                    userProcessInfo.map((item: any, index: any) => {
+                                        return (
+                                            <div key={index} className="home-content-box-percentages-item">
+                                                <div className="home-content-box-percentages-item-top">
+                                                    <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
+                                                        {item.process}
+                                                    </span>
 
-                                    </Tbody>
-                                </Table>
-                            </TableContainer>
+                                                </div>
+                                                <div className="home-content-box-percentages-item-bottom">
+                                                    <div className="progress">
+                                                        <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                                    </div>
+                                                    <span className={`percentage-value`} data-testid="percentageValue">
+                                                        {item.percentage}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                }
+                            </div>
                             <Link to="/quiz">
                                 <button className='home-content-start-process-button' aria-label="submit_button">
                                     {translation.newProcessButton}
                                 </button>
                             </Link>
                         </div>
-                        <div className="home-content-box-help-base" style={{ backgroundColor: useColorModeValue("rgba(233, 233, 233, 0.4)", "rgba(34, 34, 34, 0.65)") }}>
-                            <div className="home-content-help-text"> {translation.needHelp} </div>
-                            <div className="home-content-box-help-wrapper">
-                                <div className="home-content-box-help" style={{ backgroundColor: adaptedColor }}>
-                                    <Link to="/help">
-                                        <div className="home-content-help-help-text"> {translation.help} </div>
-                                        <img className="home-help-image" src="assets/help-page/FAQs-bro.png" alt="Help_page_clickable_image" />
-                                    </Link>
-                                </div>
-                                <div className="home-content-box-lexicon" style={{ backgroundColor: adaptedColor }}>
-                                    <Link to="/lexicon">
-                                        <div className="home-content-help-lexicon-text"> {translation.lexicon} </div>
-                                        <img className="home-help-image" src="assets/lexicon-page/Lexicon-icon.png" alt="Lexicon_page_clickable_image" />
-                                    </Link>
-                                </div>
-                            </div>
+                        <div className="home-floating-buttons">
+                            <Link to="/help">
+                                <button className='home-floating-button' aria-label="submit_button">
+                                    <img src="assets/help-page/help_icon.png" alt="Help_page_clickable_image" />
+                                    <div className="home-floating-button-modal-description">
+                                        <p>{translation.help}</p>
+                                    </div>
+                                </button>
+
+                            </Link>
+                            <Link to="/lexicon">
+                                <button className='home-floating-button' aria-label="submit_button">
+                                    <img src="assets/lexicon-page/lexicon_icon.png" alt="Lexicon_page_clickable_image" />
+                                    <div className="home-floating-button-modal-description">
+                                        <p>{translation.lexicon}</p>
+                                    </div>
+                                </button>
+                            </Link>
                         </div>
                     </div>
                     <ListEventCalendar

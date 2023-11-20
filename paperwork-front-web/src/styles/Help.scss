@@ -1,3 +1,7 @@
+.Help {
+  min-height: 100vh;
+}
+
 .help-light {
   background-color: #FFFFFF;
   color: #000000;
@@ -8,7 +12,9 @@
   color: #CECECE;
 }
 
-.faq-light-image, .faq-dark-image, .faq-image-contact-us{
+.faq-light-image,
+.faq-dark-image,
+.faq-image-contact-us {
   width: 700px;
   max-width: 400px;
   height: auto;
@@ -19,12 +25,23 @@
   filter: drop-shadow(0 0 0.75rem rgba(86, 86, 86, 0.434));
 }
 
-.contact-image {
+.contact-button {
   position: fixed;
-  bottom: 10px;
-  right: 10px;
-  height: 80px;
-  width: 80px;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #FC6976;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #29C9B3;
+  }
 }
 
 .Lexicon-text-button-light {

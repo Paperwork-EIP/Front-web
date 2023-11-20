@@ -58,7 +58,7 @@
 }
 
 .home-calendar-button {
-    background-color: #29C9B3;
+    border: 1px solid #FC6976;
     padding: 8px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -72,7 +72,7 @@
     transform: translateX(-50%);
 
     &:hover {
-        background-color: #1A9A88;
+        background-color: #29C9B3;
     }
 }
 
