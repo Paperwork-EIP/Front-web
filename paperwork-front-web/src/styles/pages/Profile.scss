@@ -1,3 +1,11 @@
+$border-color: #b5b5b5;
+$progress-bar-color: #a1a1a194;
+$progress-value-color-low: #FC6976;
+$progress-value-color-medium: #fc9f69;
+$progress-value-color-high: #29c9c6;
+$progress-value-color-very-high: #29C9B3;
+
+
 .Profile {
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px 3% 10px 3%;
@@ -45,6 +53,7 @@
             padding: 15px;
             justify-content: center;
             align-items: center;
+            border: 1px solid $border-color;
 
             .text-style-main-container {
                 margin-top: 4px;
@@ -87,6 +96,7 @@
             align-items: center;
             font-size: 1.2em;
             letter-spacing: 0.06em;
+            border: 1px solid $border-color;
 
             .heading {
                 margin-top: 2rem;
@@ -137,9 +147,10 @@
         margin: 0 3% 0 3%;
         padding: 10px 3% 10px 3%;
         border-radius: 8px;
+        border: 1px solid $border-color;
 
         .heading {
-            margin-top: 2rem;
+            margin: 1rem 0 1rem 0;
             font-size: 1.5em;
             font-weight: bold;
         }
@@ -147,9 +158,10 @@
         .Process-Btn {
             border-radius: 8px;
             margin: 4px 0 4px 0;
+            padding: 0 10px 10px 10px;
 
-            :hover {
-                border-radius: 8px;
+            &:hover {
+                background-color: var(--process-button-hover);
             }
 
             .process-progress {
@@ -157,10 +169,6 @@
                 flex-direction: row;
                 align-items: center;
                 padding: 1%;
-
-                :hover {
-                    border: none;
-                }
 
                 .progress-name {
                     width: 15%;
@@ -242,6 +250,7 @@
 // LIGHT THEME
 .Profile-light {
     --text-color: #000000;
+    --hr-color: #b5b5b5b0;
     --secondary-color: #FC6976;
     --background-page: #FFFFFF;
     --background-box: #ECEFF1;
@@ -255,7 +264,6 @@
     .informations-container {
         .section-container {
             background-color: var(--background-box);
-            border: 0.1rem solid var(--border-color);
         }
 
         .main-container {
@@ -292,7 +300,7 @@
             }
 
             hr {
-                border: 1px solid var(--text-color);
+                border: 1px solid var(--hr-color);
             }
         }
     }
@@ -300,19 +308,83 @@
     .process-container {
         background-color: var(--background-box);
 
-        :hover {
-            background-color: var(--process-button-hover);
-        }
+        .home-content-box-percentages-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
 
-        .process-progress {
-            .progress-bar {
-                .progress-bar-bg {
-                    background-color: var(--progress-bar-bg);
+            .home-content-box-percentages-item-top,
+            .home-content-box-percentages-item-bottom {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                .percentage-value {
+                    width: 60px;
+                    text-align: center;
+                    font-weight: 500;
+                    padding: 4px 0;
+                    border-radius: 20px;
+
+                    &.percentage-low {
+                        background-color: $progress-value-color-low;
+                    }
+
+                    &.percentage-medium {
+                        background-color: $progress-value-color-medium;
+                    }
+
+                    &.percentage-high {
+                        background-color: $progress-value-color-high;
+                    }
+
+                    &.percentage-very-high {
+                        background-color: $progress-value-color-very-high;
+                    }
                 }
 
-                .progress-bar-front {
-                    background-color: var(--secondary-color);
+                .progress {
+                    width: 100%;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: $progress-bar-color;
+                    overflow: hidden;
+
+                    .progress-value {
+                        height: 100%;
+
+                        &.percentage-low {
+                            background-color: $progress-value-color-low;
+                        }
+
+                        &.percentage-medium {
+                            background-color: $progress-value-color-medium;
+                        }
+
+                        &.percentage-high {
+                            background-color: $progress-value-color-high;
+                        }
+
+                        &.percentage-very-high {
+                            background-color: $progress-value-color-very-high;
+                        }
+                    }
                 }
+            }
+
+            .home-content-box-percentages-item-border-light {
+                border-color: #a1a1a194;
+            }
+
+            .home-content-box-percentages-item-border-dark {
+                border-color: #5f5f5fa6;
             }
         }
     }
@@ -321,9 +393,10 @@
 // DARK THEME
 .Profile-dark {
     --text-color: #CECECE;
+    --hr-color: #b5b5b583;
     --secondary-color: #FC6976;
-    --background-page: #222222;
-    --background-box: #303030;
+    --background-page: #303030;
+    --background-box: #222222;
     --process-button-hover: #3b3b3b;
     --progress-bar-bg: #222222;
     --border-color: #303030;
@@ -334,7 +407,6 @@
     .informations-container {
         .section-container {
             background-color: var(--background-box);
-            border: 0.1rem solid var(--border-color);
         }
 
         .main-container {
@@ -371,7 +443,7 @@
             }
 
             hr {
-                border: 1px solid var(--text-color);
+                border: 1px solid var(--hr-color);
             }
         }
     }
@@ -379,19 +451,83 @@
     .process-container {
         background-color: var(--background-box);
 
-        :hover {
-            background-color: var(--process-button-hover);
-        }
+        .home-content-box-percentages-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
 
-        .process-progress {
-            .progress-bar {
-                .progress-bar-bg {
-                    background-color: var(--progress-bar-bg);
+            .home-content-box-percentages-item-top,
+            .home-content-box-percentages-item-bottom {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                .percentage-value {
+                    width: 60px;
+                    text-align: center;
+                    font-weight: 500;
+                    padding: 4px 0;
+                    border-radius: 20px;
+
+                    &.percentage-low {
+                        background-color: $progress-value-color-low;
+                    }
+
+                    &.percentage-medium {
+                        background-color: $progress-value-color-medium;
+                    }
+
+                    &.percentage-high {
+                        background-color: $progress-value-color-high;
+                    }
+
+                    &.percentage-very-high {
+                        background-color: $progress-value-color-very-high;
+                    }
                 }
 
-                .progress-bar-front {
-                    background-color: var(--secondary-color);
+                .progress {
+                    width: 100%;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: $progress-bar-color;
+                    overflow: hidden;
+
+                    .progress-value {
+                        height: 100%;
+
+                        &.percentage-low {
+                            background-color: $progress-value-color-low;
+                        }
+
+                        &.percentage-medium {
+                            background-color: $progress-value-color-medium;
+                        }
+
+                        &.percentage-high {
+                            background-color: $progress-value-color-high;
+                        }
+
+                        &.percentage-very-high {
+                            background-color: $progress-value-color-very-high;
+                        }
+                    }
                 }
+            }
+
+            .home-content-box-percentages-item-border-light {
+                border-color: #a1a1a194;
+            }
+
+            .home-content-box-percentages-item-border-dark {
+                border-color: #5f5f5fa6;
             }
         }
     }

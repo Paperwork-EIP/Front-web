@@ -150,7 +150,6 @@ function HomePage() {
                                                     <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
                                                         {item.process}
                                                     </span>
-
                                                 </div>
                                                 <div className="home-content-box-percentages-item-bottom">
                                                     <div className="progress">

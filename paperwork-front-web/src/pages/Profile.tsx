@@ -41,6 +41,24 @@ const ProfilePage = () => {
     // Color mode
     const { colorMode } = useColorMode();
 
+    function getPercentageClass(percentage: number) {
+        if (percentage <= 25) {
+            return "percentage-low";
+        }
+        else if (percentage <= 50) {
+            return "percentage-medium";
+        }
+        else if (percentage <= 75) {
+            return "percentage-high";
+        }
+        else if (percentage <= 100) {
+            return "percentage-very-high";
+        }
+        else {
+            return "percentage-low";
+        }
+    };
+
     async function getUserInfo() {
         try {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } }).then(res => {
@@ -91,69 +109,76 @@ const ProfilePage = () => {
                 isLoading ? <Loading /> : <></>
             }
             <div className={colorMode === "light" ? "Profile Profile-light" : "Profile Profile-dark"}>
-                        <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />{translation.modify}</a>
-                        <div className='informations-container'>
-                            <div className='main-container'>
-                                <img src={profilePicture === null ? "assets/avatar/no_avatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
-                                <div data-testid="username" className='section-username'>{username === null ? translation.noUsername : username}</div>
-                                <div className='section-fullname'>
-                                    <div className='fn-name'>{name === null ? null : name}</div>
-                                    <div className='fn-firstname'>{firstname === null ? null : firstname}</div>
-                                </div>
-                            </div>
-                            <div className='secondary-container'>
-                                <div className='secondary-row'>
-                                    <div className='secondary-label'>Email</div>
-                                    <div data-testid="email" className='section-text email-text'>{email === null ? translation.noEmail : email}</div>
-                                </div>
-                                <hr />
-                                <div className='secondary-row'>
-                                    <div className='secondary-label'>{translation.address}</div>
-                                    <div data-testid="address" className='section-text address-text'>{address === null ? translation.noAddress : address}</div>
-                                </div>
-                                <hr />
-                                <div className='secondary-row'>
-                                    <div className='secondary-label'>{translation.phonenumber}</div>
-                                    <div data-testid="number_phone" className='section-text phonenumber-text'>{phonenumber === null ? translation.noPhonenumber : phonenumber}</div>
-                                </div>
-                                <hr />
-                                <div className='secondary-row'>
-                                    <div className='secondary-label'>{translation.language}</div>
-                                    <div data-testid="language" className='section-text language-text'>{language === null ? translation.noLanguage : language}</div>
-                                </div>
-                                <hr />
-                                <div className='secondary-row'>
-                                    <div className='secondary-label'>{translation.age}</div>
-                                    <div data-testid="age" className='section-text section-age'>{age === null ? translation.noAge : age}</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='process-container'>
-                            <h1 className='heading'>{translation.process}</h1>
-                            <>
-                                {
-                                    userProcessInfo && userProcessInfo.length === 0 ?
-                                        <div className='no-process'>{translation.noProcess}</div>
-                                        :
-                                        userProcessInfo?.map((item: any) => {
-                                            return (
-                                                item.pourcentage ?
-                                                    <button className='Process-Btn' data-testid='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.stocked_title}>
-                                                        <div className='process-progress' key={item.userProcess.id}>
-                                                            <div className='progress-name'>{item.userProcess.title}</div>
-                                                            <div className='progress-bar'>
-                                                                <div className='progress-bar-bg'></div>
-                                                                <div className='progress-bar-front' style={{ width: item.pourcentage + '%' }}></div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                    : <div className='no-process'>{translation.noProcess}</div>
-                                            )
-                                        })
-                                }
-                            </>
+                <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />{translation.modify}</a>
+                <div className='informations-container'>
+                    <div className='main-container'>
+                        <img src={profilePicture === null ? "assets/avatar/no_avatar.png" : profilePicture} alt="Avatar" className="Avatar" data-testid="profilePicture"></img>
+                        <div data-testid="username" className='section-username'>{username === null ? translation.noUsername : username}</div>
+                        <div className='section-fullname'>
+                            <div className='fn-name'>{name === null ? null : name}</div>
+                            <div className='fn-firstname'>{firstname === null ? null : firstname}</div>
                         </div>
                     </div>
+                    <div className='secondary-container'>
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>Email</div>
+                            <div data-testid="email" className='section-text email-text'>{email === null ? translation.noEmail : email}</div>
+                        </div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>{translation.address}</div>
+                            <div data-testid="address" className='section-text address-text'>{address === null ? translation.noAddress : address}</div>
+                        </div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>{translation.phonenumber}</div>
+                            <div data-testid="number_phone" className='section-text phonenumber-text'>{phonenumber === null ? translation.noPhonenumber : phonenumber}</div>
+                        </div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>{translation.language}</div>
+                            <div data-testid="language" className='section-text language-text'>{language === null ? translation.noLanguage : language}</div>
+                        </div>
+                        <hr />
+                        <div className='secondary-row'>
+                            <div className='secondary-label'>{translation.age}</div>
+                            <div data-testid="age" className='section-text section-age'>{age === null ? translation.noAge : age}</div>
+                        </div>
+                    </div>
+                </div>
+                <div className='process-container'>
+                    <h1 className='heading'>{translation.process}</h1>
+                    {
+                        userProcessInfo && userProcessInfo.length === 0 ?
+                            <div className='no-process'>{translation.noProcess}</div>
+                            :
+                            userProcessInfo?.map((item: any, index: number) => {
+                                return (
+                                    item.pourcentage ?
+                                        <button className='Process-Btn' data-testid='Process-Btn' onClick={() => window.location.href = 'processResult/' + item.userProcess.stocked_title}>
+                                            <div key={index} className="home-content-box-percentages-item">
+                                                <div className="home-content-box-percentages-item-top">
+                                                    <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
+                                                        {item.userProcess.title}
+                                                    </span>
+                                                </div>
+                                                <div className="home-content-box-percentages-item-bottom">
+                                                    <div className="progress">
+                                                        <div className={`progress-value ${getPercentageClass(item.pourcentage)}`} style={{ width: `${item.pourcentage}%` }}></div>
+                                                    </div>
+                                                    <span className={`percentage-value`} data-testid="percentageValue">
+                                                        {item.pourcentage}%
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </button>
+                                        :
+                                        <div className='no-process'>{translation.noProcess}</div>
+                                )
+                            })
+                    }
+                </div>
+            </div>
         </>
     );
 }
