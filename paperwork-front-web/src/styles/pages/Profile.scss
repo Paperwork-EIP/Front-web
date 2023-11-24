@@ -303,8 +303,7 @@ $progress-value-color-very-high: #29C9B3;
         }
 
         .profile-img {
-            width: 100%;
-            height: auto;
+            display: none;
         }
     }
 }
@@ -313,7 +312,7 @@ $progress-value-color-very-high: #29C9B3;
     --text-color: #000000;
     --hr-color: #b5b5b5b0;
     --secondary-color: #FC6976;
-    --background-page: #FFFFFF;
+    --background-page: #f5f5f5;
     --background-box: #ECEFF1;
     --process-button-hover: #F8F8FA;
     --progress-bar-bg: #FFFFFF;

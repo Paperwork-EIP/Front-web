@@ -177,6 +177,7 @@ function ProfilePage() {
                                 <div className='secondary-label'>{translation.age}</div>
                                 <div data-testid="age" className='section-text section-age'>{age === null ? translation.noAge : age}</div>
                             </div>
+                            <hr />
                             <a href='/settings' className='modify-profile-btn' data-testid='modify-profile-btn'><FaCog className='modify-profile-icon' size={25} />{translation.modify}</a>
                         </div>
                     </div>
