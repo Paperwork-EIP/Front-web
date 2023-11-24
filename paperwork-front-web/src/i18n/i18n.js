@@ -62,7 +62,7 @@ const resources = {
                 yes_account_click: "Click here !",
                 text_1: "Join us !",
                 text_2: "Create your account with an email address or by Google/Facebook",
-                fail: "Fail to send the verification email",
+                fail: "Fail to register the account. Please try again later.",
                 error: "Email, username or password is incorrect."
             },
             aboutus: {
@@ -72,7 +72,7 @@ const resources = {
                 job_3: "Frontend developer",
                 job_4: "Frontend developer",
                 job_5: "Mobile developer",
-                job_6: "Devops/Mobile developer",
+                job_6: "Devops developer",
                 job_7: "Backend developer",
                 date_1: "September - October 2021",
                 timeline_title: "Project timeline",
@@ -198,7 +198,7 @@ const resources = {
                 yes_account_click: "Cliquez ici !",
                 text_1: "Rejoignez-nous !",
                 text_2: "Créez votre compte avec une adresse email ou via Google/Facebook.",
-                fail: "Échec de l'envoi de l'email de vérification",
+                fail: "Échec de l'inscription du compte. Veuillez réessayer plus tard.",
                 error: "L'email, le nom d'utilisateur ou le mot de passe est incorrect."
             },
             aboutus: {
@@ -208,7 +208,7 @@ const resources = {
                 job_3: "Développeur frontend",
                 job_4: "Développeur frontend",
                 job_5: "Développeur mobile",
-                job_6: "Devops/Développeur mobile",
+                job_6: "Devops mobile",
                 job_7: "Développeur backend",
                 timeline_title: "Chronologie du projet",
                 timeline_1_title: "Moonshot",
@@ -344,7 +344,7 @@ const resources = {
                 job_3: "Frontend-Entwickler",
                 job_4: "Frontend-Entwickler",
                 job_5: "Mobile Entwickler",
-                job_6: "DevOps/Mobile-Entwickler",
+                job_6: "DevOps-Entwickler",
                 job_7: "Backend-Entwickler",
                 date_1: "September - Oktober 2021",
                 timeline_title: "Projektzeitachse",
@@ -421,7 +421,7 @@ const resources = {
                 es: "Espanol"
             },
             welcome: {
-                header_title: "서류 작업",
+                header_title: "Paperwork",
                 header_description: "가장 지루한 작업을 돕는 도구입니다.",
                 header_start_button: "시작",
                 container_title: "서류 작업이란?",
@@ -480,7 +480,7 @@ const resources = {
                 job_3: "프론트엔드 개발자",
                 job_4: "프론트엔드 개발자",
                 job_5: "모바일 개발자",
-                job_6: "DevOps/모바일 개발자",
+                job_6: "DevOps 개발자",
                 job_7: "백엔드 개발자",
                 timeline_title: "프로젝트 타임라인",
                 timeline_1_title: "Moonshot",
@@ -558,7 +558,7 @@ const resources = {
                 es: "Espanol"
             },
             "welcome": {
-                "header_title": "Pekerjaan Kantoran",
+                "header_title": "Paperwork",
                 "header_description": "Sebuah alat untuk membantu Anda dalam tugas yang paling menjengkelkan.",
                 "header_start_button": "Mulai",
                 "container_title": "Apa itu Pekerjaan Kantoran ?",
@@ -617,7 +617,7 @@ const resources = {
                 "job_3": "Pengembang Frontend",
                 "job_4": "Pengembang Frontend",
                 "job_5": "Pengembang Mobile",
-                "job_6": "Devops/Pengembang Mobile",
+                "job_6": "Devops Mobile",
                 "job_7": "Pengembang Backend",
                 "date_1": "September - Oktober 2021",
                 "timeline_title": "Kronologi Proyek",
@@ -753,7 +753,7 @@ const resources = {
                 job_3: "Desarrollador Frontend",
                 job_4: "Desarrollador Frontend",
                 job_5: "Desarrollador Móvil",
-                job_6: "Desarrollador Devops/Móvil",
+                job_6: "Desarrollador Devops",
                 job_7: "Desarrollador Backend",
                 date_1: "Septiembre - Octubre 2021",
                 timeline_title: "Cronología del proyecto",

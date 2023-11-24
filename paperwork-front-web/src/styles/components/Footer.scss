@@ -1,0 +1,100 @@
+.Footer-container {
+    // Footer color
+    --footer-background-color: #151515;
+    --footer-font-color: white;
+
+    height: 15em;
+    width: 100%;
+    padding-top: 2em;
+    padding-bottom: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--footer-background-color);
+
+    .Footer-separator {
+        display: block;
+        height: 1px;
+        background-color: white;
+        width: 70%;
+    }
+
+    .Footer-body {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .Footer-content {
+            width: 70%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10em;
+            grid-auto-rows: minmax(100px, auto);
+            padding: 10px;
+
+            .Footer-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                h1 {
+                    color: var(--footer-font-color);
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+
+                img {
+                    height: 100px;
+                    width: auto;
+                }
+            }
+
+            .Footer-infos {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+
+                .Footer-info {
+                    a {
+                        position: relative;
+                        color: var(--footer-font-color);
+                    }
+
+                    a::before {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 4px;
+                        bottom: -4px;
+                        z-index: 2;
+                        background-color: var(--footer-background-color);
+                        transition: all ease-out 0.4s;
+                    }
+
+                    a::after {
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        width: 100%;
+                        height: 2px;
+                        background-color: white;
+                    }
+                }
+
+                .Footer-info:hover {
+                    cursor: pointer;
+
+                    a::before {
+                        width: 0%;
+                    }
+                }
+            }
+        }
+    }
+}

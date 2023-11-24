@@ -40,15 +40,17 @@ function Header() {
 
     function logout() {
         cookies.remove('loginToken');
-        window.location.reload();
+        if (!cookies.get('loginToken')) {
+            window.location.replace('/');
+        }
     }
 
-    function getData() {
+    async function getData() {
         if (!cookies.get('loginToken')) {
             window.location.replace('/');
         }
         else {
-            axios.get(`${api}/user/getbytoken`, {
+            await axios.get(`${api}/user/getbytoken`, {
                 params: { token: cookiesInfo.loginToken }
             })
                 .then(res => {
@@ -75,7 +77,7 @@ function Header() {
     }, [isOpen])
 
     return (
-        <div className={colorMode === 'light' ? "Header Day-mode" : "Header Night-mode"}>
+        <div className={colorMode === 'light' ? "Header Day-mode-secondary" : "Header Night-mode-secondary"}>
             <div className="Header-container">
                 <div className="Header-left-side">
                     <div className="Header-logo">
@@ -93,36 +95,38 @@ function Header() {
                         <button className="Header-avatar-button" aria-label="button-open-modal" onClick={openModal}>
                             <img className="Header-avatar" src={avatar} alt="avatar-header" />
                         </button>
-                        {isOpen && (
-                            <div className="Header-modal" data-testid="Header-modal" >
-                                <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode"}>
-                                    <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
-                                    <h2>{name}</h2>
-                                    <p>{email}</p>
-                                    <div className="Header-separator"></div>
-                                    <Link to='/home' data-testid="link-home" className="Header-modal-link">
-                                        <MdHome />
-                                        <span>{ translation.home }</span>
-                                    </Link>
-                                    <Link to='/profile' data-testid="link-profile" className="Header-modal-link">
-                                        <MdPerson />
-                                        <span>{ translation.profile }</span>
-                                    </Link>
-                                    <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
-                                        <MdCalendarMonth />
-                                        <span>{ translation.calendar }</span>
-                                    </Link>
-                                    <Link to='/help' data-testid="link-help" className="Header-modal-link">
-                                        <MdHelpOutline />
-                                        <span>{ translation.help }</span>
-                                    </Link>
-                                    <button className="Header-modal-link" aria-label='button-logout' onClick={logout}>
-                                        <MdLogout />
-                                        <span>{ translation.logout }</span>
-                                    </button>
+                        {
+                            isOpen && (
+                                <div className="Header-modal" data-testid="Header-modal" >
+                                    <div className={colorMode === 'light' ? "Header-modal-content Day-mode" : "Header-modal-content Night-mode-secondary"}>
+                                        <img src={avatar} alt="avatar-modal-header" className="Header-modal-profile-picture" />
+                                        <h2>{name}</h2>
+                                        <p>{email}</p>
+                                        <div className="Header-separator"></div>
+                                        <Link to='/home' data-testid="link-home" className="Header-modal-link">
+                                            <MdHome />
+                                            <span>{translation.home}</span>
+                                        </Link>
+                                        <Link to='/profile' data-testid="link-profile" className="Header-modal-link">
+                                            <MdPerson />
+                                            <span>{translation.profile}</span>
+                                        </Link>
+                                        <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
+                                            <MdCalendarMonth />
+                                            <span>{translation.calendar}</span>
+                                        </Link>
+                                        <Link to='/help' data-testid="link-help" className="Header-modal-link">
+                                            <MdHelpOutline />
+                                            <span>{translation.help}</span>
+                                        </Link>
+                                        <button className="Header-modal-link" aria-label='button-logout' onClick={logout}>
+                                            <MdLogout />
+                                            <span>{translation.logout}</span>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )
+                        }
                     </div>
                 </div>
             </div>

@@ -162,7 +162,7 @@ const translations: Translations = {
       answer4: "A proof of address is a document that verifies where you live. It is often required as a form of identification when you need to open a bank account, apply for credit, or get a government-issued ID card. A proof of address can take many forms, but it typically includes your name, your address, and a date.",
     },
     home: {
-      title: "Your Paperwork Space",
+      title: "Your Paperwork space",
       ascending: "Ascending",
       descending: "Descending",
       newProcessButton: "New Process",
@@ -179,7 +179,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "en-GB",
-      calendar: "Calendar",
+      calendar: "Don't miss your appointments. Schedule them in the calendar !",
       addEvent: "Add an Event",
       dailyEvent: "Daily Events",
       editDeleteEvent: "Edit/Delete an Event",
@@ -195,6 +195,7 @@ const translations: Translations = {
       applied: "Applied",
       left: "Left",
       today: "Today",
+      eventModifiedSuccessfully: "Event modified successfully!",
     }
   },
   français: {
@@ -348,7 +349,7 @@ const translations: Translations = {
       answer4: "Un justificatif de domicile est un document qui vérifie votre adresse de domicile. Il est souvent requis comme une forme d'identification lorsque vous avez besoin d'ouvrir un compte bancaire, de demander du crédit ou d'obtenir une carte d'identité émise par le gouvernement. Un justificatif de domicile peut prendre différentes formes, mais il inclut généralement votre nom, votre adresse et une date.",
     },
     home: {
-      title: "Votre Espace Paperwork",
+      title: "Votre espace Paperwork",
       ascending: "Croissant",
       descending: "Décroissant",
       newProcessButton: "Nouvelle Procédure",
@@ -365,7 +366,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "fr-FR",
-      calendar: "Calendrier",
+      calendar: "Ne manquez plus vos rendez-vous. <br /> Planifiez-les dans le calendrier !",
       addEvent: "Ajouter un évènement",
       dailyEvent: "Évènements quotidiens",
       editDeleteEvent: "Modifier/Supprimer un évènement",
@@ -381,6 +382,7 @@ const translations: Translations = {
       applied: "Terminé",
       left: "Restant",
       today: "Aujourd'hui",
+      eventModifiedSuccessfully: "Évènement modifié avec succès !",
     }
   },
   deutsch: {
@@ -549,7 +551,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "de-DE",
-      calendar: "Kalender",
+      calendar: "Verpassen Sie keine Termine mehr. Planen Sie sie im Kalender!",
       addEvent: "Ereignis hinzufügen",
       dailyEvent: "Tägliche Ereignisse",
       editDeleteEvent: "Ereignis bearbeiten/löschen",
@@ -565,6 +567,7 @@ const translations: Translations = {
       applied: "Angewendet",
       left: "Übrig",
       today: "Heute",
+      eventModifiedSuccessfully: "Ereignis erfolgreich geändert!",
     }
   },
   한국어로: {
@@ -733,7 +736,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "ko-KR",
-      calendar: "캘린더",
+      calendar: "약속을 놓치지 마세요. 캘린더에 예약하세요!",
       addEvent: "이벤트 추가",
       dailyEvent: "일일 이벤트",
       editDeleteEvent: "이벤트 수정/삭제",
@@ -749,6 +752,7 @@ const translations: Translations = {
       applied: "적용됨",
       left: "남음",
       today: "오늘",
+      eventModifiedSuccessfully: "이벤트가 성공적으로 수정되었습니다!",
     }
   },
   indonesia: {
@@ -900,7 +904,7 @@ const translations: Translations = {
       answer4: "Bukti alamat adalah dokumen yang memverifikasi tempat tinggal Anda. Ini sering kali diperlukan sebagai bentuk identifikasi ketika Anda perlu membuka rekening bank, mengajukan kredit, atau mendapatkan kartu identitas yang dikeluarkan pemerintah. Bukti alamat dapat memiliki banyak bentuk, tetapi biasanya mencakup nama Anda, alamat Anda, dan tanggal."
     },
     home: {
-      title: "Ruang Paperwork Anda",
+      title: "Ruang Paperwork anda",
       ascending: "Menaik",
       descending: "Menurun",
       newProcessButton: "Proses Baru",
@@ -917,7 +921,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "id-ID",
-      calendar: "Kalender",
+      calendar: "No te pierdas tus citas. ¡Programa en el calendario!",
       addEvent: "Tambahkan Acara",
       dailyEvent: "Acara Harian",
       editDeleteEvent: "Edit/Hapus Acara",
@@ -933,6 +937,7 @@ const translations: Translations = {
       applied: "Diterapkan",
       left: "Tinggal",
       today: "Hari Ini",
+      eventModifiedSuccessfully: "Acara berhasil diubah!",
     }
   },
   español: {
@@ -1084,7 +1089,7 @@ const translations: Translations = {
       answer4: "Una prueba de dirección es un documento que verifica dónde vives. A menudo se requiere como una forma de identificación cuando necesitas abrir una cuenta bancaria, solicitar crédito o obtener una tarjeta de identificación emitida por el gobierno. Una prueba de dirección puede tomar muchas formas, pero generalmente incluye tu nombre, tu dirección y una fecha.",
     },
     home: {
-      title: "Tu Espacio de Documentación",
+      title: "Tu espacio de Paperwork",
       ascending: "Ascendente",
       descending: "Descendente",
       newProcessButton: "Nuevo Proceso",
@@ -1117,6 +1122,7 @@ const translations: Translations = {
       applied: "Aplicado",
       left: "Restante",
       today: "Hoy",
+      eventModifiedSuccessfully: "¡Evento modificado con éxito!",
     }
   }
 };
