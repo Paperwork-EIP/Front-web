@@ -536,16 +536,15 @@ const resources = {
             verifyEmail: {
                 icon: "모든 것이 정상입니다!",
                 verified: "이메일이 확인되었습니다",
-                titleTop: "Paperwork에서 여정을 시작하세요",
+                titleTop: "Paperwork에서 일정 시작하세요",
                 home: "홈",
                 profile: "프로필",
                 calendar: "캘린더",
-                help: "도움말",
+                help: "도와주세요",
                 newProcess: "새로운 프로세스",
                 processIdea: "프로세스 아이디어",
             }
         }
-
     },
     id: {
         "translation": {
