@@ -5,40 +5,21 @@ $progress-value-color-medium: #fc9f69;
 $progress-value-color-high: #29c9c6;
 $progress-value-color-very-high: #29C9B3;
 
-
 .Profile {
-    font-family: Arial, Helvetica, sans-serif;
     padding: 10px 3% 10px 3%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     min-height: calc(100vh - 55px);
-
-    .modify-profile-btn {
-        width: 175px;
-        height: 40px;
-        border-radius: 8px;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-        border: none;
-        text-align: center;
-        text-decoration: none;
-        font-size: 1.2rem;
-        margin-left: 3%;
-
-        .modify-profile-icon {
-            padding-right: 0.5rem;
-        }
-    }
-    
-    .modify-profile-btn:hover {
-        text-decoration: underline;
-    }
+    position: relative;
 
     .informations-container {
+        min-height: 30rem;
         display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
 
         .section-container {
             display: flex;
@@ -46,25 +27,41 @@ $progress-value-color-very-high: #29C9B3;
             border-radius: 8px;
         }
 
-        .main-container {
-            @extend .section-container;
-            width: 34%;
-            margin: 2% 1% 2% 3%;
-            padding: 15px;
-            justify-content: center;
+        .modify-profile-btn {
+            display: flex;
+            flex-direction: row;
             align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem 0.5rem 1rem;
+            border-radius: 8px;
             border: 1px solid $border-color;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
 
-            .text-style-main-container {
-                margin-top: 4px;
-                font-size: 1.2em;
-                letter-spacing: 0.06em;
+            &:hover {
+                background-color: var(--process-button-hover);
             }
 
-            .Avatar {
-                width: 25%;
+            .modify-profile-icon {
+                padding-right: 0.5rem;
+            }
+        }
+
+        .main-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1600px;
+            padding: 16px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 32px;
+
+            .avatar {
+                width: 180px;
                 height: auto;
                 border-radius: 50%;
+                filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
             }
 
             .section-username {
@@ -75,28 +72,108 @@ $progress-value-color-very-high: #29C9B3;
                 @extend .text-style-main-container;
                 display: flex;
                 flex-direction: row;
+                margin: 16px 0 0 0;
+                font-size: 1.3em;
+                font-weight: 700;
 
                 .fn-name {
-                    text-transform: uppercase;
+                    padding-left: 0.5rem;
+                    text-transform: capitalize;
                 }
 
                 .fn-firstname {
                     text-transform: capitalize;
-                    padding-left: 0.5rem;
                 }
             }
         }
-        
+
+        .primary-container {
+            @extend .section-container;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+
+            .avatar-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center
+            }
+
+            .process-container {
+                display: flex;
+                width: 100%;
+                min-width: 300px;
+                flex-direction: column;
+                margin: 0 3% 0 3%;
+                padding: 10px 3% 10px 3%;
+                border-radius: 8px;
+                border: 1px solid $border-color;
+
+                .heading {
+                    margin: 1rem 0 1rem 0;
+                    padding: 0 8px 0 8px;
+                    font-size: 1.3em;
+                }
+
+                .process-btn {
+                    border-radius: 8px;
+                    margin: 4px 0 4px 0;
+                    padding: 0 10px 10px 10px;
+                    transition: all 0.3s ease-in-out;
+
+                    &:hover {
+                        background-color: var(--process-button-hover);
+                    }
+
+                    .process-progress {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 1%;
+
+                        .progress-name {
+                            width: 15%;
+                        }
+
+                        .progress-bar {
+                            width: 85%;
+                            height: 1.5rem;
+                            position: relative;
+                            margin-left: 1rem;
+
+                            .progress-bar-bg {
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 14px;
+                            }
+
+                            .progress-bar-front {
+                                position: absolute;
+                                width: 5%;
+                                height: 100%;
+                                border-radius: 14px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         .secondary-container {
             @extend .section-container;
-            width: 58%;
-            margin: 2% 3% 2% 1%;
-            padding: 15px 5% 15px 5%;
+            width: 50vw;
             display: flex;
             align-items: center;
-            font-size: 1.2em;
-            letter-spacing: 0.06em;
+            justify-content: space-evenly;
+            font-size: 1.1em;
+            padding: 16px;
             border: 1px solid $border-color;
+            letter-spacing: 0.06em;
+            gap: 1rem;
 
             .heading {
                 margin-top: 2rem;
@@ -108,146 +185,130 @@ $progress-value-color-very-high: #29C9B3;
 
             .secondary-row {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 width: 100%;
-                justify-content: center;
-                
+                padding-left: 8px;
+                gap: 0.6rem;
+
                 .section-text {
                     display: flex;
                     width: 60%;
+                    line-break: anywhere;
                 }
 
                 .secondary-label {
-                    display: flex;
-                    width: 40%;
-                    text-transform: capitalize;
-                    justify-content: left;
+                    font-size: 16px;
                 }
 
                 .email-text {
                     text-transform: lowercase;
                 }
-
-                .address-text, .language-text {
-                    text-transform: capitalize;
-                }
             }
 
             hr {
                 width: 100%;
-                margin-top: auto;
-                margin-bottom: auto;
             }
         }
     }
 
-    .process-container {
-        display: flex;
-        flex-direction: column;
-        margin: 0 3% 0 3%;
-        padding: 10px 3% 10px 3%;
-        border-radius: 8px;
-        border: 1px solid $border-color;
+    .profile-img {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: clamp(300px, 30%, 500px);
+        height: auto;
+        opacity: 0.6;
+        z-index: 0;
 
-        .heading {
-            margin: 1rem 0 1rem 0;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-
-        .Process-Btn {
-            border-radius: 8px;
-            margin: 4px 0 4px 0;
-            padding: 0 10px 10px 10px;
-
-            &:hover {
-                background-color: var(--process-button-hover);
-            }
-
-            .process-progress {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                padding: 1%;
-
-                .progress-name {
-                    width: 15%;
-                }
-
-                .progress-bar {
-                    width: 85%;
-                    height: 1.5rem;
-                    position: relative;
-                    margin-left: 1rem;
-
-                    .progress-bar-bg {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        border-radius: 14px;
-                    }
-
-                    .progress-bar-front {
-                        position: absolute;
-                        width: 5%;
-                        height: 100%;
-                        border-radius: 14px;
-                    }
-                }
-            }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
         }
     }
 }
-        
+
 @media (max-width: 768px) {
     .Profile {
-        padding: 0;
-
         .informations-container {
-            flex-direction: column;
+            .main-container {
+                flex-direction: column;
+                gap: 16px;
 
-            .main-container, .secondary-container {
-                width: 100%;
-                margin: 10px;
-                padding: 15px 8px 15px 8px;
+                .avatar {
+                    width: 150px;
+                }
+            }
+
+            .secondary-container {
+                width: 80vw;
+                gap: 16px;
 
                 .secondary-row {
                     width: 100%;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
+                    padding-left: 0;
 
-                    .secondary-label, .section-text {
-                        width: auto;
+                    .section-text {
+                        width: 100%;
                     }
                 }
+            }
+        }
+
+        .secondary-container {
+            .modify-profile-btn {
+                width: 100%;
+                margin-top: 16px;
             }
         }
 
         .process-container {
-            width: 100%;
-            margin: 10px;
-            padding: 15px 8px 15px 8px;
+            .heading {
+                margin: 8px 0 8px 0;
+            }
 
-            .Process-Btn {
+            .process-btn {
+                padding: 0 10px 10px 10px;
+
                 .process-progress {
-                    display: flex;
-                    flex-direction: column;
+                    padding: 1%;
+
                     .progress-name {
-                        width: 100%;
+                        width: 20%;
                     }
+
                     .progress-bar {
-                        margin-left: 0;
-                        margin-top: 0.5rem;
-                        width: 100%;
+                        width: 80%;
+                        height: 1.5rem;
+                        position: relative;
+                        margin-left: 1rem;
+
+                        .progress-bar-bg {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            border-radius: 14px;
+                        }
+
+                        .progress-bar-front {
+                            position: absolute;
+                            width: 5%;
+                            height: 100%;
+                            border-radius: 14px;
+                        }
                     }
                 }
             }
         }
+
+        .profile-img {
+            width: 100%;
+            height: auto;
+        }
     }
 }
 
-// LIGHT THEME
 .Profile-light {
     --text-color: #000000;
     --hr-color: #b5b5b5b0;
@@ -267,8 +328,6 @@ $progress-value-color-very-high: #29C9B3;
         }
 
         .main-container {
-            @extend .section-container;
-
             .text-style-main-container {
                 color: var(--text-color);
             }
@@ -285,12 +344,21 @@ $progress-value-color-very-high: #29C9B3;
                 @extend .text-style-main-container;
             }
         }
-        
+
         .secondary-container {
             @extend .section-container;
 
             .heading {
                 color: var(--secondary-color);
+            }
+
+            .modify-profile-btn {
+                background-color: var(--background-page);
+                color: var(--text-color);
+
+                &:hover {
+                    background-color: var(--process-button-hover);
+                }
             }
 
             .secondary-row {
@@ -390,7 +458,6 @@ $progress-value-color-very-high: #29C9B3;
     }
 }
 
-// DARK THEME
 .Profile-dark {
     --text-color: #CECECE;
     --hr-color: #b5b5b583;
@@ -410,8 +477,6 @@ $progress-value-color-very-high: #29C9B3;
         }
 
         .main-container {
-            @extend .section-container;
-
             .text-style-main-container {
                 color: var(--text-color);
             }
@@ -428,12 +493,21 @@ $progress-value-color-very-high: #29C9B3;
                 @extend .text-style-main-container;
             }
         }
-        
+
         .secondary-container {
             @extend .section-container;
 
             .heading {
                 color: var(--secondary-color);
+            }
+
+            .modify-profile-btn {
+                background-color: var(--background-page);
+                color: var(--text-color);
+
+                &:hover {
+                    background-color: var(--process-button-hover);
+                }
             }
 
             .secondary-row {
