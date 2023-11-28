@@ -64,14 +64,11 @@
     }
 }
 
-
-
-
 // LIGHT THEME
 .ProcessResult-light {
-    --background-color: rgb(240, 240, 240);
+    --background-color: #ffffff;
     --text-color: black;
-    --new-process-button-color: rgb(100, 100, 100);
+    --new-process-button-color: #ECEFF1;
     --border-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
     --box-color: white;
     --checkbox-color: #29C9B3;
@@ -101,15 +98,12 @@
     }
 }
 
-
-
-
 // DARK THEME
 .ProcessResult-dark {
-    --background-color: rgb(16, 20, 28);
+    --background-color: #303030;
     --text-color: white;
     --new-process-button-color: rgb(183, 193, 207);
-    --box-color: rgb(26, 32, 44);
+    --box-color: #222222;
     --checkbox-color: #29C9B3;
 
     background-color: var(--background-color);
