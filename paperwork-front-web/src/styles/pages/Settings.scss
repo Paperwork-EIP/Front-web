@@ -30,17 +30,13 @@
 
         .choice-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
             flex-direction: column;
             border-radius: 12px;
             width: 22%;
-            height: 240px;
+            height: 200px;
             font-size: 1.2rem;
-
-            .choice-divider {
-                height: 8px;
-            }
 
             .choice-button {
                 display: flex;
@@ -74,7 +70,7 @@
                 font-weight: bold;
                 margin-bottom: 2rem;
             }
-                
+
             .errorPassword {
                 width: 100%;
                 padding-left: 10px;
@@ -94,7 +90,7 @@
                 text-decoration: none;
                 font-size: 16px;
                 border-radius: 4px;
-    
+
                 .edit-password-icon {
                     font-size: 1.2rem;
                     margin-left: 5px;
@@ -104,12 +100,12 @@
             .information-container {
                 width: 50%;
                 padding: 12px;
-                
+
                 label {
                     padding: 12px 12px 0 0;
                     display: inline-block;
                 }
-                
+
                 input {
                     width: 100%;
                     padding: 12px;
@@ -134,7 +130,7 @@
                     right: 3%;
                     cursor: pointer;
                 }
-                
+
                 .input-container {
                     display: flex;
                     flex-wrap: wrap;
@@ -159,7 +155,7 @@
                     text-decoration: none;
                     font-size: 16px;
                     border-radius: 4px;
-        
+
                     .delete-account-icon {
                         font-size: 1.2rem;
                         margin-left: 5px;
@@ -168,8 +164,6 @@
             }
 
             @media (max-width: 768px) {
-                
-                    
                 .information-container {
                     width: 100%;
                 }
@@ -198,7 +192,7 @@
                         left: 0;
                         border-radius: 50%;
                     }
-                    
+
                     .ModifImg {
                         position: absolute;
                         top: 0;
@@ -225,7 +219,7 @@
                     text-decoration: none;
                     font-size: 16px;
                     border-radius: 4px;
-        
+
                     .update-personal-info-icon {
                         font-size: 1.2rem;
                         margin-top: 2px;
@@ -244,11 +238,13 @@
 
             .choice-container {
                 width: 40%;
+
                 .choice-button {
                     justify-content: center;
                     padding-left: 0;
                 }
             }
+
             .section-container {
                 margin-left: 0;
                 margin-top: 20px;
@@ -256,7 +252,7 @@
             }
         }
     }
-    
+
     @media (max-width: 1000px) {
         .settings-container {
             .choice-container {
@@ -264,7 +260,7 @@
             }
         }
     }
-    
+
     @media (max-width: 600px) {
         .settings-container {
             .choice-container {
@@ -310,7 +306,7 @@
             width: 70%;
             height: 70%;
             z-index: 1000;
-            
+
             /* width */
             ::-webkit-scrollbar {
                 width: 10px;
@@ -334,7 +330,7 @@
                     width: 100%;
                     height: 2px;
                 }
-                
+
                 .modal-button-container {
                     display: flex;
                     flex-direction: row;
@@ -363,7 +359,7 @@
                         width: 100px;
                         margin: 10px 20px 10px 20px;
                         border-radius: 50%;
-                        
+
                         :hover {
                             cursor: pointer;
                             border-radius: 50%;
@@ -404,22 +400,17 @@
     }
 }
 
-
-
-
-// LIGHT THEME
 .Settings-light {
-    // Body color
-    --background-color: rgb(240, 240, 240);
+    --background-color: #ffffff;
     --secondary-color: #FC6976;
     --secondary-color-hover: #cf555f;
     --label-color: black;
-    --background-box: white;
+    --background-box: #ECEFF1;
     --border-color: #ccc;
     --continue-btn: #29C9B3;
     --continue-btn-hover: #209989;
     --modal-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    --container-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
+    --container-shadow: 0px 10px 10px -7px rgba(0, 0, 0, 0.1), 0px 5px 10px 5px rgba(0, 0, 0, 0.2);
     --modal-bg: rgba(0, 0, 0, 0.5);
     --edit-btn-bg: #ff4a5a;
     --error-pwd-color: #9b9b9b;
@@ -431,6 +422,8 @@
     --border-color: rgb(204, 204, 204);
     --background-button-color: #E0FDF7;
     --avatar-hover: rgba(0, 0, 0, 0.8);
+
+    background-color: var(--background-color);
 
     .choice-container {
         background-color: var(--background-box);
@@ -501,7 +494,7 @@
             .delete-account-btn {
                 background-color: var(--secondary-color);
                 color: var(--background-box);
-    
+
                 .delete-account-icon {
                     color: var(--background-box);
                 }
@@ -528,10 +521,12 @@
             .update-personal-info-btn {
                 background-color: var(--continue-btn);
                 color: var(--background-box);
+
                 .update-personal-info-icon {
                     color: var(--background-box);
                 }
             }
+
             .update-personal-info-btn:hover {
                 background-color: var(--continue-btn-hover);
             }
@@ -552,17 +547,14 @@
         .modal-container {
             background-color: var(--modal-container-bg);
 
-            /* Track */
             ::-webkit-scrollbar-track {
                 background: var(--track)
             }
 
-            /* Handle */
             ::-webkit-scrollbar-thumb {
                 background: var(--track-thumb)
             }
 
-            /* Handle on hover */
             ::-webkit-scrollbar-thumb:hover {
                 background: var(--track-thumb-hover)
             }
@@ -576,7 +568,7 @@
                 .divider span {
                     background-color: var(--secondary-color);
                 }
-                
+
                 .modal-button-container {
                     .modal-btn {
                         color: var(--background-box);
@@ -614,16 +606,11 @@
     }
 }
 
-
-
-
-// DARK THEME
 .Settings-dark {
-    // Body color
-    --background-color: rgb(15, 15, 15);
+    --background-color: #303030;
     --secondary-color: #FC6976;
     --label-color: white;
-    --background-box: rgb(26, 32, 44);
+    --background-box: #222222;
     --button-color: white;
     --border-color: rgb(51, 51, 51);
     --continue-btn: #29C9B3;
@@ -639,6 +626,8 @@
     --border-color: rgb(204, 204, 204);
     --background-button-color: #E0FDF7;
     --avatar-hover: rgba(0, 0, 0, 0.8);
+
+    background-color: var(--background-color);
 
     .choice-container {
         background-color: var(--background-box);
@@ -705,7 +694,7 @@
             .delete-account-btn {
                 background-color: var(--secondary-color);
                 color: var(--button-color);
-    
+
                 .delete-account-icon {
                     color: var(--button-color);
                 }
@@ -730,10 +719,12 @@
             .update-personal-info-btn {
                 background-color: var(--continue-btn);
                 color: var(--button-color);
+
                 .update-personal-info-icon {
                     color: var(--button-color);
                 }
             }
+
             .update-personal-info-btn:hover {
                 background-color: var(--continue-btn-hover);
             }
@@ -776,7 +767,7 @@
                 .divider span {
                     background-color: var(--secondary-color);
                 }
-                
+
                 .modal-button-container {
                     .modal-btn {
                         color: var(--button-color);

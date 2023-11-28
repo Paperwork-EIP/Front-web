@@ -112,9 +112,9 @@
 // LIGHT THEME
 .Quiz-light {
     // Body color
-    --background-color: rgb(240, 240, 240);
+    --background-color: #ffffff;
     --text-color: black;
-    --background-box: white;
+    --background-box: #ECEFF1;
     --no-btn: #FC6976;
     --yes-btn: #29C9B3;
     --border-color: #E8E8E8;
@@ -165,15 +165,10 @@
     }
 }
 
-
-
-
-// DARK THEME
 .Quiz-dark {
-    // Body color
-    --background-color: rgb(16, 20, 28);
+    --background-color: #303030;
     --text-color: white;
-    --background-box: rgb(26, 32, 44);
+    --background-box: #222222;
     --no-btn: #FC6976;
     --yes-btn: #29C9B3;
     --border-color: #E8E8E8;
