@@ -14,7 +14,6 @@ import { getTranslation } from './Translation';
 
 import "../styles/pages/Settings.scss";
 
-
 function SettingsPage() {
     const cookies = new Cookies();
 
