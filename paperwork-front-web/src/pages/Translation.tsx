@@ -573,7 +573,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Ereignis erfolgreich geändert!",
     }
   },
-  한국어로: {
+  korean: {
     quiz: {
       title: "새로운 프로세스 퀴즈",
       question: "어떤 종류의 절차를 완료하고 싶으세요?",
@@ -945,7 +945,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Acara berhasil diubah!",
     }
   },
-  español: {
+  espanol: {
     quiz: {
       title: "Nuevo Cuestionario de Proceso",
       question: "¿Qué tipo de procedimiento deseas completar?",
