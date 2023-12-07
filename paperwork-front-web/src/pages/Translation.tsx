@@ -199,7 +199,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Event modified successfully!",
     }
   },
-  français: {
+  french: {
     quiz: {
       title: "Nouveau questionnaire de procédure",
       question: "Quel type de procédure voulez-vous compléter ?",
@@ -387,7 +387,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Évènement modifié avec succès !",
     }
   },
-  deutsch: {
+  german: {
     quiz: {
       title: "Neues Prozess-Quiz",
       question: "Welchen Typ von Verfahren möchten Sie abschließen?",
@@ -759,7 +759,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "이벤트가 성공적으로 수정되었습니다!",
     }
   },
-  indonesia: {
+  indonesian: {
     quiz: {
       title: "Kuis Proses Baru",
       question: "Jenis prosedur apa yang ingin Anda selesaikan?",
@@ -945,7 +945,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Acara berhasil diubah!",
     }
   },
-  espanol: {
+  spanish: {
     quiz: {
       title: "Nuevo Cuestionario de Proceso",
       question: "¿Qué tipo de procedimiento deseas completar?",
@@ -1134,6 +1134,6 @@ const translations: Translations = {
 };
 
 export function getTranslation(locale: string, page: string): TranslationKeys {
-  const pageTranslations = translations[locale]?.[page] || translations.français[page];
+  const pageTranslations = translations[locale]?.[page] || translations.english[page];
   return pageTranslations;
 }

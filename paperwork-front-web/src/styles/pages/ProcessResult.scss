@@ -13,16 +13,9 @@
     }
 
     .StartNewProcess-Btn {
-        width: auto;
-        height: 40px;
-        border-radius: 8px;
+        display: flex;
         align-items: center;
         justify-content: flex-start;
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-        border: none;
-        text-align: center;
         text-decoration: none;
         font-size: 1.2rem;
         margin-bottom: 1em;
@@ -76,15 +69,6 @@
     background-color: var(--background-color);
     color: var(--text-color);
 
-    .StartNewProcess-Btn {
-        background-color: var(--background-color);
-        color: var(--new-process-button-color);
-
-        .StartNewProcess-Icon {
-            color: var(--new-process-button-color);
-        }
-    }
-
     .ProcessResult-Requires {
         -webkit-box-shadow: var(--border-shadow);
         box-shadow: var(--border-shadow);
@@ -108,15 +92,6 @@
 
     background-color: var(--background-color);
     color: var(--text-color);
-
-    .StartNewProcess-Btn {
-        background-color: var(--background-color);
-        color: var(--new-process-button-color);
-
-        .StartNewProcess-Icon {
-            color: var(--new-process-button-color);
-        }
-    }
 
     .ProcessResult-Requires {
         background-color: var(--box-color);

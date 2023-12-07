@@ -47,11 +47,11 @@ const ProcessResult = () => {
 
     useEffect(() => {
         axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
-        .then(res => {
-            setLanguage(res.data.language);
-        }).catch(err => {
-            console.log(err)
-        });
+            .then(res => {
+                setLanguage(res.data.language);
+            }).catch(err => {
+                console.log(err)
+            });
 
         if (cookiesInfo) {
             axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
@@ -66,7 +66,7 @@ const ProcessResult = () => {
                 }).catch(err => {
                     console.log(err);
                 }
-            );
+                );
         }
     }, [cookiesInfo, processSelected, api, stepsAnswer]);
 
@@ -102,9 +102,14 @@ const ProcessResult = () => {
             <Header />
 
             <div className={colorMode === "light" ? "ProcessResult ProcessResult-light" : "ProcessResult ProcessResult-dark"}>
-                <a href='/quiz' className='StartNewProcess-Btn'><FaLessThan className='StartNewProcess-Icon' size={16} />{ translation.startNewProcess }</a>
+                <a href='/quiz' className='StartNewProcess-Btn'>
+                    <FaLessThan className='StartNewProcess-Icon' />
+                    <span>
+                        {translation.startNewProcess}
+                    </span>
+                </a>
                 <div className='ProcessResult-Requires'>
-                    <div className='ProcessResult-Title'>{ translation.resultProcess }"{ title }":</div>
+                    <div className='ProcessResult-Title'>{translation.resultProcess}"{title}":</div>
                     <div className='ProcessResult-Checkbox-Container'>
                         <>
                             {
