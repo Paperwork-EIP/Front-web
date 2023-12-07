@@ -318,19 +318,19 @@ function SettingsPage() {
                                     <option data-testid="select-option" value="english">
                                     English
                                     </option>
-                                    <option data-testid="select-option" value="français">
+                                    <option data-testid="select-option" value="french">
                                     Français
                                     </option>
-                                    <option data-testid="select-option" value="deutsch">
+                                    <option data-testid="select-option" value="german">
                                     Deutsch
                                     </option>
                                     <option data-testid="select-option" value="korean">
                                     Korean
                                     </option>
-                                    <option data-testid="select-option" value="indonesia">
+                                    <option data-testid="select-option" value="indonesian">
                                     Indonesia
                                     </option>
-                                    <option data-testid="select-option" value="espanol">
+                                    <option data-testid="select-option" value="spanish">
                                     Espanol
                                     </option>
                                 </select>
