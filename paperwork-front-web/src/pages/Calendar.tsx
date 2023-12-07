@@ -47,7 +47,8 @@ function CalendarPage() {
     const isNewDateError = useRef(false);
     const isModDateError = useRef(false);
     const selectedMonth = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
-    const comparativeDate = date.getFullYear() + '-' + selectedMonth + '-' + date.getDate();
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const comparativeDate = date.getFullYear() + '-' + selectedMonth + '-' + day;
 
     const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
     const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
@@ -379,11 +380,12 @@ function CalendarPage() {
                                         listEvents.map((item: any) => {
                                             return (
                                                 item.date.split("T")[0] === comparativeDate ?
-                                                    <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px' key={item.key + item.date}>
-                                                        <Text color="black" fontSize='xs' mt='1' px='1'>{item.date.split("T")[0]}</Text>
-                                                        <Text color="black" fontSize='small' mt='2' px='1'>{item.process_title}</Text>
-                                                        <Text color="black" fontSize='2xs' px='1'>{item.step_title}</Text>
-                                                    </Box>
+                                                    <div className='calendar-event-list-card'>
+                                                        <div className='calendar-event-list-card-content'>
+                                                            <h1 className='calendar-event-list-card-content-title-text'>{item.process_title}</h1>
+                                                            <h2 className='calendar-event-list-card-content-description-text'>{item.step_title}</h2>
+                                                        </div>
+                                                    </div>
                                                     : ''
                                             )
                                         })
@@ -412,12 +414,10 @@ function CalendarPage() {
                         <div className='calendar-modal-header'>
                             <h1 className='calendar-modal-text'>{translation.editDelete}</h1>
                             <button
-                                // className='calendar-modal-button delete'
                                 className='calendar-modal-button-bin'
                                 aria-label='delete-button'
                                 onClick={() => deleteEvent()}
                             >
-                                {/* {translation.deleteEvent} */}
                                 <img src="assets/calendar-page/bin.png" alt="delete_image" />
                             </button>
                         </div>
