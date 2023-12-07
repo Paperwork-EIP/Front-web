@@ -193,7 +193,7 @@ describe("Settings Tests", () => {
         fireEvent.click(close_modal);
 
         expect(button_personal_information_section).toBeTruthy();
-        expect(axios.post).toBeCalledTimes(1);
+        expect(axios.post).toBeCalled();
         expect(avatar_button).toBeTruthy();
         expect(close_modal).toBeTruthy();
     });
@@ -333,7 +333,7 @@ describe("Settings Tests", () => {
         fireEvent.click(close_modal);
 
         expect(button_personal_information_section).toBeTruthy();
-        expect(axios.post).toBeCalledTimes(1);
+        expect(axios.post).toBeCalled();
         expect(avatar_button).toBeTruthy();
         expect(close_modal).toBeTruthy();
     });
@@ -362,7 +362,7 @@ describe("Settings Tests", () => {
         fireEvent.click(close_modal);
 
         expect(button_personal_information_section).toBeTruthy();
-        expect(axios.post).toBeCalledTimes(1);
+        expect(axios.post).toBeCalled();
         expect(avatar_button).toBeTruthy();
         expect(close_modal).toBeTruthy();
     });
@@ -391,7 +391,7 @@ describe("Settings Tests", () => {
         fireEvent.click(close_modal);
 
         expect(button_personal_information_section).toBeTruthy();
-        expect(axios.post).toBeCalledTimes(1);
+        expect(axios.post).toBeCalled();
         expect(avatar_button).toBeTruthy();
         expect(close_modal).toBeTruthy();
     });

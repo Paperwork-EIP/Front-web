@@ -303,12 +303,12 @@ function CalendarPage() {
                     </div>
                     <div className='calendar-modal-content'>
                         <Center p={'10px'}>
-                            <Flex width={'200px'} justifyContent={'space-between'}>
+                            <Flex width={'70%'} justifyContent={'space-between'}>
                                 <Input aria-label='input-new-date-change' onChange={handleNewDateChange} type="time" />
                             </Flex>
                         </Center>
                         <Center p={'10px'}>
-                            <div style={{ width: '200px', fontSize: 13 }}>
+                            <div style={{ width: '70%', fontSize: 13 }}>
                                 <Select
                                     className='calendar-add-select'
                                     placeholder={translation.selectTheProcess}
@@ -321,7 +321,7 @@ function CalendarPage() {
                         <Center p={'10px'}>
                             {
                                 postsStep.length !== 0 ?
-                                    <div style={{ width: '200px', fontSize: 13 }}>
+                                    <div style={{ width: '70%', fontSize: 13 }}>
                                         <Select
                                             className='calendar-add-select'
                                             placeholder={translation.selectTheStep}
@@ -331,7 +331,7 @@ function CalendarPage() {
                                         />
                                     </div>
                                     :
-                                    <div style={{ width: '200px', fontSize: 13 }}>
+                                    <div style={{ width: '70%', fontSize: 13 }}>
                                         <Select
                                             className='calendar-add-select'
                                             placeholder={translation.selectTheStep}
