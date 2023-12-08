@@ -1,264 +1,281 @@
 $border-color: #b5b5b5;
+$progress-bar-color: #a1a1a194;
+$progress-value-color-low: #FC6976;
+$progress-value-color-medium: #fc9f69;
+$progress-value-color-high: #29c9c6;
+$progress-value-color-very-high: #29C9B3;
+
+.home-content-main-box-dark {
+    background-color: #303030;
+}
+
+.home-content-main-box-light {
+    background-color: #f5f5f5;
+}
 
 .Home {
-  min-height: calc(100vh - 55px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(-40deg, transparent 0%, #29C9B3 100%);
-  background-size: 400% 400%;
-  animation: backgroundAnimation 30s ease infinite;
-
-  .home-content-main-box-light {
+    min-height: calc(100vh - 55px);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
 
-  .home-image {
-    width: clamp(50px, 30%, 200px);
-    height: clamp(50px, 30%, 200px);
-    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-  }
-
-  .home-container {
-    height: 100%;
-    width: 100%;
-    padding: 0 20px 20px 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 20px;
-
-    .home-wrapper {
-      height: 100%;
-      width: 100%;
-      max-width: 600px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow-y: auto;
-    }
-  }
-
-  .home-title {
-    letter-spacing: 2px;
-    word-spacing: 2px;
-    font-size: 36px;
-    font-weight: 700;
-    text-align: center;
-    background: linear-gradient(-10deg, #FC6976, #bb00bb);
-    background-size: 110%;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .home-content-main-box-dark {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .home-content-box-percentages {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 15px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4px);
-    border: 1px solid $border-color;
-    animation-name: slideInFromLeft;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in-out;
-
-    .percentage-value {
-      text-align: center;
-      font-weight: bold;
-      padding: 8px 0;
-      border-radius: 20px;
-
-      &.percentage-low {
-        color: #FC6976;
-        border: 1px solid #FC6976;
-      }
-
-      &.percentage-medium {
-        color: #fc9f69;
-        border: 1px solid #fc9f69;
-      }
-
-      &.percentage-high {
-        color: #29c9c6;
-        border: 1px solid #29c9c6;
-      }
-
-      &.percentage-very-high {
-        color: #29C9B3;
-        border: 1px solid #29C9B3;
-      }
-
+    .home-image {
+        width: clamp(50px, 40%, 250px);
+        height: clamp(50px, 40%, 250px);
+        filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
     }
 
-    .home-content-start-process-button {
-      background-color: #29C9B3;
-      padding: 8px 20px;
-      border-radius: 5px;
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-top: 20px;
-      align-self: center;
-
-      &:hover {
-        background-color: #1A9A88;
-      }
-
-      @media (max-width: 900px) {
-        position: relative;
+    .home-container {
+        height: 100%;
         width: 100%;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        bottom: 0;
-        transform: translateX(0);
-      }
-    }
-  }
+        padding: 0 20px 20px 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 20px;
 
-  .home-content-box-help-base {
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: 1px solid $border-color;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation-name: slideInFromLeft;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in-out;
-  }
-
-  .home-content-help-text {
-    font-weight: 500;
-    font-size: 20px;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-
-  .home-content-box-help,
-  .home-content-box-lexicon {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 0 5px 0 rgba(32, 32, 32, 0.355);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    width: clamp(100px, 25%, 400px);
-    z-index: 2;
-    margin-top: 15px;
-    padding: 10px 15px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-
-    &:hover {
-      transform: translateY(-5px);
+        .home-wrapper {
+            height: 100%;
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
     }
 
-    a {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+    .home-title {
+        word-spacing: 2px;
+        font-size: 36px;
+        font-weight: 700;
+        text-align: center;
     }
-  }
 
-  .home-content-box-help-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-  }
+    .home-content-box-percentages {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        gap: 16px;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 15px;
+        min-height: 350px;
+        max-height: 58vh;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(4px);
+        border: 1px solid $border-color;
+        animation-name: slideInFromLeft;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-in-out;
 
-  .home-content-help-help-text,
-  .home-content-help-lexicon-text {
-    font-weight: 500;
-    font-weight: bold;
-    float: left;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 5px;
-  }
+        .home-content-percentages-title {
+            font-size: 24px;
+            font-weight: 500;
+            text-align: center;
+        }
 
-  .home-help-image {
-    width: clamp(50px, 5%, 200px);
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+        .home-content-item-percentages-container {
+            height: 100%;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 0 10px;
+            overflow-y: auto;
+        }
+
+        .home-content-box-percentages-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid $border-color;
+
+            .home-content-box-percentages-item-top,
+            .home-content-box-percentages-item-bottom {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                .percentage-value {
+                    width: 60px;
+                    text-align: center;
+                    font-weight: 500;
+                    padding: 4px 0;
+                    border-radius: 20px;
+
+                    &.percentage-low {
+                        background-color: $progress-value-color-low;
+                    }
+
+                    &.percentage-medium {
+                        background-color: $progress-value-color-medium;
+                    }
+
+                    &.percentage-high {
+                        background-color: $progress-value-color-high;
+                    }
+
+                    &.percentage-very-high {
+                        background-color: $progress-value-color-very-high;
+                    }
+                }
+
+                .progress {
+                    width: 100%;
+                    height: 10px;
+                    border-radius: 5px;
+                    background-color: $progress-bar-color;
+                    overflow: hidden;
+
+                    .progress-value {
+                        height: 100%;
+
+                        &.percentage-low {
+                            background-color: $progress-value-color-low;
+                        }
+
+                        &.percentage-medium {
+                            background-color: $progress-value-color-medium;
+                        }
+
+                        &.percentage-high {
+                            background-color: $progress-value-color-high;
+                        }
+
+                        &.percentage-very-high {
+                            background-color: $progress-value-color-very-high;
+                        }
+                    }
+                }
+            }
+
+            .home-content-box-percentages-item-border-light {
+                border-color: #a1a1a194;
+            }
+
+            .home-content-box-percentages-item-border-dark {
+                border-color: #5f5f5fa6;
+            }
+        }
+
+        .home-content-start-process-button {
+            border: 1px solid #FC6976;
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            align-self: center;
+
+            &:hover {
+                background-color: #29C9B3;
+            }
+
+            @media (max-width: 900px) {
+                position: relative;
+                width: 100%;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                bottom: 0;
+                transform: translateX(0);
+            }
+        }
+    }
+
+    .home-floating-buttons {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        z-index: 200;
+
+        .home-floating-button {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #FC6976;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: #29C9B3;
+
+                .home-floating-button-modal-description {
+                    opacity: 1;
+                }
+            }
+
+            .home-floating-button-modal-description {
+                opacity: 0;
+                position: absolute;
+                left: -20%;
+                transform: translateX(-100%);
+                transition: opacity 0.3s ease;
+            }
+        }
+    }
 }
 
 @keyframes slideInFromLeft {
-  from {
-    transform: translateX(-100%);
-  }
+    from {
+        transform: translateX(-100%);
+    }
 
-  to {
-    transform: translateX(0);
-  }
+    to {
+        transform: translateX(0);
+    }
 }
 
 @keyframes backgroundAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 @media (max-width: 900px) {
-  .Home {
-    height: 100% !important;
+    .Home {
+        height: 100% !important;
 
-    .home-container {
-      height: 100% !important;
-      flex-direction: column !important;
-      align-items: center !important;
+        .home-container {
+            height: 100% !important;
+            flex-direction: column !important;
+            align-items: center !important;
 
-      .home-content-box-percentages {
-        padding: 10px !important;
-      }
+            .home-content-box-percentages {
+                padding: 10px !important;
+            }
+        }
     }
-  }
 }

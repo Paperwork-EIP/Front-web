@@ -1,12 +1,15 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.Lexicon {
+    min-height: 100vh;
 }
-  
-body {
-    font-family: sans-serif;
-    background: #eee;
+
+.lexicon-light {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.lexicon-dark {
+    background-color: #222222;
+    color: #CECECE;
 }
 
 .Help-text-button-light {
@@ -17,34 +20,43 @@ body {
     display: inline-block;
     text-decoration: none;
     overflow: hidden;
-  }
+}
 
+.lexicon-image {
+    width: 700px;
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
 
-  .Help-button-light {
+.Help-button-light {
     margin-top: 2%;
     position: relative;
     display: inline-block;
     text-decoration: none;
     overflow: hidden;
-  }
+}
 
-  .Help-button-light:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background-color: rgb(0, 0, 0);
-      transform: scaleX(0);
-      transition: transform 0.3s ease-out;
-      transform-origin: right;
-  }
-      
-  .Help-button-light:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-  }
+.Help-button-light:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(0, 0, 0);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-out;
+    transform-origin: right;
+}
+
+.Help-button-light:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
 
 .faqs {
     width: 100%;
@@ -56,23 +68,13 @@ body {
 .faqs .faq-light {
     margin: 15px;
     padding: 15px;
-    background: #fff;
+    background: #ECEFF1;
     border-radius: 10px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .faqs .faq-light:hover {
     background-color: #f3f3f3;
-}
-
-.lexicon-image {
-    width: 700px;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 35%;
 }
 
 .faq-light-contact-mail {
@@ -91,7 +93,7 @@ body {
 }
 
 .faqs .faq-light .faq-light-question::after {
-content: "+";
+    content: "+";
     position: absolute;
     top: 50%;
     right: 0px;
@@ -132,12 +134,14 @@ content: "+";
     margin: 0 auto;
 }
 
-.faqs .faq-light.open .faq-light-screen{
+.faqs .faq-light.open .faq-light-screen {
     text-align: center;
     margin-top: 30px;
 }
 
-.faqs .faq-light.open .faq-light-screen:hover {opacity: 0.6}
+.faqs .faq-light.open .faq-light-screen:hover {
+    opacity: 0.6
+}
 
 .faqs .faq-light .faq-light-display-linebreak {
     white-space: pre-line;
@@ -151,55 +155,44 @@ content: "+";
     display: inline-block;
     text-decoration: none;
     overflow: hidden;
-  }
+}
 
-
-  .Help-button-dark {
+.Help-button-dark {
     margin-top: 2%;
     position: relative;
     display: inline-block;
     text-decoration: none;
     overflow: hidden;
-  }
+}
 
-  .Help-button-dark:after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background-color: rgb(255, 255, 255);
-      transform: scaleX(0);
-      transition: transform 0.3s ease-out;
-      transform-origin: right;
-  }
-      
-  .Help-button-dark:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-  }
+.Help-button-dark:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-out;
+    transform-origin: right;
+}
+
+.Help-button-dark:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
 
 .faqs .faq-dark {
     margin: 15px;
     padding: 15px;
-    background: rgb(43, 43, 43);
+    background: #303030;
     border-radius: 10px;
     box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.1);
 }
 
 .faqs .faq-dark:hover {
     background-color: rgb(20, 20, 20);
-}
-
-.lexicon-image {
-    width: 700px;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 35%;
 }
 
 .faq-dark-contact-mail {
@@ -218,7 +211,7 @@ content: "+";
 }
 
 .faqs .faq-dark .faq-dark-question::after {
-content: "+";
+    content: "+";
     position: absolute;
     top: 50%;
     right: 0px;
@@ -259,12 +252,14 @@ content: "+";
     margin: 0 auto;
 }
 
-.faqs .faq-dark.open .faq-dark-screen{
+.faqs .faq-dark.open .faq-dark-screen {
     text-align: center;
     margin-top: 30px;
 }
 
-.faqs .faq-dark.open .faq-dark-screen:hover {opacity: 0.6}
+.faqs .faq-dark.open .faq-dark-screen:hover {
+    opacity: 0.6
+}
 
 .faqs .faq-dark .faq-dark-display-linebreak {
     white-space: pre-line;

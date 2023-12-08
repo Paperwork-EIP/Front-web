@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useColorMode } from '@chakra-ui/react';
-import { MdCalendarMonth, MdHelpOutline, MdHome, MdLightMode, MdLogout, MdModeNight, MdOutlineAdd, MdPerson } from 'react-icons/md';
+import { MdCalendarMonth, MdHelpOutline, MdHome, MdLightMode, MdLogout, MdModeNight, MdOutlineAdd, MdPerson, MdSettings } from 'react-icons/md';
 import { Link } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import axios from "axios";
@@ -114,6 +114,10 @@ function Header() {
                                         <Link to='/calendar' data-testid="link-calendar" className="Header-modal-link">
                                             <MdCalendarMonth />
                                             <span>{translation.calendar}</span>
+                                        </Link>
+                                        <Link to='/settings' data-testid="link-settings" className="Header-modal-link">
+                                            <MdSettings />
+                                            <span>{translation.settings}</span>
                                         </Link>
                                         <Link to='/help' data-testid="link-help" className="Header-modal-link">
                                             <MdHelpOutline />

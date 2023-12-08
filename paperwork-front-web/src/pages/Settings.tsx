@@ -1,26 +1,22 @@
-import Header from '../components/Header';
 import React, { useEffect, useState } from 'react';
-import Cookies from 'universal-cookie';
-import "../styles/pages/Settings.scss";
-import axios from 'axios';
 import { toast } from 'react-toastify';
-
-// Icons
-import { AiFillEye, AiFillEyeInvisible, AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import { AiFillEye, AiFillEyeInvisible, AiOutlineEdit } from 'react-icons/ai';
 import { FaUserEdit } from 'react-icons/fa';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { RxUpdate } from 'react-icons/rx';
 import { TiUserDelete } from 'react-icons/ti';
+import { useColorMode } from '@chakra-ui/react';
+import axios from 'axios';
+import Cookies from 'universal-cookie';
 
-// Translation Import
+import Header from '../components/Header';
 import { getTranslation } from './Translation';
 
-// Color mode
-import { useColorMode } from '@chakra-ui/react';
+import "../styles/pages/Settings.scss";
 
-const cookies = new Cookies();
+function SettingsPage() {
+    const cookies = new Cookies();
 
-const SettingsPage = () => {
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
@@ -29,7 +25,6 @@ const SettingsPage = () => {
 
     const api = process.env.REACT_APP_BASE_URL;
 
-    // Previous Values
     const [username, setUsername] = useState("");
     const [name, setName] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -42,7 +37,6 @@ const SettingsPage = () => {
     const [password, setPassword] = useState("");
     const [verifPassword, setVerifPassword] = useState("");
 
-    // New Values - (Personal Informations only)
     const [newUsername, setNewUsername] = useState("");
     const [newName, setNewName] = useState("");
     const [newFirstname, setNewFirstname] = useState("");
@@ -52,21 +46,15 @@ const SettingsPage = () => {
     const [newAddress, setNewAddress] = useState("");
     const [newPhonenumber, setNewPhonenumber] = useState("");
 
-
-
-    // Translation
     const translation = getTranslation(language, "settings");
 
-    // Color mode
     const { colorMode } = useColorMode();
 
-    // Eye Password
     const [showEyePwd, setShowEyePwd] = React.useState(false);
     const handleClickEyePwd = () => setShowEyePwd(!showEyePwd);
     const [showEyeVerifPwd, setShowEyeVerifPwd] = React.useState(false);
     const handleClickVerifEyePwd = () => setShowEyeVerifPwd(!showEyeVerifPwd);
 
-    // Handle change    
     const [deleteModal, setDeleteModal] = React.useState(false);
     const [avatarModal, setAvatarModal] = React.useState(false);
     const [currentSection, setCurrentSection] = useState("PersonalInformation");
@@ -75,7 +63,6 @@ const SettingsPage = () => {
         if (cookiesInfo) {
             axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
                 .then(res => {
-                    console.log(res.data);
                     setUsername(res.data.username);
                     setName(res.data.name);
                     setFirstname(res.data.firstname);
@@ -92,11 +79,11 @@ const SettingsPage = () => {
         }
     }, []);
 
-    const handleSubmit = () => {
+    async function handleSubmit() {
         const parameters = { token: cookiesInfo.loginToken };
         let isAnyNewValue = false;
 
-        const checkAndAssign = (newValue: string, oldValue: string, paramName: string) => {
+        function checkAndAssign(newValue: string, oldValue: string, paramName: string) {
             if (newValue.length > 0 && oldValue !== newValue) {
                 Object.assign(parameters, { [paramName]: newValue });
                 isAnyNewValue = true;
@@ -113,9 +100,8 @@ const SettingsPage = () => {
         checkAndAssign(newPhonenumber, phonenumber, 'number_phone');
 
         if (isAnyNewValue) {
-            axios.post(`${api}/user/modifyDatas`, parameters)
-            .then(res => {
-                console.log(res.data);
+            await axios.post(`${api}/user/modifyDatas`, parameters)
+            .then(() => {
                 toast.success(translation.alertUpdateProfileInfo);
                 newUsername.length > 0 ? setUsername(newUsername) : setUsername(username);
                 newName.length > 0 ? setName(newName) : setName(name);
@@ -153,16 +139,14 @@ const SettingsPage = () => {
         }
     };
 
-    const handleChangePassword = () => {
+    async function handleChangePassword() {
         const passwordInput = document.getElementById('password') as HTMLInputElement;
-        console.log("passwordInput.value : ", passwordInput.value);
-        console.log("password : ", password);
-        console.log("verifPassword : ", verifPassword);
+
         if (passwordInput.value === undefined || passwordInput.value === null || passwordInput.value === "") {
             toast.error(translation.alertEmptyPassword);
         } else {
             if (password.length >= 0 && password === verifPassword) {
-                axios.post(`${api}/user/modifyDatas`, {
+                await axios.post(`${api}/user/modifyDatas`, {
                     token: cookiesInfo.loginToken,
                     password: password,
                 }).then(res => {
@@ -184,12 +168,10 @@ const SettingsPage = () => {
         }
     }
 
-
-    const handleDeleteAccount = (event: any) => {
-        axios.get(`${api}/user/delete`, { params: {
+    async function handleDeleteAccount() {
+        await axios.get(`${api}/user/delete`, { params: {
             token: cookiesInfo.loginToken,
-        }}).then(res => {
-            console.log(res.data);
+        }}).then(() => {
             toast.success(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
@@ -206,8 +188,8 @@ const SettingsPage = () => {
         setDeleteModal(!deleteModal);
     }
 
-    const handleSetNewAvatar = (newAvatar: string) => {
-        axios.post(`${api}/user/modifyDatas`, {
+    async function handleSetNewAvatar(newAvatar: string) {
+        await axios.post(`${api}/user/modifyDatas`, {
             token: cookiesInfo.loginToken,
             profile_picture: newAvatar,
         }).then(res => {
@@ -234,7 +216,6 @@ const SettingsPage = () => {
                 <div className="title">{translation.title}</div>
                 <div className="settings-container">
                     <div className="choice-container">
-                        <div className="choice-divider"></div>
                         <button
                             aria-label="button-personal-information-section"
                             onClick={() => setCurrentSection("PersonalInformation")}
@@ -243,7 +224,6 @@ const SettingsPage = () => {
                             <FaUserEdit className="choice-icon" />
                             {translation.choice1}
                         </button>
-                        <div className="choice-divider"></div>
                         <button
                             aria-label="button-security-section"
                             onClick={() => setCurrentSection("Security")}
@@ -252,7 +232,6 @@ const SettingsPage = () => {
                             <RiLockPasswordFill className="choice-icon" />
                             {translation.choice2}
                         </button>
-                        <div className="choice-divider"></div>
                         <button
                             aria-label="button-delete-account-section"
                             onClick={() => setCurrentSection("DeleteAccount")}
@@ -261,7 +240,6 @@ const SettingsPage = () => {
                             <TiUserDelete className="choice-icon" />
                             {translation.choice3}
                         </button>
-                    <div className="choice-divider"></div>
                 </div>
         
                 {currentSection === "PersonalInformation" && (
@@ -270,12 +248,12 @@ const SettingsPage = () => {
                         <div className="information-container-avatar">
                             <div className="avatar-container">
                             <img
-                                src={profilePicture === null ? "/assets/avatar/NoAvatar.png" : profilePicture}
+                                src={profilePicture === null ? "/assets/avatar/no_avatar.png" : profilePicture}
                                 alt="Avatar"
                                 className="Avatar"
                             />
                             <button aria-label="button-change-avatar" onClick={() => setAvatarModal(!avatarModal)}>
-                                <img src="/assets/avatar/PictureModif.png" alt="PictureModif" className="ModifImg" />
+                                <img src="/assets/avatar/picture_modif.png" alt="PictureModif" className="ModifImg" />
                             </button>
                             </div>
                         </div>
@@ -340,19 +318,19 @@ const SettingsPage = () => {
                                     <option data-testid="select-option" value="english">
                                     English
                                     </option>
-                                    <option data-testid="select-option" value="français">
+                                    <option data-testid="select-option" value="french">
                                     Français
                                     </option>
-                                    <option data-testid="select-option" value="deutsch">
+                                    <option data-testid="select-option" value="german">
                                     Deutsch
                                     </option>
                                     <option data-testid="select-option" value="korean">
                                     Korean
                                     </option>
-                                    <option data-testid="select-option" value="indonesia">
+                                    <option data-testid="select-option" value="indonesian">
                                     Indonesia
                                     </option>
-                                    <option data-testid="select-option" value="espanol">
+                                    <option data-testid="select-option" value="spanish">
                                     Espanol
                                     </option>
                                 </select>
@@ -539,23 +517,29 @@ const SettingsPage = () => {
                                     <span></span>
                                 </div>
                                 <div className="modal-avatar-container">
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar01.png")}>
-                                        <img src="/assets/avatar/Avatar01.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar01.png")}>
+                                        <img src="/assets/avatar/avatar01.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar02.png")}>
-                                        <img src="/assets/avatar/Avatar02.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar02.png")}>
+                                        <img src="/assets/avatar/avatar02.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar03.png")}>
-                                        <img src="/assets/avatar/Avatar03.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar03.png")}>
+                                        <img src="/assets/avatar/avatar03.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar04.png")}>
-                                        <img src="/assets/avatar/Avatar04.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar04.png")}>
+                                        <img src="/assets/avatar/avatar04.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar05.png")}>
-                                        <img src="/assets/avatar/Avatar05.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
+                                        <img src="/assets/avatar/avatar05.png" alt="Avatar" className="Avatar" />
                                     </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/Avatar06.png")}>
-                                        <img src="/assets/avatar/Avatar06.png" alt="Avatar" className="Avatar" />
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
+                                        <img src="/assets/avatar/avatar06.png" alt="Avatar" className="Avatar" />
+                                    </button>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
+                                        <img src="/assets/avatar/avatar07.png" alt="Avatar" className="Avatar" />
+                                    </button>
+                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
+                                        <img src="/assets/avatar/avatar08.png" alt="Avatar" className="Avatar" />
                                     </button>
                                 </div>
                                 <div className="modal-button-container">

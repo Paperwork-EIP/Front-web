@@ -1,6 +1,6 @@
 {
   "name": "paperwork-front-web",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@chakra-ui/icons": "^2.0.2",
@@ -40,8 +40,7 @@
     "test:coverage": "jest --silent --coverage=true",
     "test:coverage:log": "jest --coverage=true",
     "test:all": "jest --watchAll --coverage=true",
-    "eject": "react-scripts eject",
-    "prepare": "cd .. && npx husky install paperwork-front-web/.husky"
+    "eject": "react-scripts eject"
   },
   "jest": {
     "testEnvironment": "jsdom",
@@ -81,7 +80,6 @@
     "@types/react-calendar": "^3.5.2",
     "@types/react-modal": "^3.13.1",
     "@types/react-vertical-timeline-component": "^3.3.3",
-    "husky": "^8.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0"
   }

@@ -2,7 +2,7 @@ $calendar-primary-color: #FC6976;
 $calendar-secondary-color: #29C9B3;
 
 $calendar-light-text-color: #000000;
-$calendar-light-background-color: #ffffffb2;
+$calendar-light-background-color: #ffffff;
 $calendar-light-foreground-color: #ECEFF1;
 $calendar-light-hover-color: #F8F8FA;
 $calendar-light-disabled-color: #F0F0F0;
@@ -10,7 +10,7 @@ $calendar-light-active-color: $calendar-secondary-color;
 $calendar-light-active-text-color: #FFFFFF;
 
 $calendar-dark-text-color: #CECECE;
-$calendar-dark-background-color: #222222a7;
+$calendar-dark-background-color: #222222;
 $calendar-dark-foreground-color: #303030;
 $calendar-dark-hover-color: #3b3b3b;
 $calendar-dark-disabled-color: #303030;
@@ -23,9 +23,6 @@ $calendar-dark-active-text-color: #FFFFFF;
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - 55px);
-    background: linear-gradient(to right, transparent 0%, #fc697547 100%);
-    background-size: 400% 400%;
-    animation: backgroundAnimation 30s ease infinite;
 
     .calendar-title {
         position: relative;
@@ -33,30 +30,14 @@ $calendar-dark-active-text-color: #FFFFFF;
         max-width: 1000px;
         padding: 0 0 20px 0;
         margin: 0 0 10px 0;
-        letter-spacing: 2px;
         word-spacing: 2px;
         font-size: clamp(20px, 5vw, 36px);
-        font-weight: 700;
+        font-weight: 500;
         text-align: center;
-        background: linear-gradient(to right, #FC6976, #29C9B3);
-        background-size: 100% 200%;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-
-        &:after {
-            content: "";
-            display: block;
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(to right, #FC6976, #29C9B3);
-            filter: blur(5px);
-        }
     }
 
     .calendar-image {
+        opacity: 0.6;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -136,8 +117,8 @@ $calendar-dark-active-text-color: #FFFFFF;
 
                 &:disabled {
                     abbr {
-                        background: $calendar-light-disabled-color;
-                        border: 1px solid $calendar-primary-color;
+                        color: #808080af;
+                        font-weight: bold;
                     }
 
                     &:hover {
@@ -270,8 +251,8 @@ $calendar-dark-active-text-color: #FFFFFF;
 
                 &:disabled {
                     abbr {
-                        background: $calendar-dark-disabled-color;
-                        border: 1px solid $calendar-primary-color;
+                        color: gray;
+                        font-weight: bold;
                     }
 
                     &:hover {
@@ -385,40 +366,92 @@ $calendar-dark-active-text-color: #FFFFFF;
         .calendar-modal-line {
             width: 100%;
             height: 2px;
-            background-color: #cecece;
+            background-color: #cecece1f;
         }
 
         .calendar-modal-text {
             font-weight: 500;
             font-size: 24px;
+            padding-left: 24px;
+            padding-top: 8px;
+        }
+
+        .calendar-modal-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
             padding: 10px 15px;
+
+            .calendar-modal-button-bin {
+                transition: opacity 0.3s ease;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
         }
     }
 
     .calendar-modal-content {
         width: calc(100% - 50px);
+
+        .calendar-edit-select {
+            width: 100%;
+        }
+    }
+
+    .calendar-event-list {
+        overflow-y: auto;
+        height: 240px;
+
+        .calendar-event-list-card {
+            border: 1px solid #cecece;
+            border-radius: 5px;
+            padding: 16px;
+            margin-bottom: 16px;
+
+            &-content {
+                &-title-text {
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-bottom: 16px;
+                }
+
+                &-description-text {
+                    font-size: 14px;
+                    font-weight: 400;
+                }
+            }
+        }
     }
 
     .calendar-modal-buttons {
         width: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: center;
         gap: 20px;
-        padding: 20px 25px;
+        padding: 16px 0 24px 0;
     }
 
     .calendar-modal-button {
+        padding: 8px 20px;
+        border-radius: 5px;
         font-size: 14px;
+        font-weight: 500;
         text-transform: uppercase;
         cursor: pointer;
+        border: 1px solid transparent;
 
         &.close {
             color: #FC6976;
         }
 
         &.submit {
-            color: #29C9B3;
+            font-size: 16px;
+            border-color: #29C9B3;
         }
 
         &.delete {

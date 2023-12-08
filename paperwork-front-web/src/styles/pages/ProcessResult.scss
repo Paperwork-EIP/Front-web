@@ -13,16 +13,9 @@
     }
 
     .StartNewProcess-Btn {
-        width: auto;
-        height: 40px;
-        border-radius: 8px;
+        display: flex;
         align-items: center;
         justify-content: flex-start;
-        display: flex;
-        flex-wrap: wrap;
-        position: relative;
-        border: none;
-        text-align: center;
         text-decoration: none;
         font-size: 1.2rem;
         margin-bottom: 1em;
@@ -64,29 +57,17 @@
     }
 }
 
-
-
-
 // LIGHT THEME
 .ProcessResult-light {
-    --background-color: rgb(240, 240, 240);
+    --background-color: #ffffff;
     --text-color: black;
-    --new-process-button-color: rgb(100, 100, 100);
+    --new-process-button-color: #ECEFF1;
     --border-shadow: 0px 10px 10px -7px rgba(0,0,0,0.1), 0px 5px 10px 5px rgba(0,0,0,0.2);
     --box-color: white;
     --checkbox-color: #29C9B3;
 
     background-color: var(--background-color);
     color: var(--text-color);
-
-    .StartNewProcess-Btn {
-        background-color: var(--background-color);
-        color: var(--new-process-button-color);
-
-        .StartNewProcess-Icon {
-            color: var(--new-process-button-color);
-        }
-    }
 
     .ProcessResult-Requires {
         -webkit-box-shadow: var(--border-shadow);
@@ -101,28 +82,16 @@
     }
 }
 
-
-
-
 // DARK THEME
 .ProcessResult-dark {
-    --background-color: rgb(16, 20, 28);
+    --background-color: #303030;
     --text-color: white;
     --new-process-button-color: rgb(183, 193, 207);
-    --box-color: rgb(26, 32, 44);
+    --box-color: #222222;
     --checkbox-color: #29C9B3;
 
     background-color: var(--background-color);
     color: var(--text-color);
-
-    .StartNewProcess-Btn {
-        background-color: var(--background-color);
-        color: var(--new-process-button-color);
-
-        .StartNewProcess-Icon {
-            color: var(--new-process-button-color);
-        }
-    }
 
     .ProcessResult-Requires {
         background-color: var(--box-color);

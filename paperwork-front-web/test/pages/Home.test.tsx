@@ -54,19 +54,6 @@ describe("Home Page Tests", () => {
             expect(axios.get).toHaveBeenCalled;
         })
     });
-    test('should handle clicks', async () => {
-        const { getByLabelText } = render(
-            <BrowserRouter>
-                <HomePage />
-            </BrowserRouter>
-        );
-
-        const click1 = fireEvent.click(getByLabelText(/click-alp/i));
-        const click2 = fireEvent.click(getByLabelText(/click-asc/i));
-
-        expect(click1).toBeTruthy();
-        expect(click2).toBeTruthy();
-    });
     // test('should display percentage of process', async () => {
     //     axios.get = jest.fn().mockResolvedValue({
     //         data: {

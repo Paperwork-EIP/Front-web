@@ -29,7 +29,8 @@ function CircleIcon(prop: any) {
 function ListEventCalendar(props: Readonly<Props>) {
     let colorEvent = "";
     const date = new Date();
-    const comparativeDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const comparativeDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + day;
     const rdv = props.rdv;
     const style = props.style ? props.style : "list-event-calendar-box-calendar";
     const adaptedColor = props.adaptedColor;

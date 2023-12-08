@@ -111,6 +111,7 @@ const translations: Translations = {
       home: "Home",
       profile: "Profile",
       calendar: "Calendar",
+      settings: "Settings",
       help: "Help",
       logout: "Logout",
     },
@@ -162,7 +163,7 @@ const translations: Translations = {
       answer4: "A proof of address is a document that verifies where you live. It is often required as a form of identification when you need to open a bank account, apply for credit, or get a government-issued ID card. A proof of address can take many forms, but it typically includes your name, your address, and a date.",
     },
     home: {
-      title: "Your Paperwork Space",
+      title: "Your Paperwork space",
       ascending: "Ascending",
       descending: "Descending",
       newProcessButton: "New Process",
@@ -198,7 +199,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Event modified successfully!",
     }
   },
-  français: {
+  french: {
     quiz: {
       title: "Nouveau questionnaire de procédure",
       question: "Quel type de procédure voulez-vous compléter ?",
@@ -298,6 +299,7 @@ const translations: Translations = {
       home: "Accueil",
       profile: "Profil",
       calendar: "Calendrier",
+      settings: "Paramètres",
       help: "Aide",
       logout: "Déconnexion",
     },
@@ -349,7 +351,7 @@ const translations: Translations = {
       answer4: "Un justificatif de domicile est un document qui vérifie votre adresse de domicile. Il est souvent requis comme une forme d'identification lorsque vous avez besoin d'ouvrir un compte bancaire, de demander du crédit ou d'obtenir une carte d'identité émise par le gouvernement. Un justificatif de domicile peut prendre différentes formes, mais il inclut généralement votre nom, votre adresse et une date.",
     },
     home: {
-      title: "Votre Espace Paperwork",
+      title: "Votre espace Paperwork",
       ascending: "Croissant",
       descending: "Décroissant",
       newProcessButton: "Nouvelle Procédure",
@@ -366,7 +368,7 @@ const translations: Translations = {
     },
     calendar: {
       calendarLocation: "fr-FR",
-      calendar: "Ne manquez plus vos rendez-vous. Planifiez-les dans le calendrier !",
+      calendar: "Ne manquez plus vos rendez-vous. <br /> Planifiez-les dans le calendrier !",
       addEvent: "Ajouter un évènement",
       dailyEvent: "Évènements quotidiens",
       editDeleteEvent: "Modifier/Supprimer un évènement",
@@ -385,7 +387,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Évènement modifié avec succès !",
     }
   },
-  deutsch: {
+  german: {
     quiz: {
       title: "Neues Prozess-Quiz",
       question: "Welchen Typ von Verfahren möchten Sie abschließen?",
@@ -483,6 +485,7 @@ const translations: Translations = {
       home: "Startseite",
       profile: "Profil",
       calendar: "Kalender",
+      settings: "Einstellungen",
       help: "Hilfe",
       logout: "Abmelden",
     },
@@ -570,7 +573,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Ereignis erfolgreich geändert!",
     }
   },
-  한국어로: {
+  korean: {
     quiz: {
       title: "새로운 프로세스 퀴즈",
       question: "어떤 종류의 절차를 완료하고 싶으세요?",
@@ -668,6 +671,7 @@ const translations: Translations = {
       home: "홈",
       profile: "프로필",
       calendar: "캘린더",
+      settings: "설정",
       help: "도움말",
       logout: "로그아웃",
     },
@@ -755,7 +759,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "이벤트가 성공적으로 수정되었습니다!",
     }
   },
-  indonesia: {
+  indonesian: {
     quiz: {
       title: "Kuis Proses Baru",
       question: "Jenis prosedur apa yang ingin Anda selesaikan?",
@@ -853,6 +857,7 @@ const translations: Translations = {
       home: "Beranda",
       profile: "Profil",
       calendar: "Kalender",
+      settings: "Pengaturan",
       help: "Bantuan",
       logout: "Keluar",
     },
@@ -904,7 +909,7 @@ const translations: Translations = {
       answer4: "Bukti alamat adalah dokumen yang memverifikasi tempat tinggal Anda. Ini sering kali diperlukan sebagai bentuk identifikasi ketika Anda perlu membuka rekening bank, mengajukan kredit, atau mendapatkan kartu identitas yang dikeluarkan pemerintah. Bukti alamat dapat memiliki banyak bentuk, tetapi biasanya mencakup nama Anda, alamat Anda, dan tanggal."
     },
     home: {
-      title: "Ruang Paperwork Anda",
+      title: "Ruang Paperwork anda",
       ascending: "Menaik",
       descending: "Menurun",
       newProcessButton: "Proses Baru",
@@ -940,7 +945,7 @@ const translations: Translations = {
       eventModifiedSuccessfully: "Acara berhasil diubah!",
     }
   },
-  español: {
+  spanish: {
     quiz: {
       title: "Nuevo Cuestionario de Proceso",
       question: "¿Qué tipo de procedimiento deseas completar?",
@@ -1038,6 +1043,7 @@ const translations: Translations = {
       home: "Inicio",
       profile: "Perfil",
       calendar: "Calendario",
+      settings: "Configuración",
       help: "Ayuda",
       logout: "Cerrar sesión",
     },
@@ -1089,7 +1095,7 @@ const translations: Translations = {
       answer4: "Una prueba de dirección es un documento que verifica dónde vives. A menudo se requiere como una forma de identificación cuando necesitas abrir una cuenta bancaria, solicitar crédito o obtener una tarjeta de identificación emitida por el gobierno. Una prueba de dirección puede tomar muchas formas, pero generalmente incluye tu nombre, tu dirección y una fecha.",
     },
     home: {
-      title: "Tu Espacio de Documentación",
+      title: "Tu espacio de Paperwork",
       ascending: "Ascendente",
       descending: "Descendente",
       newProcessButton: "Nuevo Proceso",
@@ -1128,6 +1134,6 @@ const translations: Translations = {
 };
 
 export function getTranslation(locale: string, page: string): TranslationKeys {
-  const pageTranslations = translations[locale]?.[page] || translations.français[page];
+  const pageTranslations = translations[locale]?.[page] || translations.english[page];
   return pageTranslations;
 }

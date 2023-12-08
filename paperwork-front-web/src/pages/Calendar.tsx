@@ -12,7 +12,7 @@ import { getTranslation } from './Translation';
 import Loading from '../components/Loading';
 import ListEventCalendar from '../components/ListEventCalendar';
 
-import "../styles/Calendar.scss";
+import "../styles/pages/Calendar.scss";
 
 function CalendarPage() {
     const cookies = new Cookies();
@@ -47,13 +47,14 @@ function CalendarPage() {
     const isNewDateError = useRef(false);
     const isModDateError = useRef(false);
     const selectedMonth = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
-    const comparativeDate = date.getFullYear() + '-' + selectedMonth + '-' + date.getDate();
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const comparativeDate = date.getFullYear() + '-' + selectedMonth + '-' + day;
 
     const { isOpen: isOpenAddModal, onOpen: onOpenAddModal, onClose: onCloseAddModal } = useDisclosure();
     const { isOpen: isOpenDailyModal, onOpen: onOpenDailyModal, onClose: onCloseDailyModal } = useDisclosure();
     const { isOpen: isOpenDeleteModal, onOpen: onOpenDeleteModal, onClose: onCloseDeleteModal } = useDisclosure();
 
-    const adaptedColor = useColorModeValue("rgba(255, 255, 255, 0.85)", "rgba(34, 34, 34, 0.85)");
+    const adaptedColor = useColorModeValue("#f5f5f5", "#303030");
 
     function handleNewDateChange(e: any) {
         setNewDate(e.target.value);
@@ -267,6 +268,7 @@ function CalendarPage() {
                     minDate={new Date()}
                     onClickDay={(value) => {
                         setDate(value);
+                        onOpenDailyModal();
                         rdv.map((item: any) => {
                             if (item.toString()?.split("T")[0] === comparativeDate) {
                                 isEvent++;
@@ -302,12 +304,12 @@ function CalendarPage() {
                     </div>
                     <div className='calendar-modal-content'>
                         <Center p={'10px'}>
-                            <Flex width={'200px'} justifyContent={'space-between'}>
+                            <Flex width={'70%'} justifyContent={'space-between'}>
                                 <Input aria-label='input-new-date-change' onChange={handleNewDateChange} type="time" />
                             </Flex>
                         </Center>
                         <Center p={'10px'}>
-                            <div style={{ width: '200px', fontSize: 13 }}>
+                            <div style={{ width: '70%', fontSize: 13 }}>
                                 <Select
                                     className='calendar-add-select'
                                     placeholder={translation.selectTheProcess}
@@ -320,7 +322,7 @@ function CalendarPage() {
                         <Center p={'10px'}>
                             {
                                 postsStep.length !== 0 ?
-                                    <div style={{ width: '200px', fontSize: 13 }}>
+                                    <div style={{ width: '70%', fontSize: 13 }}>
                                         <Select
                                             className='calendar-add-select'
                                             placeholder={translation.selectTheStep}
@@ -330,7 +332,7 @@ function CalendarPage() {
                                         />
                                     </div>
                                     :
-                                    <div style={{ width: '200px', fontSize: 13 }}>
+                                    <div style={{ width: '70%', fontSize: 13 }}>
                                         <Select
                                             className='calendar-add-select'
                                             placeholder={translation.selectTheStep}
@@ -378,11 +380,12 @@ function CalendarPage() {
                                         listEvents.map((item: any) => {
                                             return (
                                                 item.date.split("T")[0] === comparativeDate ?
-                                                    <Box m={3} bgColor="#dbdbdb" borderRadius='lg' borderWidth='1px' key={item.key + item.date}>
-                                                        <Text color="black" fontSize='xs' mt='1' px='1'>{item.date.split("T")[0]}</Text>
-                                                        <Text color="black" fontSize='small' mt='2' px='1'>{item.process_title}</Text>
-                                                        <Text color="black" fontSize='2xs' px='1'>{item.step_title}</Text>
-                                                    </Box>
+                                                    <div className='calendar-event-list-card'>
+                                                        <div className='calendar-event-list-card-content'>
+                                                            <h1 className='calendar-event-list-card-content-title-text'>{item.process_title}</h1>
+                                                            <h2 className='calendar-event-list-card-content-description-text'>{item.step_title}</h2>
+                                                        </div>
+                                                    </div>
                                                     : ''
                                             )
                                         })
@@ -408,8 +411,15 @@ function CalendarPage() {
                             {date.toDateString()}
                         </div>
                         <div className='calendar-modal-line'></div>
-                        <div className='calendar-modal-text'>
-                            {translation.editDelete}
+                        <div className='calendar-modal-header'>
+                            <h1 className='calendar-modal-text'>{translation.editDelete}</h1>
+                            <button
+                                className='calendar-modal-button-bin'
+                                aria-label='delete-button'
+                                onClick={() => deleteEvent()}
+                            >
+                                <img src="assets/calendar-page/bin.png" alt="delete_image" />
+                            </button>
                         </div>
                     </div>
                     <div className='calendar-modal-content'>
@@ -433,9 +443,9 @@ function CalendarPage() {
                                                         <Input width={'100%'} value={`${item.process_title} - ${item.step_title}`} disabled />
                                                     </Center>
                                                     <Center p={'10px'}>
-                                                        {
-                                                            postsStepEdit.length !== 0 ?
-                                                                <div>
+                                                        <Flex width={'100%'}>
+                                                            {
+                                                                postsStepEdit.length !== 0 ?
                                                                     <Select
                                                                         className='calendar-edit-select'
                                                                         placeholder={translation.selectTheStep}
@@ -443,27 +453,24 @@ function CalendarPage() {
                                                                         onChange={handleProcessEdit}
                                                                         styles={customStyles}
                                                                     />
-                                                                </div>
-                                                                :
-                                                                <div>
+                                                                    :
                                                                     <Select
                                                                         className='calendar-edit-select'
                                                                         placeholder={translation.selectTheStep}
                                                                         defaultValue={"Show List"}
                                                                         styles={customStyles}
                                                                     />
-                                                                </div>
-                                                        }
+                                                            }
+                                                        </Flex>
                                                     </Center>
-                                                    <Center p={'10px'}>
-                                                        <button
-                                                            className='calendar-modal-button delete'
-                                                            aria-label='delete-button'
-                                                            onClick={() => deleteEvent()}
-                                                        >
-                                                            {translation.deleteEvent}
+                                                    <div className='calendar-modal-buttons'>
+                                                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitModEvent}>
+                                                            {translation.submit}
                                                         </button>
-                                                    </Center>
+                                                        <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseDeleteModal}>
+                                                            {translation.close}
+                                                        </button>
+                                                    </div>
                                                 </Box>
                                                 : ''
                                         )
@@ -471,14 +478,6 @@ function CalendarPage() {
                                 }
                             </div>
                         }
-                    </div>
-                    <div className='calendar-modal-buttons'>
-                        <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseDeleteModal}>
-                            {translation.close}
-                        </button>
-                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitModEvent}>
-                            {translation.submit}
-                        </button>
                     </div>
                 </Modal>
             </>
@@ -501,9 +500,7 @@ function CalendarPage() {
             }
             <div className='calendar' style={{ backgroundColor: adaptedColor }}>
                 <div className='calendar-wrapper'>
-                    <h1 className="calendar-title">
-                        {translation.calendar}
-                    </h1>
+                    <h1 className="calendar-title" dangerouslySetInnerHTML={{ __html: translation.calendar }}></h1>
                     <div className={colorMode === 'light' ? "calendar-content-light" : "calendar-content-dark"}>
                         {
                             displayCalendar()
