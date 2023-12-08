@@ -15,12 +15,12 @@ import "../styles/pages/Register.scss";
 function RegisterPage() {
 
     const api = process.env.REACT_APP_BASE_URL;
-    // const url = new URL(window.location.href);
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [checkRegexMail, setCheckRegexMail] = useState(false);
 
     const cookies = new Cookies();
     const { t } = useTranslation();
@@ -33,19 +33,6 @@ function RegisterPage() {
                 password: password
             }
         ).then(async response => {
-            // await axios.get(`${api}/user/sendVerificationEmail?token=${response.data.jwt}`)
-            //     .then(() => {
-            //         cookies.set('loginToken', { loginToken: url.searchParams.get('token') }, {
-            //             path: '/',
-            //             secure: true,
-            //             sameSite: 'none'
-            //         });
-            //         window.location.replace('/sentEmail');
-            //     })
-            //     .catch(err => {
-            //         console.error(err);
-            //         toast.error(t('register.error'));
-            //     })
             cookies.set('loginToken', { loginToken: response.data.jwt }, {
                 path: '/',
                 secure: true,
@@ -58,15 +45,21 @@ function RegisterPage() {
         })
     };
 
+    function handleEmailChange(event: any) {
+        const mail = event.target.value;
+        setEmail(mail);
+
+        const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (regexMail.test(mail)) {
+            setCheckRegexMail(true);
+        } else {
+            setCheckRegexMail(false);
+        }
+    }
+
     function handleConfirmPasswordChange(event: any) {
         const confirm = event.target.value;
         setConfirmPassword(confirm);
-
-        if (password !== confirm) {
-            setButtonDisabled(true);
-        } else {
-            setButtonDisabled(false);
-        }
     };
 
     async function googleConnect() {
@@ -88,6 +81,11 @@ function RegisterPage() {
     }
 
     useEffect(() => {
+        if (email && password && confirmPassword === password && checkRegexMail) {
+            setButtonDisabled(false);
+        } else {
+            setButtonDisabled(true);
+        }
         if (cookies.get('loginToken')) {
             window.location.replace('/home');
         }
@@ -102,7 +100,7 @@ function RegisterPage() {
                         <h1 className='Register-title'>{t('register.title')}</h1>
                         <div className='Register-form'>
                             <div className="Register-form-group field">
-                                <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={handleEmailChange} required />
                                 <label htmlFor="email" className="Register-form-label">{t('register.email')}</label>
                             </div>
                             <div className="Register-form-group field">

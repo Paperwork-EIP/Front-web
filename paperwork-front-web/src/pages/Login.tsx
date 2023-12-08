@@ -51,7 +51,7 @@ function LoginPage() {
     async function handleForgotPassword() {
         await axios.get(
             `${api}/user/sendResetPasswordEmail?email=${email}`,
-        ).then(res => {
+        ).then(() => {
             toast.success(t('login.emailSent'));
         }).catch(err => {
             toast.warning(t('login.emailFail'));
@@ -59,7 +59,7 @@ function LoginPage() {
         })
     };
 
-    function handleinputFilled() {
+    function handleInputFilled() {
         if (email && password) {
             setButtonDisabled(false);
         } else {
@@ -80,7 +80,7 @@ function LoginPage() {
     }
 
     useEffect(() => {
-        handleinputFilled();
+        handleInputFilled();
         if (cookies.get('loginToken')) {
             window.location.replace('/home');
         }
