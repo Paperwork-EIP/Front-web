@@ -12,7 +12,6 @@ import { getTranslation } from '../Translation';
 import "../../styles/Quiz.css";
 import "../../styles/pages/Quiz.scss";
 
-
 function QuizPage() {
     const cookies = new Cookies();
     const cookiesInfo = cookies.get('loginToken');
@@ -29,7 +28,9 @@ function QuizPage() {
 
     function handleSubmit(e: any) {
         e.preventDefault();
+
         const quizSelect = document.getElementById('Quiz-Select') as HTMLSelectElement;
+
         if (quizSelect) {
             const selectedValue = quizSelect.value;
             window.location.href = `/quiz/${selectedValue}/0`;
@@ -41,15 +42,15 @@ function QuizPage() {
             .then(res => {
                 setLanguage(res.data.language);
             }).catch(err => {
-                console.log(err)
+                console.error(err)
             });
     }
 
     async function getProcesses() {
         await axios.get(`${api}/process/getAll`, { params: { language: language } })
             .then(res => {
-                var procedures = [];
-                console.log(res.data);
+                let procedures = [];
+
                 for (let i = 0; i < res.data.response.length; i++) {
                     procedures.push({
                         label: res.data.response[i]['title'],
@@ -59,7 +60,7 @@ function QuizPage() {
                 }
                 setPosts(procedures);
             }).catch(err => {
-                console.log(err)
+                console.error(err)
             });
     }
 
@@ -71,7 +72,6 @@ function QuizPage() {
     return (
         <>
             <Header />
-
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
                 <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
                 <div className='Quiz-container'>

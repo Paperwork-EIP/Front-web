@@ -86,12 +86,13 @@ function QuizQuestion() {
                 window.location.href = `/quiz/${processSelected}/${nextStep}?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
         } else {
 
-            var queryStr = `?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
-            var queryArr = queryStr.replace('?', '').split('&');
-            var queryParams = [];
+            let queryStr = `?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
+            let queryArr = queryStr.replace('?', '').split('&');
+            let queryParams = [];
 
-            for (var q = 0; q < queryArr.length; q++) {
-                var qArr = queryArr[q].split('=');
+            for (let q = 0; q < queryArr.length; q++) {
+                let qArr = queryArr[q].split('=');
+
                 if (qArr[1] === 'true')
                     queryParams.push({ step_id: parseInt(qArr[0]), response: true });
                 else
@@ -106,7 +107,7 @@ function QuizQuestion() {
                         window.location.href = `/processResult/${processSelected}`;
                     }).catch(err => {
                         toast.error(translation.error);
-                        console.log(err);
+                        console.error(err);
                     });
             } else {
                 axios.post(`${api}/userProcess/update`, post)
@@ -114,7 +115,7 @@ function QuizQuestion() {
                         window.location.href = `/processResult/${processSelected}`;
                     }).catch(err => {
                         toast.error(translation.error);
-                        console.log(err);
+                        console.error(err);
                     });
             }
         }

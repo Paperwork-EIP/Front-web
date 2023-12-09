@@ -33,7 +33,7 @@ const ProcessResult = () => {
     }
     const cookiesInfo = cookies.get('loginToken');
 
-    var { processSelected } = useParams();
+    let { processSelected } = useParams();
 
     // User informations
     const [language, setLanguage] = useState("");
@@ -71,7 +71,7 @@ const ProcessResult = () => {
     }, [cookiesInfo, processSelected, api, stepsAnswer]);
 
     const handleCheckboxClick = (step_id: any, is_done: any) => {
-        var newStepsAnswer = [];
+        let newStepsAnswer = [];
         newStepsAnswer = stepsAnswer;
         newStepsAnswer?.map((item: any) => {
             if (item.step_id === step_id) {
