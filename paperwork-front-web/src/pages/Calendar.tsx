@@ -1,4 +1,4 @@
-import { Center, Text, Box, Flex, Input, useDisclosure, useColorModeValue, useColorMode } from '@chakra-ui/react';
+import { Center, Box, Flex, Input, useDisclosure, useColorModeValue, useColorMode } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Select from 'react-select';
 import React, { useState, useRef, useEffect } from 'react';
@@ -483,6 +483,24 @@ function CalendarPage() {
             </>
         )
     }
+
+    useEffect(() => {
+        listEvents?.map((item: any) => {
+            const eventDate = new Date(item.date);
+            const today = new Date();
+            const threeDays = new Date();
+            threeDays.setDate(today.getDate() - 3);
+            
+            if (eventDate < threeDays) {
+                axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                }).then(() => {
+                    window.location.reload();
+                }).catch(err => {
+                    console.error(err);
+                })
+            }
+        })
+    }, [listEvents]);
 
     useEffect(() => {
         if (!cookies.get('loginToken')) {

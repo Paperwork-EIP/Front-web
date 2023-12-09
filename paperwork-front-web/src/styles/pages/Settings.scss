@@ -35,6 +35,7 @@
             flex-direction: column;
             border-radius: 12px;
             width: 22%;
+            min-width: 300px;
             height: 200px;
             font-size: 1.2rem;
 
@@ -100,7 +101,7 @@
                 padding: 12px;
 
                 label {
-                    padding: 12px 12px 0 0;
+                    padding-bottom: 8px;
                     display: inline-block;
                 }
 
@@ -164,6 +165,16 @@
             @media (max-width: 768px) {
                 .information-container {
                     width: 100%;
+
+                    .input-container {
+                        .edit-select {
+                            width: 100%;
+                        }
+
+                        .edit-input {
+                            width: 100%;
+                        }
+                    }
                 }
             }
 
@@ -226,40 +237,19 @@
         }
     }
 
-    @media (max-width: 1500px) {
+    @media (max-width: 768px) {
         .settings-container {
             flex-direction: column;
             justify-content: center;
             align-items: center;
 
             .choice-container {
-                width: 40%;
-
-                .choice-button {
-                    justify-content: center;
-                    padding-left: 0;
-                }
+                width: 100%;
             }
 
             .section-container {
                 margin-left: 0;
                 margin-top: 20px;
-                width: 100%;
-            }
-        }
-    }
-
-    @media (max-width: 1000px) {
-        .settings-container {
-            .choice-container {
-                width: 60%;
-            }
-        }
-    }
-
-    @media (max-width: 600px) {
-        .settings-container {
-            .choice-container {
                 width: 100%;
             }
         }

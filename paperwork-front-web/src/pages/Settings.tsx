@@ -76,6 +76,8 @@ function SettingsPage() {
                     console.log(err)
                 }
             );
+        } else {
+            window.location.assign('/');
         }
     }, []);
 
