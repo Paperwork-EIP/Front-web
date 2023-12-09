@@ -1,26 +1,20 @@
-// React Import
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { useColorMode } from '@chakra-ui/react';
 
-// Utils Import
 import axios from "axios";
 import Cookies from 'universal-cookie';
 
-// Pages Import
-import Header from '../../components/Header';
-import "../../styles/pages/Quiz.scss";
-
-// Translation Import
 import { getTranslation } from '../Translation';
+import Header from '../../components/Header';
 
-// Color mode
-import { useColorMode } from '@chakra-ui/react';
+import "../../styles/pages/Quiz.scss";
+import { toast } from 'react-toastify';
 
-const QuizQuestion = () => {
-
+function QuizQuestion() {
     const cookies = new Cookies();
-
     const cookiesInfo = cookies.get('loginToken');
+
     if (!cookies.get('loginToken')) {
         window.location.assign('/');
     }
@@ -34,103 +28,110 @@ const QuizQuestion = () => {
     const [currentQuestionAnswer, setCurrentQuestionAnswer] = useState();
     const [questions, setQuestions] = useState([{}]);
     const [update, setUpdate] = React.useState(false);
-
-    // User informations
     const [language, setLanguage] = useState("");
-
-    // Translation
     const translation = getTranslation(language, "quiz");
-
-    // Color mode
     const { colorMode } = useColorMode();
 
-    useEffect(() => {
-        axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
-        .then(res => {
-            console.log(res.data.language);
-            setLanguage(res.data.language);
-        }).catch(err => {
-            console.log(err)
-        });
-
-        axios.get(`${api}/processQuestions/get`, { params: { title: processSelected, language: language } })
-        .then(res => {
-            console.log(res.data.questions);
-            setTitle(res.data.title);
-            setCurrentId(res.data.questions[nextStep - 1].step_id);
-            setCurrentQuestionAnswer(res.data.questions[nextStep - 1].question);
-            setQuestions(res.data.questions);
-        }).catch(err => {
-            console.log(err)
-        });
-
-        axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
-        .then(res => {
-            console.log(res.data.response);
-            res.data.response.map((item: any) => {
-                if (item.userProcess.stocked_title === processSelected)
-                    setUpdate(true);
+    async function getUserLanguage() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
+            .then(res => {
+                console.log(res.data.language);
+                setLanguage(res.data.language);
+            }).catch(err => {
+                console.log(err)
             });
-        }).catch(err => {
-            console.log(err)
-        });
+    }
+
+    async function getProcessQuestions() {
+        await axios.get(`${api}/processQuestions/get`, { params: { title: processSelected, language: language } })
+            .then(res => {
+                console.log(res.data.questions);
+                setTitle(res.data.title);
+                setCurrentId(res.data.questions[nextStep - 1].step_id);
+                setCurrentQuestionAnswer(res.data.questions[nextStep - 1].question);
+                setQuestions(res.data.questions);
+            }).catch(err => {
+                console.log(err)
+            });
+    }
+
+    async function getUserProcesses() {
+        await axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
+            .then(res => {
+                console.log(res.data.response);
+                res.data.response.map((item: any) => {
+                    if (item.userProcess.stocked_title === processSelected)
+                        setUpdate(true);
+                });
+            }).catch(err => {
+                console.log(err)
+            });
+    }
+
+    useEffect(() => {
+        getUserLanguage();
+        getProcessQuestions();
+        getUserProcesses();
     }, [nextStep, processSelected, api, cookiesInfo.loginToken, language])
 
-    function handleClick(currentQuestionAnswer: string) {
+    function handleClick(e: any, currentQuestionAnswer: string) {
+        e.preventDefault();
+
         const urlAnswers = window.location.search.substring(1);
-        if (nextStep < questions.length)
-        {
+
+        if (nextStep < questions.length) {
             if (!urlAnswers)
                 window.location.href = `/quiz/${processSelected}/${nextStep}?${currentId}=${currentQuestionAnswer}`;
             else
                 window.location.href = `/quiz/${processSelected}/${nextStep}?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
         } else {
 
-            var queryStr = `?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
-            var queryArr = queryStr.replace('?','').split('&');
-            var queryParams = [];
+            let queryStr = `?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
+            let queryArr = queryStr.replace('?', '').split('&');
+            let queryParams = [];
 
-            for (var q = 0; q < queryArr.length; q++) {
-                var qArr = queryArr[q].split('=');
+            for (let q = 0; q < queryArr.length; q++) {
+                let qArr = queryArr[q].split('=');
+
                 if (qArr[1] === 'true')
-                    queryParams.push({ step_id: parseInt(qArr[0]), response: true});
+                    queryParams.push({ step_id: parseInt(qArr[0]), response: true });
                 else
-                    queryParams.push({ step_id: parseInt(qArr[0]), response: false});
+                    queryParams.push({ step_id: parseInt(qArr[0]), response: false });
             }
 
             const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
-            if (update === false)
-            {
+
+            if (update === false) {
                 axios.post(`${api}/userProcess/add`, post)
-                .then(res => {
-                    console.log(res);
-                    window.location.href = `/processResult/${processSelected}`;
-                }).catch(err => {
-                    console.log(err)
-                });
+                    .then(() => {
+                        window.location.href = `/processResult/${processSelected}`;
+                    }).catch(err => {
+                        toast.error(translation.error);
+                        console.error(err);
+                    });
             } else {
                 axios.post(`${api}/userProcess/update`, post)
-                .then(res => {
-                    console.log(res);
-                    window.location.href = `/processResult/${processSelected}`;
-                }).catch(err => {
-                    console.log(err)
-                });
+                    .then(() => {
+                        window.location.href = `/processResult/${processSelected}`;
+                    }).catch(err => {
+                        toast.error(translation.error);
+                        console.error(err);
+                    });
             }
         }
     }
 
     return (
         <>
-            <Header/>
+            <Header />
 
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
                 <div className='Page-Title'>{title}</div>
                 <div className='Quiz-container'>
                     <div className='Question-Style'>{currentQuestionAnswer!}</div>
                     <div className='QuizQuestionBtn'>
-                        <button type="button" className='No-btn' data-testid="btn-no" onClick={() => handleClick('false')}>{translation.no}</button>
-                        <button type="button" className='Yes-btn' data-testid="btn-yes" onClick={() => handleClick('true')}>{translation.yes}</button>
+                        <button type="button" className='No-btn' data-testid="btn-no" onClick={(e) => handleClick(e, 'false')}>{translation.no}</button>
+                        <button type="button" className='Yes-btn' data-testid="btn-yes" onClick={(e) => handleClick(e, 'true')}>{translation.yes}</button>
                     </div>
                 </div>
             </div>
