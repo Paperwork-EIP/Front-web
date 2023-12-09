@@ -50,7 +50,7 @@ function QuizPage() {
             .then(res => {
                 var procedures = [];
                 console.log(res.data);
-                for (var i = 0; i < res.data.response.length; i++) {
+                for (let i = 0; i < res.data.response.length; i++) {
                     procedures.push({
                         label: res.data.response[i]['title'],
                         stocked_title: res.data.response[i]['stocked_title'],
