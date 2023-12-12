@@ -79,7 +79,7 @@ function QuizPage() {
                 <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
                 <div className='Quiz-container'>
                     <div className='Question-Style' data-testid="quiz-question">{translation.question}</div>
-                    <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
+                    <select defaultValue="-" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select'>
                         {
                             posts.map((post: any, index: number) => {
                                 return (
