@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { useColorMode } from '@chakra-ui/react';
 
 import axios from "axios";
@@ -9,7 +10,6 @@ import { getTranslation } from '../Translation';
 import Header from '../../components/Header';
 
 import "../../styles/pages/Quiz.scss";
-import { toast } from 'react-toastify';
 
 function QuizQuestion() {
     const cookies = new Cookies();
@@ -35,36 +35,36 @@ function QuizQuestion() {
     async function getUserLanguage() {
         await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
             .then(res => {
-                console.log(res.data.language);
                 setLanguage(res.data.language);
             }).catch(err => {
-                console.log(err)
+                toast.error(translation.error);
+                console.log(err);
             });
     }
 
     async function getProcessQuestions() {
         await axios.get(`${api}/processQuestions/get`, { params: { title: processSelected, language: language } })
             .then(res => {
-                console.log(res.data.questions);
                 setTitle(res.data.title);
                 setCurrentId(res.data.questions[nextStep - 1].step_id);
                 setCurrentQuestionAnswer(res.data.questions[nextStep - 1].question);
                 setQuestions(res.data.questions);
             }).catch(err => {
-                console.log(err)
+                toast.error(translation.error);
+                console.log(err);
             });
     }
 
     async function getUserProcesses() {
         await axios.get(`${api}/userProcess/getUserProcesses`, { params: { user_token: cookiesInfo.loginToken } })
             .then(res => {
-                console.log(res.data.response);
                 res.data.response.map((item: any) => {
                     if (item.userProcess.stocked_title === processSelected)
                         setUpdate(true);
                 });
             }).catch(err => {
-                console.log(err)
+                toast.error(translation.error);
+                console.log(err);
             });
     }
 
@@ -74,7 +74,7 @@ function QuizQuestion() {
         getUserProcesses();
     }, [nextStep, processSelected, api, cookiesInfo.loginToken, language])
 
-    function handleClick(e: any, currentQuestionAnswer: string) {
+    async function handleClick(e: any, currentQuestionAnswer: string) {
         e.preventDefault();
 
         const urlAnswers = window.location.search.substring(1);
@@ -85,7 +85,6 @@ function QuizQuestion() {
             else
                 window.location.href = `/quiz/${processSelected}/${nextStep}?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
         } else {
-
             let queryStr = `?${urlAnswers}&${currentId}=${currentQuestionAnswer}`;
             let queryArr = queryStr.replace('?', '').split('&');
             let queryParams = [];
@@ -102,7 +101,7 @@ function QuizQuestion() {
             const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: queryParams }
 
             if (update === false) {
-                axios.post(`${api}/userProcess/add`, post)
+                await axios.post(`${api}/userProcess/add`, post)
                     .then(() => {
                         window.location.href = `/processResult/${processSelected}`;
                     }).catch(err => {
@@ -110,7 +109,7 @@ function QuizQuestion() {
                         console.error(err);
                     });
             } else {
-                axios.post(`${api}/userProcess/update`, post)
+                await axios.post(`${api}/userProcess/update`, post)
                     .then(() => {
                         window.location.href = `/processResult/${processSelected}`;
                     }).catch(err => {
@@ -124,7 +123,6 @@ function QuizQuestion() {
     return (
         <>
             <Header />
-
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
                 <div className='Page-Title'>{title}</div>
                 <div className='Quiz-container'>

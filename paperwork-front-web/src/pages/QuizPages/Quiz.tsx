@@ -9,8 +9,8 @@ import Cookies from 'universal-cookie';
 import Header from '../../components/Header';
 import { getTranslation } from '../Translation';
 
-import "../../styles/Quiz.css";
 import "../../styles/pages/Quiz.scss";
+import { toast } from 'react-toastify';
 
 function QuizPage() {
     const cookies = new Cookies();
@@ -33,6 +33,7 @@ function QuizPage() {
 
         if (quizSelect) {
             const selectedValue = quizSelect.value;
+
             window.location.href = `/quiz/${selectedValue}/0`;
         }
     }
@@ -42,6 +43,7 @@ function QuizPage() {
             .then(res => {
                 setLanguage(res.data.language);
             }).catch(err => {
+                toast.error(translation.error);
                 console.error(err)
             });
     }
@@ -60,6 +62,7 @@ function QuizPage() {
                 }
                 setPosts(procedures);
             }).catch(err => {
+                toast.error(translation.error);
                 console.error(err)
             });
     }
@@ -76,11 +79,11 @@ function QuizPage() {
                 <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
                 <div className='Quiz-container'>
                     <div className='Question-Style' data-testid="quiz-question">{translation.question}</div>
-                    <select defaultValue="Select a process" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select' placeholder='Select the Procedure'>
+                    <select defaultValue="-" name="Quiz-Select" id="Quiz-Select" data-testid="select" className='Quiz-Select'>
                         {
-                            posts.map((post: any) => {
+                            posts.map((post: any, index: number) => {
                                 return (
-                                    <option data-testid="select-option" value={post.stocked_title}>{post.label}</option>
+                                    <option key={index} data-testid="select-option" value={post.stocked_title}>{post.label}</option>
                                 )
                             })
                         }
