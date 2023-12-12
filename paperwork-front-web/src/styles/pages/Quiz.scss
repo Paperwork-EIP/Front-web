@@ -12,8 +12,9 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-weight: bold;
-        font-size: 1.2rem;
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 32px;
     }
 
     .Quiz-container {
@@ -29,45 +30,36 @@
 
         .Question-Style {
             font-size: 24px;
-            margin-bottom: 36px;
+            margin-bottom: 40px;
             height: 90%;
             overflow-y: auto;
         }
 
         .Quiz-Select {
-            width: 300px;
-            max-width: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            line-height: 1.125em;
+            min-width: 200px;
+            width: 100%;
+            max-width: 300px;
             border-radius: 5px;
-            height: 50px;
-            overflow-y: auto;
-            padding-left: 0.5em;
-            margin-top: 3.5em;
+            padding: 12px 0;
             overflow:hidden; 
             white-space:nowrap; 
             text-overflow:ellipsis;
-
-            option {
-                overflow-y: scroll;
-            }
         }
 
         .Submit-btn {
             display: flex;
-            flex-wrap: wrap;
-            position: relative;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
             border: none;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
+            padding: 8px 20px;
             font-size: 16px;
-            border-radius: 4px;
-            margin-top: 3.5em;
+            border-radius: 5px;
+            margin-top: 32px;
 
             .Submit-icon {
-                font-size: 1.3rem;
-                margin-left: 5px;
+                font-size: 16px;
+                margin-left: 8px;
             }
         }
 
@@ -79,7 +71,8 @@
 
             @mixin Btn-Style {
                 border: none;
-                padding: 8px 24px;
+                width: 100px;
+                padding: 8px 20px;
                 font-size: 16px;
                 border-radius: 4px;
                 transition: 0.3s;
