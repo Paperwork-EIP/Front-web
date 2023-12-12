@@ -43,6 +43,12 @@ function HomePage() {
         }
     };
 
+    function checkIfCookieExist() {
+        if (cookieList === undefined) {
+            window.location.href = "/login";
+        }
+    }
+
     async function getUserDatasByToken() {
         try {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
@@ -117,10 +123,30 @@ function HomePage() {
     }
 
     useEffect(() => {
+        checkIfCookieExist();
         getUserDatasByToken();
         getCalendarDatas();
         getUserProcessData();
     }, []);
+
+    useEffect(() => {
+        rdv?.map((item: any) => {
+            const eventDate = new Date(item.date);
+            const today = new Date();
+            const threeDays = new Date();
+            threeDays.setDate(today.getDate() - 3);
+            
+            if (eventDate < threeDays) {
+                axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                }).then(() => {
+                    window.location.reload();
+                }).catch(err => {
+                    console.error(err);
+                })
+            }
+        })
+    }, [rdv]);
+
 
     return (
         <>

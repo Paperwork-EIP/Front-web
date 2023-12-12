@@ -85,6 +85,34 @@ describe('Register Tests', () => {
         window.location = location;
         expect(axios.post).toHaveBeenCalledTimes(0);
     });
+    
+    test('should not submit the form with invalid email format when submit button is clicked', async () => {
+        const location = window.location;
+        const cookies = new Cookies();
+
+        cookies.set = jest.fn().mockImplementationOnce(() => { });
+
+        const { getByLabelText, getByTestId } = render(
+            <BrowserRouter>
+                <RegisterPage />
+            </BrowserRouter>
+        );
+
+        const email = fireEvent.change(getByTestId(/email/i), { target: { value: 'test' } });
+        const username = fireEvent.change(getByTestId(/username/), { target: { value: 'testpassword' } });
+        const password = fireEvent.change(getByTestId(/password/), { target: { value: 'testpassword' } });
+        const confirmPassword = fireEvent.change(getByTestId(/confirmPassword/), { target: { value: 'notsame' } });
+        const Register = fireEvent.click(getByLabelText(/button-register/i));
+
+        expect(email).toBeTruthy();
+        expect(password).toBeTruthy();
+        expect(username).toBeTruthy();
+        expect(confirmPassword).toBeTruthy();
+        expect(Register).toBeTruthy();
+
+        window.location = location;
+        expect(axios.post).toHaveBeenCalledTimes(0);
+    });
     test('should display alert and not submits the form with invalid data when submit button is clicked', async () => {
         axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
 

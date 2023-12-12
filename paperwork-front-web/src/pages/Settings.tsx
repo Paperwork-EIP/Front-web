@@ -75,7 +75,9 @@ function SettingsPage() {
                 }).catch(err => {
                     console.log(err)
                 }
-            );
+                );
+        } else {
+            window.location.assign('/');
         }
     }, []);
 
@@ -101,41 +103,41 @@ function SettingsPage() {
 
         if (isAnyNewValue) {
             await axios.post(`${api}/user/modifyDatas`, parameters)
-            .then(() => {
-                toast.success(translation.alertUpdateProfileInfo);
-                newUsername.length > 0 ? setUsername(newUsername) : setUsername(username);
-                newName.length > 0 ? setName(newName) : setName(name);
-                newFirstname.length > 0 ? setFirstname(newFirstname) : setFirstname(firstname);
-                newLanguage.length > 0 ? setLanguage(newLanguage) : setLanguage(language);
-                newAge.length > 0 ? setAge(newAge) : setAge(age);
-                newEmail.length > 0 ? setEmail(newEmail) : setEmail(email);
-                newAddress.length > 0 ? setAddress(newAddress) : setAddress(address);
-                newPhonenumber.length > 0 ? setPhonenumber(newPhonenumber) : setPhonenumber(phonenumber);
-            })
-            .catch(err => {
-                console.log(err);
-                if (err.response && err.response.status) {
-                    const { status } = err.response;
-                switch (status) {
-                    case 400:
-                        toast.error(translation.alertMissingToken);
-                        break;
-                    case 404:
-                        toast.error(translation.alertUserNotFound);
-                        break;
-                    case 409:
-                        toast.error(translation.alertUsernameAlreadyUsed);
-                        break;
-                    case 500:
-                        toast.error(translation.alertSystemError);
-                        break;
-                    default:
-                        break;
+                .then(() => {
+                    toast.success(translation.alertUpdateProfileInfo);
+                    newUsername.length > 0 ? setUsername(newUsername) : setUsername(username);
+                    newName.length > 0 ? setName(newName) : setName(name);
+                    newFirstname.length > 0 ? setFirstname(newFirstname) : setFirstname(firstname);
+                    newLanguage.length > 0 ? setLanguage(newLanguage) : setLanguage(language);
+                    newAge.length > 0 ? setAge(newAge) : setAge(age);
+                    newEmail.length > 0 ? setEmail(newEmail) : setEmail(email);
+                    newAddress.length > 0 ? setAddress(newAddress) : setAddress(address);
+                    newPhonenumber.length > 0 ? setPhonenumber(newPhonenumber) : setPhonenumber(phonenumber);
+                })
+                .catch(err => {
+                    console.log(err);
+                    if (err.response && err.response.status) {
+                        const { status } = err.response;
+                        switch (status) {
+                            case 400:
+                                toast.error(translation.alertMissingToken);
+                                break;
+                            case 404:
+                                toast.error(translation.alertUserNotFound);
+                                break;
+                            case 409:
+                                toast.error(translation.alertUsernameAlreadyUsed);
+                                break;
+                            case 500:
+                                toast.error(translation.alertSystemError);
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-            });
+                });
         } else {
-          toast.error(translation.alertNoChange);
+            toast.error(translation.alertNoChange);
         }
     };
 
@@ -169,9 +171,11 @@ function SettingsPage() {
     }
 
     async function handleDeleteAccount() {
-        await axios.get(`${api}/user/delete`, { params: {
-            token: cookiesInfo.loginToken,
-        }}).then(() => {
+        await axios.get(`${api}/user/delete`, {
+            params: {
+                token: cookiesInfo.loginToken,
+            }
+        }).then(() => {
             toast.success(translation.alertDeleteAccount);
             cookies.remove('loginToken', { path: '/' });
             window.location.reload();
@@ -208,7 +212,7 @@ function SettingsPage() {
         });
         setAvatarModal(!avatarModal);
     }
-    
+
     return (
         <>
             <Header />
@@ -240,317 +244,316 @@ function SettingsPage() {
                             <TiUserDelete className="choice-icon" />
                             {translation.choice3}
                         </button>
-                </div>
-        
-                {currentSection === "PersonalInformation" && (
-                    <div className="section-container">
-                        <div className="section-title">{translation.choice1}</div>
-                        <div className="information-container-avatar">
-                            <div className="avatar-container">
-                            <img
-                                src={profilePicture === null ? "/assets/avatar/no_avatar.png" : profilePicture}
-                                alt="Avatar"
-                                className="Avatar"
-                            />
-                            <button aria-label="button-change-avatar" onClick={() => setAvatarModal(!avatarModal)}>
-                                <img src="/assets/avatar/picture_modif.png" alt="PictureModif" className="ModifImg" />
-                            </button>
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="username">{translation.username}</label>
-                            <div className="input-container">
-                            <input
-                                onChange={({ target }) => setNewUsername(target.value)}
-                                data-testid="input-change-username"
-                                className="edit-input"
-                                type="text"
-                                id="username"
-                                name="username"
-                                placeholder={username ? username : translation.usernamePlaceholder}
-                            />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="name">{translation.name}</label>
-                            <div className="input-container">
-                            <input
-                                onChange={(event) => setNewName(event.target.value)}
-                                data-testid="input-change-name"
-                                className="edit-input"
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder={name ? name : translation.namePlaceholder}
-                            />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="firstname">{translation.firstname}</label>
-                            <div className="input-container">
-                            <input
-                                onChange={({ target }) => setNewFirstname(target.value)}
-                                data-testid="input-change-firstname"
-                                className="edit-input"
-                                type="text"
-                                id="firstname"
-                                name="firstname"
-                                placeholder={firstname ? firstname : translation.firstnamePlaceholder}
-                            />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="language">{translation.language}</label>
-                            <div className="input-container">
-                                <select
-                                    onChange={({ target }) => setNewLanguage(target.value)}
-                                    value={newLanguage.length > 0 && newLanguage !== language ? newLanguage : language}
-                                    name="Language-Select"
-                                    id="Language-Select"
-                                    data-testid="select-change-language"
-                                    className="edit-select"
-                                    placeholder={language}
-                                >
-                                    <option data-testid="select-option" value="english">
-                                    English
-                                    </option>
-                                    <option data-testid="select-option" value="french">
-                                    Français
-                                    </option>
-                                    <option data-testid="select-option" value="german">
-                                    Deutsch
-                                    </option>
-                                    <option data-testid="select-option" value="korean">
-                                    Korean
-                                    </option>
-                                    <option data-testid="select-option" value="indonesian">
-                                    Indonesia
-                                    </option>
-                                    <option data-testid="select-option" value="spanish">
-                                    Espanol
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="age">{translation.age}</label>
-                            <div className="input-container">
-                                <input
-                                    onChange={({ target }) => setNewAge(target.value)}
-                                    data-testid="input-change-age"
-                                    className="edit-input"
-                                    type="number"
-                                    id="age"
-                                    name="age"
-                                    min="1"
-                                    max="200"
-                                    placeholder={age ? age : translation.agePlaceholder}
-                                />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="email">Email</label>
-                            <div className="input-container">
-                                <input
-                                    onChange={({ target }) => setNewEmail(target.value)}
-                                    data-testid="input-change-email"
-                                    className="edit-input"
-                                    type="email"
-                                    pattern=".+@globex\.com"
-                                    id="email"
-                                    name="email"
-                                    placeholder={email ? email : "Email..."}
-                                />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="address">{translation.address}</label>
-                            <div className="input-container">
-                                <input
-                                    onChange={({ target }) => setNewAddress(target.value)}
-                                    data-testid="input-change-address"
-                                    className="edit-input"
-                                    type="text"
-                                    id="address"
-                                    name="address"
-                                    placeholder={address ? address : translation.addressPlaceholder}
-                                />
-                            </div>
-                        </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="phonenumber">{translation.phonenumber}</label>
-                            <div className="input-container">
-                                <input
-                                    onChange={({ target }) => setNewPhonenumber(target.value)}
-                                    data-testid="input-change-phone"
-                                    className="edit-input"
-                                    type="tel"
-                                    id="phonenumber"
-                                    name="phonenumber"
-                                    placeholder={phonenumber ? phonenumber : translation.phonenumberPlaceholder}
-                                />
-                            </div>
-                        </div>
-            
-                        <div className="update-btn-container">
-                            <button
-                                type="button"
-                                className="update-personal-info-btn"
-                                aria-label="update-personal-info-btn"
-                                onClick={() => handleSubmit()}
-                                >
-                                {translation.updateBtn}
-                                <RxUpdate className="update-personal-info-icon" />
-                            </button>
-                        </div>
                     </div>
-                )}
-        
-                {currentSection === "Security" && (
-                    <div className="section-container">
-                        <div className="section-title">{translation.choice2}</div>
-                        <div className="information-container">
-                            <label htmlFor="password">{translation.password}</label>
-                            <div className="passwordInput">
-                                <input
-                                    onChange={({ target }) => setPassword(target.value)}
-                                    data-testid="input-change-pswd"
-                                    type={showEyePwd ? "text" : "password"}
-                                    id="password"
-                                    name="password"
-                                    placeholder="**********"
-                                />
-                                <button type="button" aria-label="button-change-show1" onClick={handleClickEyePwd}>
-                                    {showEyePwd ? <AiFillEye className="passwordInputEye" size={20} /> : <AiFillEyeInvisible className="passwordInputEye" size={20} />}
+
+                    {currentSection === "PersonalInformation" && (
+                        <div className="section-container">
+                            <div className="section-title">{translation.choice1}</div>
+                            <div className="information-container-avatar">
+                                <div className="avatar-container">
+                                    <img
+                                        src={profilePicture === null ? "/assets/avatar/no_avatar.png" : profilePicture}
+                                        alt="Avatar"
+                                        className="Avatar"
+                                    />
+                                    <button aria-label="button-change-avatar" onClick={() => setAvatarModal(!avatarModal)}>
+                                        <img src="/assets/avatar/picture_modif.png" alt="PictureModif" className="ModifImg" />
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="username">{translation.username}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewUsername(target.value)}
+                                        data-testid="input-change-username"
+                                        className="edit-input"
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        placeholder={username ? username : translation.usernamePlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="name">{translation.name}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={(event) => setNewName(event.target.value)}
+                                        data-testid="input-change-name"
+                                        className="edit-input"
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder={name ? name : translation.namePlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="firstname">{translation.firstname}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewFirstname(target.value)}
+                                        data-testid="input-change-firstname"
+                                        className="edit-input"
+                                        type="text"
+                                        id="firstname"
+                                        name="firstname"
+                                        placeholder={firstname ? firstname : translation.firstnamePlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="language">{translation.language}</label>
+                                <div className="input-container">
+                                    <select
+                                        onChange={({ target }) => setNewLanguage(target.value)}
+                                        value={newLanguage.length > 0 && newLanguage !== language ? newLanguage : language}
+                                        name="Language-Select"
+                                        id="Language-Select"
+                                        data-testid="select-change-language"
+                                        className="edit-select"
+                                    >
+                                        <option data-testid="select-option" value="english">
+                                            English
+                                        </option>
+                                        <option data-testid="select-option" value="french">
+                                            Français
+                                        </option>
+                                        <option data-testid="select-option" value="german">
+                                            Deutsch
+                                        </option>
+                                        <option data-testid="select-option" value="korean">
+                                            Korean
+                                        </option>
+                                        <option data-testid="select-option" value="indonesian">
+                                            Indonesia
+                                        </option>
+                                        <option data-testid="select-option" value="spanish">
+                                            Espanol
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="age">{translation.age}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewAge(target.value)}
+                                        data-testid="input-change-age"
+                                        className="edit-input"
+                                        type="number"
+                                        id="age"
+                                        name="age"
+                                        min="1"
+                                        max="200"
+                                        placeholder={age ? age : translation.agePlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="email">Email</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewEmail(target.value)}
+                                        data-testid="input-change-email"
+                                        className="edit-input"
+                                        type="email"
+                                        pattern=".+@globex\.com"
+                                        id="email"
+                                        name="email"
+                                        placeholder={email ? email : "Email..."}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="address">{translation.address}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewAddress(target.value)}
+                                        data-testid="input-change-address"
+                                        className="edit-input"
+                                        type="text"
+                                        id="address"
+                                        name="address"
+                                        placeholder={address ? address : translation.addressPlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="phonenumber">{translation.phonenumber}</label>
+                                <div className="input-container">
+                                    <input
+                                        onChange={({ target }) => setNewPhonenumber(target.value)}
+                                        data-testid="input-change-phone"
+                                        className="edit-input"
+                                        type="tel"
+                                        id="phonenumber"
+                                        name="phonenumber"
+                                        placeholder={phonenumber ? phonenumber : translation.phonenumberPlaceholder}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="update-btn-container">
+                                <button
+                                    type="button"
+                                    className="update-personal-info-btn"
+                                    aria-label="update-personal-info-btn"
+                                    onClick={() => handleSubmit()}
+                                >
+                                    {translation.updateBtn}
+                                    <RxUpdate className="update-personal-info-icon" />
                                 </button>
                             </div>
                         </div>
-            
-                        <div className="information-container">
-                            <label htmlFor="verifPassword">{translation.verifPassword}</label>
-                            <div className="passwordInput">
-                                <input
-                                    onChange={({ target }) => setVerifPassword(target.value)}
-                                    data-testid="input-change-cpswd"
-                                    type={showEyeVerifPwd ? "text" : "password"}
-                                    id="verifPassword"
-                                    name="verifPassword"
-                                    placeholder="**********"
-                                />
-                                <button type="button" aria-label="button-change-show2" onClick={handleClickVerifEyePwd}>
-                                    {showEyeVerifPwd ? <AiFillEye className="passwordInputEye" size={20} /> : <AiFillEyeInvisible className="passwordInputEye" size={20} />}
+                    )}
+
+                    {currentSection === "Security" && (
+                        <div className="section-container">
+                            <div className="section-title">{translation.choice2}</div>
+                            <div className="information-container">
+                                <label htmlFor="password">{translation.password}</label>
+                                <div className="passwordInput">
+                                    <input
+                                        onChange={({ target }) => setPassword(target.value)}
+                                        data-testid="input-change-pswd"
+                                        type={showEyePwd ? "text" : "password"}
+                                        id="password"
+                                        name="password"
+                                        placeholder="**********"
+                                    />
+                                    <button type="button" aria-label="button-change-show1" onClick={handleClickEyePwd}>
+                                        {showEyePwd ? <AiFillEye className="passwordInputEye" size={20} /> : <AiFillEyeInvisible className="passwordInputEye" size={20} />}
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="information-container">
+                                <label htmlFor="verifPassword">{translation.verifPassword}</label>
+                                <div className="passwordInput">
+                                    <input
+                                        onChange={({ target }) => setVerifPassword(target.value)}
+                                        data-testid="input-change-cpswd"
+                                        type={showEyeVerifPwd ? "text" : "password"}
+                                        id="verifPassword"
+                                        name="verifPassword"
+                                        placeholder="**********"
+                                    />
+                                    <button type="button" aria-label="button-change-show2" onClick={handleClickVerifEyePwd}>
+                                        {showEyeVerifPwd ? <AiFillEye className="passwordInputEye" size={20} /> : <AiFillEyeInvisible className="passwordInputEye" size={20} />}
+                                    </button>
+                                </div>
+                            </div>
+                            <label htmlFor="errorPassword" className="errorPassword">
+                                {translation.errorPassword}
+                            </label>
+                            <div className="update-btn-container">
+                                <button
+                                    type="button"
+                                    className="update-personal-info-btn"
+                                    aria-label="update-password-btn"
+                                    onClick={() => handleChangePassword()}
+                                >
+                                    {translation.editPassword}
+                                    <AiOutlineEdit className="update-personal-info-icon" />
                                 </button>
                             </div>
                         </div>
-                        <label htmlFor="errorPassword" className="errorPassword">
-                            {translation.errorPassword}
-                        </label>
-                        <div className="update-btn-container">
-                            <button
-                                type="button"
-                                className="update-personal-info-btn"
-                                aria-label="update-password-btn"
-                                onClick={() => handleChangePassword()}
+                    )}
+
+                    {currentSection === "DeleteAccount" && (
+                        <div className="section-container">
+                            <div className="section-title">{translation.choice3}</div>
+                            <label htmlFor="errorPassword" className="errorPassword">
+                                {translation.deleteModalQst}
+                            </label>
+                            <div className="update-btn-container">
+                                <button
+                                    type="button"
+                                    className="update-personal-info-btn"
+                                    aria-label="delete-account-btn"
+                                    onClick={() => setDeleteModal(true)}
                                 >
-                                {translation.editPassword}
-                                <AiOutlineEdit className="update-personal-info-icon" />
-                            </button>
+                                    {translation.deleteAccount}
+                                    <TiUserDelete className="update-personal-info-icon" />
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                )}
-        
-                {currentSection === "DeleteAccount" && (
-                    <div className="section-container">
-                        <div className="section-title">{translation.choice3}</div>
-                        <label htmlFor="errorPassword" className="errorPassword">
-                            {translation.deleteModalQst}
-                        </label>
-                        <div className="update-btn-container">
-                            <button
-                                type="button"
-                                className="update-personal-info-btn"
-                                aria-label="delete-account-btn"
-                                onClick={() => setDeleteModal(true)}
-                                >
-                                {translation.deleteAccount}
-                                <TiUserDelete className="update-personal-info-icon" />
-                            </button>
-                        </div>
-                    </div>
-                )}
-        
-                {deleteModal && (
-                    <div id="changeVariableModal" className="modal-background">
-                        <div className="modal-container">
-                            <div className="modal-content">
-                                <h1 className="modal-title">{translation.deleteModalQst}</h1>
-                                <div className="divider">
-                                    <span></span>
-                                </div>
-                                <div className="modal-button-container">
-                                    <button type="button" className="modal-btn modal-cancel-btn" aria-label="button-delete-cancel" onClick={() => setDeleteModal(false)}>
-                                    {translation.cancelBtn}
-                                    </button>
-                                    <button type="button" className="modal-btn modal-continue-btn" aria-label="button-delete-continue" onClick={handleDeleteAccount}>
-                                    {translation.continueBtn}
-                                    </button>
+                    )}
+
+                    {deleteModal && (
+                        <div id="changeVariableModal" className="modal-background">
+                            <div className="modal-container">
+                                <div className="modal-content">
+                                    <h1 className="modal-title">{translation.deleteModalQst}</h1>
+                                    <div className="divider">
+                                        <span></span>
+                                    </div>
+                                    <div className="modal-button-container">
+                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label="button-delete-cancel" onClick={() => setDeleteModal(false)}>
+                                            {translation.cancelBtn}
+                                        </button>
+                                        <button type="button" className="modal-btn modal-continue-btn" aria-label="button-delete-continue" onClick={handleDeleteAccount}>
+                                            {translation.continueBtn}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
-        
-                {avatarModal && (
-                    <div id="changeVariableModal" className="modal-background">
-                        <div className="modal-container">
-                            <div className="modal-content">
-                                <h1 className="modal-title">{translation.avatarModalTxt}</h1>
-                                <div className="divider">
-                                    <span></span>
-                                </div>
-                                <div className="modal-avatar-container">
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar01.png")}>
-                                        <img src="/assets/avatar/avatar01.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar02.png")}>
-                                        <img src="/assets/avatar/avatar02.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar03.png")}>
-                                        <img src="/assets/avatar/avatar03.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar04.png")}>
-                                        <img src="/assets/avatar/avatar04.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
-                                        <img src="/assets/avatar/avatar05.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
-                                        <img src="/assets/avatar/avatar06.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
-                                        <img src="/assets/avatar/avatar07.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                    <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
-                                        <img src="/assets/avatar/avatar08.png" alt="Avatar" className="Avatar" />
-                                    </button>
-                                </div>
-                                <div className="modal-button-container">
-                                    <button type="button" className="modal-btn modal-cancel-btn" aria-label="button-change-avatar-cancel" onClick={() => setAvatarModal(false)}>
-                                        {translation.cancelBtn}
-                                    </button>
+                    )}
+
+                    {avatarModal && (
+                        <div id="changeVariableModal" className="modal-background">
+                            <div className="modal-container">
+                                <div className="modal-content">
+                                    <h1 className="modal-title">{translation.avatarModalTxt}</h1>
+                                    <div className="divider">
+                                        <span></span>
+                                    </div>
+                                    <div className="modal-avatar-container">
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar01.png")}>
+                                            <img src="/assets/avatar/avatar01.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar02.png")}>
+                                            <img src="/assets/avatar/avatar02.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar03.png")}>
+                                            <img src="/assets/avatar/avatar03.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar04.png")}>
+                                            <img src="/assets/avatar/avatar04.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
+                                            <img src="/assets/avatar/avatar05.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
+                                            <img src="/assets/avatar/avatar06.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar05.png")}>
+                                            <img src="/assets/avatar/avatar07.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                        <button type="button" className="modal-avatar-button" aria-label="button-change-avatar-option" onClick={() => handleSetNewAvatar("/assets/avatar/avatar06.png")}>
+                                            <img src="/assets/avatar/avatar08.png" alt="Avatar" className="Avatar" />
+                                        </button>
+                                    </div>
+                                    <div className="modal-button-container">
+                                        <button type="button" className="modal-btn modal-cancel-btn" aria-label="button-change-avatar-cancel" onClick={() => setAvatarModal(false)}>
+                                            {translation.cancelBtn}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                )}
+                    )}
                 </div>
             </div>
         </>

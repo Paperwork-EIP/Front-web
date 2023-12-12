@@ -20,6 +20,7 @@ const translations: Translations = {
       submit: "Submit",
       yes: "Yes",
       no: "No",
+      error: "Error, please try again later."
     },
     profile: {
       modify: "Modify Profile",
@@ -206,6 +207,7 @@ const translations: Translations = {
       submit: "Soumettre",
       yes: "Oui",
       no: "Non",
+      error: "Erreur, veuillez réessayer plus tard."
     },
     profile: {
       modify: "Modifier le profil",
@@ -394,6 +396,7 @@ const translations: Translations = {
       submit: "Abschicken",
       yes: "Ja",
       no: "Nein",
+      error: "Fehler, bitte versuchen Sie es später erneut."
     },
     profile: {
       modify: "Profil bearbeiten",
@@ -580,6 +583,7 @@ const translations: Translations = {
       submit: "제출",
       yes: "예",
       no: "아니요",
+      error: "오류, 나중에 다시 시도하십시오."
     },
     profile: {
       modify: "프로필 수정",
@@ -766,6 +770,7 @@ const translations: Translations = {
       submit: "Kirim",
       yes: "Ya",
       no: "Tidak",
+      error: "Kesalahan, coba lagi nanti."
     },
     profile: {
       modify: "Ubah Profil",
@@ -952,6 +957,7 @@ const translations: Translations = {
       submit: "Enviar",
       yes: "Sí",
       no: "No",
+      error: "Error, inténtelo de nuevo más tarde."
     },
     profile: {
       modify: "Modificar Perfil",
