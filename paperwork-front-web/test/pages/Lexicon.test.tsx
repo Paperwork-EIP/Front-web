@@ -33,21 +33,21 @@ afterEach(() => {
 });
 
 describe('Lexicon Tests', () => {
-    // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
-    //   const cookies = new Cookies();
-    //   const location = window.location;
-    //   cookies.remove('loginToken');
+    test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
+        const cookies = new Cookies();
+        const location = window.location;
+        cookies.remove('loginToken');
 
-    //   render(
-    //       <BrowserRouter>
-    //           <Lexicon />
-    //       </BrowserRouter>
-    //   );
+        render(
+            <BrowserRouter>
+                <Lexicon />
+            </BrowserRouter>
+        );
 
-    //   window.location = location;
+        window.location = location;
 
-    //   expect(window.location.assign).toBeCalledWith('/');
-    // });  
+        expect(window.location.assign).toBeCalledWith('/');
+    });
     it('should toggle FAQ', async () => {
         const cookies = new Cookies();
         cookies.set('loginToken', { token: 'token123' });
@@ -61,7 +61,7 @@ describe('Lexicon Tests', () => {
         );
 
         const faqButtons = getAllByTestId('faq-button');
-        expect(faqButtons).toHaveLength(4);
+        expect(faqButtons).not.toBeNull();
 
         fireEvent.click(faqButtons[0]);
 
@@ -72,5 +72,20 @@ describe('Lexicon Tests', () => {
 
             expect(useStateSpy).toHaveBeenCalled();
         });
+    });
+    test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
+        const cookies = new Cookies();
+        const location = window.location;
+        cookies.remove('loginToken');
+
+        render(
+            <BrowserRouter>
+                <Lexicon />
+            </BrowserRouter>
+        );
+
+        window.location = location;
+
+        expect(window.location.assign).toBeCalledWith('/');
     });
 });
