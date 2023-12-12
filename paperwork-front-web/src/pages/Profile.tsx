@@ -18,7 +18,6 @@ function ProfilePage() {
 
     const api = process.env.REACT_APP_BASE_URL;
 
-    // User informations
     const [username, setUsername] = useState("");
     const [name, setName] = useState("");
     const [firstname, setFirstname] = useState("");
@@ -29,13 +28,8 @@ function ProfilePage() {
     const [phonenumber, setPhonenumber] = useState("");
     const [profilePicture, setProfilePicture] = useState("");
     const [userProcessInfo, setUserProcessInfo] = useState([]);
-
     const [isLoading, setIsLoading] = useState(true);
-
-    // Translation
     const translation = getTranslation(language, "profile");
-
-    // Color mode
     const { colorMode } = useColorMode();
 
     function getPercentageClass(percentage: number) {
@@ -183,7 +177,7 @@ function ProfilePage() {
                     </div>
                 </div>
                 <div className="profile-img" >
-                    <img src="assets/profile-page/account.png" alt="profile"/>
+                    <img src="assets/profile-page/account.png" alt="profile" />
                 </div>
             </div>
         </>
