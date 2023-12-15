@@ -10,7 +10,8 @@ import Header from '../components/Header';
 import Loading from "../components/Loading";
 import ListEventCalendar from "../components/ListEventCalendar";
 
-import "../styles/HomeContent.scss";
+import "../styles/pages/Home.scss";
+import { toast } from "react-toastify";
 
 function HomePage() {
     const cookies = new Cookies();
@@ -55,9 +56,11 @@ function HomePage() {
                 .then(res => {
                     setLanguage(res.data.language);
                 }).catch(err => {
-                    console.log(err)
+                    toast.error(translation.error);
+                    console.log(err);
                 });
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -81,9 +84,11 @@ function HomePage() {
                     }
                     setRDV(rdvTmp);
                 }).catch(err => {
+                    toast.error(translation.error);
                     console.error(err);
                 })
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -114,9 +119,11 @@ function HomePage() {
                     }
                     setUserProcessInfo(userProcessTmp);
                 }).catch(err => {
-                    console.error(err)
+                    toast.error(translation.error);
+                    console.error(err);
                 });
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -141,6 +148,7 @@ function HomePage() {
                 }).then(() => {
                     window.location.reload();
                 }).catch(err => {
+                    toast.error(translation.error);
                     console.error(err);
                 })
             }
