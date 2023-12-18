@@ -371,9 +371,9 @@ function CalendarPage() {
                     <div className='calendar-modal-content'>
                         {
                             isEvent === 0 ?
-                                <div className='calendar-modal-text'>
+                                <h3 className='calendar-modal-text-nothing'>
                                     {translation.nothingPlanned}
-                                </div>
+                                </h3>
                                 :
                                 <div className='calendar-event-list'>
                                     {

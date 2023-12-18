@@ -178,6 +178,7 @@ const translations: Translations = {
       help: "Help",
       lexicon: "Lexicon",
       today: "Today",
+      error: "Error, please try again later."
     },
     calendar: {
       calendarLocation: "en-GB",
@@ -367,6 +368,7 @@ const translations: Translations = {
       help: "Aide",
       lexicon: "Lexique",
       today: "Aujourd'hui",
+      error: "Erreur, veuillez réessayer plus tard."
     },
     calendar: {
       calendarLocation: "fr-FR",
@@ -554,6 +556,7 @@ const translations: Translations = {
       help: "Hilfe",
       lexicon: "Lexikon",
       today: "Heute",
+      error: "Fehler, bitte versuchen Sie es später erneut."
     },
     calendar: {
       calendarLocation: "de-DE",
@@ -741,6 +744,7 @@ const translations: Translations = {
       help: "도움말",
       lexicon: "렉시콘",
       today: "오늘",
+      error: "오류, 나중에 다시 시도하십시오."
     },
     calendar: {
       calendarLocation: "ko-KR",
@@ -928,6 +932,7 @@ const translations: Translations = {
       help: "Bantuan",
       lexicon: "Leksikon",
       today: "Hari Ini",
+      error: "Kesalahan, coba lagi nanti."
     },
     calendar: {
       calendarLocation: "id-ID",
@@ -1115,6 +1120,7 @@ const translations: Translations = {
       help: "Ayuda",
       lexicon: "Lexicon",
       today: "Hoy",
+      error: "Error, inténtelo de nuevo más tarde."
     },
     calendar: {
       calendarLocation: "es-ES",
