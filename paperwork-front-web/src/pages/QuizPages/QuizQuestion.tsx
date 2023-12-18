@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { useColorMode } from '@chakra-ui/react';
+import { useColorMode, Step, StepIcon, StepIndicator, StepNumber, StepSeparator, StepStatus, StepTitle, Stepper, useSteps, } from '@chakra-ui/react';
 
 import axios from "axios";
 import Cookies from 'universal-cookie';
@@ -31,6 +31,11 @@ function QuizQuestion() {
     const [language, setLanguage] = useState("");
     const translation = getTranslation(language, "quiz");
     const { colorMode } = useColorMode();
+
+    const { activeStep } = useSteps({
+        index: 1,
+        count: questions.length,
+    })
 
     async function getUserLanguage() {
         await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
@@ -67,12 +72,6 @@ function QuizQuestion() {
                 console.log(err);
             });
     }
-
-    useEffect(() => {
-        getUserLanguage();
-        getProcessQuestions();
-        getUserProcesses();
-    }, [nextStep, processSelected, api, cookiesInfo.loginToken, language])
 
     async function handleClick(e: any, currentQuestionAnswer: string) {
         e.preventDefault();
@@ -120,10 +119,29 @@ function QuizQuestion() {
         }
     }
 
+    useEffect(() => {
+        getUserLanguage();
+        getProcessQuestions();
+        getUserProcesses();
+    }, [nextStep, processSelected, api, cookiesInfo.loginToken, language])
+
     return (
         <>
             <Header />
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
+                <Stepper index={activeStep}>
+                    {questions.map((_: any, index: number) => (
+                        <Step key={index}>
+                            <StepIndicator>
+                                <StepStatus
+                                    complete={<StepIcon />}
+                                    incomplete={<StepNumber />}
+                                    active={<StepNumber />}
+                                />
+                            </StepIndicator>
+                        </Step>
+                    ))}
+                </Stepper>
                 <div className='Page-Title'>{title}</div>
                 <div className='Quiz-container'>
                     <div className='Question-Style'>{currentQuestionAnswer!}</div>
