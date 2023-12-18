@@ -33,7 +33,7 @@ function QuizQuestion() {
     const { colorMode } = useColorMode();
 
     const { activeStep } = useSteps({
-        index: 1,
+        index: parseInt(step!),
         count: questions.length,
     })
 
