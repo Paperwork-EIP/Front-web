@@ -22,7 +22,7 @@ function QuizQuestion() {
     
     const [currentId, setCurrentId] = useState<number>();
     const [currentQuestion, setCurrentQuestion] = useState<string>();
-    const [questions, setQuestions] = useState<{ question: string, step_id: number, underQuestions: [{ question: string, step_id: number }] }[]>([]);
+    const [questions, setQuestions] = useState<any>([]);
     const [answer, setAnswer] = useState([{}]);
     const [update, setUpdate] = React.useState(false);
 
@@ -49,8 +49,6 @@ function QuizQuestion() {
                 setCurrentId(res.data.questions[nextStep - 1].step_id);
                 setCurrentQuestion(res.data.questions[nextStep - 1].question);
                 setQuestions(res.data.questions);
-                console.log("========= TEST =========")
-                console.log(questions[0].question);
             }).catch(err => {
                 console.log(err);
             });
