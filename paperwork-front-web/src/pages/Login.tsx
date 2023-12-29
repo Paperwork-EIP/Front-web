@@ -19,7 +19,6 @@ import FooterNoConnected from '../components/Footer';
 import "../styles/pages/Login.scss";
 
 function LoginPage() {
-
     const api = process.env.REACT_APP_BASE_URL;
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [email, setEmail] = useState("");
@@ -29,7 +28,8 @@ function LoginPage() {
     const cookies = new Cookies();
     const { t } = useTranslation();
 
-    async function handleSubmit() {
+    async function handleSubmit(event: any) {
+        event.preventDefault();
         await axios.post(
             `${api}/user/login`,
             {
@@ -93,7 +93,7 @@ function LoginPage() {
                 <div className='Login-container'>
                     <div className='Login-wrapper'>
                         <h1 className='Login-title'>{t('login.title')}</h1>
-                        <div className='Login-form'>
+                        <form className='Login-form' onSubmit={handleSubmit}>
                             <div className="Login-form-group field">
                                 <input type="email" className="Login-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 <label htmlFor="email" className="Login-form-label">{t('login.email')}</label>
@@ -102,8 +102,12 @@ function LoginPage() {
                                 <input type="password" className="Login-form-field" placeholder="Password" name="password" id='password' data-testid="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                                 <label htmlFor="password" className="Login-form-label">{t('login.password')}</label>
                             </div>
+                            <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' disabled={buttonDisabled}>
+                                {t('login.button')}
+                            </button>
+                        </form>
+                        <div>
                             <button className='Login-forgot-password-button' onClick={onOpenModal}>{t('login.forgotPassword')}</button>
-
                             <Modal className='Login-modal' style={{ content: { background: "rgba(45,45,45,1)" } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
                                 <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
                                     <RxCrossCircled />
@@ -116,9 +120,6 @@ function LoginPage() {
                                 </div>
                             </Modal>
                         </div>
-                        <button className={buttonDisabled ? 'Login-submit-button disabled' : 'Login-submit-button'} type='submit' aria-label='button-login' onClick={handleSubmit} disabled={buttonDisabled}>
-                            {t('login.button')}
-                        </button>
                         <div className='Login-connections'>
                             <button className='Login-button-api' data-testid="google-link" onClick={googleConnect}>
                                 <FaGoogle />
