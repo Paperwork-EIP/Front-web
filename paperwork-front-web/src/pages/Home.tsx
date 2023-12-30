@@ -187,7 +187,6 @@ function HomePage() {
                             <div className="home-content-item-percentages-container">
                                 {
                                     userProcessInfo.map((item: any, index: any) => {
-                                        console.log(item);
                                         return (
                                             <button key={index} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
                                                 <div className="home-content-box-percentages-item">
