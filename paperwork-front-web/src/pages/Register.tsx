@@ -20,12 +20,12 @@ function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [checkRegexMail, setCheckRegexMail] = useState(false);
 
     const cookies = new Cookies();
     const { t } = useTranslation();
 
-    async function handleSubmit() {
+    async function handleSubmit(event: any) {
+        event.preventDefault();
         await axios.post(`${api}/user/register`,
             {
                 username: username,
@@ -44,18 +44,6 @@ function RegisterPage() {
             toast.error(t('register.error'));
         })
     };
-
-    function handleEmailChange(event: any) {
-        const mail = event.target.value;
-        setEmail(mail);
-
-        const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (regexMail.test(mail)) {
-            setCheckRegexMail(true);
-        } else {
-            setCheckRegexMail(false);
-        }
-    }
 
     function handleConfirmPasswordChange(event: any) {
         const confirm = event.target.value;
@@ -81,7 +69,7 @@ function RegisterPage() {
     }
 
     useEffect(() => {
-        if (email && password && confirmPassword === password && checkRegexMail) {
+        if (email && password && confirmPassword === password) {
             setButtonDisabled(false);
         } else {
             setButtonDisabled(true);
@@ -98,9 +86,9 @@ function RegisterPage() {
                 <div className='Register-container'>
                     <div className='Register-wrapper'>
                         <h1 className='Register-title'>{t('register.title')}</h1>
-                        <div className='Register-form'>
+                        <form className='Register-form' onSubmit={handleSubmit}>
                             <div className="Register-form-group field">
-                                <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={handleEmailChange} required />
+                                <input type="email" className="Register-form-field" placeholder="Email" name="email" id='email' data-testid="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                                 <label htmlFor="email" className="Register-form-label">{t('register.email')}</label>
                             </div>
                             <div className="Register-form-group field">
@@ -115,10 +103,10 @@ function RegisterPage() {
                                 <input type="password" className="Register-form-field" placeholder="Confirm password" name="confirmPassword" id='confirmPassword' data-testid="confirmPassword" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
                                 <label htmlFor="confirmPassword" className="Register-form-label">{t('register.confirm_password')}</label>
                             </div>
-                        </div>
-                        <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} aria-label='button-register' onClick={() => { handleSubmit() }} disabled={buttonDisabled}>
-                            {t('register.button')}
-                        </button>
+                            <button className={buttonDisabled ? 'Register-submit-button disabled' : 'Register-submit-button'} type='submit' aria-label='button-register' disabled={buttonDisabled}>
+                                {t('register.button')}
+                            </button>
+                        </form>
                         <div className='Register-connections'>
                             <button className='Register-button-api' data-testid="google-link" onClick={googleConnect}>
                                 <FaGoogle />

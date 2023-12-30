@@ -50,6 +50,10 @@ function HomePage() {
         }
     }
 
+    function redirectToProcessResult(processTitle: string) {
+        window.location.href = "/processResult/" + processTitle;
+    }
+
     async function getUserDatasByToken() {
         try {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
@@ -105,6 +109,7 @@ function HomePage() {
                                 {
                                     key: j,
                                     process: res.data.response[j]['userProcess'].title,
+                                    stocked_title: res.data.response[j]['userProcess'].stocked_title,
                                     percentage: res.data.response[j]['pourcentage']
                                 }
                             );
@@ -113,6 +118,7 @@ function HomePage() {
                                 {
                                     key: j,
                                     process: res.data.response[j]['userProcess'].title,
+                                    stocked_title: res.data.response[j]['userProcess'].stocked_title,
                                     percentage: 0
                                 }
                             );
@@ -129,6 +135,24 @@ function HomePage() {
         setIsLoading(false);
     }
 
+    async function deletePassedEvent() {
+        rdv?.map(async (item: any) => {
+            const eventDate = new Date(item.date);
+            const today = new Date();
+            const threeDays = new Date();
+            threeDays.setDate(today.getDate() - 3);
+
+            if (eventDate < threeDays) {
+                await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                }).then(() => {
+                    window.location.reload();
+                }).catch(err => {
+                    console.error(err);
+                })
+            }
+        })
+    }
+
     useEffect(() => {
         checkIfCookieExist();
         getUserDatasByToken();
@@ -137,22 +161,7 @@ function HomePage() {
     }, []);
 
     useEffect(() => {
-        rdv?.map((item: any) => {
-            const eventDate = new Date(item.date);
-            const today = new Date();
-            const threeDays = new Date();
-            threeDays.setDate(today.getDate() - 3);
-            
-            if (eventDate < threeDays) {
-                axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
-                }).then(() => {
-                    window.location.reload();
-                }).catch(err => {
-                    toast.error(translation.error);
-                    console.error(err);
-                })
-            }
-        })
+        deletePassedEvent();
     }, [rdv]);
 
 
@@ -179,21 +188,23 @@ function HomePage() {
                                 {
                                     userProcessInfo.map((item: any, index: any) => {
                                         return (
-                                            <div key={index} className="home-content-box-percentages-item">
-                                                <div className="home-content-box-percentages-item-top">
-                                                    <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
-                                                        {item.process}
-                                                    </span>
-                                                </div>
-                                                <div className="home-content-box-percentages-item-bottom">
-                                                    <div className="progress">
-                                                        <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                            <button key={index} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
+                                                <div className="home-content-box-percentages-item">
+                                                    <div className="home-content-box-percentages-item-top">
+                                                        <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
+                                                            {item.process}
+                                                        </span>
                                                     </div>
-                                                    <span className={`percentage-value`} data-testid="percentageValue">
-                                                        {item.percentage}%
-                                                    </span>
+                                                    <div className="home-content-box-percentages-item-bottom">
+                                                        <div className="progress">
+                                                            <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                                        </div>
+                                                        <span className={`percentage-value`} data-testid="percentageValue">
+                                                            {item.percentage}%
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </button>
                                         );
                                     })
                                 }
