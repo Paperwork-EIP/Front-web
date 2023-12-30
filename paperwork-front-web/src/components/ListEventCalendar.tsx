@@ -96,23 +96,23 @@ function ListEventCalendar(props: Readonly<Props>) {
                                 })
                             }
                         </div>
-                        {
-                            activeCalendarButton ?
-                                <Link to="/calendar">
-                                    <button className='home-calendar-button' aria-label="submit_button">
-                                        {translation.calendar}
-                                    </button>
-                                </Link>
-                                :
-                                <></>
-                        }
                     </>
                     :
                     <>
-                        <div className="list-event-calendar-calendar-text"> {translation.calendar} </div>
-                        <div className="list-event-calendar-line-calendar" style={{ backgroundColor: adaptedColor }} ></div>
-                        <div className="list-event-calendar-nothing-text"> {translation.nothing} </div>
+                        <div className="list-event-calendar-calendar-text">{translation.calendar}</div>
+                        <div className="list-event-calendar-line-calendar" style={{ backgroundColor: adaptedColor }}></div>
+                        <div className="list-event-calendar-nothing-text">{translation.nothing}</div>
                     </>
+            }
+            {
+                activeCalendarButton ?
+                    <Link to="/calendar">
+                        <button className='home-calendar-button' aria-label="submit_button">
+                            {translation.calendar}
+                        </button>
+                    </Link>
+                    :
+                    <></>
             }
         </div>
     )

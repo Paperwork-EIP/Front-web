@@ -49,13 +49,15 @@
 
 .list-event-calendar-nothing-text {
     font-weight: 500;
-    padding-top: 10%;
     text-align: center;
     font-size: 150%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .home-calendar-button {
-    border: 1px solid #FC6976;
+    border: 1px solid #29C9B3;
     padding: 8px 20px;
     border-radius: 5px;
     font-size: 14px;
