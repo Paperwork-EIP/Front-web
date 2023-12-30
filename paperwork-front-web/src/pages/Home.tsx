@@ -186,9 +186,9 @@ function HomePage() {
                             </h2>
                             <div className="home-content-item-percentages-container">
                                 {
-                                    userProcessInfo.map((item: any, index: any) => {
+                                    userProcessInfo.map((item: any) => {
                                         return (
-                                            <button key={index} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
+                                            <button key={item.key} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
                                                 <div className="home-content-box-percentages-item">
                                                     <div className="home-content-box-percentages-item-top">
                                                         <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
