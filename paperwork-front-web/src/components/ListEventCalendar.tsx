@@ -65,9 +65,15 @@ function ListEventCalendar(props: Readonly<Props>) {
                         <div className="list-event-calendar-box-calendar-in">
                             {
                                 rdv.map((item: any) => {
-                                    if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                                    const convertedDateItem = new Date(item.date);
+                                    const convertedDateSelected = new Date(comparativeDate);
+
+                                    const checkTodayDate = convertedDateItem.getFullYear() + '-' + (convertedDateItem.getMonth() + 1) + '-' + convertedDateItem.getDate();
+                                    const checkSelectedDate = convertedDateSelected.getFullYear() + '-' + (convertedDateSelected.getMonth() + 1) + '-' + convertedDateSelected.getDate();
+
+                                    if (checkTodayDate === checkSelectedDate) {
                                         colorEvent = "#fc9f69";
-                                    } else if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                                    } else if (convertedDateItem < convertedDateSelected) {
                                         colorEvent = "#FC6976";
                                     } else {
                                         colorEvent = "#29C9B3";
