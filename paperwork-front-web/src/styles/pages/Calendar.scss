@@ -347,7 +347,6 @@ $calendar-dark-active-text-color: #FFFFFF;
     transform: translate(-50%, -50%);
     width: clamp(300px, 50%, 600px);
     min-height: 200px;
-    // max-height: 80vh;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -373,8 +372,10 @@ $calendar-dark-active-text-color: #FFFFFF;
         .calendar-modal-text {
             font-weight: 500;
             font-size: 24px;
+            width: 80%;
             padding-left: 24px;
             padding-top: 8px;
+            margin-bottom: 16px;
         }
 
         .calendar-modal-header {
@@ -396,6 +397,7 @@ $calendar-dark-active-text-color: #FFFFFF;
 
     .calendar-modal-content {
         width: calc(100% - 50px);
+        height: clamp(150px, 50vh, 500px);
 
         .calendar-edit-select {
             width: 100%;
@@ -532,6 +534,15 @@ $calendar-dark-active-text-color: #FFFFFF;
 
             .calendar-buttons {
                 margin-bottom: 25px;
+            }
+        }
+    }
+
+    .calendar-modal {
+        .calendar-modal-header {
+            .calendar-modal-text {
+                font-size: 20px;
+                padding-left: 0;
             }
         }
     }

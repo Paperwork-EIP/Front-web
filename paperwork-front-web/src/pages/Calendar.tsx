@@ -252,9 +252,6 @@ function CalendarPage() {
                 <button className={'calendar-button'} aria-label="add_an_event_button" onClick={onOpenAddModal}>
                     {translation.addEvent}
                 </button>
-                <button className='calendar-button' aria-label="daily_event_button" onClick={onOpenDailyModal}>
-                    {translation.dailyEvent}
-                </button>
                 <button className={(isEvent === 0 ? ' disabled' : '') + ' calendar-button'} aria-label="delete_edit_event_button" onClick={editButtonOnClickEvent} disabled={isEvent === 0 ? true : false}>
                     {translation.editDeleteEvent}
                 </button>
@@ -300,9 +297,11 @@ function CalendarPage() {
                             {date.toDateString()}
                         </div>
                         <div className='calendar-modal-line'></div>
-                        <h2 className='calendar-modal-text'>
-                            {translation.create}
-                        </h2>
+                        <div className='calendar-modal-header'>
+                            <h2 className='calendar-modal-text'>
+                                {translation.create}
+                            </h2>
+                        </div>
                     </div>
                     <div className='calendar-modal-content'>
                         <Center p={'10px'}>
@@ -366,8 +365,10 @@ function CalendarPage() {
                             {date.toDateString()}
                         </div>
                         <div className='calendar-modal-line'></div>
-                        <div className='calendar-modal-text'>
-                            {translation.dailyEvent}
+                        <div className='calendar-modal-header'>
+                            <div className='calendar-modal-text'>
+                                {translation.dailyEvent}
+                            </div>
                         </div>
                     </div>
                     <div className='calendar-modal-content'>
