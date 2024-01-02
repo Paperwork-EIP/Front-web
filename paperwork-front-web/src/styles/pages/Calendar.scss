@@ -346,7 +346,8 @@ $calendar-dark-active-text-color: #FFFFFF;
     left: 50%;
     transform: translate(-50%, -50%);
     width: clamp(300px, 50%, 600px);
-    min-height: clamp(200px, 45%, 500px);
+    min-height: 200px;
+    // max-height: 80vh;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -403,7 +404,7 @@ $calendar-dark-active-text-color: #FFFFFF;
 
     .calendar-event-list {
         overflow-y: auto;
-        height: 240px;
+        max-height: 100%;
 
         .calendar-event-list-card {
             border: 1px solid #cecece;

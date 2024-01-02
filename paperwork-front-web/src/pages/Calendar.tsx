@@ -57,6 +57,7 @@ function CalendarPage() {
     const adaptedColor = useColorModeValue("#f5f5f5", "#303030");
 
     function handleNewDateChange(e: any) {
+        e.preventDefault();
         setNewDate(e.target.value);
         isNewDateError.current = e.target.value === '';
     }
@@ -65,12 +66,12 @@ function CalendarPage() {
         setModDate(e.target.value);
     }
 
-    async function deleteEvent() {
-        rdv?.map((item: any) => {
+    function deleteEvent() {
+        rdv?.map(async (item: any) => {
             indexDel++;
             return (
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    await axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
                     }).then(() => {
                         window.location.reload();
                     }).catch(err => {
@@ -82,10 +83,10 @@ function CalendarPage() {
     }
 
     function replaceEvent() {
-        listEvents?.map((item: any) => {
+        listEvents?.map(async (item: any) => {
             return (
                 item.date.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                    await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
                     }).catch(err => {
                         console.error(err);
                     })
@@ -166,12 +167,13 @@ function CalendarPage() {
         setIsLoading(false);
     }
 
-    function submitNewEvent() {
+    function submitNewEvent(event: any) {
+        event.preventDefault();
         isNewDateError.current = newDate === '';
-        postsStep?.map((item: any) => {
+        postsStep?.map(async (item: any) => {
             return (
                 item['label'] === stepSelected ?
-                    axios.post(`${api}/calendar/set`, {
+                    await axios.post(`${api}/calendar/set`, {
                         date: comparativeDate + ' ' + newDate + ':00',
                         user_process_id: item['user_process_id'],
                         step_id: item['step_id']
@@ -247,7 +249,7 @@ function CalendarPage() {
     function displayCalendarButtons() {
         return (
             <div className="calendar-buttons">
-                <button className={(isEvent > 0 ? ' disabled' : '') + ' calendar-button'} aria-label="add_an_event_button" onClick={onOpenAddModal} disabled={isEvent > 0 ? true : false}>
+                <button className={'calendar-button'} aria-label="add_an_event_button" onClick={onOpenAddModal}>
                     {translation.addEvent}
                 </button>
                 <button className='calendar-button' aria-label="daily_event_button" onClick={onOpenDailyModal}>
@@ -347,7 +349,7 @@ function CalendarPage() {
                         <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseAddModal}>
                             {translation.close}
                         </button>
-                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitNewEvent}>
+                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={(event) => submitNewEvent(event)}>
                             {translation.submit}
                         </button>
                     </div>
@@ -485,14 +487,14 @@ function CalendarPage() {
     }
 
     useEffect(() => {
-        listEvents?.map((item: any) => {
+        listEvents?.map(async (item: any) => {
             const eventDate = new Date(item.date);
             const today = new Date();
             const threeDays = new Date();
             threeDays.setDate(today.getDate() - 3);
-            
+
             if (eventDate < threeDays) {
-                axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
                 }).then(() => {
                     window.location.reload();
                 }).catch(err => {
