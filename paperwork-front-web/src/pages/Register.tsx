@@ -13,7 +13,6 @@ import FooterNoConnected from '../components/Footer';
 import "../styles/pages/Register.scss";
 
 function RegisterPage() {
-
     const api = process.env.REACT_APP_BASE_URL;
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [username, setUsername] = useState("");
@@ -51,18 +50,9 @@ function RegisterPage() {
     };
 
     async function googleConnect() {
-        await axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/google/urlLogin`)
+        await axios.get(`${process.env.REACT_APP_BASE_URL}/user/oauth/google/urlLogin`)
             .then(res => {
-                window.location.replace(res.data)
-            }).catch(err => {
-                console.error(err);
-            });
-    }
-
-    async function facebookConnect() {
-        await axios.get(`${process.env.REACT_APP_BASE_URL}/oauth/facebook/url`)
-            .then(res => {
-                window.location.replace(res.data)
+                window.location.assign(res.data);
             }).catch(err => {
                 console.error(err);
             });
@@ -110,9 +100,6 @@ function RegisterPage() {
                         <div className='Register-connections'>
                             <button className='Register-button-api' data-testid="google-link" onClick={googleConnect}>
                                 <FaGoogle />
-                            </button>
-                            <button className='Register-button-api' data-testid="facebook-link" onClick={facebookConnect}>
-                                <FaFacebook />
                             </button>
                         </div>
                         <div className='Register-redirection-to-login'>
