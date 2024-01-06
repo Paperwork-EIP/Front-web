@@ -49,8 +49,7 @@ function LoginPage() {
     };
 
     async function handleForgotPassword() {
-        await axios.get(
-            `${api}/user/sendResetPasswordEmail?email=${email}`,
+        await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`,
         ).then(() => {
             toast.success(t('login.emailSent'));
         }).catch(err => {
@@ -68,14 +67,8 @@ function LoginPage() {
     }
 
     async function googleConnect() {
-        await axios.get(`${api}/oauth/google/urlLogin`).then(res => {
-            window.location.replace(res.data)
-        })
-    }
-
-    async function facebookConnect() {
-        await axios.get(`${api}/oauth/facebook/url`).then(res => {
-            window.location.replace(res.data)
+        await axios.get(`${api}/user/oauth/google/urlLogin`).then(res => {
+            window.location.assign(res.data)
         })
     }
 
@@ -123,9 +116,6 @@ function LoginPage() {
                         <div className='Login-connections'>
                             <button className='Login-button-api' data-testid="google-link" onClick={googleConnect}>
                                 <FaGoogle />
-                            </button>
-                            <button className='Login-button-api' data-testid="facebook-link" onClick={facebookConnect}>
-                                <FaFacebook />
                             </button>
                         </div>
                         <div className='Login-redirection-to-register'>

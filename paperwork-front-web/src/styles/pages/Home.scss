@@ -60,7 +60,7 @@ $progress-value-color-very-high: #29C9B3;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         gap: 16px;
         padding: 20px;
         border-radius: 10px;
@@ -98,10 +98,16 @@ $progress-value-color-very-high: #29C9B3;
             padding: 10px 10px 0 10px;
             width: 100%;
             transition: all 0.3s ease-in-out;
-            
+
             &:hover {
                 background-color: var(--process-button-hover);
             }
+        }
+
+        .home-content-process-noprocess {
+            font-weight: 500;
+            text-align: center;
+            font-size: 150%;
         }
 
         .home-content-box-percentages-item {

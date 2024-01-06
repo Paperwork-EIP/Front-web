@@ -498,7 +498,7 @@ function SettingsPage() {
                             <div className="update-btn-container">
                                 <button
                                     type="button"
-                                    className="update-personal-info-btn"
+                                    className="delete-account-btn"
                                     aria-label="delete-account-btn"
                                     onClick={() => setDeleteModal(true)}
                                 >
