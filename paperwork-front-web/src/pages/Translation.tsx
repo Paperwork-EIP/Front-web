@@ -178,7 +178,8 @@ const translations: Translations = {
       help: "Help",
       lexicon: "Lexicon",
       today: "Today",
-      error: "Error, please try again later."
+      error: "Error, please try again later.",
+      noProcess: "You don't have any process yet",
     },
     calendar: {
       calendarLocation: "en-GB",
@@ -372,7 +373,8 @@ const translations: Translations = {
       help: "Aide",
       lexicon: "Lexique",
       today: "Aujourd'hui",
-      error: "Erreur, veuillez réessayer plus tard."
+      error: "Erreur, veuillez réessayer plus tard.",
+      noProcess: "Vous n'avez pas encore de procédure en cours",
     },
     calendar: {
       calendarLocation: "fr-FR",
@@ -564,7 +566,8 @@ const translations: Translations = {
       help: "Hilfe",
       lexicon: "Lexikon",
       today: "Heute",
-      error: "Fehler, bitte versuchen Sie es später erneut."
+      error: "Fehler, bitte versuchen Sie es später erneut.",
+      noProcess: "Sie haben noch keinen Prozess",
     },
     calendar: {
       calendarLocation: "de-DE",
@@ -756,7 +759,8 @@ const translations: Translations = {
       help: "도움말",
       lexicon: "렉시콘",
       today: "오늘",
-      error: "오류, 나중에 다시 시도하십시오."
+      error: "오류, 나중에 다시 시도하십시오.",
+      noProcess: "아직 프로세스가 없습니다",
     },
     calendar: {
       calendarLocation: "ko-KR",
@@ -948,7 +952,8 @@ const translations: Translations = {
       help: "Bantuan",
       lexicon: "Leksikon",
       today: "Hari Ini",
-      error: "Kesalahan, coba lagi nanti."
+      error: "Kesalahan, coba lagi nanti.",
+      noProcess: "Anda belum memiliki proses apa pun",
     },
     calendar: {
       calendarLocation: "id-ID",
@@ -1140,7 +1145,8 @@ const translations: Translations = {
       help: "Ayuda",
       lexicon: "Lexicon",
       today: "Hoy",
-      error: "Error, inténtelo de nuevo más tarde."
+      error: "Error, inténtelo de nuevo más tarde.",
+      noProcess: "Todavía no tienes ningún proceso",
     },
     calendar: {
       calendarLocation: "es-ES",

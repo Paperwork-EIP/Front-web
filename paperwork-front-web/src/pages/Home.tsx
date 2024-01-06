@@ -186,27 +186,32 @@ function HomePage() {
                             </h2>
                             <div className="home-content-item-percentages-container">
                                 {
-                                    userProcessInfo.map((item: any) => {
-                                        return (
-                                            <button key={item.key} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
-                                                <div className="home-content-box-percentages-item">
-                                                    <div className="home-content-box-percentages-item-top">
-                                                        <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
-                                                            {item.process}
-                                                        </span>
-                                                    </div>
-                                                    <div className="home-content-box-percentages-item-bottom">
-                                                        <div className="progress">
-                                                            <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                    userProcessInfo.length > 0 ?
+                                        userProcessInfo.map((item: any) => {
+                                            return (
+                                                <button key={item.key} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
+                                                    <div className="home-content-box-percentages-item">
+                                                        <div className="home-content-box-percentages-item-top">
+                                                            <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
+                                                                {item.process}
+                                                            </span>
                                                         </div>
-                                                        <span className={`percentage-value`} data-testid="percentageValue">
-                                                            {item.percentage}%
-                                                        </span>
+                                                        <div className="home-content-box-percentages-item-bottom">
+                                                            <div className="progress">
+                                                                <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                                            </div>
+                                                            <span className={`percentage-value`} data-testid="percentageValue">
+                                                                {item.percentage}%
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </button>
-                                        );
-                                    })
+                                                </button>
+                                            );
+                                        })
+                                        :
+                                        <h2 className="home-content-process-noprocess">
+                                            {translation.noProcess}
+                                        </h2>
                                 }
                             </div>
                             <Link to="/quiz">
