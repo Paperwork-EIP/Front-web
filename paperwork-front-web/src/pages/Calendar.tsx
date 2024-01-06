@@ -29,7 +29,6 @@ function CalendarPage() {
 
     let isEvent = 0;
     let indexMod = 1;
-    let indexDel = 1;
 
     const cookieList = cookies.get('loginToken')
     const api = process.env.REACT_APP_BASE_URL;
@@ -66,16 +65,38 @@ function CalendarPage() {
         setModDate(e.target.value);
     }
 
-    function deleteEvent() {
+    function deleteEvent(event: any, index: number = 1) {
+        event.preventDefault();
         rdv?.map(async (item: any) => {
-            indexDel++;
             return (
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    await axios.get(`${api}/calendar/delete?user_process_id=${rdv[indexDel + 2]}&step_id=${rdv[indexDel + 3]}`, {
+                    await axios.get(`${api}/calendar/delete`, {
+                        params: {
+                            user_process_id: listEvents[index].user_process_id,
+                            step_id: listEvents[index].step_id
+                        }
                     }).then(() => {
-                        window.location.reload();
+                        toast.success(translation.eventDeletedSuccessfully);
                     }).catch(err => {
                         console.error(err);
+                        toast.error(err);
+                    })
+                    : ''
+            )
+        })
+    }
+
+    async function deleteAllEvent(event: any) {
+        event.preventDefault();
+        listEvents?.map(async (item: any) => {
+            return (
+                item.date.split("T")[0] === comparativeDate ?
+                    await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                    }).then(() => {
+                        toast.success(translation.allEventsDeletedSuccessfully);
+                    }).catch(err => {
+                        console.error(err);
+                        toast.error(err);
                     })
                     : ''
             )
@@ -87,8 +108,11 @@ function CalendarPage() {
             return (
                 item.date.split("T")[0] === comparativeDate ?
                     await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                    }).then(() => {
+                        toast.success(translation.eventModifiedSuccessfully);
                     }).catch(err => {
                         console.error(err);
+                        toast.error(err);
                     })
                     : ''
             )
@@ -110,7 +134,7 @@ function CalendarPage() {
                 setPostsStep(steps);
                 setStepSelected(steps[0]['label']);
             }).catch(err => {
-                console.error(err)
+                console.error(err);
             });
         setStepSelected(e.label);
     }
@@ -179,8 +203,10 @@ function CalendarPage() {
                         step_id: item['step_id']
                     }).then(() => {
                         window.location.reload();
+                        toast.success(translation.eventAddedSuccessfully);
                     }).catch(err => {
                         console.error(err);
+                        toast.error(err);
                     })
                     :
                     ''
@@ -226,7 +252,6 @@ function CalendarPage() {
                     step_id: item.step_id
                 }).then(() => {
                     toast.success(translation.eventModifiedSuccessfully);
-                    window.location.reload();
                 }).catch(err => {
                     toast.error(err);
                     console.error(err);
@@ -381,11 +406,13 @@ function CalendarPage() {
                                 <div className='calendar-event-list'>
                                     {
                                         listEvents.map((item: any) => {
+                                            const convertedDate = item.date.split("T")[1].split(":")[0] + ":" + item.date.split("T")[1].split(":")[1];
+
                                             return (
                                                 item.date.split("T")[0] === comparativeDate ?
                                                     <div className='calendar-event-list-card'>
                                                         <div className='calendar-event-list-card-content'>
-                                                            <h1 className='calendar-event-list-card-content-title-text'>{item.process_title}</h1>
+                                                            <h1 className='calendar-event-list-card-content-title-text'>{convertedDate} - {item.process_title}</h1>
                                                             <h2 className='calendar-event-list-card-content-description-text'>{item.step_title}</h2>
                                                         </div>
                                                     </div>
@@ -419,7 +446,7 @@ function CalendarPage() {
                             <button
                                 className='calendar-modal-button-bin'
                                 aria-label='delete-button'
-                                onClick={() => deleteEvent()}
+                                onClick={(event: any) => deleteAllEvent(event)}
                             >
                                 <img src="assets/calendar-page/bin.png" alt="delete_image" />
                             </button>
@@ -429,10 +456,17 @@ function CalendarPage() {
                         {
                             <div className='calendar-event-list'>
                                 {
-                                    listEvents.map((item: any) => {
+                                    listEvents.map((item: any, index: number) => {
                                         return (
                                             item.date.split("T")[0] === comparativeDate ?
-                                                <Box width={"100%"} key={item.key}>
+                                                <Box
+                                                    width={"100%"}
+                                                    key={item.key}
+                                                    border={"1px solid #cecece"}
+                                                    borderRadius={"10px"}
+                                                    padding={2}
+                                                    marginBottom={4}
+                                                >
                                                     <Center p={'10px'}>
                                                         <Flex width={'100%'} justifyContent={'space-between'}>
                                                             <Input
@@ -466,11 +500,16 @@ function CalendarPage() {
                                                             }
                                                         </Flex>
                                                     </Center>
-                                                    <div className='calendar-modal-buttons'>
-                                                        <button className='calendar-modal-button submit' aria-label="add_submit_button" onClick={submitModEvent}>
-                                                            {translation.submit}
-                                                        </button>
-                                                        <button className='calendar-modal-button close' aria-label="add_close_button" onClick={onCloseDeleteModal}>
+                                                    <div className='calendar-modal-buttons-update'>
+                                                        <div className='calendar-modal-buttons-actions'>
+                                                            <button className='calendar-modal-button submit' aria-label="updated_submit_button" onClick={submitModEvent}>
+                                                                {translation.submit}
+                                                            </button>
+                                                            <button className='calendar-modal-button delete' aria-label='update_delete_button' onClick={(event: any) => deleteEvent(event, index)}>
+                                                                {translation.delete}
+                                                            </button>
+                                                        </div>
+                                                        <button className='calendar-modal-button close' aria-label="update_close_button" onClick={onCloseDeleteModal}>
                                                             {translation.close}
                                                         </button>
                                                     </div>
