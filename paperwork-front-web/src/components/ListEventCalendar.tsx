@@ -65,9 +65,15 @@ function ListEventCalendar(props: Readonly<Props>) {
                         <div className="list-event-calendar-box-calendar-in">
                             {
                                 rdv.map((item: any) => {
-                                    if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] === comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                                    const convertedDateItem = new Date(item.date);
+                                    const convertedDateSelected = new Date(comparativeDate);
+
+                                    const checkTodayDate = convertedDateItem.getFullYear() + '-' + (convertedDateItem.getMonth() + 1) + '-' + convertedDateItem.getDate();
+                                    const checkSelectedDate = convertedDateSelected.getFullYear() + '-' + (convertedDateSelected.getMonth() + 1) + '-' + convertedDateSelected.getDate();
+
+                                    if (checkTodayDate === checkSelectedDate) {
                                         colorEvent = "#fc9f69";
-                                    } else if (item.date.split('T')[0].split('-')[0] + item.date.split('T')[0].split('-')[1] + item.date.split('T')[0].split('-')[2] < comparativeDate.split('-')[0] + comparativeDate.split('-')[1] + comparativeDate.split('-')[2]) {
+                                    } else if (convertedDateItem < convertedDateSelected) {
                                         colorEvent = "#FC6976";
                                     } else {
                                         colorEvent = "#29C9B3";
@@ -96,23 +102,23 @@ function ListEventCalendar(props: Readonly<Props>) {
                                 })
                             }
                         </div>
-                        {
-                            activeCalendarButton ?
-                                <Link to="/calendar">
-                                    <button className='home-calendar-button' aria-label="submit_button">
-                                        {translation.calendar}
-                                    </button>
-                                </Link>
-                                :
-                                <></>
-                        }
                     </>
                     :
                     <>
-                        <div className="list-event-calendar-calendar-text"> {translation.calendar} </div>
-                        <div className="list-event-calendar-line-calendar" style={{ backgroundColor: adaptedColor }} ></div>
-                        <div className="list-event-calendar-nothing-text"> {translation.nothing} </div>
+                        <div className="list-event-calendar-calendar-text">{translation.calendar}</div>
+                        <div className="list-event-calendar-line-calendar" style={{ backgroundColor: adaptedColor }}></div>
+                        <div className="list-event-calendar-nothing-text">{translation.nothing}</div>
                     </>
+            }
+            {
+                activeCalendarButton ?
+                    <Link to="/calendar">
+                        <button className='home-calendar-button' aria-label="submit_button">
+                            {translation.calendar}
+                        </button>
+                    </Link>
+                    :
+                    <></>
             }
         </div>
     )

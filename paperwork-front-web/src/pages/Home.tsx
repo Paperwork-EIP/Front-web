@@ -10,7 +10,8 @@ import Header from '../components/Header';
 import Loading from "../components/Loading";
 import ListEventCalendar from "../components/ListEventCalendar";
 
-import "../styles/HomeContent.scss";
+import "../styles/pages/Home.scss";
+import { toast } from "react-toastify";
 
 function HomePage() {
     const cookies = new Cookies();
@@ -49,15 +50,21 @@ function HomePage() {
         }
     }
 
+    function redirectToProcessResult(processTitle: string) {
+        window.location.href = "/processResult/" + processTitle;
+    }
+
     async function getUserDatasByToken() {
         try {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
                 .then(res => {
                     setLanguage(res.data.language);
                 }).catch(err => {
-                    console.log(err)
+                    toast.error(translation.error);
+                    console.log(err);
                 });
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -81,9 +88,11 @@ function HomePage() {
                     }
                     setRDV(rdvTmp);
                 }).catch(err => {
+                    toast.error(translation.error);
                     console.error(err);
                 })
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -100,6 +109,7 @@ function HomePage() {
                                 {
                                     key: j,
                                     process: res.data.response[j]['userProcess'].title,
+                                    stocked_title: res.data.response[j]['userProcess'].stocked_title,
                                     percentage: res.data.response[j]['pourcentage']
                                 }
                             );
@@ -108,18 +118,39 @@ function HomePage() {
                                 {
                                     key: j,
                                     process: res.data.response[j]['userProcess'].title,
+                                    stocked_title: res.data.response[j]['userProcess'].stocked_title,
                                     percentage: 0
                                 }
                             );
                     }
                     setUserProcessInfo(userProcessTmp);
                 }).catch(err => {
-                    console.error(err)
+                    toast.error(translation.error);
+                    console.error(err);
                 });
         } catch (error) {
+            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
+    }
+
+    async function deletePassedEvent() {
+        rdv?.map(async (item: any) => {
+            const eventDate = new Date(item.date);
+            const today = new Date();
+            const threeDays = new Date();
+            threeDays.setDate(today.getDate() - 3);
+
+            if (eventDate < threeDays) {
+                await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                }).then(() => {
+                    window.location.reload();
+                }).catch(err => {
+                    console.error(err);
+                })
+            }
+        })
     }
 
     useEffect(() => {
@@ -130,21 +161,7 @@ function HomePage() {
     }, []);
 
     useEffect(() => {
-        rdv?.map((item: any) => {
-            const eventDate = new Date(item.date);
-            const today = new Date();
-            const threeDays = new Date();
-            threeDays.setDate(today.getDate() - 3);
-            
-            if (eventDate < threeDays) {
-                axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
-                }).then(() => {
-                    window.location.reload();
-                }).catch(err => {
-                    console.error(err);
-                })
-            }
-        })
+        deletePassedEvent();
     }, [rdv]);
 
 
@@ -169,25 +186,32 @@ function HomePage() {
                             </h2>
                             <div className="home-content-item-percentages-container">
                                 {
-                                    userProcessInfo.map((item: any, index: any) => {
-                                        return (
-                                            <div key={index} className="home-content-box-percentages-item">
-                                                <div className="home-content-box-percentages-item-top">
-                                                    <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
-                                                        {item.process}
-                                                    </span>
-                                                </div>
-                                                <div className="home-content-box-percentages-item-bottom">
-                                                    <div className="progress">
-                                                        <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                    userProcessInfo.length > 0 ?
+                                        userProcessInfo.map((item: any) => {
+                                            return (
+                                                <button key={item.key} className="home-content-process-btn" onClick={() => redirectToProcessResult(item.stocked_title)}>
+                                                    <div className="home-content-box-percentages-item">
+                                                        <div className="home-content-box-percentages-item-top">
+                                                            <span key="{itemAscProcess}" className={colorMode === "light" ? "home-content-box-percentages-item-border-light" : "home-content-box-percentages-item-border-dark"}>
+                                                                {item.process}
+                                                            </span>
+                                                        </div>
+                                                        <div className="home-content-box-percentages-item-bottom">
+                                                            <div className="progress">
+                                                                <div className={`progress-value ${getPercentageClass(item.percentage)}`} style={{ width: `${item.percentage}%` }}></div>
+                                                            </div>
+                                                            <span className={`percentage-value`} data-testid="percentageValue">
+                                                                {item.percentage}%
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <span className={`percentage-value`} data-testid="percentageValue">
-                                                        {item.percentage}%
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        );
-                                    })
+                                                </button>
+                                            );
+                                        })
+                                        :
+                                        <h2 className="home-content-process-noprocess">
+                                            {translation.noProcess}
+                                        </h2>
                                 }
                             </div>
                             <Link to="/quiz">

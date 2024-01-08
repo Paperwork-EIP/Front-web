@@ -23,6 +23,8 @@ $calendar-dark-active-text-color: #FFFFFF;
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - 55px);
+    padding: 0 20px;
+    gap: 20px;
 
     .calendar-title {
         position: relative;
@@ -62,7 +64,6 @@ $calendar-dark-active-text-color: #FFFFFF;
         align-items: center;
         justify-content: center;
         gap: 20px;
-        padding: 20px;
 
         .calendar-widget {
             width: calc(100% - 20px);
@@ -199,7 +200,6 @@ $calendar-dark-active-text-color: #FFFFFF;
         align-items: center;
         justify-content: center;
         gap: 20px;
-        padding: 20px;
 
         .calendar-widget {
             width: calc(100% - 20px);
@@ -346,7 +346,7 @@ $calendar-dark-active-text-color: #FFFFFF;
     left: 50%;
     transform: translate(-50%, -50%);
     width: clamp(300px, 50%, 600px);
-    min-height: clamp(200px, 45%, 500px);
+    min-height: 200px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -372,8 +372,10 @@ $calendar-dark-active-text-color: #FFFFFF;
         .calendar-modal-text {
             font-weight: 500;
             font-size: 24px;
+            width: 80%;
             padding-left: 24px;
             padding-top: 8px;
+            margin-bottom: 16px;
         }
 
         .calendar-modal-header {
@@ -395,6 +397,7 @@ $calendar-dark-active-text-color: #FFFFFF;
 
     .calendar-modal-content {
         width: calc(100% - 50px);
+        height: clamp(150px, 50vh, 500px);
 
         .calendar-edit-select {
             width: 100%;
@@ -403,7 +406,8 @@ $calendar-dark-active-text-color: #FFFFFF;
 
     .calendar-event-list {
         overflow-y: auto;
-        height: 240px;
+        max-height: 100%;
+        padding-right: 4px;
 
         .calendar-event-list-card {
             border: 1px solid #cecece;
@@ -434,6 +438,24 @@ $calendar-dark-active-text-color: #FFFFFF;
         justify-content: center;
         gap: 20px;
         padding: 16px 0 24px 0;
+
+        &-update {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding-top: 16px;
+        }
+
+        &-actions {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
     }
 
     .calendar-modal-button {
@@ -456,17 +478,20 @@ $calendar-dark-active-text-color: #FFFFFF;
 
         &.delete {
             color: #FC6976;
-            border: 1px solid #FC6976;
-            border-radius: 5px;
-            padding: 8px 20px;
+            font-size: 16px;
+            border-color: #FC6976;
         }
     }
 }
 
+.calendar-modal-text-nothing {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
 .calendar-list-widget {
-    height: 100%;
-    min-height: 300px;
-    max-height: 90vh;
+    height: 90vh;
     width: 100%;
     max-width: 600px;
     overflow-y: auto;
@@ -504,10 +529,6 @@ $calendar-dark-active-text-color: #FFFFFF;
 
         .calendar-title {
             padding-top: 20px;
-
-            &:after {
-                filter: blur(2px);
-            }
         }
 
         .calendar-wrapper {
@@ -518,12 +539,34 @@ $calendar-dark-active-text-color: #FFFFFF;
             .calendar-widget {
                 width: 100%;
             }
+
+            .calendar-buttons {
+                margin-bottom: 25px;
+            }
         }
 
         .calendar-content-dark {
             .calendar-widget {
                 width: 100%;
             }
+
+            .calendar-buttons {
+                margin-bottom: 25px;
+            }
         }
+    }
+
+    .calendar-modal {
+        .calendar-modal-header {
+            .calendar-modal-text {
+                font-size: 20px;
+                padding-left: 0;
+            }
+        }
+    }
+
+    .calendar-list-widget {
+        height: 100%;
+        margin-bottom: 20px;
     }
 }

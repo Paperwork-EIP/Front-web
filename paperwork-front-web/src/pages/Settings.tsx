@@ -10,6 +10,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 import { getTranslation } from './Translation';
 
 import "../styles/pages/Settings.scss";
@@ -45,6 +46,7 @@ function SettingsPage() {
     const [newEmail, setNewEmail] = useState("");
     const [newAddress, setNewAddress] = useState("");
     const [newPhonenumber, setNewPhonenumber] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     const translation = getTranslation(language, "settings");
 
@@ -59,29 +61,28 @@ function SettingsPage() {
     const [avatarModal, setAvatarModal] = React.useState(false);
     const [currentSection, setCurrentSection] = useState("PersonalInformation");
 
-    useEffect(() => {
-        if (cookiesInfo) {
-            axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
-                .then(res => {
-                    setUsername(res.data.username);
-                    setName(res.data.name);
-                    setFirstname(res.data.firstname);
-                    setLanguage(res.data.language);
-                    setAge(res.data.age);
-                    setEmail(res.data.email);
-                    setAddress(res.data.address);
-                    setPhonenumber(res.data.number_phone);
-                    setProfilePicture(res.data.profile_picture);
-                }).catch(err => {
-                    console.log(err)
-                }
-                );
-        } else {
-            window.location.assign('/');
-        }
-    }, []);
+    async function getUserData() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
+            .then(res => {
+                setUsername(res.data.username);
+                setName(res.data.name);
+                setFirstname(res.data.firstname);
+                setLanguage(res.data.language);
+                setAge(res.data.age);
+                setEmail(res.data.email);
+                setAddress(res.data.address);
+                setPhonenumber(res.data.number_phone);
+                setProfilePicture(res.data.profile_picture);
+            }).catch(err => {
+                toast.error(translation.alertSystemError);
+                console.log(err)
+            });
+        setIsLoading(false);
+    }
 
     async function handleSubmit() {
+        setIsLoading(true);
+
         const parameters = { token: cookiesInfo.loginToken };
         let isAnyNewValue = false;
 
@@ -139,9 +140,12 @@ function SettingsPage() {
         } else {
             toast.error(translation.alertNoChange);
         }
+
+        setIsLoading(false);
     };
 
     async function handleChangePassword() {
+        setIsLoading(true);
         const passwordInput = document.getElementById('password') as HTMLInputElement;
 
         if (passwordInput.value === undefined || passwordInput.value === null || passwordInput.value === "") {
@@ -168,9 +172,11 @@ function SettingsPage() {
                 toast.error(translation.alertPasswordNotMatch);
             }
         }
+        setIsLoading(false);
     }
 
     async function handleDeleteAccount() {
+        setIsLoading(true);
         await axios.get(`${api}/user/delete`, {
             params: {
                 token: cookiesInfo.loginToken,
@@ -190,14 +196,15 @@ function SettingsPage() {
             }
         });
         setDeleteModal(!deleteModal);
+        setIsLoading(false);
     }
 
     async function handleSetNewAvatar(newAvatar: string) {
+        setIsLoading(true);
         await axios.post(`${api}/user/modifyDatas`, {
             token: cookiesInfo.loginToken,
             profile_picture: newAvatar,
-        }).then(res => {
-            console.log(res.data);
+        }).then(() => {
             toast.success(translation.alertAvatarUpdated);
             window.location.reload();
         }).catch(err => {
@@ -211,11 +218,23 @@ function SettingsPage() {
             }
         });
         setAvatarModal(!avatarModal);
+        setIsLoading(false);
     }
+
+    useEffect(() => {
+        if (cookiesInfo) {
+            getUserData();
+        } else {
+            window.location.assign('/');
+        }
+    }, []);
 
     return (
         <>
             <Header />
+            {
+                isLoading ? <Loading /> : <></>
+            }
             <div className={`Settings ${colorMode === "light" ? "Settings-light" : "Settings-dark"}`}>
                 <div className="title">{translation.title}</div>
                 <div className="settings-container">
@@ -479,7 +498,7 @@ function SettingsPage() {
                             <div className="update-btn-container">
                                 <button
                                     type="button"
-                                    className="update-personal-info-btn"
+                                    className="delete-account-btn"
                                     aria-label="delete-account-btn"
                                     onClick={() => setDeleteModal(true)}
                                 >

@@ -178,6 +178,8 @@ const translations: Translations = {
       help: "Help",
       lexicon: "Lexicon",
       today: "Today",
+      error: "Error, please try again later.",
+      noProcess: "You don't have any process yet",
     },
     calendar: {
       calendarLocation: "en-GB",
@@ -188,6 +190,7 @@ const translations: Translations = {
       create: "Create",
       close: "Close",
       submit: "Submit",
+      delete: "Delete",
       selectTheProcess: "Select the Process",
       selectTheStep: "Select the Step",
       nothingPlanned: "Nothing Planned",
@@ -197,7 +200,10 @@ const translations: Translations = {
       applied: "Applied",
       left: "Left",
       today: "Today",
+      eventAddedSuccessfully: "Event added successfully!",
       eventModifiedSuccessfully: "Event modified successfully!",
+      eventDeletedSuccessfully: "Event deleted successfully!",
+      allEventsDeletedSuccessfully: "All events deleted successfully!",
     }
   },
   french: {
@@ -367,6 +373,8 @@ const translations: Translations = {
       help: "Aide",
       lexicon: "Lexique",
       today: "Aujourd'hui",
+      error: "Erreur, veuillez réessayer plus tard.",
+      noProcess: "Vous n'avez pas encore de procédure en cours",
     },
     calendar: {
       calendarLocation: "fr-FR",
@@ -377,6 +385,7 @@ const translations: Translations = {
       create: "Créer",
       close: "Fermer",
       submit: "Valider",
+      delete: "Supprimer",
       selectTheProcess: "Sélectionner la Procédure",
       selectTheStep: "Sélectionner l'Étape",
       nothingPlanned: "Rien de prévu",
@@ -386,7 +395,10 @@ const translations: Translations = {
       applied: "Terminé",
       left: "Restant",
       today: "Aujourd'hui",
+      eventAddedSuccessfully: "Évènement ajouté avec succès !",
       eventModifiedSuccessfully: "Évènement modifié avec succès !",
+      eventDeletedSuccessfully: "Évènement supprimé avec succès !",
+      allEventsDeletedSuccessfully: "Tous les évènements ont été supprimés avec succès !",
     }
   },
   german: {
@@ -554,6 +566,8 @@ const translations: Translations = {
       help: "Hilfe",
       lexicon: "Lexikon",
       today: "Heute",
+      error: "Fehler, bitte versuchen Sie es später erneut.",
+      noProcess: "Sie haben noch keinen Prozess",
     },
     calendar: {
       calendarLocation: "de-DE",
@@ -564,6 +578,7 @@ const translations: Translations = {
       create: "Erstellen",
       close: "Schließen",
       submit: "Absenden",
+      delete: "Löschen",
       selectTheProcess: "Prozess auswählen",
       selectTheStep: "Schritt auswählen",
       nothingPlanned: "Nichts geplant",
@@ -573,7 +588,10 @@ const translations: Translations = {
       applied: "Angewendet",
       left: "Übrig",
       today: "Heute",
+      eventAddedSuccessfully: "Ereignis erfolgreich hinzugefügt!",
       eventModifiedSuccessfully: "Ereignis erfolgreich geändert!",
+      eventDeletedSuccessfully: "Ereignis erfolgreich gelöscht!",
+      allEventsDeletedSuccessfully: "Alle Ereignisse erfolgreich gelöscht!",
     }
   },
   korean: {
@@ -741,6 +759,8 @@ const translations: Translations = {
       help: "도움말",
       lexicon: "렉시콘",
       today: "오늘",
+      error: "오류, 나중에 다시 시도하십시오.",
+      noProcess: "아직 프로세스가 없습니다",
     },
     calendar: {
       calendarLocation: "ko-KR",
@@ -751,6 +771,7 @@ const translations: Translations = {
       create: "생성",
       close: "닫기",
       submit: "제출",
+      delete: "삭제",
       selectTheProcess: "프로세스 선택",
       selectTheStep: "단계 선택",
       nothingPlanned: "계획된 이벤트 없음",
@@ -760,7 +781,10 @@ const translations: Translations = {
       applied: "적용됨",
       left: "남음",
       today: "오늘",
+      eventAddedSuccessfully: "이벤트가 성공적으로 추가되었습니다!",
       eventModifiedSuccessfully: "이벤트가 성공적으로 수정되었습니다!",
+      eventDeletedSuccessfully: "이벤트가 성공적으로 삭제되었습니다!",
+      allEventsDeletedSuccessfully: "모든 이벤트가 성공적으로 삭제되었습니다!",
     }
   },
   indonesian: {
@@ -928,6 +952,8 @@ const translations: Translations = {
       help: "Bantuan",
       lexicon: "Leksikon",
       today: "Hari Ini",
+      error: "Kesalahan, coba lagi nanti.",
+      noProcess: "Anda belum memiliki proses apa pun",
     },
     calendar: {
       calendarLocation: "id-ID",
@@ -938,6 +964,7 @@ const translations: Translations = {
       create: "Buat",
       close: "Tutup",
       submit: "Kirim",
+      delete: "Hapus",
       selectTheProcess: "Pilih Proses",
       selectTheStep: "Pilih Langkah",
       nothingPlanned: "Tidak Ada yang Direncanakan",
@@ -947,7 +974,10 @@ const translations: Translations = {
       applied: "Diterapkan",
       left: "Tinggal",
       today: "Hari Ini",
+      eventAddedSuccessfully: "Acara berhasil ditambahkan!",
       eventModifiedSuccessfully: "Acara berhasil diubah!",
+      eventDeletedSuccessfully: "Acara berhasil dihapus!",
+      allEventsDeletedSuccessfully: "Semua acara berhasil dihapus!",
     }
   },
   spanish: {
@@ -1115,6 +1145,8 @@ const translations: Translations = {
       help: "Ayuda",
       lexicon: "Lexicon",
       today: "Hoy",
+      error: "Error, inténtelo de nuevo más tarde.",
+      noProcess: "Todavía no tienes ningún proceso",
     },
     calendar: {
       calendarLocation: "es-ES",
@@ -1125,6 +1157,7 @@ const translations: Translations = {
       create: "Crear",
       close: "Cerrar",
       submit: "Enviar",
+      delete: "Eliminar",
       selectTheProcess: "Seleccionar el Proceso",
       selectTheStep: "Seleccionar el Paso",
       nothingPlanned: "Nada Planeado",
@@ -1134,7 +1167,10 @@ const translations: Translations = {
       applied: "Aplicado",
       left: "Restante",
       today: "Hoy",
+      eventAddedSuccessfully: "¡Evento agregado con éxito!",
       eventModifiedSuccessfully: "¡Evento modificado con éxito!",
+      eventDeletedSuccessfully: "¡Evento eliminado con éxito!",
+      allEventsDeletedSuccessfully: "¡Todos los eventos eliminados con éxito!",
     }
   }
 };

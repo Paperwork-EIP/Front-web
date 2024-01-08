@@ -1,18 +1,49 @@
-.Lexicon {
+.Help {
     min-height: 100vh;
 }
 
-.lexicon-light {
+.help-light {
     background-color: #FFFFFF;
     color: #000000;
 }
 
-.lexicon-dark {
+.help-dark {
     background-color: #222222;
     color: #CECECE;
 }
 
-.Help-text-button-light {
+.faq-light-image,
+.faq-dark-image,
+.faq-image-contact-us {
+    max-width: 400px;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    filter: drop-shadow(0 0 0.75rem rgba(86, 86, 86, 0.434));
+}
+
+.contact-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FC6976;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #29C9B3;
+    }
+}
+
+.Lexicon-text-button-light {
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 0.5%;
@@ -22,17 +53,7 @@
     overflow: hidden;
 }
 
-.lexicon-image {
-    width: 700px;
-    max-width: 400px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 35%;
-}
-
-.Help-button-light {
+.Lexicon-button-light {
     margin-top: 2%;
     position: relative;
     display: inline-block;
@@ -40,7 +61,7 @@
     overflow: hidden;
 }
 
-.Help-button-light:after {
+.Lexicon-button-light:after {
     content: "";
     position: absolute;
     left: 0;
@@ -53,19 +74,19 @@
     transform-origin: right;
 }
 
-.Help-button-light:hover:after {
+.Lexicon-button-light:hover:after {
     transform: scaleX(1);
     transform-origin: left;
 }
 
-.faqs {
+.faqs-light {
     width: 100%;
     max-width: 768px;
     margin: 0 auto;
     padding: 5px;
 }
 
-.faqs .faq-light {
+.faqs-light .faq-light {
     margin: 15px;
     padding: 15px;
     background: #ECEFF1;
@@ -73,18 +94,22 @@
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.faqs .faq-light:hover {
+.faqs-light .faq-light:hover {
     background-color: #f3f3f3;
 }
 
-.faq-light-contact-mail {
+.faq-image-contact-us:hover {
+    opacity: 0.6
+}
+
+.faq-contact-mail {
     max-width: 100%;
     padding: 15px;
     color: #FC6976;
     text-align: center;
 }
 
-.faqs .faq-light .faq-light-question {
+.faqs-light .faq-light .faq-light-question {
     position: relative;
     font-size: 20px;
     padding-right: 80px;
@@ -92,7 +117,7 @@
     color: black;
 }
 
-.faqs .faq-light .faq-light-question::after {
+.faqs-light .faq-light .faq-light-question::after {
     content: "+";
     position: absolute;
     top: 50%;
@@ -104,48 +129,42 @@
     color: black;
 }
 
-.faqs .faq-light .faq-light-answer {
+.faqs-light .faq-light .faq-light-answer {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     transition: all 0.2s ease;
 }
 
-.faqs .faq-light .faq-light-answer-divider {
+.faqs-light .faq-light.open .faq-light-answer-divider {
     border-top: 1px solid lightgray;
 }
 
-.faqs .faq-light.open .faq-light-question {
+.faqs-light .faq-light.open .faq-light-question {
     margin-bottom: 15px;
     color: black;
 }
 
-.faqs .faq-light.open .faq-light-question::after {
+.faqs-light .faq-light.open .faq-light-question::after {
     content: "-";
     color: black;
 }
 
-.faqs .faq-light.open .faq-light-answer {
+.faqs-light .faq-light.open .faq-light-answer {
     margin-bottom: 15px;
-    max-height: 100px;
+    max-height: 1000px;
     opacity: 1;
-    margin: 0 auto;
 }
 
-.faqs .faq-light.open .faq-light-screen {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.faqs .faq-light.open .faq-light-screen:hover {
+.faqs-light .faq-light.open .faq-light-screen:hover {
     opacity: 0.6
 }
 
-.faqs .faq-light .faq-light-display-linebreak {
+.faqs-light .faq-light .faq-light-display-linebreak {
     white-space: pre-line;
 }
 
-.Help-text-button-dark {
+.Lexicon-text-button-dark {
     margin-top: 2%;
     margin-left: 1%;
     margin-right: 0.5%;
@@ -155,7 +174,8 @@
     overflow: hidden;
 }
 
-.Help-button-dark {
+
+.Lexicon-button-dark {
     margin-top: 2%;
     position: relative;
     display: inline-block;
@@ -163,7 +183,7 @@
     overflow: hidden;
 }
 
-.Help-button-dark:after {
+.Lexicon-button-dark:after {
     content: "";
     position: absolute;
     left: 0;
@@ -176,12 +196,19 @@
     transform-origin: right;
 }
 
-.Help-button-dark:hover:after {
+.Lexicon-button-dark:hover:after {
     transform: scaleX(1);
     transform-origin: left;
 }
 
-.faqs .faq-dark {
+.faqs-dark {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.faqs-dark .faq-dark {
     margin: 15px;
     padding: 15px;
     background: #303030;
@@ -189,18 +216,11 @@
     box-shadow: 0px 2px 2px rgba(255, 255, 255, 0.1);
 }
 
-.faqs .faq-dark:hover {
+.faqs-dark .faq-dark:hover {
     background-color: #3b3b3b;
 }
 
-.faq-dark-contact-mail {
-    max-width: 100%;
-    padding: 15px;
-    color: #FC6976;
-    text-align: center;
-}
-
-.faqs .faq-dark .faq-dark-question {
+.faqs-dark .faq-dark .faq-dark-question {
     position: relative;
     font-size: 20px;
     padding-right: 80px;
@@ -208,7 +228,7 @@
     color: rgb(255, 255, 255);
 }
 
-.faqs .faq-dark .faq-dark-question::after {
+.faqs-dark .faq-dark .faq-dark-question::after {
     content: "+";
     position: absolute;
     top: 50%;
@@ -220,43 +240,37 @@
     color: rgb(255, 255, 255);
 }
 
-.faqs .faq-dark .faq-dark-answer {
+.faqs-dark .faq-dark .faq-dark-answer {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
     transition: all 0.2s ease;
 }
 
-.faqs .faq-dark .faq-dark-answer-divider {
-    border-top: 1px solid darkgray;
+.faqs-dark .faq-dark.open .faq-dark-answer-divider {
+    border-top: 1px solid lightgray;
 }
 
-.faqs .faq-dark.open .faq-dark-question {
+.faqs-dark .faq-dark.open .faq-dark-question {
     margin-bottom: 15px;
     color: rgb(255, 255, 255);
 }
 
-.faqs .faq-dark.open .faq-dark-question::after {
+.faqs-dark .faq-dark.open .faq-dark-question::after {
     content: "-";
     color: rgb(255, 255, 255);
 }
 
-.faqs .faq-dark.open .faq-dark-answer {
+.faqs-dark .faq-dark.open .faq-dark-answer {
     margin-bottom: 15px;
-    max-height: 100px;
+    max-height: 1000px;
     opacity: 1;
-    margin: 0 auto;
 }
 
-.faqs .faq-dark.open .faq-dark-screen {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.faqs .faq-dark.open .faq-dark-screen:hover {
+.faqs-dark .faq-dark.open .faq-dark-screen:hover {
     opacity: 0.6
 }
 
-.faqs .faq-dark .faq-dark-display-linebreak {
+.faqs-dark .faq-dark .faq-dark-display-linebreak {
     white-space: pre-line;
 }
