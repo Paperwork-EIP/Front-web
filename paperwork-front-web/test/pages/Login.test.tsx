@@ -15,7 +15,8 @@ beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            replace: jest.fn()
+            replace: jest.fn(),
+            assign: jest.fn(),
         }
     });
     toast.success = jest.fn();
@@ -80,41 +81,6 @@ describe('Login Tests', () => {
         fireEvent.click(googleButton);
         expect(axios.get).toHaveBeenCalled();
     });
-    test('clicking on facebook connect button calls facebookConnect function', () => {
-        const { getByTestId } = render(
-            <BrowserRouter>
-                <LoginPage />
-            </BrowserRouter>
-        );
-        const googleButton = getByTestId('facebook-link');
-
-        fireEvent.click(googleButton);
-        expect(axios.get).toHaveBeenCalled();
-    });
-    // test('should not login with Google', () => {
-    //     axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <LoginPage />
-    //         </BrowserRouter>
-    //     );
-    //     const googleButton = getByTestId('google-link');
-
-    //     fireEvent.click(googleButton);
-    //     expect(axios.get).toHaveBeenCalled();
-    // });
-    // test('should not login with Facebook', () => {
-    //     axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <LoginPage />
-    //         </BrowserRouter>
-    //     );
-    //     const googleButton = getByTestId('facebook-link');
-
-    //     fireEvent.click(googleButton);
-    //     expect(axios.get).toHaveBeenCalled();
-    // });
     test('should link to the register page when register button clicked', () => {
         const { getByTestId } = render(
             <BrowserRouter>

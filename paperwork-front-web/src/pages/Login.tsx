@@ -49,8 +49,7 @@ function LoginPage() {
     };
 
     async function handleForgotPassword() {
-        await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`,
-        ).then(() => {
+        await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`).then(() => {
             toast.success(t('login.emailSent'));
         }).catch(err => {
             toast.warning(t('login.emailFail'));
@@ -100,7 +99,7 @@ function LoginPage() {
                             </button>
                         </form>
                         <div>
-                            <button className='Login-forgot-password-button' onClick={onOpenModal}>{t('login.forgotPassword')}</button>
+                            <button className='Login-forgot-password-button' onClick={onOpenModal} aria-label='login-forgot-password-button'>{t('login.forgotPassword')}</button>
                             <Modal className='Login-modal' style={{ content: { background: "rgba(45,45,45,1)" } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
                                 <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
                                     <RxCrossCircled />
@@ -109,7 +108,7 @@ function LoginPage() {
                                 <div className='Login-title'>{t('login.forgotPasswordTitle')}</div>
                                 <div className='Login-box-email'>
                                     <input type="email" className="Login-email-input" placeholder={t('login.email') || ''} defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
-                                    <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30} /></button>
+                                    <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword} aria-label='button-send-mail-forgot-password'><FiSend className='Login-title-icons' size={30} /></button>
                                 </div>
                             </Modal>
                         </div>
