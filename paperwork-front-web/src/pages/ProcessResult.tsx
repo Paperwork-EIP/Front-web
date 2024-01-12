@@ -59,6 +59,7 @@ const ProcessResult = () => {
     async function getUserSteps() {
         await axios.get(`${api}/userProcess/getUserSteps`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
             .then(res => {
+                console.log(res);
                 setRequeteSend(true);
                 setStepsAnswer(res.data.response);
                 setTitle(res.data.title);
@@ -152,13 +153,13 @@ const ProcessResult = () => {
                     </span>
                 </a>
                 <div className='ProcessResult-Requires'>
-                    <div className='ProcessResult-Title'>{translation.resultProcess}"{title}":</div>
+                    <div className='ProcessResult-Title' data-testid="processResult-title">{translation.resultProcess}"{title}":</div>
                     <div className='ProcessResult-Checkbox-Container'>
                         <>
                             {stepsAnswer?.map((item: any, index: any) => {
-                                if (item.under_steps.length === 0) {
+                                if (item.under_steps?.length === 0) {
                                     return (
-                                        <div key={index} className='ProcessResult-output'>
+                                        <div key={index} className='ProcessResult-output' data-testid="processResultOutput">
                                             <input
                                                 className='ProcessResult-Checkbox'
                                                 type="checkbox"
@@ -172,11 +173,11 @@ const ProcessResult = () => {
                                         </div>
                                     )
                                 }
-                                else {
+                                else if (item.under_steps) {
                                     return (
                                         <div key={index}>
                                             <div key={index}>
-                                                <div key={index} className='ProcessResult-output'>
+                                                <div className='ProcessResult-output' data-testid="processResultOutput">
                                                     <input
                                                         className='ProcessResult-Checkbox'
                                                         type="checkbox"
@@ -192,8 +193,8 @@ const ProcessResult = () => {
                                             <div>
                                                 {item.under_steps.map((underStep: any, underIndex: any) => {
                                                     return (
-                                                        <div key={underIndex}>
-                                                            <div key={index} className='ProcessResult-output'>
+                                                        <div className="ProcessResult-underStep" key={underIndex}>
+                                                            <div className='ProcessResult-output' data-testid="processResultOutput">
                                                                 <input
                                                                     className='ProcessResult-Checkbox'
                                                                     type="checkbox"
@@ -216,11 +217,12 @@ const ProcessResult = () => {
                         </>
                     </div>
                     <div className="section-container">
-                        <div className="update-btn-container">
+                        <div className="update-btn-container" data-testid="updateBtnContainer">
                             <button
                                 type="button"
                                 className="update-personal-info-btn"
                                 aria-label="update-personal-info-btn"
+                                data-testid="updatePersonalInfoBtn"
                                 onClick={() => handleUpdate()}
                             >
                                 {translation.updateBtn}

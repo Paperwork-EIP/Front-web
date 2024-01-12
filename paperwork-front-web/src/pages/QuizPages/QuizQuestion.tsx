@@ -89,11 +89,11 @@ function QuizQuestion() {
         const post = { process_title: processSelected, user_token: cookiesInfo.loginToken, questions: responseTemp }
         await axios.get(`${api}/userProcess/delete`, { params: { process_title: processSelected, user_token: cookiesInfo.loginToken } })
         await axios.post(`${api}/userProcess/add`, post)
-                .then(() => {
-                    window.location.href = `/processResult/${processSelected}`;
-                }).catch(err => {
-                    console.log(err)
-                });
+        .then(() => {
+            window.location.href = `/processResult/${processSelected}`;
+        }).catch(err => {
+            console.log(err)
+        });
     }
 
     function handleClick(currentQuestionAnswer: string) {
@@ -137,7 +137,7 @@ function QuizQuestion() {
                     setCurrentId(questions[nextStep].step_id);
                 }
             } else {
-                if (questions[nextStep - 1].underQuestions && currentQuestionAnswer === 'true' && nextUnder === -1) {
+                if (questions[nextStep - 1]?.underQuestions && currentQuestionAnswer === 'true' && nextUnder === -1) {
                     setAnswer(answer => [...answer, { step_id: currentId, response: currentQuestionAnswer === 'true', underQuestions: questions[nextStep - 1].underQuestions.map((item: any, index: number) => {
                         return (
                             {id: item.step_id, response: true}
@@ -173,14 +173,14 @@ function QuizQuestion() {
                     setCurrentId(questions[nextStep - 1].step_id);}
             }
         } else {
-            if (questions[nextStep - 1].underQuestions && currentQuestionAnswer === 'true' && nextUnder === -1) {
+            if (questions[nextStep - 1]?.underQuestions && currentQuestionAnswer === 'true' && nextUnder === -1) {
                 var responseTemp = [...answer, { step_id: currentId, response: currentQuestionAnswer === 'true', underQuestions: questions[nextStep - 1].underQuestions.map((item: any, index: number) => {
                     return (
                         {step_id: item.step_id, response: true}
                     )
                 })}];
                 checkUpdate(responseTemp);
-            }  else if (questions[nextStep - 1].underQuestions) {
+            }  else if (questions[nextStep - 1]?.underQuestions) {
                 if (nextUnder === -1) {
                     setNextUnder(nextUnder + 1);
                     setCurrentQuestion(questions[nextStep - 1].underQuestions[nextUnder + 1].question);
