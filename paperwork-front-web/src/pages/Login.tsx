@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
-import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
@@ -51,9 +51,8 @@ function LoginPage() {
     async function handleForgotPassword() {
         await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`).then(() => {
             toast.success(t('login.emailSent'));
-        }).catch(err => {
+        }).catch(() => {
             toast.warning(t('login.emailFail'));
-            console.log(err);
         })
     };
 
