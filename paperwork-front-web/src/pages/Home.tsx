@@ -11,7 +11,6 @@ import Loading from "../components/Loading";
 import ListEventCalendar from "../components/ListEventCalendar";
 
 import "../styles/pages/Home.scss";
-import { toast } from "react-toastify";
 
 function HomePage() {
     const cookies = new Cookies();
@@ -44,14 +43,33 @@ function HomePage() {
         }
     };
 
+    function redirectToProcessResult(processTitle: string) {
+        window.location.href = "/processResult/" + processTitle;
+    }
+
     function checkIfCookieExist() {
-        if (cookieList === undefined) {
-            window.location.href = "/login";
+        if (!cookieList) {
+            window.location.replace("/login");
+        } else {
+            checkTokenInDatabase();
         }
     }
 
-    function redirectToProcessResult(processTitle: string) {
-        window.location.href = "/processResult/" + processTitle;
+    async function checkTokenInDatabase() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } }
+        ).then((res) => {
+            switch (res.status) {
+                case 200:
+                    break;
+                default:
+                    cookies.remove('loginToken');
+                    window.location.replace("/login");
+                    break;
+            }
+        }).catch(() => {
+            cookies.remove('loginToken');
+            window.location.replace("/login");
+        });
     }
 
     async function getUserDatasByToken() {
@@ -158,7 +176,7 @@ function HomePage() {
         getUserDatasByToken();
         getCalendarDatas();
         getUserProcessData();
-    }, []);
+    }, [cookieList]);
 
     useEffect(() => {
         deletePassedEvent();
