@@ -73,32 +73,7 @@ describe("Quiz Questions Tests", () => {
             expect(getByTestId('btn-no')).toBeInTheDocument();
         });
     });
-    // test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
-    //     const location = window.location;
-    //     const fakeUser =
-    //     {
-    //         email: "testEmail",
-    //         username: "testUsername",
-    //         address: "testAddress",
-    //         number_phone: "testPhoneNumber",
-    //         language: "english",
-    //         age: 20,
-    //         profile_picture: "Avatars/Avatar05.png"
-    //     };
 
-    //     axios.get = jest.fn().mockResolvedValue({ status:200, data: fakeUser});
-    //     const useStateSpy = jest.spyOn(React, 'useState');
-    //     useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-
-    //     render(
-    //         <BrowserRouter>
-    //             <QuizQuestions />
-    //         </BrowserRouter>
-    //     );
-
-    //     window.location = location;
-    //     expect(window.location.assign).toBeCalledWith('/');
-    // });
     test('handles button click and redirects to next question', async () => {
         const fakeUser =
         {
@@ -127,6 +102,7 @@ describe("Quiz Questions Tests", () => {
             expect(window.location.href).toEqual("/processResult/undefined");
         });
     });
+
     test('handles last question and redirects to result page', async () => {
         const fakeUser =
         {
@@ -158,6 +134,7 @@ describe("Quiz Questions Tests", () => {
             );
         });
     });
+
     test('should handle error if axios.post catch an error', async () => {
         const fakeUser =
         {
