@@ -141,17 +141,6 @@ describe('Register Tests', () => {
         fireEvent.click(googleButton);
         expect(axios.get).toHaveBeenCalled();
     });
-    test('clicking on facebook connect button calls facebookConnect function', () => {
-        const { getByTestId } = render(
-            <BrowserRouter>
-                <RegisterPage />
-            </BrowserRouter>
-        );
-        const googleButton = getByTestId('facebook-link');
-
-        fireEvent.click(googleButton);
-        expect(axios.get).toHaveBeenCalled();
-    });
     test('should not login with Google', () => {
         axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
         const { getByTestId } = render(
@@ -160,18 +149,6 @@ describe('Register Tests', () => {
             </BrowserRouter>
         );
         const googleButton = getByTestId('google-link');
-
-        fireEvent.click(googleButton);
-        expect(axios.get).toHaveBeenCalled();
-    });
-    test('should not login with Facebook', () => {
-        axios.get = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
-        const { getByTestId } = render(
-            <BrowserRouter>
-                <RegisterPage />
-            </BrowserRouter>
-        );
-        const googleButton = getByTestId('facebook-link');
 
         fireEvent.click(googleButton);
         expect(axios.get).toHaveBeenCalled();

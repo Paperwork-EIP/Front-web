@@ -16,6 +16,7 @@ beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
+            replace: jest.fn(),
             assign: jest.fn(),
             href: "http://localhost:3456/test"
         }

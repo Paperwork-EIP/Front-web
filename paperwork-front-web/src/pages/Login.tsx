@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import axios from "axios";
 
-import { FaFacebook, FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 import { FiSend } from 'react-icons/fi';
 import { RxCrossCircled } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
@@ -49,12 +49,10 @@ function LoginPage() {
     };
 
     async function handleForgotPassword() {
-        await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`,
-        ).then(() => {
+        await axios.get(`${api}/user/sendResetPasswordEmail?email=${email}`).then(() => {
             toast.success(t('login.emailSent'));
-        }).catch(err => {
+        }).catch(() => {
             toast.warning(t('login.emailFail'));
-            console.log(err);
         })
     };
 
@@ -100,7 +98,7 @@ function LoginPage() {
                             </button>
                         </form>
                         <div>
-                            <button className='Login-forgot-password-button' onClick={onOpenModal}>{t('login.forgotPassword')}</button>
+                            <button className='Login-forgot-password-button' onClick={onOpenModal} aria-label='login-forgot-password-button'>{t('login.forgotPassword')}</button>
                             <Modal className='Login-modal' style={{ content: { background: "rgba(45,45,45,1)" } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenModal} onRequestClose={onCloseModal}>
                                 <button className='Login-close-button' aria-label="cancel_close_button" onClick={onCloseModal}>
                                     <RxCrossCircled />
@@ -109,7 +107,7 @@ function LoginPage() {
                                 <div className='Login-title'>{t('login.forgotPasswordTitle')}</div>
                                 <div className='Login-box-email'>
                                     <input type="email" className="Login-email-input" placeholder={t('login.email') || ''} defaultValue={email} onChange={(e) => setEmail(e.target.value)} required />
-                                    <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword}><FiSend className='Login-title-icons' size={30} /></button>
+                                    <button className={buttonDisabled ? 'Login-send-mail-button disabled' : 'Login-send-mail-button'} onClick={handleForgotPassword} aria-label='button-send-mail-forgot-password'><FiSend className='Login-title-icons' size={30} /></button>
                                 </div>
                             </Modal>
                         </div>
