@@ -38,35 +38,11 @@ afterEach(() => {
 });
 
 describe('Profile Tests', () => {
-    test('should redirects to login page if loginToken cookie doesn\'t exist', () => {
-        const location = window.location;
-        cookies.remove('loginToken');
-
-        render(
-            <BrowserRouter>
-                <Profile />
-            </BrowserRouter>
-        );
-
-        window.location = location;
-
-        expect(window.location.assign).toBeCalledWith('/');
-    });
     it('should render the page correctly', () => {
         const screen = render(<Router><Profile /></Router>);
 
         expect(screen).toBeDefined();
     });
-    // it('should link to the modify profile page when about button clicked', () => {
-    //     const { getByTestId } = render(
-    //         <BrowserRouter>
-    //             <Profile />
-    //         </BrowserRouter>
-    //     );
-
-    //     const linkElement = getByTestId('modify-profile-btn');
-    //     expect(linkElement).toHaveAttribute('href', '/settings');
-    // });
     test('Axios.get used in the use effect to have user\'s datas.', () => {
         render(
             <BrowserRouter>

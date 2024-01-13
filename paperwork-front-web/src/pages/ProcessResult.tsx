@@ -25,31 +25,6 @@ function ProcessResult() {
     const translation = getTranslation(language, "processResult");
     const { colorMode } = useColorMode();
 
-    function checkIfCookieExist() {
-        if (!cookies) {
-            window.location.replace("/login");
-        } else {
-            checkTokenInDatabase();
-        }
-    }
-
-    async function checkTokenInDatabase() {
-        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } }
-        ).then((res) => {
-            switch (res.status) {
-                case 200:
-                    break;
-                default:
-                    cookies.remove('loginToken');
-                    window.location.replace("/login");
-                    break;
-            }
-        }).catch(() => {
-            cookies.remove('loginToken');
-            window.location.replace("/login");
-        });
-    }
-
     async function getLanguage() {
         await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } })
             .then(res => {
@@ -75,10 +50,9 @@ function ProcessResult() {
     }
 
     useEffect(() => {
-        checkIfCookieExist();
         getLanguage();
         getUserSteps();
-    }, [cookiesInfo, processSelected, api, stepsAnswer]);
+    }, [processSelected, api, stepsAnswer]);
 
     const handleCheckboxClick = (step_id: any, is_done: any) => {
         let newStepsAnswer = [];

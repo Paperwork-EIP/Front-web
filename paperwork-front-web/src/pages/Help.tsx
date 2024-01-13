@@ -24,22 +24,21 @@ function HelpPage() {
     const [language, setLanguage] = useState("");
     const api = process.env.REACT_APP_BASE_URL;
 
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
-
     const cookieList = cookies.get('loginToken');
     const { colorMode } = useColorMode();
     const translation = getTranslation(language, "helpPage");
 
+    async function getLanguage() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
+            .then((res) => {
+                setLanguage(res.data.language);
+            }).catch((err) => {
+                console.error(err);
+            });
+    }
 
     useEffect(() => {
-        axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
-            .then(res => {
-                setLanguage(res.data.language);
-            }).catch(err => {
-                console.log(err)
-            });
+        getLanguage();
     }, [cookieList]);
 
     useEffect(() => {

@@ -16,10 +16,6 @@ function QuizPage() {
     const cookies = new Cookies();
     const cookiesInfo = cookies.get('loginToken');
 
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
-
     const api = process.env.REACT_APP_BASE_URL;
     const [posts, setPosts] = useState([{}]);
     const [language, setLanguage] = useState("");

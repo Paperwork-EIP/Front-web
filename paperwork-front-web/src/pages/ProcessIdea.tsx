@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDisclosure, useColorModeValue, FormHelperText, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
@@ -23,32 +23,6 @@ function ProcessIdea() {
     const [language, setLanguage] = useState("");
     const translation = getTranslation(language, "processIdea");
 
-    function checkIfCookieExist() {
-        if (!cookies) {
-            window.location.replace("/login");
-        } else {
-            checkTokenInDatabase();
-        }
-    }
-
-    async function checkTokenInDatabase() {
-        await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } }
-        ).then((res) => {
-            switch (res.status) {
-                case 200:
-                    setLanguage(res.data.language);
-                    break;
-                default:
-                    cookies.remove('loginToken');
-                    window.location.replace("/login");
-                    break;
-            }
-        }).catch(() => {
-            cookies.remove('loginToken');
-            window.location.replace("/login");
-        });
-    }
-
     const isTitleError = useRef(false);
     const isDescriptionError = useRef(false);
     const isContentError = useRef(false);
@@ -65,7 +39,7 @@ function ProcessIdea() {
         isContentError.current = e.target.value === '';
     }
 
-    const cancelProcessIdea = () => {
+    function cancelProcessIdea() {
         setTitle("");
         setDescription("");
         setContent("");
@@ -86,10 +60,6 @@ function ProcessIdea() {
             console.error(err);
         })
     }
-
-    useEffect(() => {
-        checkIfCookieExist();
-    }, [cookieList]);
 
     return (
         <div style={{ background: adaptedColor, height: "100vh" }}>

@@ -20,31 +20,6 @@ function SettingsPage() {
 
     const cookiesInfo = cookies.get('loginToken');
 
-    function checkIfCookieExist() {
-        if (!cookies) {
-            window.location.replace("/login");
-        } else {
-            checkTokenInDatabase();
-        }
-    }
-
-    async function checkTokenInDatabase() {
-        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } }
-        ).then((res) => {
-            switch (res.status) {
-                case 200:
-                    break;
-                default:
-                    cookies.remove('loginToken');
-                    window.location.replace("/login");
-                    break;
-            }
-        }).catch(() => {
-            cookies.remove('loginToken');
-            window.location.replace("/login");
-        });
-    }
-
     const api = process.env.REACT_APP_BASE_URL;
 
     const [username, setUsername] = useState("");
@@ -243,9 +218,8 @@ function SettingsPage() {
     }
 
     useEffect(() => {
-        checkIfCookieExist();
         getUserData();
-    }, [cookiesInfo]);
+    }, []);
 
     return (
         <>

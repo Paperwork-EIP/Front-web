@@ -25,12 +25,6 @@ function LexiconPage() {
     const { colorMode } = useColorMode();
     const translation = getTranslation(language, "lexiconPage");
 
-    function checkCookie() {
-        if (!cookies.get('loginToken')) {
-            window.location.assign('/');
-        }
-    }
-
     async function getLanguage() {
         if (cookieList) {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
@@ -43,7 +37,6 @@ function LexiconPage() {
     }
 
     useEffect(() => {
-        checkCookie();
         getLanguage();
     }, [cookieList]);
 

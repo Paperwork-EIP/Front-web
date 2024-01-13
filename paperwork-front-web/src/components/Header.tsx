@@ -27,6 +27,7 @@ function Header() {
             setAvatar(url);
         }
     }
+
     function handleClickOutside(event: any) {
         if (event.target.className === 'Header-modal') {
             setIsOpen(false);
@@ -40,31 +41,60 @@ function Header() {
 
     function logout() {
         cookies.remove('loginToken');
+
         if (!cookies.get('loginToken')) {
             window.location.replace('/');
         }
     }
 
-    async function getData() {
-        if (!cookies.get('loginToken')) {
-            window.location.replace('/');
+    function checkIfCookieExist() {
+        if (!cookiesInfo || !cookiesInfo.loginToken) {
+            window.location.replace("/login");
+        } else {
+            checkTokenInDatabase();
         }
-        else {
+    }
+
+    async function checkTokenInDatabase() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } }
+        ).then((res) => {
+            switch (res.status) {
+                case 200:
+                    break;
+                default:
+                    cookies.remove('loginToken');
+                    window.location.replace("/login");
+                    break;
+            }
+        }).catch(() => {
+            cookies.remove('loginToken');
+            window.location.replace("/login");
+        });
+    }
+
+    async function getData() {
+        if (cookiesInfo && cookiesInfo.loginToken) {
             await axios.get(`${api}/user/getbytoken`, {
                 params: { token: cookiesInfo.loginToken }
             })
-                .then(res => {
+                .then((res) => {
                     setName(res.data.username);
                     setEmail(res.data.email);
                     setLanguage(res.data.language);
                     checkAvatar(res.data.profile_picture);
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.error(err);
                 });
         }
-
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            checkIfCookieExist();
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [])
 
     useEffect(() => {
         getData();
