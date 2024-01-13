@@ -18,11 +18,32 @@ import "../styles/pages/Settings.scss";
 function SettingsPage() {
     const cookies = new Cookies();
 
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
+    const cookiesInfo = cookies.get('loginToken');
+
+    function checkIfCookieExist() {
+        if (!cookies) {
+            window.location.replace("/login");
+        } else {
+            checkTokenInDatabase();
+        }
     }
 
-    const cookiesInfo = cookies.get('loginToken');
+    async function checkTokenInDatabase() {
+        await axios.get(`${api}/user/getbytoken`, { params: { token: cookiesInfo.loginToken } }
+        ).then((res) => {
+            switch (res.status) {
+                case 200:
+                    break;
+                default:
+                    cookies.remove('loginToken');
+                    window.location.replace("/login");
+                    break;
+            }
+        }).catch(() => {
+            cookies.remove('loginToken');
+            window.location.replace("/login");
+        });
+    }
 
     const api = process.env.REACT_APP_BASE_URL;
 
@@ -222,12 +243,9 @@ function SettingsPage() {
     }
 
     useEffect(() => {
-        if (cookiesInfo) {
-            getUserData();
-        } else {
-            window.location.assign('/');
-        }
-    }, []);
+        checkIfCookieExist();
+        getUserData();
+    }, [cookiesInfo]);
 
     return (
         <>

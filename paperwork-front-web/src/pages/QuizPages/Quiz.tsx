@@ -63,7 +63,7 @@ function QuizPage() {
                 setPosts(procedures);
             }).catch(err => {
                 toast.error(translation.error);
-                console.error(err)
+                console.error(err);
             });
     }
 
