@@ -15,10 +15,6 @@ function QuizQuestion() {
     const cookies = new Cookies();
     const cookiesInfo = cookies.get('loginToken');
 
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
-
     var { processSelected } = useParams();
     var { step } = useParams();
     const nextStep = parseInt(step!) + 1;

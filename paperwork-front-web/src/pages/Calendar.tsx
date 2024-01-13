@@ -545,11 +545,7 @@ function CalendarPage() {
     }, [listEvents]);
 
     useEffect(() => {
-        if (!cookies.get('loginToken')) {
-            window.location.assign('/');
-        } else {
-            getUserDataByToken();
-        }
+        getUserDataByToken();
     }, [isEvent, comparativeDate, date, stepSelected, stepEdit, modDate]);
 
     return (

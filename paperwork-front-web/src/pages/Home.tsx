@@ -48,31 +48,6 @@ function HomePage() {
         window.location.href = "/processResult/" + processTitle;
     }
 
-    function checkIfCookieExist() {
-        if (!cookieList) {
-            window.location.replace("/login");
-        } else {
-            checkTokenInDatabase();
-        }
-    }
-
-    async function checkTokenInDatabase() {
-        await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } }
-        ).then((res) => {
-            switch (res.status) {
-                case 200:
-                    break;
-                default:
-                    cookies.remove('loginToken');
-                    window.location.replace("/login");
-                    break;
-            }
-        }).catch(() => {
-            cookies.remove('loginToken');
-            window.location.replace("/login");
-        });
-    }
-
     async function getUserDatasByToken() {
         try {
             await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
@@ -173,11 +148,10 @@ function HomePage() {
     }
 
     useEffect(() => {
-        checkIfCookieExist();
         getUserDatasByToken();
         getCalendarDatas();
         getUserProcessData();
-    }, [cookieList]);
+    }, []);
 
     useEffect(() => {
         deletePassedEvent();

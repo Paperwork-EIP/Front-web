@@ -68,17 +68,6 @@ afterEach(() => {
 });
 
 describe("Settings Tests", () => {
-    test('should not redirects to login page if loginToken cookie does not exists', () => {
-        cookies.remove('loginToken');
-
-        render(
-            <BrowserRouter>
-                <Settings />
-            </BrowserRouter>
-        );
-
-        expect(window.location.pathname).not.toEqual('/');
-    });
     test('should get data correctly', () => {
         const useStateSpy = jest.spyOn(React, 'useState');
         useStateSpy.mockImplementation((init) => [init, jest.fn()]);

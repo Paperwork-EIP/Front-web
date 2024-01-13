@@ -18,10 +18,6 @@ import "../styles/pages/Settings.scss";
 function SettingsPage() {
     const cookies = new Cookies();
 
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
-
     const cookiesInfo = cookies.get('loginToken');
 
     const api = process.env.REACT_APP_BASE_URL;
@@ -222,11 +218,7 @@ function SettingsPage() {
     }
 
     useEffect(() => {
-        if (cookiesInfo) {
-            getUserData();
-        } else {
-            window.location.assign('/');
-        }
+        getUserData();
     }, []);
 
     return (

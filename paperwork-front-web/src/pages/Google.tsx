@@ -11,7 +11,7 @@ function GooglePage() {
     const code = new URLSearchParams(search).get('code');
 
     if(!code) {
-        window.location.assign("/");
+        window.location.replace("/login");
     } else {
         axios.get(`${api}/user/oauth/google/login?code=${code}`).then(res => {
             cookies.set('loginToken', { loginToken: res.data.jwt, email: res.data.email }, {
