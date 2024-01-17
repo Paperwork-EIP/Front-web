@@ -107,6 +107,7 @@ const translations: Translations = {
       alertUpdate: "Updated successfully!",
       startNewProcess: "Start a new process",
       resultProcess: "Result of the process for ",
+      updateBtn: "Update",
     },
     header: {
       home: "Home",
@@ -302,6 +303,7 @@ const translations: Translations = {
       alertUpdate: "Mis à jour avec succès !",
       startNewProcess: "Commencer une nouvelle procédure",
       resultProcess: "Résultat de la procédure pour ",
+      updateBtn: "Mettre à jour",
     },
     header: {
       home: "Accueil",
@@ -495,6 +497,7 @@ const translations: Translations = {
       alertUpdate: "Erfolgreich aktualisiert!",
       startNewProcess: "Neuen Prozess starten",
       resultProcess: "Ergebnis des Prozesses für",
+      updateBtn: "Aktualisieren",
     },
     header: {
       home: "Startseite",
@@ -688,6 +691,7 @@ const translations: Translations = {
       alertUpdate: "성공적으로 업데이트되었습니다!",
       startNewProcess: "새로운 프로세스 시작",
       resultProcess: "다음을 위한 프로세스 결과 ",
+      updateBtn: "업데이트",
     },
     header: {
       home: "홈",
@@ -881,6 +885,7 @@ const translations: Translations = {
       alertUpdate: "Diperbarui dengan sukses!",
       startNewProcess: "Mulai proses baru",
       resultProcess: "Hasil proses untuk ",
+      updateBtn: "Perbarui",
     },
     header: {
       home: "Beranda",
@@ -1074,6 +1079,7 @@ const translations: Translations = {
       alertUpdate: "¡Actualizado con éxito!",
       startNewProcess: "Iniciar un nuevo proceso",
       resultProcess: "Resultado del proceso para",
+      updateBtn: "Actualizar",
     },
     header: {
       home: "Inicio",
