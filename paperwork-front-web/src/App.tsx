@@ -49,7 +49,7 @@ const App = () => {
                     <Route path="/emailSent" element={<EmailSentPage />} />
                     <Route path="/settings" element={<SettingsPage />} />
                     <Route path="/quiz" element={<QuizPage />} />
-                    <Route path="/quiz/:processSelected/:step" element={<QuizQuestion />} />
+                    <Route path="/quiz/:processSelected/:processTitle" element={<QuizQuestion />} />
                     <Route path="/processResult/:processSelected" element={<ProcessResult />} />
                     <Route path="/processIdea" element={<ProcessIdea />} />
                     <Route path="/googleLogin" element={<GooglePage />} />

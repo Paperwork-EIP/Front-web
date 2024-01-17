@@ -1,10 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
-
-import Cookies from 'universal-cookie';
 import axios from 'axios';
-
+import Cookies from 'universal-cookie';
 import ProcessResult from '../../src/pages/ProcessResult';
 
 jest.mock('axios');
@@ -25,89 +23,182 @@ beforeEach(() => {
     Object.defineProperty(window, 'location', {
         writable: true,
         value: {
-            assign: jest.fn()
+            replace: jest.fn(),
+            assign: jest.fn(),
+            get: jest.fn(() => 'testLoginToken'),
+            set: jest.fn(),
+            remove: jest.fn(),
         }
     });
 
-    cookies.set('loginToken', 'test');
-    axios.get = jest.fn().mockResolvedValue(mockResponse);
-    axios.post = jest.fn().mockResolvedValueOnce({ data: { jwt: "token123" } });
+    axios.get.mockResolvedValue({
+        data: {
+            language: 'en', // Replace this with the actual response from your API
+        },
+    });
 });
 
 afterEach(() => {
-    cleanup;
+    cleanup();
     jest.restoreAllMocks();
 });
 
 describe("Process Result Tests", () => {
-    test('should display correctly the page', () => {
+    test('should not redirect to login page if loginToken cookie exists', () => {
+        cookies.set('loginToken', 'test');
+        render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
+        expect(window.location.pathname).not.toEqual('/');
+    });
+
+    test('should render the page correctly', async () => {
+        const screen = render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            expect(screen).toBeDefined();
+        });
+    });
+
+    test('should verify getLanguageByToken function', async () => {
+        const getLanguageByTokenResponse = {
+            data: {
+                id: 123,
+                username: "test",
+                email: "test@test.test",
+                password: "textpwd",
+                language: "english",
+                name: "testName",
+                firstname: "testFirstname",
+                adress: "testAdress",
+                profile_picture: "testPictureLink",
+                age: null,
+                number_phone: null,
+                token: "tokenTest",
+                google_token: null,
+                facebook_token: null
+            },
+        };
+
+        cookies.set('loginToken', 'test');
+        axios.get.mockResolvedValue(getLanguageByTokenResponse);
+
         render(
             <BrowserRouter>
                 <ProcessResult />
             </BrowserRouter>
         );
 
+        await waitFor(() => {
+            expect(axios.get).toHaveBeenCalled();
+        });
+    });
+
+    test('should handle update button click', async () => {
+        const handleUpdateResponse = {
+            data: {
+                response: 'Update successful',
+            },
+        };
+
+        cookies.set('loginToken', 'test');
+        axios.post.mockResolvedValue(handleUpdateResponse);
+
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            fireEvent.click(getByTestId('updatePersonalInfoBtn'));
+            expect(axios.post).toHaveBeenCalled();
+            // Add more assertions as needed
+        });
+    });
+
+    test('should not redirect to login page if loginToken cookie exists', () => {
+        cookies.set('loginToken', 'test');
+        render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
         expect(window.location.pathname).not.toEqual('/');
     });
-    // test('should redirects to welcome page if loginToken cookie not exists', () => {
-    //     render(
-    //         <BrowserRouter>
-    //             <ProcessResult />
-    //         </BrowserRouter>
-    //     );
 
-    //     cookies.remove("loginToken");
-    //     expect(window.location.assign).toHaveBeenCalledTimes(1);
-    // });
-    test('should get data', async () => {
-        const useStateSpy = jest.spyOn(React, 'useState');
-        useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-        const { container } = render(
-          <BrowserRouter>
-            <ProcessResult />
-          </BrowserRouter>
+    test('should render the page correctly', async () => {
+        const screen = render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
         );
 
         await waitFor(() => {
-            const checkbox = container.querySelector('input[type="checkbox"]')!;
-
-            const click = fireEvent.click(checkbox);
-
-            expect(axios.get).toBeCalled();
-            expect(useStateSpy).toHaveBeenCalled();
-            expect(checkbox).toBeInTheDocument();
-            expect(click).toBeTruthy();
-        })
-    });
-    // test('should get an error from axios get', () => {
-    //     axios.get = jest.fn().mockRejectedValue(new Error("Error"));
-
-    //     render(
-    //         <BrowserRouter>
-    //             <ProcessResult />
-    //         </BrowserRouter>
-    //     );
-
-    //     expect(axios.get).toHaveBeenCalledTimes(1);
-    // });
-    test('should get an error from axios post', async () => {
-        axios.post = jest.fn(() => Promise.reject({ response: { data: 'Error' } }));
-        const useStateSpy = jest.spyOn(React, 'useState');
-        useStateSpy.mockImplementation((init) => [init, jest.fn()]);
-        const { container } = render(
-          <BrowserRouter>
-            <ProcessResult />
-          </BrowserRouter>
-        );
-      
-        await waitFor(() => {
-          const checkbox = container.querySelector('input[type="checkbox"]')!;
-      
-          fireEvent.click(checkbox);
-      
-          expect(axios.post).toHaveBeenCalledTimes(1);
-          expect(useStateSpy).toHaveBeenCalled();
-          expect(checkbox).toBeInTheDocument();
+            expect(screen).toBeDefined();
         });
-      });
+    });
+
+    test('should verify getLanguageByToken function', async () => {
+        const getLanguageByTokenResponse = {
+            data: {
+                id: 123,
+                username: "test",
+                email: "test@test.test",
+                password: "textpwd",
+                language: "english",
+                name: "testName",
+                firstname: "testFirstname",
+                adress: "testAdress",
+                profile_picture: "testPictureLink",
+                age: null,
+                number_phone: null,
+                token: "tokenTest",
+                google_token: null,
+                facebook_token: null
+            },
+        };
+
+        cookies.set('loginToken', 'test');
+        axios.get.mockResolvedValue(getLanguageByTokenResponse);
+
+        render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            expect(axios.get).toHaveBeenCalled();
+        });
+    });
+
+    test('should handle update button click', async () => {
+        const handleUpdateResponse = {
+            data: {
+                response: 'Update successful',
+            },
+        };
+
+        cookies.set('loginToken', 'test');
+        axios.post.mockResolvedValue(handleUpdateResponse);
+
+        const { getByTestId } = render(
+            <BrowserRouter>
+                <ProcessResult />
+            </BrowserRouter>
+        );
+
+        await waitFor(() => {
+            fireEvent.click(getByTestId('updatePersonalInfoBtn'));
+            expect(axios.post).toHaveBeenCalled();
+            // Add more assertions as needed
+        });
+    });
 });

@@ -12,6 +12,10 @@
         align-items: baseline;
     }
 
+    .ProcessResult-underStep {
+        padding-left: 1em;
+    }
+
     .StartNewProcess-Btn {
         display: flex;
         align-items: center;
@@ -40,6 +44,38 @@
             font-weight: bold;
             text-decoration: underline;
             font-size: 1.875rem;
+        }
+
+        .section-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            padding: 24px;
+
+            .update-btn-container {
+                background-color: #29C9B3;
+                padding: 6px;
+                border-radius: 12px;
+                color: white;
+
+                .update-personal-info-btn {
+                    display: flex;
+                    flex-wrap: wrap;
+                    position: relative;
+                    border: none;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-size: 16px;
+                    border-radius: 4px;
+
+                    .update-personal-info-icon {
+                        font-size: 1.2rem;
+                        margin-top: 2px;
+                        margin-left: 5px;
+                    }
+                }
+            }
         }
     }
 
