@@ -1,21 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDisclosure, useColorModeValue, FormHelperText, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
-import "../styles/ProcessIdea.css";
 import Modal from 'react-modal';
 import { getTranslation } from './Translation';
 
+import "../styles/ProcessIdea.scss";
+
 function ProcessIdea() {
-
     const cookies = new Cookies();
-
-    if (!cookies.get('loginToken')) {
-        window.location.assign('/');
-    }
+    const api = process.env.REACT_APP_BASE_URL;
 
     const cookieList = cookies.get('loginToken');
+    const adaptedColor = useColorModeValue("#f5f5f5", "#303030");
 
     const { isOpen: isOpenCancelModal, onOpen: onOpenCancelModal, onClose: onCloseCancelModal } = useDisclosure();
     const { isOpen: isOpenSubmitModal, onOpen: onOpenSubmitModal, onClose: onCloseSubmitModal } = useDisclosure();
@@ -24,15 +22,6 @@ function ProcessIdea() {
     const [content, setContent] = useState("");
     const [language, setLanguage] = useState("");
     const translation = getTranslation(language, "processIdea");
-
-    useEffect(() => {
-        axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
-        .then(res => {
-            setLanguage(res.data.language);
-        }).catch(err => {
-            console.log(err)
-        });
-    }, [cookieList]);
 
     const isTitleError = useRef(false);
     const isDescriptionError = useRef(false);
@@ -50,76 +39,72 @@ function ProcessIdea() {
         isContentError.current = e.target.value === '';
     }
 
-    const cancelProcessIdea = () => {
+    function cancelProcessIdea() {
         setTitle("");
         setDescription("");
         setContent("");
         onCloseCancelModal();
     }
-    
-    const api = process.env.REACT_APP_BASE_URL;
 
-    const submitProcessIdea = () => {
+    async function submitProcessIdea() {
         isTitleError.current = title === '';
         isDescriptionError.current = description === '';
         isContentError.current = content === '';
         onCloseSubmitModal();
-        axios.post(`${api}/processProposal/add`, {
+        await axios.post(`${api}/processProposal/add`, {
             title: title,
             description: description,
             content: content,
             user_token: cookieList.loginToken
         }).catch(err => {
-          console.log(err);
+            console.error(err);
         })
     }
 
-    const adaptedColor = useColorModeValue("rgba(228,228,228,1)", "rgba(45,45,55,1)");
-
     return (
-        <>
-            <Header/>
+        <div style={{ background: adaptedColor, height: "100vh" }}>
+            <Header />
             <div className="process-idea-image">
                 <img src="assets/processidea-page/Webinar-cuate.svg" alt="processidea_cover_image" />
             </div>
             <div className="process-idea-main-box">
-            
-            <FormControl isInvalid={isTitleError.current} isRequired>
-            <label className='process-idea-label'> {translation.title} </label>
-            <input className='process-idea-input' value={title} onChange={handleTitleChange} aria-label="title" placeholder={translation.title}/>
-                {!isTitleError ? (
+
+                <FormControl isInvalid={isTitleError.current} isRequired>
+                    <label className='process-idea-label'> {translation.title} </label>
+                    <input className='process-idea-input' value={title} onChange={handleTitleChange} aria-label="title" placeholder={translation.title} />
+                    {!isTitleError ? (
                         <FormHelperText>
-                        {translation.helperTitle}
+                            {translation.helperTitle}
                         </FormHelperText>
                     ) : (
                         <FormErrorMessage>{translation.errorTitle}</FormErrorMessage>
-                )}
-            
-            </FormControl>
+                    )}
 
-            <FormControl isInvalid={isDescriptionError.current} isRequired>
-            <label className='process-idea-label'> {translation.description} </label>
-            <input className='process-idea-input' value={description} onChange={handleDescriptionChange} aria-label="description" placeholder={translation.description}/>
-                {!isDescriptionError ? (
-                    <FormHelperText>
-                    {translation.helperDescription}
-                    </FormHelperText>
-                ) : (
-                    <FormErrorMessage>{translation.errorDescription}</FormErrorMessage>
-                )}
-            </FormControl>
+                </FormControl>
 
-            <FormControl isInvalid={isContentError.current} isRequired>
-            <label className='process-idea-label'> {translation.content} </label>
-            <textarea className='process-idea-textarea-content' value={content} onChange={handleContentChange} aria-label="content" placeholder={translation.content}/>
-                {!isDescriptionError ? (
-                    <FormHelperText>
-                    {translation.helperContent}
-                    </FormHelperText>
-                ) : (
-                    <FormErrorMessage>{translation.errorContent}</FormErrorMessage>
-                )}
-            </FormControl>
+                <FormControl isInvalid={isDescriptionError.current} isRequired>
+                    <label className='process-idea-label'> {translation.description} </label>
+                    <input className='process-idea-input' value={description} onChange={handleDescriptionChange} aria-label="description" placeholder={translation.description} />
+                    {!isDescriptionError ? (
+                        <FormHelperText>
+                            {translation.helperDescription}
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>{translation.errorDescription}</FormErrorMessage>
+                    )}
+                </FormControl>
+
+                <FormControl isInvalid={isContentError.current} isRequired>
+                    <label className='process-idea-label'> {translation.content} </label>
+                    <textarea className='process-idea-textarea-content' value={content} onChange={handleContentChange} aria-label="content" placeholder={translation.content} />
+                    {!isDescriptionError ? (
+                        <FormHelperText>
+                            {translation.helperContent}
+                        </FormHelperText>
+                    ) : (
+                        <FormErrorMessage>{translation.errorContent}</FormErrorMessage>
+                    )}
+                </FormControl>
 
                 <div className="process-idea-main-box-buttons">
                     <button className='process-idea-cancel-button' aria-label="cancel_button" onClick={onOpenCancelModal}>
@@ -130,9 +115,9 @@ function ProcessIdea() {
                         {translation.submit}
                     </button>
 
-                    
 
-                    <Modal className='process-idea-modal-cancel' style={{content:{background: adaptedColor}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenCancelModal} onRequestClose={onCloseCancelModal}>
+
+                    <Modal className='process-idea-modal-cancel' style={{ content: { background: adaptedColor } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenCancelModal} onRequestClose={onCloseCancelModal}>
                         <div className='process-idea-modal-cancel-text'>{translation.cancelMessage}</div>
                         <button className='process-idea-close-button' aria-label="cancel_close_button" onClick={onCloseCancelModal}>
                             {translation.close}
@@ -142,7 +127,7 @@ function ProcessIdea() {
                         </button>
                     </Modal>
 
-                    <Modal className='process-idea-modal-cancel' style={{content:{background: adaptedColor}}} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenSubmitModal} onRequestClose={onCloseSubmitModal}>
+                    <Modal className='process-idea-modal-cancel' style={{ content: { background: adaptedColor } }} overlayClassName='process-idea-modal-cancel-overlay' isOpen={isOpenSubmitModal} onRequestClose={onCloseSubmitModal}>
                         <div className='process-idea-modal-cancel-text'>{translation.submitMessage}</div>
                         <button className='process-idea-close-button' aria-label="submit_close_button" onClick={onCloseSubmitModal}>
                             {translation.close}
@@ -150,10 +135,10 @@ function ProcessIdea() {
                         <button className='process-idea-continue-button' aria-label="submit_continue_button" onClick={submitProcessIdea}>
                             {translation.continue}
                         </button>
-                    </Modal>                    
+                    </Modal>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

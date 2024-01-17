@@ -86,9 +86,6 @@ function ProfilePage() {
     }
 
     useEffect(() => {
-        if (!cookies.get('loginToken')) {
-            window.location.assign('/');
-        }
         getUserInfo();
         getUserProcessInfo();
     }, []);
