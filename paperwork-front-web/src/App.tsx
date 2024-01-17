@@ -22,7 +22,6 @@ import EmailSentPage from './pages/EmailSent';
 import QuizPage from './pages/QuizPages/Quiz';
 import QuizQuestion from './pages/QuizPages/QuizQuestion';
 import GooglePage from './pages/Google';
-import FacebookPage from './pages/Facebook';
 import WelcomePage from './pages/Welcome';
 import AboutUsPage from './pages/AboutUs';
 
@@ -54,7 +53,6 @@ const App = () => {
                     <Route path="/processResult/:processSelected" element={<ProcessResult />} />
                     <Route path="/processIdea" element={<ProcessIdea />} />
                     <Route path="/googleLogin" element={<GooglePage />} />
-                    <Route path="/facebookLogin" element={<FacebookPage />} />
                     <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </ChakraProvider>
