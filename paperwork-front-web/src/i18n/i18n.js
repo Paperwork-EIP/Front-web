@@ -150,7 +150,7 @@ const resources = {
             },
             welcome: {
                 header_title: "Paperwork",
-                header_description: "Un outil pour vous aider dans la tâche la plus ennuyeuse.",
+                header_description: "Un outil pour vous aider dans vos tâches les plus ennuyeuses.",
                 header_start_button: "Commencer",
                 container_title: "Qu'est-ce que Paperwork ?",
                 container_description: "Une application pour vous aider dans vos tâches administratives.",
