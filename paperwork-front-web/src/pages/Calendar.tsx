@@ -182,15 +182,15 @@ function CalendarPage() {
             setRDV(rdvTmp);
             setListEvents(tmpListEvents);
 
-            const processResponse = await axios.get(`${api}/process/getAll`, {
+            const processResponse = await axios.get(`${api}/userProcess/getUserProcesses`, {
                 params: {
-                    language: userData.language
+                    user_token: cookieList.loginToken
                 }
             });
-            const processData = processResponse.data;
-            const procedures = processData.response.map((item: any, index: any) => ({
-                label: item.stocked_title,
-                source: item.source,
+            const processData = processResponse.data.response;
+            const procedures = processData.map((item: any, index: any) => ({
+                label: item.userProcess.stocked_title,
+                source: item.userProcess.source,
                 value: index
             }));
             setPosts(procedures);
@@ -417,12 +417,12 @@ function CalendarPage() {
                                 :
                                 <div className='calendar-event-list'>
                                     {
-                                        listEvents.map((item: any) => {
+                                        listEvents.map((item: any, index:number) => {
                                             const convertedDate = item.date.split("T")[1].split(":")[0] + ":" + item.date.split("T")[1].split(":")[1];
 
                                             return (
                                                 item.date.split("T")[0] === comparativeDate ?
-                                                    <div className='calendar-event-list-card'>
+                                                    <div key={index} className='calendar-event-list-card'>
                                                         <div className='calendar-event-list-card-content'>
                                                             <h1 className='calendar-event-list-card-content-title-text'>{convertedDate} - {item.process_title}</h1>
                                                             <h2 className='calendar-event-list-card-content-description-text'>{item.step_title}</h2>
@@ -495,25 +495,6 @@ function CalendarPage() {
                                                         <Input width={'100%'} value={`${item.process_title} - ${item.step_title}`} disabled />
                                                     </Center>
                                                     <Center p={'10px'}>
-                                                        <Flex width={'100%'}>
-                                                            {
-                                                                postsStepEdit.length !== 0 ?
-                                                                    <Select
-                                                                        className='calendar-edit-select'
-                                                                        placeholder={translation.selectTheStep}
-                                                                        options={postsStepEdit}
-                                                                        onChange={handleProcessEdit}
-                                                                        styles={customStyles}
-                                                                    />
-                                                                    :
-                                                                    <Select
-                                                                        className='calendar-edit-select'
-                                                                        placeholder={translation.selectTheStep}
-                                                                        defaultValue={"Show List"}
-                                                                        styles={customStyles}
-                                                                    />
-                                                            }
-                                                        </Flex>
                                                     </Center>
                                                     <div className='calendar-modal-buttons-update'>
                                                         <div className='calendar-modal-buttons-actions'>
