@@ -50,15 +50,18 @@ function HomePage() {
 
     async function getUserDatasByToken() {
         try {
-            await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } })
-                .then(res => {
+            if (cookieList.loginToken) {
+                await axios.get(`${api}/user/getbytoken`, {
+                    params: {
+                        token: cookieList.loginToken
+                    }
+                }).then((res) => {
                     setLanguage(res.data.language);
                 }).catch(err => {
-                    toast.error(translation.error);
                     console.log(err);
                 });
+            }
         } catch (error) {
-            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -66,8 +69,12 @@ function HomePage() {
 
     async function getCalendarDatas() {
         try {
-            await axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`)
-                .then(res => {
+            if (cookieList.loginToken) {
+                await axios.get(`${api}/calendar/getAll`, {
+                    params: {
+                        token: cookieList.loginToken
+                    }
+                }).then(res => {
                     let rdvTmp = [];
                     for (let i = 0; i < res.data.appoinment.length; i++) {
                         rdvTmp.push(
@@ -81,12 +88,11 @@ function HomePage() {
                         );
                     }
                     setRDV(rdvTmp);
-                }).catch(err => {
-                    toast.error(translation.error);
-                    console.error(err);
+                }).catch((error) => {
+                    console.error(error);
                 })
+            }
         } catch (error) {
-            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -94,8 +100,12 @@ function HomePage() {
 
     async function getUserProcessData() {
         try {
-            await axios.get(`${api}/userProcess/getUserProcesses?user_token=${cookieList.loginToken}`)
-                .then(res => {
+            if (cookieList.loginToken) {
+                await axios.get(`${api}/userProcess/getUserProcesses`, {
+                    params: {
+                        user_token: cookieList.loginToken
+                    }
+                }).then(res => {
                     let userProcessTmp = [];
                     for (let j = 0; j < res.data.response.length; j++) {
                         if (res.data.response[j]['pourcentage'] != null)
@@ -118,12 +128,11 @@ function HomePage() {
                             );
                     }
                     setUserProcessInfo(userProcessTmp);
-                }).catch(err => {
-                    toast.error(translation.error);
-                    console.error(err);
+                }).catch((error) => {
+                    console.error(error);
                 });
+            }
         } catch (error) {
-            toast.error(translation.error);
             console.error(error);
         }
         setIsLoading(false);
@@ -134,10 +143,15 @@ function HomePage() {
             const eventDate = new Date(item.date);
             const today = new Date();
             const threeDays = new Date();
+
             threeDays.setDate(today.getDate() - 3);
 
             if (eventDate < threeDays) {
-                await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                await axios.get(`${api}/calendar/delete`, {
+                    params: {
+                        user_process_id: item.user_process_id,
+                        step_id: item.step_id
+                    }
                 }).then(() => {
                     window.location.reload();
                 }).catch(err => {
@@ -148,15 +162,18 @@ function HomePage() {
     }
 
     useEffect(() => {
-        getUserDatasByToken();
-        getCalendarDatas();
-        getUserProcessData();
+        const interval = setInterval(() => {
+            getUserDatasByToken();
+            getCalendarDatas();
+            getUserProcessData();
+        }, 2000);
+
+        return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
         deletePassedEvent();
     }, [rdv]);
-
 
     return (
         <>

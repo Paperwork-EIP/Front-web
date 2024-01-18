@@ -84,7 +84,11 @@ function CalendarPage() {
         listEvents?.map(async (item: any) => {
             return (
                 item.date.split("T")[0] === comparativeDate ?
-                    await axios.get(`${api}/calendar/delete?user_process_id=${item.user_process_id}&step_id=${item.step_id}`, {
+                    await axios.get(`${api}/calendar/delete`, {
+                        params: {
+                            user_process_id: item.user_process_id,
+                            step_id: item.step_id
+                        }
                     }).then(() => {
                         toast.success(translation.allEventsDeletedSuccessfully);
                     }).catch(err => {
@@ -111,7 +115,12 @@ function CalendarPage() {
     }
 
     async function handleProcessSelected(e: any) {
-        await axios.get(`${api}/userProcess/getUserSteps?process_title=${e.label}&user_token=${cookieList.loginToken}`)
+        await axios.get(`${api}/userProcess/getUserSteps`, {
+            params: {
+                process_title: e.label,
+                user_token: cookieList.loginToken
+            }
+        })
             .then(res => {
                 let steps = [];
                 for (let i = 0; i < res.data.response.length; i++) {
@@ -136,14 +145,21 @@ function CalendarPage() {
 
     async function getUserDataByToken() {
         try {
-            const userResponse = await axios.get(`${api}/user/getbytoken`, { params: { token: cookieList.loginToken } });
+            const userResponse = await axios.get(`${api}/user/getbytoken`, {
+                params: {
+                    token: cookieList.loginToken
+                }
+            });
             const userData = userResponse.data;
 
             setLanguage(userData.language);
 
-            const calendarResponse = await axios.get(`${api}/calendar/getAll?token=${cookieList.loginToken}`);
+            const calendarResponse = await axios.get(`${api}/calendar/getAll`, {
+                params: {
+                    token: cookieList.loginToken
+                }
+            });
             const calendarData = calendarResponse.data;
-
             const rdvTmp = [];
             const tmpListEvents = [];
 
@@ -166,15 +182,17 @@ function CalendarPage() {
             setRDV(rdvTmp);
             setListEvents(tmpListEvents);
 
-            const processResponse = await axios.get(`${api}/process/getAll?language=${userData.language}`);
+            const processResponse = await axios.get(`${api}/process/getAll`, {
+                params: {
+                    language: userData.language
+                }
+            });
             const processData = processResponse.data;
-
             const procedures = processData.response.map((item: any, index: any) => ({
                 label: item.stocked_title,
                 source: item.source,
                 value: index
             }));
-
             setPosts(procedures);
         } catch (error) {
             console.error(error);
@@ -210,7 +228,12 @@ function CalendarPage() {
             indexMod++;
             return (
                 item.toString()?.split("T")[0] === comparativeDate ?
-                    axios.get(`${api}/userProcess/getUserSteps?process_title=${rdv[indexMod - 1]}&user_token=${cookieList.loginToken}`)
+                    axios.get(`${api}/userProcess/getUserSteps`, {
+                        params: {
+                            process_title: rdv[indexMod - 1],
+                            user_token: cookieList.loginToken
+                        }
+                    })
                         .then(res => {
                             let steps = [];
                             for (let i = 0; i < res.data.response.length; i++) {

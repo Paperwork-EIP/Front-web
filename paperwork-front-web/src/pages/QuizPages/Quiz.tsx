@@ -56,8 +56,7 @@ const QuizPage = () => {
             .then(res => {
                 var procedures = [];
                 console.log(res.data);
-                for (var i = 0; i < res.data.response.length; i++)
-                {
+                for (var i = 0; i < res.data.response.length; i++) {
                     procedures.push({
                         label: res.data.response[i]['title'],
                         stocked_title: res.data.response[i]['stocked_title'],
@@ -88,11 +87,11 @@ const QuizPage = () => {
             const title = valuesTable[1];
             window.location.href = `/quiz/${stocked_title}/${title}`;
         }
-    }                     
+    }
 
     return (
         <>
-            <Header/>
+            <Header />
 
             <div className={colorMode === "light" ? "Quiz Quiz-light" : "Quiz Quiz-dark"}>
                 <div className="Page-Title" data-testid="quiz-title">{translation.title}</div>
@@ -104,7 +103,7 @@ const QuizPage = () => {
                         id="Quiz-Select"
                         data-testid="select"
                         className='Quiz-Select'
-                        placeholder='Select the Procedure'>
+                    >
                         {
                             posts.map((post: any) => {
                                 return (
