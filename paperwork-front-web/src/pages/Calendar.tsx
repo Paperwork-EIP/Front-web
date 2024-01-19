@@ -73,6 +73,7 @@ function CalendarPage() {
             }
         }).then(() => {
             toast.success(translation.eventDeletedSuccessfully);
+            window.location.reload();
         }).catch(err => {
             console.error(err);
             toast.error(err);
@@ -91,6 +92,7 @@ function CalendarPage() {
                         }
                     }).then(() => {
                         toast.success(translation.allEventsDeletedSuccessfully);
+                        window.location.reload();
                     }).catch(err => {
                         console.error(err);
                         toast.error(err);
@@ -417,7 +419,7 @@ function CalendarPage() {
                                 :
                                 <div className='calendar-event-list'>
                                     {
-                                        listEvents.map((item: any, index:number) => {
+                                        listEvents.map((item: any, index: number) => {
                                             const convertedDate = item.date.split("T")[1].split(":")[0] + ":" + item.date.split("T")[1].split(":")[1];
 
                                             return (
@@ -505,9 +507,6 @@ function CalendarPage() {
                                                                 {translation.delete}
                                                             </button>
                                                         </div>
-                                                        <button className='calendar-modal-button close' aria-label="update_close_button" onClick={onCloseDeleteModal}>
-                                                            {translation.close}
-                                                        </button>
                                                     </div>
                                                 </Box>
                                                 : ''
@@ -516,6 +515,11 @@ function CalendarPage() {
                                 }
                             </div>
                         }
+                    </div>
+                    <div className='calendar-modal-buttons'>
+                    <button className='calendar-modal-button close' aria-label="update_close_button" onClick={onCloseDeleteModal}>
+                        {translation.close}
+                    </button>
                     </div>
                 </Modal>
             </>
