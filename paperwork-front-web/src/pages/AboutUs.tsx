@@ -231,7 +231,7 @@ function AboutUsPage() {
                         </form>
                     </div>
                     <p>{t('aboutus.contact_email')}</p>
-                    <a href="mailto:paperwork_2024@labeip.epitech.eu">paperwork_2024@labeip.epitech.eu</a>
+                    <a href="mailto:no-reply@paperwork-fr.com">paperwork_2024@labeip.epitech.eu</a>
                     <div className="separator"></div>
                 </div>
             </div>
