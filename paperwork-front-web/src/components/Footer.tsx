@@ -31,6 +31,11 @@ function FooterNoConnected() {
                                 <button data-testid="Footer-login-link">{t('welcome.footer_login')}</button>
                             </Link>
                         </div>
+                        <div className="Footer-info">
+                            <a href="mailto:no-reply@paperwork-fr.com">
+                                <button data-testid="Footer-contact-link">{t('welcome.footer_contact')}</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

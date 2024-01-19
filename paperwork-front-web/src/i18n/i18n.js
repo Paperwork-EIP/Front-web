@@ -33,7 +33,8 @@ const resources = {
                 footer_title: "Paperwork",
                 footer_aboutus: "About Us",
                 footer_register: "Register",
-                footer_login: "Login"
+                footer_login: "Login",
+                footer_contact: "Send us an email"
             },
             login: {
                 title: "Login",
@@ -169,7 +170,8 @@ const resources = {
                 footer_title: "Paperwork",
                 footer_aboutus: "À propos de nous",
                 footer_register: "S'inscrire",
-                footer_login: "Se connecter"
+                footer_login: "Se connecter",
+                footer_contact: "Envoyez-nous un email"
             },
             login: {
                 title: "Connexion",
@@ -305,7 +307,8 @@ const resources = {
                 footer_title: "Büroarbeit",
                 footer_aboutus: "Über uns",
                 footer_register: "Registrieren",
-                footer_login: "Anmelden"
+                footer_login: "Anmelden",
+                footer_contact: "Schreiben Sie uns eine E-Mail"
             },
             login: {
                 title: "Anmelden",
@@ -441,7 +444,8 @@ const resources = {
                 footer_title: "서류 작업",
                 footer_aboutus: "회사 정보",
                 footer_register: "가입",
-                footer_login: "로그인"
+                footer_login: "로그인",
+                footer_contact: "이메일 보내기"
             },
             login: {
                 title: "로그인",
@@ -548,7 +552,7 @@ const resources = {
     },
     id: {
         "translation": {
-            button: {
+            "button": {
                 fr: "Français",
                 en: "English",
                 de: "Deutsch",
@@ -577,7 +581,8 @@ const resources = {
                 "footer_title": "Pekerjaan Kantoran",
                 "footer_aboutus": "Tentang Kami",
                 "footer_register": "Daftar",
-                "footer_login": "Masuk"
+                "footer_login": "Masuk",
+                "footer_contact": "Kirim Email kepada Kami"
             },
             "login": {
                 "title": "Masuk",
@@ -713,7 +718,8 @@ const resources = {
                 footer_title: "Paperwork",
                 footer_aboutus: "Acerca de nosotros",
                 footer_register: "Registrarse",
-                footer_login: "Iniciar sesión"
+                footer_login: "Iniciar sesión",
+                footer_contact: "Envíanos un correo electrónico"
             },
             login: {
                 title: "Iniciar sesión",
