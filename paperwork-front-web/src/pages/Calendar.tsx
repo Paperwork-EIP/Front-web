@@ -190,7 +190,6 @@ function CalendarPage() {
                 }
             });
             const processData = processResponse.data.response;
-            console.log(processData);
             const procedures = processData.map((item: any, index: any) => ({
                 label: item.userProcess.title,
                 source: item.userProcess.source,
