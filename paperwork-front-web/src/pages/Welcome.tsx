@@ -48,15 +48,15 @@ function WelcomePage() {
                     <p>{t('welcome.container_description')}</p>
                     <div className="Welcome-description-cards">
                         <div className="Welcome-description-card">
-                            <img src="/assets/welcome-page/icon-1.png" alt="icnon-1" />
+                            <img src="/assets/welcome-page/icon-1.png" alt="icon-1" />
                             <span>{t('welcome.container_description_card_1')}</span>
                         </div>
                         <div className="Welcome-description-card">
-                            <img src="/assets/welcome-page/icon-2.png" alt="icnon-2" />
+                            <img src="/assets/welcome-page/icon-2.png" alt="icon-2" />
                             <span>{t('welcome.container_description_card_2')}</span>
                         </div>
                         <div className="Welcome-description-card">
-                            <img src="/assets/welcome-page/icon-3.png" alt="icnon-3" />
+                            <img src="/assets/welcome-page/icon-3.png" alt="icon-3" />
                             <span>{t('welcome.container_description_card_3')}</span>
                         </div>
                     </div>
@@ -65,7 +65,7 @@ function WelcomePage() {
                     <section className="Welcome-section">
                         <div className="Welcome-section-right">
                             <img
-                                src="assets/welcome-page/tiredness-animate.svg"
+                                src="/assets/welcome-page/tired.png"
                                 alt="tiredness_image"
                             />
                         </div>
@@ -86,7 +86,7 @@ function WelcomePage() {
                         </div>
                         <div className="Welcome-section-left">
                             <img
-                                src="assets/welcome-page/done-animate.svg"
+                                src="/assets/welcome-page/done.png"
                                 alt="done_image"
                             />
                         </div>
@@ -95,7 +95,7 @@ function WelcomePage() {
                     <section className="Welcome-section">
                         <div className="Welcome-section-right">
                             <img
-                                src="assets/welcome-page/accessible-phone-animate.svg"
+                                src="/assets/welcome-page/phone.png"
                                 alt="accessible_from_phone_image"
                             />
                         </div>
