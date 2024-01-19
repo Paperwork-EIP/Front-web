@@ -22,8 +22,14 @@ function AboutUsPage() {
     const api = process.env.REACT_APP_BASE_URL;
     const { t } = useTranslation();
 
-    function submitForm() {
-        axios.get(`${api}/contact/sendEmail`,
+    function resetValues() {
+        setEmail("");
+        setName("");
+        setText("");
+    }
+
+    async function submitForm() {
+        await axios.get(`${api}/user/contact/sendEmail`,
             {
                 params: {
                     name: name,
@@ -33,6 +39,7 @@ function AboutUsPage() {
             })
             .then(() => {
                 toast.success(t('aboutus.email_sent'));
+                resetValues();
             })
             .catch((err) => {
                 console.log(err);
