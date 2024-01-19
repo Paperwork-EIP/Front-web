@@ -191,7 +191,7 @@ function CalendarPage() {
             });
             const processData = processResponse.data.response;
             const procedures = processData.map((item: any, index: any) => ({
-                label: item.userProcess.title,
+                label: item.userProcess.stocked_title,
                 source: item.userProcess.source,
                 value: index
             }));
